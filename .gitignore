@@ -1,0 +1,15 @@
+._*
+/.bundle
+.DS_Store
+.idea/
+.rbenv-version
+.redcar/
+.sass-cache/
+database.yml
+/db/*.sqlite3
+/log/*.log
+/public/assets
+/public/coverage
+/tmp
+/vendor/bundle
+/config/smtp.yml
