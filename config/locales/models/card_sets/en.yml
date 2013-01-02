@@ -1,0 +1,24 @@
+en:
+  activerecord:
+    models:
+      card_set: "Card Set"
+    attributes:
+      card_set:
+        name: "Name"
+        card_block_id: "Card Block"
+        code: "Code"
+        release_date: "Release Date"
+        prerelease_date: "Prerelease Date"
+        created_at: "Created At"
+        updated_at: "Updated At"
+    errors:
+      models:
+        card_set:
+          attributes:
+            name: "Name"
+            card_block_id: "Card Block"
+            code: "Code"
+            release_date: "Release Date"
+            prerelease_date: "Prerelease Date"
+            created_at: "Created At"
+            updated_at: "Updated At"

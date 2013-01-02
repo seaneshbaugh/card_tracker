@@ -1,0 +1,7 @@
+<% @card_sets.each do |card_set| %>
+  <div id="set-<%= card_set.id %>" class="set row">
+    <div class="span12">
+      <%= link_to card_set.name, set_cards_path(card_set) %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,40 @@
+<div id="card_block_types">
+  <h1><%= t('activerecord.models.card_block_type').pluralize %> <small><%= @card_block_types.total_count %></small></h1>
+  <%= search_form_for @search, :url => admin_card_block_types_path, :html => { :method => :get, :class => 'form-search well' } do |f| %>
+    <%= f.text_field :name_cont, :placeholder => t('activerecord.attributes.card_block_type.name') %>
+    <%= f.button '<i class="icon-search"></i> Search'.html_safe, :type => :submit, :class => 'btn btn-primary' %>
+    <%= link_to '<i class="icon-remove"></i>'.html_safe, admin_card_block_types_path, :class => 'btn', :rel => 'tooltip', :title => t('clear_search') %>
+  <% end %>
+  <% if can? :create, CardBlockType, current_user %>
+    <div class="clearfix">
+      <%= link_to t('card_block_types.new.title'), new_admin_card_block_type_path, :class => 'btn btn-primary pull-right' %>
+    </div>
+  <% end %>
+  <% if @card_block_types.any? %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th><%= sort_link @search, :name %></th>
+          <th><%= sort_link @search, :created_at %></th>
+          <th><%= sort_link @search, :updated_at %></th>
+          <% if can? :edit, CardBlockType, current_user %><th class="icon">&nbsp;</th><% end %>
+          <% if can? :destroy, CardBlockType, current_user %><th class="icon">&nbsp;</th><% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @card_block_types.each do |card_block_type| %>
+          <tr>
+            <td><%= link_to truncate(card_block_type.name, :length => 64), admin_card_block_type_path(card_block_type) %></td>
+            <td><%= card_block_type.created_at.iso8601 %></td>
+            <td><%= card_block_type.updated_at.iso8601 %></td>
+            <% if can? :edit, CardBlockType, current_user %><td class="icon"><%= icon_edit_link edit_admin_card_block_type_path(card_block_type) %></td><% end %>
+            <% if can? :destroy, CardBlockType, current_user %><td class="icon"><%= icon_delete_link admin_card_block_type_path(card_block_type) %></td><% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @card_block_types %>
+  <% else %>
+    <p class="lead"><%= t('messages.card_block_types.none') %></p>
+  <% end %>
+</div>

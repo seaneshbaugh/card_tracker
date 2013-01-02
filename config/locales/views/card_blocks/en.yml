@@ -1,0 +1,34 @@
+en:
+  navigation:
+    card_blocks: "Card Blocks"
+  helpers:
+    submit:
+      card_block:
+        create: "Add Card Block"
+        update: "Update Card Block"
+    button:
+      card_block:
+  messages:
+    card_blocks:
+      could_not_find: "Could not find the specified card block."
+      created: "Card Block has been created."
+      updated: "Card Block has been updated."
+      deleted: "Card Block has been deleted."
+      none: "There are no card blocks yet. Click 'New Card Block' to get started."
+  card_blocks:
+    links:
+      back_to_index: "Back to Card Blocks"
+      deactivate: "Deactivate Card Block"
+      activate: "Activate Card Block"
+    sections:
+      information: "Card Block Information"
+    index:
+      title: "Card Blocks"
+    new:
+      title: "New Card Block"
+    edit:
+      title: "Edit Card Block"
+    delete:
+      title: "Delete Card Block"
+    show:
+      title: "Card Block"

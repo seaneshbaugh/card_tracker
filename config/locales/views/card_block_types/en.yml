@@ -1,0 +1,34 @@
+en:
+  navigation:
+    card_block_types: "Card Block Types"
+  helpers:
+    submit:
+      card_block_type:
+        create: "Add Card Block Type"
+        update: "Update Card Block Type"
+    button:
+      card_block_type:
+  messages:
+    card_block_types:
+      could_not_find: "Could not find the specified card block type."
+      created: "Card Block Type has been created."
+      updated: "Card Block Type has been updated."
+      deleted: "Card Block Type has been deleted."
+      none: "There are no card block types yet. Click 'New Card Block Type' to get started."
+  card_block_types:
+    links:
+      back_to_index: "Back to Card Block Types"
+      deactivate: "Deactivate Card Block Type"
+      activate: "Activate Card Block Type"
+    sections:
+      information: "Card Block Type Information"
+    index:
+      title: "Card Block Types"
+    new:
+      title: "New Card Block Type"
+    edit:
+      title: "Edit Card Block Type"
+    delete:
+      title: "Delete Card Block Type"
+    show:
+      title: "Card Block Type"

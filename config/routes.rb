@@ -1,58 +1,39 @@
 CardTracker::Application.routes.draw do
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
+  devise_for :users #, :only => [:sessions, :passwords]
 
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
+  devise_scope :user do
+    get '/login' => 'devise/sessions#new', :as => 'login'
+    delete '/logout' => 'devise/sessions#destroy', :as => 'logout'
+    get '/reset-password' => 'devise/passwords#new', :as => 'reset_password'
+  end
 
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
+  get '/contact' => 'contact#new', :as => 'contact'
 
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  post '/contact' => 'contact#create'
 
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+  resource :collection
 
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
+  resources :card_sets, :path => :sets, :as => :sets, :only => [:index] do
+    resources :cards, :only => [:index, :show]
+  end
 
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
+  authenticate :user do
+    namespace :admin do
+      root :to => 'admin#index'
 
-  # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+      resource :account, :only => [:show, :edit, :update]
 
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+      resources :cards
 
-  # See how all your routes lay out with "rake routes"
+      resources :card_sets
 
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
+      resources :card_blocks
+
+      resources :card_block_types
+
+      resources :users
+    end
+  end
+
+  root :to => 'collections#show'
 end

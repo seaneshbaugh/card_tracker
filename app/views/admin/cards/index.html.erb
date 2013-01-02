@@ -1,0 +1,40 @@
+<div id="cards">
+  <h1><%= t('activerecord.models.card').pluralize %> <small><%= @cards.total_count %></small></h1>
+  <%= search_form_for @search, :url => admin_cards_path, :html => { :method => :get, :class => 'form-search well' } do |f| %>
+    <%= f.text_field :name_cont, :placeholder => t('activerecord.attributes.card.name') %>
+    <%= f.button '<i class="icon-search"></i> Search'.html_safe, :type => :submit, :class => 'btn btn-primary' %>
+    <%= link_to '<i class="icon-remove"></i>'.html_safe, admin_cards_path, :class => 'btn', :rel => 'tooltip', :title => t('clear_search') %>
+  <% end %>
+  <% if can? :create, Card, current_user %>
+    <div class="clearfix">
+      <%= link_to t('cards.new.title'), new_admin_card_path, :class => 'btn btn-primary pull-right' %>
+    </div>
+  <% end %>
+  <% if @cards.any? %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th><%= sort_link @search, :name %></th>
+          <th><%= sort_link @search, :created_at %></th>
+          <th><%= sort_link @search, :updated_at %></th>
+          <% if can? :edit, Card, current_user %><th class="icon">&nbsp;</th><% end %>
+          <% if can? :destroy, Card, current_user %><th class="icon">&nbsp;</th><% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cards.each do |card| %>
+          <tr>
+            <td><%= link_to truncate(card.name, :length => 64), admin_card_path(card) %></td>
+            <td><%= card.created_at.iso8601 %></td>
+            <td><%= card.updated_at.iso8601 %></td>
+            <% if can? :edit, Card, current_user %><td class="icon"><%= icon_edit_link edit_admin_card_path(card) %></td><% end %>
+            <% if can? :destroy, Card, current_user %><td class="icon"><%= icon_delete_link admin_card_path(card) %></td><% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @cards %>
+  <% else %>
+    <p class="lead"><%= t('messages.cards.none') %></p>
+  <% end %>
+</div>

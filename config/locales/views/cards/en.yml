@@ -1,0 +1,34 @@
+en:
+  navigation:
+    cards: "Cards"
+  helpers:
+    submit:
+      card:
+        create: "Add Card"
+        update: "Update Card"
+    button:
+      card:
+  messages:
+    cards:
+      could_not_find: "Could not find the specified card."
+      created: "Card has been created."
+      updated: "Card has been updated."
+      deleted: "Card has been deleted."
+      none: "There are no cards yet. Click 'New Card' to get started."
+  cards:
+    links:
+      back_to_index: "Back to Cards"
+      deactivate: "Deactivate Card"
+      activate: "Activate Card"
+    sections:
+      information: "Card Information"
+    index:
+      title: "Cards"
+    new:
+      title: "New Card"
+    edit:
+      title: "Edit Card"
+    delete:
+      title: "Delete Card"
+    show:
+      title: "Card"

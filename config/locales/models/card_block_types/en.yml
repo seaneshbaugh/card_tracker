@@ -1,0 +1,16 @@
+en:
+  activerecord:
+    models:
+      card_block_type: "Card Block Type"
+    attributes:
+      card_block_type:
+        name: "Name"
+        created_at: "Created At"
+        updated_at: "Updated At"
+    errors:
+      models:
+        card_block_type:
+          attributes:
+            name: "Name"
+            created_at: "Created At"
+            updated_at: "Updated At"

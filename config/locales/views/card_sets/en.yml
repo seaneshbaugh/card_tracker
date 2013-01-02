@@ -1,0 +1,34 @@
+en:
+  navigation:
+    card_sets: "Card Sets"
+  helpers:
+    submit:
+      card_set:
+        create: "Add Card Set"
+        update: "Update Card Set"
+    button:
+      card_set:
+  messages:
+    card_sets:
+      could_not_find: "Could not find the specified card set."
+      created: "Card Set has been created."
+      updated: "Card Set has been updated."
+      deleted: "Card Set has been deleted."
+      none: "There are no card sets yet. Click 'New Card Set' to get started."
+  card_sets:
+    links:
+      back_to_index: "Back to Card Sets"
+      deactivate: "Deactivate Card Set"
+      activate: "Activate Card Set"
+    sections:
+      information: "Card Set Information"
+    index:
+      title: "Card Sets"
+    new:
+      title: "New Card Set"
+    edit:
+      title: "Edit Card Set"
+    delete:
+      title: "Delete Card Set"
+    show:
+      title: "Card Set"

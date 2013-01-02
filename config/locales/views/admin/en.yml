@@ -1,0 +1,24 @@
+en:
+  navigation:
+    admin_home: "Admin Home"
+    site_home: "Site Home"
+  admin:
+    title: "Caves of Koilos Admin"
+    description: "The Caves of Koilos, a place to keep track of your Magic: The Gathering card collection."
+    author: "Sean Eshbaugh"
+    footer: Created with <a href="http://rubyonrails.org/">Ruby on Rails</a> by <a href="http://seaneshbaugh.com/">Sean Eshbaugh</a>. Fork me on <a href="https://github.com/seaneshbaugh/card_tracker">GitHub</a>!
+    sections:
+      quick_links: "Quick Links"
+      rails_info: "Rails Info"
+      routes: "Routes"
+    quick_links:
+      add_user: "<br />Add User"
+      add_page: "<br />Add Page"
+      add_post: "<br />Add Post"
+      add_picture: "<br />Upload Picture"
+      analytics: "<br />View Analytics"
+      export: "<br />Export Database"
+      reboot: "<br />Reboot Rails"
+  messages:
+    admin:
+      not_implemented: "Coming soon! This feature has not been implemented."
