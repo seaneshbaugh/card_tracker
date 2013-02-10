@@ -1,12 +1,13 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.9'
+gem 'rails', '3.2.11'
 gem 'mysql2'
 gem 'cancan'
+gem 'delayed_job'
+gem 'delayed_job_active_record'
 gem 'devise'
 gem 'exception_notification'
 gem 'kaminari'
-#gem 'paperclip', '~> 2.7'
 gem 'ransack'
 gem 'sanitize'
 gem 'simple_form'
@@ -18,7 +19,7 @@ group :assets do
   gem 'less-rails'
   gem 'libv8'
   gem 'therubyracer'
-  gem 'twitter-bootstrap-rails', '2.1.7'
+  gem 'twitter-bootstrap-rails'
   gem 'uglifier'
 end
 

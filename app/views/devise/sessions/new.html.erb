@@ -7,7 +7,7 @@
       <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
     </fieldset>
     <div class="form-actions">
-      <%= f.button :submit, t('navigation.sign_in') %>
+      <%= f.button :submit, t('navigation.sign_in'), :class => 'btn-primary' %>
     </div>
   <% end %>
   <%= render 'devise/shared/links' %>

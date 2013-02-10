@@ -69,17 +69,17 @@ CardTracker::Application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address              => 'smtp.gmail.com',
-    :port                 => 587,
+    :address              => SMTP_SETTINGS['address'],
+    :port                 => SMTP_SETTINGS['port'],
     :domain               => 'cavesofkoilos.com',
     :user_name            => SMTP_SETTINGS['user_name'],
     :password             => SMTP_SETTINGS['password'],
-    :authentication       => 'plain',
-    :enable_starttls_auto => true
+    :authentication       => :login #,
+    #:enable_starttls_auto => true
   }
   config.action_mailer.raise_delivery_errors = true
 
-  # Set mailer host to conneythecorgi.com for in email links
+  # Set mailer host to cavesofkoilos.com for in email links
   config.action_mailer.default_url_options = { :host => 'cavesofkoilos.com' }
 
   config.middleware.use ExceptionNotifier, :sender_address => 'seaneshbaugh@gmail.com', :exception_recipients => 'seaneshbaugh@gmail.com'

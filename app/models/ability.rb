@@ -7,7 +7,7 @@ class Ability
     :sysadmin => 'sysadmin'
   }
 
-  def initialize user
+  def initialize(user)
     user ||= User.new
 
     cannot :manage, :all
@@ -16,13 +16,23 @@ class Ability
       when ROLES[:sysadmin] then
         can :manage, :all
       when ROLES[:admin] then
-        can :manage, :all
+        can :manage, Admin
+        can :manage, CardBlockType
+        can :manage, CardBlock
+        can :manage, CardSet
+        can :manage, Card
+        can :manage, Collection
+        can [:read, :create], User
 
-        cannot [:update, :destroy], User do |u|
-          u.role == ROLES[:sysadmin]
+        can [:update, :destroy], User do |u|
+          Rails.logger.info u.inspect
+          Rails.logger.info u.role
+          Rails.logger.info u.role != ROLES[:sysadmin]
+
+          u.role != ROLES[:sysadmin]
         end
       when ROLES[:read_only] then
-        can :read, :all
+        cannot :read, :all
       else
         cannot :read, :all
     end

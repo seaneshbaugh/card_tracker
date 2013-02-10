@@ -1,25 +1,45 @@
-<div id="card_block_type">
-  <h1><%= t('card_block_types.show.title') %> <small><%= @card_block_type.name %></small></h1>
+<div id="card-block">
+  <h1><%= t('card_blocks.show.title') %> <small><%= @card_block.name %></small></h1>
   <table class="table table-condensed table-striped">
     <tbody>
       <tr>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.card_block_type.name') %></th>
-        <td><%= @card_block_type.name %></td>
+        <th class="span3"><%= t('activerecord.attributes.card_block.name') %></th>
+        <td><%= @card_block.name %></td>
       </tr>
       <tr>
-        <th class="span3"><%= t('activerecord.attributes.card_block_type.created_at') %></th>
-        <td><%= @card_block_type.created_at.iso8601 %></td>
+        <th class="span3"><%= t('activerecord.models.card_block_type') %></th>
+        <td><%= link_to @card_block.card_block_type.name, admin_card_block_type_path(@card_block.card_block_type) %></td>
       </tr>
       <tr>
-        <th class="span3"><%= t('activerecord.attributes.card_block_type.updated_at') %></th>
-        <td><%= @card_block_type.updated_at.iso8601 %></td>
+        <th class="span3"><%= t('activerecord.attributes.card_block.created_at') %></th>
+        <td><%= @card_block.created_at.iso8601 %></td>
+      </tr>
+      <tr>
+        <th class="span3"><%= t('activerecord.attributes.card_block.updated_at') %></th>
+        <td><%= @card_block.updated_at.iso8601 %></td>
       </tr>
     </tbody>
   </table>
+  <% if @card_block.card_sets.any? %>
+    <h2><%= t('activerecord.models.card_set').pluralize %></h2>
+    <table class="table table-condensed table-striped">
+      <tbody>
+        <% @card_block.card_sets.each do |card_set| %>
+          <tr>
+            <th style="text-align: center; width: 71px;"><%= link_to card_set_symbol(card_set).html_safe, admin_card_set_path(card_set) %></th>
+            <th><%= link_to card_set.name, admin_card_set_path(card_set) %></th>
+            <td><%= card_set.release_date %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <!-- TODO: i18nize this. -->
+    <p class="lead">No Card Sets.</p>
+  <% end %>
   <div class="form-actions">
-    <%= link_to t('card_block_types.links.back_to_index'), admin_card_block_types_path, :class => 'btn' %>
-    <% if can? :edit, CardBlockType, current_user %><%= link_to t('card_block_types.edit.title'), edit_admin_card_block_type_path(@card_block_type), :class => 'btn' %><% end %>
-    <% if can? :destroy, CardBlockType, current_user %><%= link_to t('card_block_types.delete.title'), admin_card_block_type_path(@card_block_type), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') } %><% end %>
+    <%= link_to t('card_blocks.links.back_to_index'), admin_card_blocks_path, :class => 'btn' %>
+    <% if can? :edit, CardBlock, current_user %><%= link_to t('card_blocks.edit.title'), edit_admin_card_block_path(@card_block), :class => 'btn' %><% end %>
+    <% if can? :destroy, CardBlock, current_user %><%= link_to t('card_blocks.delete.title'), admin_card_block_path(@card_block), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') } %><% end %>
   </div>
 </div>

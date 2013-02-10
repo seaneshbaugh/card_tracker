@@ -6,5 +6,6 @@
 //= require_self
 
 $(function() {
-
+    $("[rel*=tooltip]").tooltip({placement: "top"});
+    $("[rel*=popover]").popover({trigger: "hover"});
 });

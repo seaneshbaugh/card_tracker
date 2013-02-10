@@ -1,8 +1,8 @@
-<div id="card_block_types">
+<div id="card-block-types">
   <h1><%= t('activerecord.models.card_block_type').pluralize %> <small><%= @card_block_types.total_count %></small></h1>
   <%= search_form_for @search, :url => admin_card_block_types_path, :html => { :method => :get, :class => 'form-search well' } do |f| %>
     <%= f.text_field :name_cont, :placeholder => t('activerecord.attributes.card_block_type.name') %>
-    <%= f.button '<i class="icon-search"></i> Search'.html_safe, :type => :submit, :class => 'btn btn-primary' %>
+    <%= f.button "<i class=\"icon-search\"></i> #{t('search')}".html_safe, :type => :submit, :class => 'btn btn-primary' %>
     <%= link_to '<i class="icon-remove"></i>'.html_safe, admin_card_block_types_path, :class => 'btn', :rel => 'tooltip', :title => t('clear_search') %>
   <% end %>
   <% if can? :create, CardBlockType, current_user %>

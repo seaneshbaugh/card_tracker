@@ -1,0 +1,24 @@
+<div id="edit-account">
+  <h1><%= t('accounts.edit.title') %></h1>
+  <%= simple_form_for(@account, :as => :account, :url => account_path, :html => { :class => 'form-horizontal' }) do |f| %>
+    <fieldset>
+      <legend><%= t('users.sections.contact_information') %></legend>
+      <%= f.input :first_name %>
+      <%= f.input :last_name %>
+      <%= f.input :email %>
+    </fieldset>
+    <fieldset>
+      <legend><%= t('users.sections.account_information') %></legend>
+      <%= f.input :username %>
+      <%= f.input :password %>
+      <%= f.input :password_confirmation %>
+    </fieldset>
+    <div class="form-actions">
+      <%= link_to t('cancel'), root_path, :class => 'btn' %>
+      <%= f.submit t('accounts.update.title'), :class => 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
+<div id="delete-account">
+  <%= link_to t('accounts.delete.title'), confirm_delete_account_path, :class => 'btn btn-danger' %>
+</div>

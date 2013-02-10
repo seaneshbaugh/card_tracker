@@ -1,21 +1,19 @@
 class Admin::UsersController < Admin::AdminController
+  before_filter :find_user, :only => [:show, :edit, :update, :destroy]
+
   authorize_resource
 
   def index
-    if params[:q].present? && params[:q][:s].present?
-      @search = User.unscoped.search(params[:q])
-    else
-      @search = User.search(params[:q])
-    end
+    @search = User.search(params[:q])
 
-    @users = @search.result.page(params[:page])
+    @users = @search.result.order('users.created_at ASC').page(params[:page])
   end
 
   def show
-    @user = User.where(:id => params[:id]).first
-
     if @user.nil?
-      redirect_to admin_users_url, :notice => t('messages.users.could_not_find')
+      flash[:error] = t('messages.users.could_not_find')
+
+      redirect_to admin_users_url
     end
   end
 
@@ -26,44 +24,70 @@ class Admin::UsersController < Admin::AdminController
   def create
     @user = User.new(params[:user])
 
+    @user.confirmed_at = Time.now
+
+    if current_user.role != Ability::ROLES[:sysadmin] && @user.role == Ability::ROLES[:sysadmin]
+      @user.role = Ability::ROLES[:read_only]
+    end
+
     if @user.save
-      redirect_to admin_users_url, :notice => t('messages.users.created')
+      flash[:success] = t('messages.users.created')
+
+      redirect_to admin_users_url
     else
+      flash.now[:error] = @user.errors.full_messages.uniq.join('. ') + '.'
+
       render 'new'
     end
   end
 
   def edit
-    @user = User.where(:id => params[:id]).first
-
     if @user.nil?
-      redirect_to admin_users_url, :notice => t('messages.users.could_not_find')
+      flash[:error] = t('messages.users.could_not_find')
+
+      redirect_to admin_users_url
     end
   end
 
   def update
-    @user = User.where(:id => params[:id]).first
-
     if @user.nil?
-      redirect_to admin_users_url, :notice => t('messages.users.could_not_find') and return
+      flash[:error] = t('messages.users.could_not_find')
+
+      redirect_to admin_users_url and return
+    end
+
+    if params[:user] && current_user.role != Ability::ROLES[:sysadmin] && params[:user][:role] == Ability::ROLES[:sysadmin]
+      params[:user][:role] = Ability::ROLES[:read_only]
     end
 
     if @user.update_attributes(params[:user])
-      redirect_to edit_admin_user_url(@user), :notice => t('messages.users.updated')
+      flash[:success] = t('messages.users.updated')
+
+      redirect_to edit_admin_user_url(@user)
     else
+      flash.now[:error] = @user.errors.full_messages.uniq.join('. ') + '.'
+
       render 'edit'
     end
   end
 
   def destroy
-    @user = User.where(:id => params[:id]).first
-
     if @user.nil?
-      redirect_to admin_users_url, :notice => t('messages.users.could_not_find') and return
+      flash[:error] = t('messages.users.could_not_find')
+
+      redirect_to admin_users_url and return
     end
 
     @user.destroy
 
-    redirect_to admin_users_url, :notice => t('messages.users.deleted')
+    flash[:success] = t('messages.users.deleted')
+
+    redirect_to admin_users_url
+  end
+
+  protected
+
+  def find_user
+    @user = User.where(:id => params[:id]).first
   end
 end

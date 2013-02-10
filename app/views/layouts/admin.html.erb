@@ -31,21 +31,18 @@
       <%= link_to t('admin.title'), admin_root_path, :title => t('admin.title'), :class => 'brand' %>
       <div class="nav-collapse collapse">
         <ul class="nav" role="navigation">
-          <li><%= link_to t('navigation.admin_home'), admin_root_path, :class => is_active_controller?('admin/admin') %></li>
           <% if can? :read, CardBlock, current_user %><li class="card-block-nav-link"><%= link_to t('navigation.card_blocks'), admin_card_blocks_path, :class => is_active_controller?('admin/card_blocks') %></li><% end %>
           <% if can? :read, CardSet, current_user %><li class="card-set-nav-link"><%= link_to t('navigation.card_sets'), admin_card_sets_path, :class => is_active_controller?('admin/card_sets') %></li><% end %>
           <% if can? :read, Card, current_user %><li class="card-nav-link"><%= link_to t('navigation.cards'), admin_cards_path, :class => is_active_controller?('admin/cards') %></li><% end %>
           <% if can? :read, CardBlockType, current_user %><li class="card-block-type-nav-link"><%= link_to t('navigation.card_block_types'), admin_card_block_types_path, :class => is_active_controller?('admin/card_block_types') %></li><% end %>
           <% if can? :read, User, current_user %><li class="user-nav-link"><%= link_to t('navigation.users'), admin_users_path, :class => is_active_controller?('admin/users') %></li><% end %>
           <li class="site-home-nav-link"><%= link_to t('navigation.site_home'), root_path %></li>
-          <li class="account-nav-link hidden-desktop"><%= link_to t('accounts.edit.title'), edit_admin_account_path, :class => is_active_controller?('admin/accounts') %></li>
-          <li class="logout-nav-link hidden-desktop"><%= link_to t('navigation.sign_out'), logout_path, :method => :delete %></li>
+          <li class="logout-nav-link hidden-desktop"><%= link_to ('<i class="icon-hand-left"></i> ' + t('navigation.sign_out')).html_safe, destroy_user_session_path, :method => :delete %></li>
         </ul>
       </div>
       <div class="nav-collapse collapse pull-right visible-desktop">
         <ul class="nav">
-          <li class="account-nav-link"><%= link_to ('<i class="icon-wrench"></i> ' + t('accounts.edit.title')).html_safe, edit_admin_account_path, :class => is_active_controller?('admin/accounts') %></li>
-          <li class="logout-nav-link"><%= link_to ('<i class="icon-hand-left"></i> ' + t('navigation.sign_out')).html_safe, logout_path, :method => :delete %></li>
+          <li class="logout-nav-link"><%= link_to ('<i class="icon-hand-left"></i> ' + t('navigation.sign_out')).html_safe, destroy_user_session_path, :method => :delete %></li>
         </ul>
       </div>
     </div>

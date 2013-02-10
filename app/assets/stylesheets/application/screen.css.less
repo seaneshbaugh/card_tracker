@@ -9,3 +9,197 @@ body {
   margin-top: 60px;
   overflow-y: scroll;
 }
+
+.jumbotron {
+  background: url(/assets/masthead.jpg) center center no-repeat;
+  color: #e3fdff;
+  margin-top: -20px;
+  padding: 100px 0 200px 0;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(101, 98, 145, 0.40), 0 0 30px rgba(221, 212, 222, 0.67);
+
+  h1 {
+    font-size: 80px;
+  }
+
+  p.lead {
+    font-size: 32px;
+  }
+}
+
+.footer {
+  background-color: #222222;
+  border-top: 1px solid #e5e5e5;
+  margin-top: 70px;
+  padding: 30px 0;
+  text-align: center;
+
+  p {
+    color: #777777;
+    margin-bottom: 0;
+
+    a {
+      color: #777777;
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .footer-links {
+    margin: 10px 0;
+
+    li {
+      display: inline;
+      padding: 0 2px;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      a {
+        color: #eeeeee;
+      }
+    }
+  }
+}
+
+#front-page {
+  .login {
+    h2 {
+      text-align: center;
+    }
+  }
+
+  .register {
+    h2 {
+      text-align: center;
+    }
+  }
+}
+
+#delete-account {
+  padding-left: 180px;
+}
+
+#sets {
+  .set {
+    margin-bottom: 5px;
+
+    a {
+      font-size: 14px;
+    }
+  }
+}
+
+#about {
+  p {
+    font-size: 24px;
+  }
+}
+
+#contact {
+  textarea {
+    height: 100px;
+    width: 98%;
+  }
+}
+
+.form-actions {
+  background: transparent;
+  border: 0;
+}
+
+.set-symbol {
+  width: 22px;
+
+  &.large {
+    width: 44px;
+  }
+}
+
+@media (min-width: 980px) and (max-width: 1199px) {
+  .navbar {
+    .nav {
+      li {
+        a {
+          padding: 10px 8px 10px;
+        }
+      }
+    }
+  }
+}
+
+/* Desktop large */
+@media (min-width: 1200px) {
+
+}
+
+/* Desktop */
+@media (max-width: 980px) {
+  body {
+    margin-top: 0;
+  }
+}
+
+/* Tablet to desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+  body {
+    padding-top: 0;
+  }
+
+  .jumbotron {
+    margin-top: -20px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 767px) {
+  body {
+    padding-top: 0;
+  }
+
+  .jumbotron {
+    padding: 40px 20px;
+    margin-top:   -20px;
+    margin-right: -20px;
+    margin-left:  -20px;
+  }
+
+  .masthead h1 {
+    font-size: 90px;
+  }
+
+  .masthead p, .masthead .btn {
+    font-size: 24px;
+  }
+}
+
+/* Landscape phones */
+@media (max-width: 480px) {
+  body {
+    padding-top: 0;
+  }
+
+  h2 small {
+    display: block;
+  }
+
+  #sets {
+    .set {
+      a {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .jumbotron h1 {
+    font-size: 45px;
+  }
+
+  .jumbotron p, .jumbotron .btn {
+    font-size: 18px;
+  }
+}

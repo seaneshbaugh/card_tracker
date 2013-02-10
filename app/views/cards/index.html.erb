@@ -1,22 +1,25 @@
-<% @card_set.cards.each do |card| %>
-  <!-- TODO: Move this to controller or to a helper. -->
-  <% collection = Collection.where(:card_id => card.id, :user_id => current_user.id).first %>
-  <div id="<%= card.multiverse_id %>" class="row card" data-card-id="<%= card.id %>" data-quantity="<%= collection.present? ? collection.quantity : 0 %>">
-    <div class="card-name span2">
-      <%= link_to card.name, set_card_path(@card_set, card) %>
+<div id="set-<%= @card_set.id %>" class="set">
+  <h1><%= card_set_symbol(@card_set, :class => 'large') %> <%= @card_set.name %></h1>
+  <% @card_set.cards.each do |card| %>
+    <!-- TODO: Move this to controller or to a helper. -->
+    <% collection = Collection.where(:card_id => card.id, :user_id => current_user.id).first %>
+    <div id="<%= card.multiverse_id %>" class="row card" data-card-id="<%= card.id %>" data-quantity="<%= collection.present? ? collection.quantity : 0 %>">
+      <div class="card-name span2">
+        <%= link_to card.name, set_card_path(@card_set, card) %>
+      </div>
+      <div class="card-quantity span1">
+        <% if collection.present? %>
+          <%= collection.quantity %>
+        <% else %>
+          -
+        <% end %>
+      </div>
+      <div class="span1">
+        <button class="increment btn"><i class="icon-chevron-up"></i></button>
+      </div>
+      <div class="span1">
+        <button class="decrement btn"><i class="icon-chevron-down"></i></button>
+      </div>
     </div>
-    <div class="card-quantity span1">
-      <% if collection.present? %>
-        <%= collection.quantity %>
-      <% else %>
-        -
-      <% end %>
-    </div>
-    <div class="span1">
-      <button class="increment btn"><i class="icon-chevron-up"></i></button>
-    </div>
-    <div class="span1">
-      <button class="decrement btn"><i class="icon-chevron-down"></i></button>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

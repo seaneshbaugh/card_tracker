@@ -1,0 +1,27 @@
+<div id="confirm-delete-account">
+  <h1><%= t('accounts.delete.title') %></h1>
+  <%= form_tag account_path, :method => :delete, :id => 'confirm_delete_account', :class => 'form-horizontal' do %>
+    <fieldset>
+      <legend><%= t('accounts.delete.danger') %></legend>
+      <p><%= t('accounts.delete.warning_message').html_safe %></p>
+      <p><%= t('accounts.delete.instructions', :username => current_user.username).html_safe %></p>
+      <%= hidden_field_tag :username, current_user.username, :id => 'username' %>
+      <div class="control-group string required">
+        <label class="string required control-label" for="enter_username"><abbr title="required">*</abbr> <%= t('accounts.delete.enter_username') %></label>
+        <div class="controls">
+          <%= text_field_tag :enter_username, nil, :size => 50, :id => 'enter_username', :class => 'string, required' %>
+        </div>
+      </div>
+      <div class="control-group string required">
+        <label class="string required control-label" for="enter_username_confirmation"><abbr title="required">*</abbr> <%= t('accounts.delete.enter_username_confirmation') %></label>
+        <div class="controls">
+          <%= text_field_tag :enter_username_confirmation, nil, :size => 50, :id => 'enter_username_confirmation', :class => 'string, required' %>
+        </div>
+      </div>
+    </fieldset>
+    <div class="form-actions">
+      <%= link_to t('cancel'), edit_account_path, :class => 'btn' %>
+      <%= submit_tag t('accounts.links.confirm_delete'), :class => 'btn btn-danger', :disabled => true %>
+    </div>
+  <% end %>
+</div>

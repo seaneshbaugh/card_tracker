@@ -1,15 +1,11 @@
-<h1><%= t("card_block_types.#{@card_block_type.persisted? ? 'edit' : 'new'}.title") %></h1>
-<%= simple_form_for [:admin, @card_block_type], :html => { :class => 'form-horizontal' } do |f| %>
+<h1><%= t("card_blocks.#{@card_block.persisted? ? 'edit' : 'new'}.title") %></h1>
+<%= simple_form_for [:admin, @card_block], :html => { :class => 'form-horizontal' } do |f| %>
   <fieldset>
     <%= f.input :name %>
+    <%= f.association :card_block_type, :include_blank => false %>
   </fieldset>
   <div class="form-actions">
-    <%= link_to t('card_block_types.links.back_to_index'), admin_card_block_types_path, :class => 'btn' %>
+    <%= link_to t('card_blocks.links.back_to_index'), admin_card_blocks_path, :class => 'btn' %>
     <%= f.submit nil, :class => 'btn btn-primary' %>
-    <% unless @card_block_type.persisted? %>
-      <label class="checkbox inline">
-        <%= check_box_tag 'redirect_to_new', 1, true %> <%= t('helpers.submit.card_block_type.redirect_to_new') %>
-      </label>
-    <% end %>
   </div>
 <% end %>

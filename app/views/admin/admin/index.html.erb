@@ -1,0 +1,34 @@
+<div id="admin-index">
+  <h1><%= t('navigation.admin_home') %></h1>
+  <div id="rails-info">
+    <h2><%= t('admin.sections.rails_info') %></h2>
+    <%= Rails::Info.to_html.html_safe %>
+  </div>
+  <div id="routes">
+    <h2><%= t('admin.sections.routes') %></h2>
+    <pre>
+      <ul class="unstyled">
+        <% Rails::Application::RouteInspector.new.format(Rails.application.routes.routes, ENV['CONTROLLER']).each do |route| %>
+          <li><%= route %></li>
+        <% end %>
+      </ul>
+    </pre>
+  </div>
+  <div id="gems">
+    <h2><%= t('admin.sections.gems') %></h2>
+    <ul>
+      <% get_gem_dependencies.each do |gem| %>
+        <li>
+          <%= gem[:name] %> (<%= gem[:version] %>)
+          <% if gem[:dependencies].present? %>
+            <ul>
+              <% gem[:dependencies].each do |dependency| %>
+                <li><%= dependency[:name] %> (<%= dependency[:requirement] %>)</li>
+              <% end %>
+            </ul>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

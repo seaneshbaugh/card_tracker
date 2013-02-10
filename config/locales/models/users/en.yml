@@ -4,6 +4,7 @@ en:
       user: "User"
     attributes:
       user:
+        username: "Username"
         email: "Email"
         encrypted_password: "Encrypted Password"
         role: "Role"
@@ -18,6 +19,13 @@ en:
         last_sign_in_at: "Last Sign In At"
         current_sign_in_ip: "Current Sign In Ip"
         last_sign_in_ip: "Last Sign In Ip"
+        confirmation_token: "Confirmation Token"
+        confirmed_at: "Confirmed At"
+        confirmation_sent_at: "Confirmation Sent At"
+        unconfirmed_email: "Unconfirmed Email"
+        failed_attempts: "Failed Attempts"
+        unlock_token: "Unlock Token"
+        locked_at: "Locked At"
         authentication_token: "Authentication Token"
         created_at: "Created At"
         updated_at: "Updated At"
@@ -25,6 +33,8 @@ en:
       models:
         user:
           attributes:
+            username:
+              invalid: "must start with a letter, contain only letters, numbers or underscores, and be between 6 and 32 characters long"
             email: "Email"
             encrypted_password: "Encrypted Password"
             role: "Role"
@@ -38,6 +48,13 @@ en:
             last_sign_in_at: "Last Sign In At"
             current_sign_in_ip: "Current Sign In Ip"
             last_sign_in_ip: "Last Sign In Ip"
+            confirmation_token: "Confirmation Token"
+            confirmed_at: "Confirmed At"
+            confirmation_sent_at: "Confirmation Sent At"
+            unconfirmed_email: "Unconfirmed Email"
+            failed_attempts: "Failed Attempts"
+            unlock_token: "Unlock Token"
+            locked_at: "Locked At"
             authentication_token: "Authentication Token"
             created_at: "Created At"
             updated_at: "Updated At"

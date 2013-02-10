@@ -1,17 +1,27 @@
-<%= debug @test.inspect %>
-<% @collections.each do |collection| %>
-  <div id="card-<%= collection.card.multiverse_id %>" class="row card" data-card-id="<%= collection.card_id %>" data-quantity="<%= collection.quantity %>">
-    <div class="card-name span2">
-      <%= collection.card.name %>
-    </div>
-    <div class="card-quantity span1">
-      <%= collection.quantity %>
-    </div>
-    <div class="span1">
-      <button class="increment btn"><i class="icon-chevron-up"></i></button>
-    </div>
-    <div class="span1">
-      <button class="decrement btn"><i class="icon-chevron-down"></i></button>
-    </div>
-  </div>
-<% end %>
+<div id="collection">
+  <h1>Your Collection</h1>
+  <% if @collections.present? %>
+    <% @sets.each do |set| %>
+      <h2><%= set[0].name %></h2>
+      <% set[1].each do |collection| %>
+        <div id="card-<%= collection.card.multiverse_id %>" class="row card" data-card-id="<%= collection.card_id %>" data-quantity="<%= collection.quantity %>">
+          <div class="card-name span2">
+            <%= collection.card.name %>
+          </div>
+          <div class="card-quantity span1">
+            <%= collection.quantity %>
+          </div>
+          <div class="span1">
+            <button class="increment btn"><i class="icon-chevron-up"></i></button>
+          </div>
+          <div class="span1">
+            <button class="decrement btn"><i class="icon-chevron-down"></i></button>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    <%= paginate @collections %>
+  <% else %>
+    <p class="lead">You don't seem to have any cards in your collection. Why not browse through the Magic card <%= link_to 'sets', sets_path %> and add some.</p>
+  <% end %>
+</div>

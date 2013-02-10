@@ -72,4 +72,18 @@ $(function() {
             }
         }, "json");
     });
+
+    $("#confirm_delete_account #enter_username, #confirm_delete_account #enter_username_confirmation").on("keyup", function() {
+        if ($("#confirm_delete_account #enter_username").val() === $("#confirm_delete_account #username").val() && $("#confirm_delete_account #enter_username_confirmation").val() === $("#confirm_delete_account #username").val()) {
+            $("#confirm_delete_account input[type='submit']").attr("disabled", false);
+        } else {
+            $("#confirm_delete_account input[type='submit']").attr("disabled", true);
+        }
+    });
+
+    $("body").on("submit", "#confirm_delete_account", function(event) {
+        if ($("#confirm_delete_account #enter_username").val() !== $("#confirm_delete_account #username").val() && $("#confirm_delete_account #enter_username_confirmation").val() !== $("#confirm_delete_account #username").val()) {
+            event.preventDefault();
+        }
+    });
 });

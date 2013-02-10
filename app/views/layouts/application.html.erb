@@ -20,9 +20,61 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to t('application.title'), root_path, :title => t('application.title'), :class => 'brand' %>
+      <div class="nav-collapse collapse">
+        <ul class="nav" role="navigation">
+          <% if current_user %><li class="collection-nav-link"><%= link_to ('<i class="icon-reorder"></i> ' + 'Sets').html_safe, sets_path, :class => is_active_controller?('card_sets') %></li><% end %>
+          <% if can? :read, :admin %><li class="admin-nav-link hidden-desktop"><%= link_to ('<i class="icon-sitemap"></i> ' + t('navigation.admin_home')).html_safe, admin_root_path %></li><% end %>
+          <% if current_user %><li class="account-nav-link hidden-desktop"><%= link_to ('<i class="icon-cogs"></i> ' + t('accounts.edit.title')).html_safe, edit_account_path, :class => is_active_controller?('accounts') %></li><% end %>
+          <% if current_user %><li class="logout-nav-link hidden-desktop"><%= link_to ('<i class="icon-signout"></i> ' + t('navigation.sign_out')).html_safe, destroy_user_session_path, :method => :delete %></li><% end %>
+          <% unless current_user %><li class="login-nav-link hidden-desktop"><%= link_to ('<i class="icon-signin"></i> ' + t('navigation.sign_in')).html_safe, new_user_session_path %></li><% end %>
+          <% unless current_user %><li class="register-nav-link hidden-desktop"><%= link_to ('<i class="icon-star"></i> ' + t('navigation.register')).html_safe, new_user_registration_path %></li><% end %>
+        </ul>
+      </div>
+      <div class="nav-collapse collapse pull-right visible-desktop">
+        <ul class="nav">
+          <% if can? :read, :admin %><li class="admin-nav-link"><%= link_to ('<i class="icon-sitemap"></i> ' + t('navigation.admin_home')).html_safe, admin_root_path %></li><% end %>
+          <% if current_user %><li class="account-nav-link"><%= link_to ('<i class="icon-cogs"></i> ' + t('accounts.edit.title')).html_safe, edit_account_path, :class => is_active_controller?('accounts') %></li><% end %>
+          <% if current_user %><li class="logout-nav-link"><%= link_to ('<i class="icon-signout"></i> ' + t('navigation.sign_out')).html_safe, destroy_user_session_path, :method => :delete %></li><% end %>
+          <% unless current_user %><li class="login-nav-link"><%= link_to ('<i class="icon-signin"></i> ' + t('navigation.sign_in')).html_safe, new_user_session_path %></li><% end %>
+          <% unless current_user %><li class="register-nav-link"><%= link_to ('<i class="icon-star"></i> ' + t('navigation.register')).html_safe, new_user_registration_path %></li><% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<%= yield :masthead %>
 <div class="container">
   <%= flash_messages %>
   <%= yield %>
 </div>
+<footer class="footer">
+  <div class="container">
+    <ul class="footer-links">
+      <li><%= link_to 'About', '/about' %></li>
+      <li class="muted">·</li>
+      <li><%= link_to 'Contact', contact_path %></li>
+      <li class="muted">·</li>
+      <li><%= link_to 'Privacy Policy', '/privacy-policy' %></li>
+      <li class="muted">·</li>
+      <li><%= link_to 'Terms and Conditions', '/terms-and-conditions' %></li>
+      <li class="muted">·</li>
+      <li><%= link_to 'Source', 'https://github.com/seaneshbaugh/card_tracker' %></li>
+    </ul>
+    <p>Created with <%= link_to 'Ruby on Rails', 'http://rubyonrails.org/' %> by <%= link_to 'Sean Eshbaugh', 'http://seaneshbaugh.com/' %>. No copyright.</p>
+    <p>Magic: the Gathering is a registered trademark of <%= link_to 'Wizards of the Coast LLC', 'http://company.wizards.com/' %>, a subsidiary of <%= link_to 'Hasbro, Inc.', 'http://www.hasbro.com/' %></p>
+    <p>Magic: the Gathering and all Magic images are copyright &copy; Wizards of the Coast LLC. All Rights Reserved.</p>
+    <p>The Caves of Koilos is in no way associated with Wizards of the Coast LLC or Hasbro, Inc.</p>
+  </div>
+</footer>
+<%= render 'shared/google_analytics' %>
 </body>
 </html>

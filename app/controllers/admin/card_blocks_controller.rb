@@ -2,20 +2,18 @@ class Admin::CardBlocksController < Admin::AdminController
   authorize_resource
 
   def index
-    if params[:q].present? && params[:q][:s].present?
-      @search = CardBlock.unscoped.search(params[:q])
-    else
-      @search = CardBlock.search(params[:q])
-    end
+    @search = CardBlock.search(params[:q])
 
-    @card_blocks = @search.result.page(params[:page]).order('card_blocks.name ASC')
+    @card_blocks = @search.result.includes(:card_sets).order('card_sets.release_date ASC').page(params[:page])
   end
 
   def show
-    @card_block = CardBlock.where(:slug => params[:id]).first
+    @card_block = CardBlock.where(:id => params[:id]).includes(:card_block_type, :card_sets).first
 
     if @card_block.nil?
-      redirect_to admin_card_blocks_url, :notice => t('messages.card_blocks.could_not_find')
+      flash[:error] = t('messages.card_blocks.could_not_find')
+
+      redirect_to admin_card_blocks_url
     end
   end
 
@@ -27,43 +25,59 @@ class Admin::CardBlocksController < Admin::AdminController
     @card_block = CardBlock.new(params[:card_block])
 
     if @card_block.save
-      redirect_to admin_card_blocks_url, :notice => t('messages.card_blocks.created')
+      flash[:success] = t('messages.card_blocks.created')
+
+      redirect_to admin_card_blocks_url
     else
+      flash.now[:error] = @card_block.errors.full_messages.uniq.join('. ') + '.'
+
       render 'new'
     end
   end
 
   def edit
-    @card_block = CardBlock.where(:slug => params[:id]).first
+    @card_block = CardBlock.where(:id => params[:id]).first
 
     if @card_block.nil?
-      redirect_to admin_card_blocks_url, :notice => t('messages.card_blocks.could_not_find')
+      flash[:error] = t('messages.card_blocks.could_not_find')
+
+      redirect_to admin_card_blocks_url
     end
   end
 
   def update
-    @card_block = CardBlock.where(:slug => params[:id]).first
+    @card_block = CardBlock.where(:id => params[:id]).first
 
     if @card_block.nil?
-      redirect_to admin_card_blocks_url, :notice => t('messages.card_blocks.could_not_find') and return
+      flash[:error] = t('messages.card_blocks.could_not_find')
+
+      redirect_to admin_card_blocks_url and return
     end
 
     if @card_block.update_attributes(params[:card_block])
-      redirect_to edit_admin_card_block_url(@card_block), :notice => t('messages.card_blocks.updated')
+      flash[:success] = t('messages.card_blocks.updated')
+
+      redirect_to edit_admin_card_block_url(@card_block)
     else
+      flash.now[:error] = @card_block.errors.full_messages.uniq.join('. ') + '.'
+
       render 'edit'
     end
   end
 
   def destroy
-    @card_block = CardBlock.where(:slug => params[:id]).first
+    @card_block = CardBlock.where(:id => params[:id]).first
 
     if @card_block.nil?
-      redirect_to admin_card_blocks_url, :notice => t('messages.card_blocks.could_not_find') and return
+      flash[:error] = t('messages.card_blocks.could_not_find')
+
+      redirect_to admin_card_blocks_url and return
     end
 
     @card_block.destroy
 
-    redirect_to admin_card_blocks_url, :notice => t('messages.card_blocks.deleted')
+    flash[:success] = t('messages.card_blocks.deleted')
+
+    redirect_to admin_card_blocks_url
   end
 end

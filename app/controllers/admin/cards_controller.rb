@@ -2,20 +2,18 @@ class Admin::CardsController < Admin::AdminController
   authorize_resource
 
   def index
-    if params[:q].present? && params[:q][:s].present?
-      @search = Card.unscoped.search(params[:q])
-    else
-      @search = Card.search(params[:q])
-    end
+    @search = Card.search(params[:q])
 
-    @cards = @search.result.page(params[:page]).order('cards.multiverse_id ASC')
+    @cards = @search.result.order('cards.created_at ASC').page(params[:page])
   end
 
   def show
-    @card = Card.where(:slug => params[:id]).first
+    @card = Card.where(:id => params[:id]).first
 
     if @card.nil?
-      redirect_to admin_cards_url, :notice => t('messages.cards.could_not_find')
+      flash[:error] = t('messages.cards.could_not_find')
+
+      redirect_to admin_cards_url
     end
   end
 
@@ -27,43 +25,59 @@ class Admin::CardsController < Admin::AdminController
     @card = Card.new(params[:card])
 
     if @card.save
-      redirect_to admin_cards_url, :notice => t('messages.cards.created')
+      flash[:success] = t('messages.cards.created')
+
+      redirect_to admin_cards_url
     else
+      flash.now[:error] = @card.errors.full_messages.uniq.join('. ') + '.'
+
       render 'new'
     end
   end
 
   def edit
-    @card = Card.where(:slug => params[:id]).first
+    @card = Card.where(:id => params[:id]).first
 
     if @card.nil?
-      redirect_to admin_cards_url, :notice => t('messages.cards.could_not_find')
+      flash[:error] = t('messages.cards.could_not_find')
+
+      redirect_to admin_cards_url
     end
   end
 
   def update
-    @card = Card.where(:slug => params[:id]).first
+    @card = Card.where(:id => params[:id]).first
 
     if @card.nil?
-      redirect_to admin_cards_url, :notice => t('messages.cards.could_not_find') and return
+      flash[:error] = t('messages.cards.could_not_find')
+
+      redirect_to admin_cards_url and return
     end
 
     if @card.update_attributes(params[:card])
-      redirect_to edit_admin_card_url(@card), :notice => t('messages.cards.updated')
+      flash[:success] = t('messages.cards.updated')
+
+      redirect_to edit_admin_card_url(@card)
     else
+      flash.now[:error] = @card.errors.full_messages.uniq.join('. ') + '.'
+
       render 'edit'
     end
   end
 
   def destroy
-    @card = Card.where(:slug => params[:id]).first
+    @card = Card.where(:id => params[:id]).first
 
     if @card.nil?
-      redirect_to admin_cards_url, :notice => t('messages.cards.could_not_find') and return
+      flash[:error] = t('messages.cards.could_not_find')
+
+      redirect_to admin_cards_url and return
     end
 
     @card.destroy
 
-    redirect_to admin_cards_url, :notice => t('messages.cards.deleted')
+    flash[:success] = t('messages.cards.deleted')
+
+    redirect_to admin_cards_url
   end
 end

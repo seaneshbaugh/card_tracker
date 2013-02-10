@@ -4,11 +4,11 @@
     <fieldset>
       <%= f.input :reset_password_token, :as => :hidden %>
       <%= f.full_error :reset_password_token %>
-      <%= f.input :password, :label => t('devise.passwords.new_password'), :required => true %>
+      <%= f.input :password, :autofocus => true, :label => t('devise.passwords.new_password'), :required => true %>
       <%= f.input :password_confirmation, :label => t('devise.passwords.confirm_password'), :required => true %>
     </fieldset>
     <div class="form-actions">
-      <%= f.button :submit, t('devise.passwords.edit_button') %>
+      <%= f.button :submit, t('devise.passwords.edit_button'), :class => 'btn-primary' %>
     </div>
   <% end %>
   <%= render 'devise/shared/links' %>

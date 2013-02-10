@@ -37,6 +37,10 @@ class DeviseCreateUsers < ActiveRecord::Migration
       ## Token authenticatable
       t.string :authentication_token
 
+      t.boolean :receive_newsletter
+      t.boolean :receive_sign_up_alert
+      t.boolean :receive_contact_alert
+
       t.timestamps
     end
 
@@ -63,6 +67,9 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.index :unlock_token
       t.index :locked_at
       t.index :authentication_token
+      t.index :receive_newsletter
+      t.index :receive_sign_up_alert
+      t.index :receive_contact_alert
       t.index :created_at
       t.index :updated_at
     end

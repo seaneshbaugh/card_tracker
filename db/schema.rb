@@ -122,6 +122,9 @@ ActiveRecord::Schema.define(:version => 20121230180002) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "authentication_token"
+    t.boolean  "receive_newsletter"
+    t.boolean  "receive_sign_up_alert"
+    t.boolean  "receive_contact_alert"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
   end
@@ -141,6 +144,9 @@ ActiveRecord::Schema.define(:version => 20121230180002) do
   add_index "users", ["last_sign_in_at"], :name => "index_users_on_last_sign_in_at"
   add_index "users", ["last_sign_in_ip"], :name => "index_users_on_last_sign_in_ip"
   add_index "users", ["locked_at"], :name => "index_users_on_locked_at"
+  add_index "users", ["receive_contact_alert"], :name => "index_users_on_receive_contact_alert"
+  add_index "users", ["receive_newsletter"], :name => "index_users_on_receive_newsletter"
+  add_index "users", ["receive_sign_up_alert"], :name => "index_users_on_receive_sign_up_alert"
   add_index "users", ["remember_created_at"], :name => "index_users_on_remember_created_at"
   add_index "users", ["reset_password_sent_at"], :name => "index_users_on_reset_password_sent_at"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"

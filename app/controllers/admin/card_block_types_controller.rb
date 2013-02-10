@@ -2,20 +2,18 @@ class Admin::CardBlockTypesController < Admin::AdminController
   authorize_resource
 
   def index
-    if params[:q].present? && params[:q][:s].present?
-      @search = CardBlockType.unscoped.search(params[:q])
-    else
-      @search = CardBlockType.search(params[:q])
-    end
+    @search = CardBlockType.search(params[:q])
 
-    @card_block_types = @search.result.page(params[:page]).order('card_block_types.name ASC')
+    @card_block_types = @search.result.order('card_block_types.name ASC').page(params[:page])
   end
 
   def show
-    @card_block_type = CardBlockType.where(:slug => params[:id]).first
+    @card_block_type = CardBlockType.where(:id => params[:id]).first
 
     if @card_block_type.nil?
-      redirect_to admin_card_block_types_url, :notice => t('messages.card_block_types.could_not_find')
+      flash[:error] = t('messages.card_block_types.could_not_find')
+
+      redirect_to admin_card_block_types_url
     end
   end
 
@@ -27,43 +25,59 @@ class Admin::CardBlockTypesController < Admin::AdminController
     @card_block_type = CardBlockType.new(params[:card_block_type])
 
     if @card_block_type.save
-      redirect_to admin_card_block_types_url, :notice => t('messages.card_block_types.created')
+      flash[:success] = t('messages.card_block_types.created')
+
+      redirect_to admin_card_block_types_url
     else
+      flash.now[:error] = @card_block_type.errors.full_messages.uniq.join('. ') + '.'
+
       render 'new'
     end
   end
 
   def edit
-    @card_block_type = CardBlockType.where(:slug => params[:id]).first
+    @card_block_type = CardBlockType.where(:id => params[:id]).first
 
     if @card_block_type.nil?
-      redirect_to admin_card_block_types_url, :notice => t('messages.card_block_types.could_not_find')
+      flash[:error] = t('messages.card_block_types.could_not_find')
+
+      redirect_to admin_card_block_types_url
     end
   end
 
   def update
-    @card_block_type = CardBlockType.where(:slug => params[:id]).first
+    @card_block_type = CardBlockType.where(:id => params[:id]).first
 
     if @card_block_type.nil?
-      redirect_to admin_card_block_types_url, :notice => t('messages.card_block_types.could_not_find') and return
+      flash[:error] = t('messages.card_block_types.could_not_find')
+
+      redirect_to admin_card_block_types_url and return
     end
 
     if @card_block_type.update_attributes(params[:card_block_type])
-      redirect_to edit_admin_card_block_type_url(@card_block_type), :notice => t('messages.card_block_types.updated')
+      flash[:success] = t('messages.card_block_types.updated')
+
+      redirect_to edit_admin_card_block_type_url(@card_block_type)
     else
+      flash.now[:error] = @card_block_type.errors.full_messages.uniq.join('. ') + '.'
+
       render 'edit'
     end
   end
 
   def destroy
-    @card_block_type = CardBlockType.where(:slug => params[:id]).first
+    @card_block_type = CardBlockType.where(:id => params[:id]).first
 
     if @card_block_type.nil?
-      redirect_to admin_card_block_types_url, :notice => t('messages.card_block_types.could_not_find') and return
+      flash[:error] = t('messages.card_block_types.could_not_find')
+
+      redirect_to admin_card_block_types_url and return
     end
 
     @card_block_type.destroy
 
-    redirect_to admin_card_block_types_url, :notice => t('messages.card_block_types.deleted')
+    flash[:success] = t('messages.card_block_types.deleted')
+
+    redirect_to admin_card_block_types_url
   end
 end

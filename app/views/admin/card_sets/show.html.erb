@@ -1,25 +1,25 @@
-<div id="card_block_type">
-  <h1><%= t('card_block_types.show.title') %> <small><%= @card_block_type.name %></small></h1>
+<div id="card-set">
+  <h1><%= t('card_sets.show.title') %> <small><%= @card_set.name %></small></h1>
   <table class="table table-condensed table-striped">
     <tbody>
       <tr>
       <tr>
-        <th class="span3"><%= t('activerecord.attributes.card_block_type.name') %></th>
-        <td><%= @card_block_type.name %></td>
+        <th class="span3"><%= t('activerecord.attributes.card_set.name') %></th>
+        <td><%= @card_set.name %></td>
       </tr>
       <tr>
-        <th class="span3"><%= t('activerecord.attributes.card_block_type.created_at') %></th>
-        <td><%= @card_block_type.created_at.iso8601 %></td>
+        <th class="span3"><%= t('activerecord.attributes.card_set.created_at') %></th>
+        <td><%= @card_set.created_at.iso8601 %></td>
       </tr>
       <tr>
-        <th class="span3"><%= t('activerecord.attributes.card_block_type.updated_at') %></th>
-        <td><%= @card_block_type.updated_at.iso8601 %></td>
+        <th class="span3"><%= t('activerecord.attributes.card_set.updated_at') %></th>
+        <td><%= @card_set.updated_at.iso8601 %></td>
       </tr>
     </tbody>
   </table>
   <div class="form-actions">
-    <%= link_to t('card_block_types.links.back_to_index'), admin_card_block_types_path, :class => 'btn' %>
-    <% if can? :edit, CardBlockType, current_user %><%= link_to t('card_block_types.edit.title'), edit_admin_card_block_type_path(@card_block_type), :class => 'btn' %><% end %>
-    <% if can? :destroy, CardBlockType, current_user %><%= link_to t('card_block_types.delete.title'), admin_card_block_type_path(@card_block_type), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') } %><% end %>
+    <%= link_to t('card_sets.links.back_to_index'), admin_card_sets_path, :class => 'btn' %>
+    <% if can? :edit, CardSet, current_user %><%= link_to t('card_sets.edit.title'), edit_admin_card_set_path(@card_set), :class => 'btn' %><% end %>
+    <% if can? :destroy, CardSet, current_user %><%= link_to t('card_sets.delete.title'), admin_card_set_path(@card_set), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') } %><% end %>
   </div>
 </div>

@@ -2,9 +2,9 @@ class CollectionsController < ApplicationController
   before_filter :authenticate_user!
 
   def show
-    @collections = Collection.includes(:card).where(:user_id => current_user.id).where('collections.quantity > ?', 0)
+    @collections = Collection.includes(:card => :card_set).where(:user_id => current_user.id).where('collections.quantity > ?', 0).order('card_sets.id').page(params[:page])
 
-    @test = Collection.includes(:card => :card_set).where(:user_id => 2).where('collections.quantity > ?', 0).group_by { |collection| collection.card.card_set }
+    @sets = @collections.group_by { |collection| collection.card.card_set }
   end
 
   def update

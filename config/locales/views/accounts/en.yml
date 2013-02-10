@@ -1,17 +1,24 @@
 en:
   navigation:
-    account: "Account"
+    account: "Account Settings"
   messages:
     accounts:
-      created: "Account has been created."
-      updated: "Account has been updated."
-      destroyed: "Account has been deleted."
+      updated: "Your account has been updated."
+      destroyed: "Your account has been deleted."
   accounts:
     links:
       back_to_account: "Back to Account"
+      confirm_delete: "Yes, I really want to delete my account."
     edit:
       title: "Edit Account"
     update:
       title: "Update Account"
     show:
-      title: "Account"
+      title: "Account Settings"
+    delete:
+      title: "Delete Account"
+      danger: "Danger!"
+      warning_message: "You are about to <strong>permanently</strong> delete your account. This cannot be undone and will erase all data associated with your account forever!"
+      instructions: "Enter your username, <strong>%{username}</strong>, twice below and then click the big red button."
+      enter_username: "Username"
+      enter_username_confirmation: "Retype Username"

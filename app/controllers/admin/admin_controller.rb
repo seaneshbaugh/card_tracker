@@ -5,6 +5,8 @@ class Admin::AdminController < ApplicationController
 
   layout 'admin'
 
+  authorize_resource
+
   def index
   end
 end

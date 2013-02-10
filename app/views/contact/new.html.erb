@@ -1,21 +1,18 @@
 <% content_for :page_title do %>
   <% "Contact - #{t('application.title')}" %>
 <% end %>
-<% content_for :meta_description do %>
-  Tell Conney what's up.
-<% end %>
-<div id="contact" class="page row">
-  <h1 class="page-title span12">Contact</h1>
-  <div class="page-body span12">
-  <p>Conney loves hearing how cute she is.</p>
-    <%= simple_form_for @contact, :url => 'contact', :method => :post, :html => { :class => 'form-horizontal', :honeypot => true } do |f| %>
-      <fieldset>
-        <%= f.input :name, :as => :string %>
-        <%= f.input :email, :as => :email %>
-        <%= f.input :subject, :as => :string %>
-        <%= f.input :body, :as => :text %>
-      </fieldset>
+<div id="contact">
+  <h1>Contact</h1>
+  <p>Got a question about The Caves of Koilos? Send us a message! We love feedback.</p>
+  <%= simple_form_for @contact, :url => 'contact', :method => :post, :html => { :class => 'form-horizontal', :honeypot => true } do |f| %>
+    <fieldset>
+      <%= f.input :name, :as => :string %>
+      <%= f.input :email, :as => :email %>
+      <%= f.input :subject, :as => :string %>
+      <%= f.input :body, :as => :text %>
+    </fieldset>
+    <div class="form-actions">
       <%= f.submit 'Submit', :class => 'btn btn-primary' %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
