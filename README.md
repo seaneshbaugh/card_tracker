@@ -15,6 +15,8 @@ The following gems are required to run this application:
 * rails (3.2.11)
 * mysql2
 * cancan
+* delayed_job
+* delayed_job_active_record
 * devise
 * exception_notification
 * kaminari

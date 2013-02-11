@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121230180002) do
+ActiveRecord::Schema.define(:version => 20130210155125) do
 
   create_table "card_block_types", :force => true do |t|
     t.string   "name",       :default => "", :null => false
@@ -99,6 +99,22 @@ ActiveRecord::Schema.define(:version => 20121230180002) do
   add_index "collections", ["updated_at"], :name => "index_collections_on_updated_at"
   add_index "collections", ["user_id"], :name => "index_collections_on_user_id"
 
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
   create_table "users", :force => true do |t|
     t.string   "username",               :default => "", :null => false
     t.string   "email",                  :default => "", :null => false
@@ -122,9 +138,9 @@ ActiveRecord::Schema.define(:version => 20121230180002) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "authentication_token"
-    t.boolean  "receive_newsletter"
-    t.boolean  "receive_sign_up_alert"
-    t.boolean  "receive_contact_alert"
+    t.boolean  "receive_newsletters"
+    t.boolean  "receive_sign_up_alerts"
+    t.boolean  "receive_contact_alerts"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
   end
@@ -144,9 +160,9 @@ ActiveRecord::Schema.define(:version => 20121230180002) do
   add_index "users", ["last_sign_in_at"], :name => "index_users_on_last_sign_in_at"
   add_index "users", ["last_sign_in_ip"], :name => "index_users_on_last_sign_in_ip"
   add_index "users", ["locked_at"], :name => "index_users_on_locked_at"
-  add_index "users", ["receive_contact_alert"], :name => "index_users_on_receive_contact_alert"
-  add_index "users", ["receive_newsletter"], :name => "index_users_on_receive_newsletter"
-  add_index "users", ["receive_sign_up_alert"], :name => "index_users_on_receive_sign_up_alert"
+  add_index "users", ["receive_contact_alerts"], :name => "index_users_on_receive_contact_alerts"
+  add_index "users", ["receive_newsletters"], :name => "index_users_on_receive_newsletters"
+  add_index "users", ["receive_sign_up_alerts"], :name => "index_users_on_receive_sign_up_alerts"
   add_index "users", ["remember_created_at"], :name => "index_users_on_remember_created_at"
   add_index "users", ["reset_password_sent_at"], :name => "index_users_on_reset_password_sent_at"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"
