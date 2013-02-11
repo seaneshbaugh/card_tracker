@@ -3,7 +3,7 @@ namespace :uploads do
   task :setup do
     run "mkdir -p #{shared_path}/uploads #{release_path}/public/uploads && chmod g+w #{shared_path}/uploads"
   end
-  after 'deploy:symlink', 'uploads:setup'
+  after 'deploy:create_symlink', 'uploads:setup'
 
   desc 'Creates symlink to shared uploads directory.'
   task :symlink do

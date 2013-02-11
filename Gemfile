@@ -17,7 +17,7 @@ group :assets do
   gem 'coffee-rails'
   gem 'jquery-rails'
   gem 'less-rails'
-  gem 'libv8'
+  gem 'libv8', '3.11.8.13'
   gem 'therubyracer'
   gem 'twitter-bootstrap-rails'
   gem 'uglifier'
