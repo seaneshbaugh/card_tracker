@@ -11,7 +11,7 @@
       <%= link_to t('card_blocks.new.title'), new_admin_card_block_path, :class => 'btn btn-primary pull-right' %>
     </div>
   <% end %>
-  <% if @card_blocks.any? %>
+  <% if @card_blocks.present? %>
     <table class="table table-striped">
       <thead>
         <tr>

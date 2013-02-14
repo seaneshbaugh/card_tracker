@@ -452,7 +452,7 @@ describe Admin::UsersController do
 
       params = create_params(user)
 
-      params[:first_name] = ''
+      params[:username] = ''
 
       put :update, :id => user.id, :user => params
 
@@ -462,9 +462,9 @@ describe Admin::UsersController do
 
       updated_user = User.where(:id => user.id).first
 
-      updated_user.first_name.should eq(user.first_name)
+      updated_user.username.should eq(user.username)
 
-      updated_user.first_name.should_not eq('')
+      updated_user.username.should_not eq('')
     end
 
     it 'should not allow admin users to edit a users role to be sysadmin' do

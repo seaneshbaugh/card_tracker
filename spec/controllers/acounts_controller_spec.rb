@@ -112,9 +112,9 @@ describe AccountsController do
 
       updated_user = User.where(:id => user.id).first
 
-      updated_user.email.should_not eq(user.email)
+      updated_user.email.should eq(user.email)
 
-      updated_user.email.should eq('newemail@test.com')
+      updated_user.unconfirmed_email.should eq('newemail@test.com')
     end
 
     it 'should let users update their username' do

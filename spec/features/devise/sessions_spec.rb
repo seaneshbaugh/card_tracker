@@ -16,7 +16,7 @@ describe 'sessions' do
   end
 
   context '#create' do
-    it 'should ' do
+    it 'should let a user sign in' do
       password = 'verylongpassword'
 
       user = create(:user, :password => password, :password_confirmation => password)

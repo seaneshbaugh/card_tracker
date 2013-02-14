@@ -12,7 +12,7 @@
       <%= link_to t('users.new.title'), new_admin_user_path, :class => 'btn btn-primary pull-right' %>
     </div>
   <% end %>
-  <% if @users.any? %>
+  <% if @users.present? %>
     <table class="table table-striped">
       <thead>
         <tr>
