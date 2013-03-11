@@ -30,7 +30,9 @@ class AccountsController < ApplicationController
   def destroy
     @account = User.where(:id => current_user.id).first
 
-    #@account.destroy
+    @account.destroy
+
+    flash[:success] = 'Your account has successfully been deleted.'
 
     redirect_to root_url
   end

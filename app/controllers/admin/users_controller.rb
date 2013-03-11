@@ -61,6 +61,10 @@ class Admin::UsersController < Admin::AdminController
     end
 
     if @user.update_attributes(params[:user])
+      if @user.unconfirmed_email.present?
+        @user.confirm!
+      end
+
       flash[:success] = t('messages.users.updated')
 
       redirect_to edit_admin_user_url(@user)

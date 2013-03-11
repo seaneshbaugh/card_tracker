@@ -18,4 +18,14 @@ describe 'pages' do
       page.body.should have_selector('h1', :text => 'Your Collection')
     end
   end
+
+  context '#show' do
+    it 'should display the 404 page if the page does not exist' do
+      begin
+        visit '/this-page-does-not-exist'
+      rescue Exception => e
+        e.class.should eq(ActionController::RoutingError)
+      end
+    end
+  end
 end
