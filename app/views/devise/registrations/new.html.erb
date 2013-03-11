@@ -1,6 +1,6 @@
 <div id="register">
   <h1><%= t('navigation.register') %></h1>
-  <%= simple_form_for resource, :as => resource_name, :url => user_registration_path, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= simple_form_for resource, :as => resource_name, :url => user_registration_path, :html => { :class => 'form-horizontal', :honeypot => true } do |f| %>
     <fieldset>
       <%= f.input :username, :autofocus => true, :required => true %>
       <%= f.input :email, :required => true %>
