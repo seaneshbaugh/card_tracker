@@ -2,7 +2,7 @@ class CardsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @card_set = CardSet.includes(:cards).where(:id => params[:set_id]).first
+    @card_set = CardSet.includes(:cards).where(:id => params[:set_id]).order('cast(cards.card_number as unsigned) ASC').first
 
     if @card_set.nil?
       flash[:error] = t('messages.card_sets.could_not_find')
