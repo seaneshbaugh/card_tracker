@@ -24,7 +24,10 @@ set :bundle_flags, '--deployment'
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
-after 'deploy', 'deploy:cleanup'
+after 'deploy',         'deploy:cleanup'
+after 'deploy:stop',    'delayed_job:stop'
+after 'deploy:start',   'delayed_job:start'
+after 'deploy:restart', 'delayed_job:restart'
 
 load 'deploy/assets'
 
