@@ -21,7 +21,7 @@
     </div>
     <div class="register span6">
       <h2>Register</h2>
-      <%= simple_form_for @new_user, :as => :user, :url => registration_path(:user), :html => { :class => 'form-horizontal', :honeypot => true } do |f| %>
+      <%= simple_form_for @new_user, :as => :user, :url => registration_path(:user), :html => { :autocomplete => 'off', :class => 'form-horizontal', :honeypot => true } do |f| %>
         <fieldset>
           <%= f.input :username %>
           <%= f.input :email %>
