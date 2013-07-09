@@ -74,7 +74,9 @@ CardTracker::Application.configure do
     :domain               => 'cavesofkoilos.com',
     :user_name            => SMTP_SETTINGS['user_name'],
     :password             => SMTP_SETTINGS['password'],
-    :authentication       => :login
+    :authentication       => :login,
+    :openssl_verify_mode  => OpenSSL::SSL::VERIFY_NONE,
+    :enable_starttls_auto => false
   }
   config.action_mailer.raise_delivery_errors = true
 
