@@ -2,6 +2,7 @@ set :stages, %w(production)
 set :default_stage, 'production'
 
 require 'bundler/capistrano'
+require 'delayed/recipes'
 require 'capistrano/ext/multistage'
 
 load 'config/recipes/base'
