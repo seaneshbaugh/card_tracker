@@ -243,6 +243,7 @@ DEPENDENCIES
   capistrano-ext
   capybara (= 2.0.3)
   coffee-rails
+  daemons
   database_cleaner
   delayed_job
   delayed_job_active_record
