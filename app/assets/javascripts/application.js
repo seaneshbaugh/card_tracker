@@ -12,17 +12,21 @@ $.fn.fadingLinks = function(color, duration) {
     }
 
     return this.each(function() {
-        var original = $(this).css("color");
+        var link, originalColor;
 
-        $(this).mouseover(function() {
-            return $(this).stop().animate({
+        link = $(this);
+
+        originalColor = link.css("color");
+
+        link.mouseover(function() {
+            return link.stop().animate({
                 color: color
             }, duration);
         });
 
-        return $(this).mouseout(function() {
-            return $(this).stop().animate({
-                color: original
+        return link.mouseout(function() {
+            return link.stop().animate({
+                color: originalColor
             }, duration);
         });
     });
@@ -30,45 +34,53 @@ $.fn.fadingLinks = function(color, duration) {
 
 $(function() {
     $("body").on("click", ".card .increment", function(event) {
+        var increment, cardId, quantity;
+
         event.preventDefault();
 
-        var that = this;
+        increment = $(this);
 
-        var cardID = $(this).parent().parent().data("card-id");
+        cardId = increment.parent().parent().data("card-id");
 
-        var quantity = parseInt($(this).parent().parent().data("quantity")) + 1;
+        quantity = parseInt(increment.parent().parent().data("quantity")) + 1;
 
-        $.post("/collection", "_method=put&card_id=" + cardID + "&quantity=" + quantity, function(data, status, jqXHR) {
+        $.post("/collection", "_method=put&card_id=" + cardId + "&quantity=" + quantity, function(data, status, jqXHR) {
+            var results;
+
             if (jqXHR.status === 200) {
-                var results = $.parseJSON(jqXHR.responseText);
+                results = $.parseJSON(jqXHR.responseText);
 
-                $(that).parent().parent().data("quantity", results["new_quantity"]);
+                increment.parent().parent().data("quantity", results["new_quantity"]);
 
-                $(that).parent().parent().find(".card-quantity").text(results["new_quantity"]);
+                increment.parent().parent().find(".card-quantity").text(results["new_quantity"]);
             }
         }, "json");
     });
 
     $("body").on("click", ".card .decrement", function(event) {
+        var decrement, cardId, quantity;
+
         event.preventDefault();
 
-        var that = this;
+        decrement = $(this);
 
-        var cardID = $(this).parent().parent().data("card-id");
+        cardId = decrement.parent().parent().data("card-id");
 
-        var quantity = parseInt($(this).parent().parent().data("quantity")) - 1;
+        quantity = parseInt(decrement.parent().parent().data("quantity")) - 1;
 
         if (quantity < 0) {
             quantity = 0;
         }
 
-        $.post("/collection", "_method=put&card_id=" + cardID + "&quantity=" + quantity, function(data, status, jqXHR) {
+        $.post("/collection", "_method=put&card_id=" + cardId + "&quantity=" + quantity, function(data, status, jqXHR) {
+            var results;
+
             if (jqXHR.status === 200) {
-                var results = $.parseJSON(jqXHR.responseText);
+                results = $.parseJSON(jqXHR.responseText);
 
-                $(that).parent().parent().data("quantity", results["new_quantity"]);
+                decrement.parent().parent().data("quantity", results["new_quantity"]);
 
-                $(that).parent().parent().find(".card-quantity").text(results["new_quantity"]);
+                decrement.parent().parent().find(".card-quantity").text(results["new_quantity"]);
             }
         }, "json");
     });

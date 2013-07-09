@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.13'
 gem 'mysql2'
 gem 'cancan'
 gem 'delayed_job'
@@ -32,10 +32,10 @@ group :development do
 end
 
 group :test do
-  gem 'capybara'
+  gem 'capybara', '2.0.3'
   gem 'database_cleaner'
   gem 'factory_girl', '~> 2.0'
   gem 'rspec-rails'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', '1.5.6'
   gem 'simplecov', :require => false
 end

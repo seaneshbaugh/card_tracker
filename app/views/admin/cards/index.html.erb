@@ -25,8 +25,8 @@
         <% @cards.each do |card| %>
           <tr>
             <td><%= link_to truncate(card.name, :length => 64), admin_card_path(card) %></td>
-            <td><%= card.created_at.iso8601 %></td>
-            <td><%= card.updated_at.iso8601 %></td>
+            <td><%= card.created_at.present? ? card.created_at.iso8601 : '&nbsp;'.html_safe %></td>
+            <td><%= card.updated_at.present? ? card.updated_at.iso8601 : '&nbsp;'.html_safe %></td>
             <% if can? :edit, Card, current_user %><td class="icon"><%= icon_edit_link edit_admin_card_path(card) %></td><% end %>
             <% if can? :destroy, Card, current_user %><td class="icon"><%= icon_delete_link admin_card_path(card) %></td><% end %>
           </tr>
