@@ -1,3 +1,27 @@
+@whiteMana:          rgb(255, 255, 209);
+@blueMana:           rgb(45, 117, 191);
+@blackMana:          rgb(37, 37, 37);
+@redMana:            rgb(155, 20, 19);
+@greenMana:          rgb(85, 205, 107);
+@colorless:          rgb(188, 188, 188);
+@land:               rgb(204, 185, 136);
+@multi:              rgb(218, 218, 0);
+@phyrexianWhiteMana: darken(@whiteMana, 30%);
+@phyrexianBlueMana:  darken(@blueMana, 30%);
+@phyrexianBlackMana: darken(@blackMana, 30%);
+@phyrexianRedMana:   darken(@redMana, 30%);
+@phyrexianGreenMana: darken(@greenMana, 30%);
+
+.manaGradient(@color: @colorless, @start: @colorless, @stop: lighten(@colorless, 10%)) {
+  background: @color;
+  background: -moz-linear-gradient(-45deg, @start 0%, @stop 100%);
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, @start), color-stop(100%, @stop));
+  background: -webkit-linear-gradient(-45deg, @start 0%, @stop 100%);
+  background: -o-linear-gradient(-45deg, @start 0%, @stop 100%);
+  background: -ms-linear-gradient(-45deg, @start 0%, @stop 100%);
+  background: linear-gradient(135deg, @start 0%, @stop 100%);
+}
+
 a:focus, a:active {
   outline: none;
 }
@@ -94,6 +118,156 @@ body {
   }
 }
 
+.set {
+  .card {
+    line-height: 30px;
+
+    &.white:nth-child(odd) {
+      .manaGradient(lighten(@whiteMana, 5%), lighten(@whiteMana, 5%), lighten(@whiteMana, 10%));
+    }
+
+    &.white:nth-child(even) {
+      .manaGradient(lighten(@whiteMana, 2.5%), lighten(@whiteMana, 2.5%), lighten(@whiteMana, 5%))
+    }
+
+    &.blue:nth-child(odd) {
+      .manaGradient(lighten(@blueMana, 40%), lighten(@blueMana, 40%), lighten(@blueMana, 50%));
+    }
+
+    &.blue:nth-child(even) {
+      .manaGradient(lighten(@blueMana, 35%), lighten(@blueMana, 35%), lighten(@blueMana, 40%))
+    }
+
+    &.black:nth-child(odd) {
+      .manaGradient(lighten(@blackMana, 70%), lighten(@blackMana, 70%), lighten(@blackMana, 80%));
+    }
+
+    &.black:nth-child(even) {
+      .manaGradient(lighten(@blackMana, 60%), lighten(@blackMana, 60%), lighten(@blackMana, 65%))
+    }
+
+    &.red:nth-child(odd) {
+      .manaGradient(lighten(@redMana, 50%), lighten(@redMana, 50%), lighten(@redMana, 60%));
+    }
+
+    &.red:nth-child(even) {
+      .manaGradient(lighten(@redMana, 45%), lighten(@redMana, 45%), lighten(@redMana, 55%));
+    }
+
+    &.green:nth-child(odd) {
+      .manaGradient(lighten(@greenMana, 30%), lighten(@greenMana, 30%), lighten(@greenMana, 40%));
+    }
+
+    &.green:nth-child(even) {
+      .manaGradient(lighten(@greenMana, 20%), lighten(@greenMana, 20%), lighten(@greenMana, 30%));
+    }
+
+    &.white-or-blue:nth-child(odd) {
+      .manaGradient(lighten(@whiteMana, 5%), lighten(@whiteMana, 5%), lighten(@blueMana, 50%));
+    }
+
+    &.white-or-blue:nth-child(even) {
+      .manaGradient(lighten(@whiteMana, 2.5%), lighten(@whiteMana, 2.5%), lighten(@blueMana, 40%));
+    }
+
+    &.white-or-black:nth-child(odd) {
+      .manaGradient(lighten(@whiteMana, 5%), lighten(@whiteMana, 5%), lighten(@blackMana, 80%));
+    }
+
+    &.white-or-black:nth-child(even) {
+      .manaGradient(lighten(@whiteMana, 2.5%), lighten(@whiteMana, 2.5%), lighten(@blackMana, 65%));
+    }
+
+    &.blue-or-black:nth-child(odd) {
+      .manaGradient(lighten(@blueMana, 40%), lighten(@blueMana, 40%), lighten(@blackMana, 80%));
+    }
+
+    &.blue-or-black:nth-child(even) {
+      .manaGradient(lighten(@blueMana, 35%), lighten(@blueMana, 35%), lighten(@blackMana, 65%));
+    }
+
+    &.blue-or-red:nth-child(odd) {
+      .manaGradient(lighten(@blueMana, 40%), lighten(@blueMana, 40%), lighten(@redMana, 60%));
+    }
+
+    &.blue-or-red:nth-child(even) {
+      .manaGradient(lighten(@blueMana, 35%), lighten(@blueMana, 35%), lighten(@redMana, 55%));
+    }
+
+    &.black-or-red:nth-child(odd) {
+      .manaGradient(lighten(@blackMana, 70%), lighten(@blackMana, 65%), lighten(@redMana, 60%));
+    }
+
+    &.black-or-red:nth-child(even) {
+      .manaGradient(lighten(@blackMana, 60%), lighten(@blackMana, 80%), lighten(@redMana, 55%));
+    }
+
+    &.black-or-green:nth-child(odd) {
+      .manaGradient(lighten(@blackMana, 70%), lighten(@blackMana, 65%), lighten(@greenMana, 40%));
+    }
+
+    &.black-or-green:nth-child(even) {
+      .manaGradient(lighten(@blackMana, 60%), lighten(@blackMana, 80%), lighten(@greenMana, 30%));
+    }
+
+    &.red-or-white:nth-child(odd) {
+      .manaGradient(lighten(@redMana, 50%), lighten(@redMana, 50%), lighten(@whiteMana, 10%));
+    }
+
+    &.red-or-white:nth-child(even) {
+      .manaGradient(lighten(@redMana, 45%), lighten(@redMana, 45%), lighten(@whiteMana, 5%));
+    }
+
+    &.red-or-green:nth-child(odd) {
+      .manaGradient(lighten(@redMana, 50%), lighten(@redMana, 50%), lighten(@greenMana, 40%));
+    }
+
+    &.red-or-green:nth-child(even) {
+      .manaGradient(lighten(@redMana, 45%), lighten(@redMana, 45%), lighten(@greenMana, 30%));
+    }
+
+    &.green-or-white:nth-child(odd) {
+      .manaGradient(lighten(@greenMana, 30%), lighten(@greenMana, 30%), lighten(@whiteMana, 10%));
+    }
+
+    &.green-or-white:nth-child(even) {
+      .manaGradient(lighten(@greenMana, 20%), lighten(@greenMana, 20%), lighten(@whiteMana, 5%));
+    }
+
+    &.green-or-blue:nth-child(odd) {
+      .manaGradient(lighten(@greenMana, 30%), lighten(@greenMana, 30%), lighten(@blueMana, 50%));
+    }
+
+    &.green-or-blue:nth-child(even) {
+      .manaGradient(lighten(@greenMana, 20%), lighten(@greenMana, 20%), lighten(@blueMana, 40%));
+    }
+
+    &.colorless:nth-child(odd) {
+      .manaGradient(lighten(@colorless, 10%), lighten(@colorless, 10%), lighten(@colorless, 15%));
+    }
+
+    &.colorless:nth-child(even) {
+      .manaGradient(lighten(@colorless, 5%), lighten(@colorless, 5%), lighten(@colorless, 10%))
+    }
+
+    &.land:nth-child(odd) {
+      .manaGradient(lighten(@land, 10%), lighten(@land, 10%), lighten(@land, 15%));
+    }
+
+    &.land:nth-child(even) {
+      .manaGradient(lighten(@land, 5%), lighten(@land, 5%), lighten(@land, 10%))
+    }
+
+    &.multi:nth-child(odd) {
+      .manaGradient(lighten(@multi, 10%), lighten(@multi, 10%), lighten(@multi, 15%));
+    }
+
+    &.multi:nth-child(even) {
+      .manaGradient(lighten(@multi, 5%), lighten(@multi, 5%), lighten(@multi, 10%))
+    }
+  }
+}
+
 #about {
   p {
     font-size: 24px;
@@ -117,6 +291,23 @@ body {
 
   &.large {
     width: 44px;
+  }
+}
+
+img[src*='symbols'] {
+  padding: 0 2px;
+  width: 18px;
+
+  &.large {
+    padding: 5px;
+    width: 64px;
+  }
+}
+
+.card {
+  .show-on-gatherer {
+    font-size: 20px;
+    margin-top: 20px;
   }
 }
 

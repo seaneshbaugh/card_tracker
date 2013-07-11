@@ -1,9 +1,8 @@
 <div id="set-<%= @card_set.id %>" class="set">
   <h1><%= card_set_symbol(@card_set, :class => 'large') %> <%= @card_set.name %></h1>
   <% @card_set.cards.each do |card| %>
-    <!-- TODO: Move this to controller or to a helper. -->
-    <% collection = Collection.where(:card_id => card.id, :user_id => current_user.id).first %>
-    <div id="<%= card.multiverse_id %>" class="row card" data-card-id="<%= card.id %>" data-quantity="<%= collection.present? ? collection.quantity : 0 %>">
+    <% collection = card.collection_for(current_user) %>
+    <div id="<%= card.multiverse_id %>" class="row card <%= card.color.join(' ') %>" data-card-id="<%= card.id %>" data-quantity="<%= collection.present? ? collection.quantity : 0 %>">
       <div class="card-name span2">
         <%= link_to card.name, set_card_path(@card_set, card) %>
       </div>

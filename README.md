@@ -15,6 +15,7 @@ The following gems are required to run this application:
 * rails (3.2.13)
 * mysql2
 * cancan
+* daemons
 * delayed_job
 * delayed_job_active_record
 * devise

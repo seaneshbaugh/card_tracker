@@ -1,5 +1,5 @@
 <div id="sets" class="row">
-  <% @card_sets.each_slice((@card_sets.length / 4).to_i) do |card_set_column| %>
+  <% @card_sets.in_groups(4, false) do |card_set_column| %>
     <div class="span3">
       <% card_set_column.each do |card_set| %>
         <div id="set-<%= card_set.id %>" class="set">

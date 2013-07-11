@@ -12,4 +12,24 @@ class Card < ActiveRecord::Base
   validates_presence_of :name
 
   validates_presence_of :card_set_id
+
+  def color
+    colors = self.mana_cost.downcase.gsub(' ', '-').split(';').reject { |mana| mana =~ /\d|variable-colorless/ }.uniq
+
+    if colors.blank? or self.card_text.downcase =~ /#{self.name} is colorless/
+      colors << 'colorless'
+    elsif colors.length > 1
+      colors << 'multi'
+    end
+
+    if self.card_type.downcase =~ /land/
+      colors << 'land'
+    end
+
+    colors
+  end
+
+  def collection_for(user)
+    self.collections.select { |collection| collection.user = user }.first
+  end
 end
