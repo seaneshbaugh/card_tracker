@@ -83,5 +83,5 @@ CardTracker::Application.configure do
   # Set mailer host to cavesofkoilos.com for in email links
   config.action_mailer.default_url_options = { :host => 'cavesofkoilos.com' }
 
-  config.middleware.use ExceptionNotifier, :sender_address => SMTP_SETTINGS['user_name'], :exception_recipients => 'seaneshbaugh@gmail.com'
+  config.middleware.use ExceptionNotification::Rack, :email => { :sender_address => SMTP_SETTINGS['user_name'], :exception_recipients => 'seaneshbaugh@gmail.com' }
 end
