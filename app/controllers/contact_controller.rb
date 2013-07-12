@@ -13,7 +13,9 @@ class ContactController < ApplicationController
         ContactMailer.delay.new_contact_form_message(alert_recipient, @contact)
       end
 
-      flash[:success] = 'Thank you for your message! We will get back to you soon.'
+      ContactMailer.delay(:run_at =>  3.minutes.from_now.getutc).contact_form_confirmation_message(@contact)
+
+      flash[:success] = 'Thanks for your message! We will get back to you soon.'
 
       redirect_to root_url
     else

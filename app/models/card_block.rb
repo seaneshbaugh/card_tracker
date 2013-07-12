@@ -9,4 +9,10 @@ class CardBlock < ActiveRecord::Base
   validates_uniqueness_of :name
 
   validates_presence_of :card_block_type_id
+
+  after_initialize do
+    if self.new_record?
+      self.name ||= ''
+    end
+  end
 end

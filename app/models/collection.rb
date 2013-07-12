@@ -10,4 +10,10 @@ class Collection < ActiveRecord::Base
 
   validates_presence_of     :quantity
   validates_numericality_of :quantity
+
+  after_initialize do
+    if self.new_record?
+      self.quantity ||= 0
+    end
+  end
 end

@@ -25,6 +25,7 @@ en:
       contact_information: "Contact Information"
       account_information: "Account Information"
       login_activity: "Login Activity"
+      alert_settings: "Alert Settings"
     index:
       title: "Users"
     new:

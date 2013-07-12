@@ -13,6 +13,24 @@ class Card < ActiveRecord::Base
 
   validates_presence_of :card_set_id
 
+  after_initialize do
+    if self.new_record?
+      self.multiverse_id = ''
+      self.name ||= ''
+      self.mana_cost ||= ''
+      self.converted_mana_cost ||= ''
+      self.card_type ||= ''
+      self.card_text ||= ''
+      self.flavor_text ||= ''
+      self.power ||= ''
+      self.toughness ||= ''
+      self.loyalty ||= ''
+      self.rarity ||= ''
+      self.card_number ||= ''
+      self.artist ||= ''
+    end
+  end
+
   def color
     colors = self.mana_cost.downcase.gsub(' ', '-').split(';').reject { |mana| mana =~ /\d|variable-colorless/ }.uniq
 

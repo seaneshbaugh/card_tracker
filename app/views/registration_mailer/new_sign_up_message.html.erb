@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+</head>
+<body style="background: #ffffff; color: #555555; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+  <h1 style="font-size: 26px; line-height: 32px;">New User Registration</h1>
+  <h2 style="font-size: 20px; line-height: 26px;">Email</h2>
+  <p style="font-size: 14px; line-height: 20px;"><a href="mailto:<%= @new_user.email %>"><%= @new_user.email %></a></p>
+  <h2 style="font-size: 20px; line-height: 26px;">Registration Time</h2>
+  <p style="font-size: 14px; line-height: 20px;"><%= @new_user.created_at.to_s(:normal) %></p>
+</body>
+</html>

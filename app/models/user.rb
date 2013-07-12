@@ -22,7 +22,42 @@ class User < ActiveRecord::Base
   validates_inclusion_of :role, :in => Ability::ROLES.map { |key, value| value }
   validates_presence_of  :role
 
+  after_initialize do
+    if self.new_record?
+      self.username ||= ''
+      self.email ||= ''
+      self.encrypted_password ||= ''
+      self.role ||= ''
+      self.first_name ||= ''
+      self.last_name ||= ''
+
+      if self.receive_newsletters.nil?
+        self.receive_newsletters ||= true
+      end
+
+      if self.receive_contact_alerts.nil?
+        self.receive_contact_alerts ||= false
+      end
+
+      if self.receive_sign_up_alerts.nil?
+        self.receive_sign_up_alerts ||= false
+      end
+
+      self.sign_in_count ||= 0
+    end
+  end
+
   before_validation :define_role
+
+  after_create do
+    @alert_recipients = User.where('users.role != ? AND users.receive_sign_up_alerts = ?', Ability::ROLES[:read_only], true)
+
+    @alert_recipients.each do |alert_recipient|
+      RegistrationMailer.delay.new_sign_up_message(alert_recipient, self)
+    end
+
+    RegistrationMailer.delay(:run_at => 45.minutes.from_now).welcome_message(self)
+  end
 
   Ability::ROLES.each do |k, v|
     class_eval %Q"scope :#{k.to_s.pluralize}, where(:role => Ability::ROLES[:#{k.to_s}].downcase)"

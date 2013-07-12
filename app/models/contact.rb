@@ -23,8 +23,13 @@ class Contact
   validates_presence_of :body
   validates_length_of   :body, :minimum => 8, :maximum => 2048
 
-  def initialize args = nil
+  def initialize(args = nil)
     @errors = ActiveModel::Errors.new(self)
+
+    self.name = ''
+    self.email = ''
+    self.subject = ''
+    self.body = ''
 
     if args
       args.each do |key, value|

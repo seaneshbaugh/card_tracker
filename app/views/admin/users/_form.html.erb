@@ -5,13 +5,19 @@
     <%= f.input :first_name %>
     <%= f.input :last_name %>
     <%= f.input :email %>
+    <%= f.input :receive_newsletters %>
   </fieldset>
   <fieldset>
     <legend><%= t('users.sections.account_information') %></legend>
     <%= f.input :username %>
     <%= f.input :password %>
     <%= f.input :password_confirmation %>
-    <%= f.input :role, :as => :select, :collections => Ability.valid_roles(current_user).map { |key, value| [value.titleize, value] } %>
+    <%= f.input :role, :as => :select, :collection => Ability.valid_roles(current_user).map { |key, value| [value.titleize, value] } %>
+  </fieldset>
+  <fieldset>
+    <legend><%= t('users.sections.alert_settings') %></legend>
+    <%= f.input :receive_sign_up_alerts %>
+    <%= f.input :receive_contact_alerts %>
   </fieldset>
   <div class="form-actions">
     <%= link_to t('users.links.back_to_index'), admin_users_path, :class => 'btn' %>

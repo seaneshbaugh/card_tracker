@@ -9,4 +9,11 @@ class CardSet < ActiveRecord::Base
   validates_uniqueness_of :name
 
   validates_presence_of :card_block_id
+
+  after_initialize do
+    if self.new_record?
+      self.name ||= ''
+      self.code ||= ''
+    end
+  end
 end

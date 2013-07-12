@@ -10,6 +10,10 @@ class AccountsController < ApplicationController
 
     params[:account].delete(:role) if params[:account]
 
+    params[:account].delete(:receive_sign_up_alerts) if params[:account]
+
+    params[:account].delete(:receive_contact_alerts) if params[:account]
+
     if @account.update_attributes(params[:account])
       sign_in(@account, :bypass => true)
 

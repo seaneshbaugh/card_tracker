@@ -27,6 +27,9 @@ en:
         unlock_token: "Unlock Token"
         locked_at: "Locked At"
         authentication_token: "Authentication Token"
+        receive_newsletters: "Receive Newsletters"
+        receive_sign_up_alerts: "Receive Sign Up Alerts"
+        receive_contact_alerts: "Receive Contact Alerts"
         created_at: "Created At"
         updated_at: "Updated At"
     errors:
@@ -56,5 +59,8 @@ en:
             unlock_token: "Unlock Token"
             locked_at: "Locked At"
             authentication_token: "Authentication Token"
+            receive_newsletters: "Receive Newsletters"
+            receive_sign_up_alerts: "Receive Sign Up Alerts"
+            receive_contact_alerts: "Receive Contact Alerts"
             created_at: "Created At"
             updated_at: "Updated At"
