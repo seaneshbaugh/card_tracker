@@ -10,7 +10,7 @@ class ContactController < ApplicationController
       @alert_recipients = User.where('users.role != ? AND users.receive_contact_alerts = ?', Ability::ROLES[:read_only], true)
 
       @alert_recipients.each do |alert_recipient|
-        ContactMailer.delay.new_contact_form_message(alert_recipient, @contact)
+        ContactMailer.new_contact_form_message(alert_recipient, @contact).deliver
       end
 
       ContactMailer.delay(:run_at =>  3.minutes.from_now.getutc).contact_form_confirmation_message(@contact)

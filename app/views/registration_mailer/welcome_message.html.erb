@@ -5,7 +5,7 @@
 </head>
 <body style="background: #ffffff; color: #555555; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
   <p style="font-size: 14px; line-height: 20px;">
-    Hi there! This is Sean from <a href="http://cavesofkoilos.com">cavesofkoilos.com</a>.
+    Hi there! This is Sean from <%= link_to 'The Caves of Koilos', root_url %>.
     I'm excited to see you've signed up to start tracking your Magic: The Gathering collection!
   </p>
   <p style="font-size: 14px; line-height: 20px;">
@@ -20,7 +20,7 @@
   </p>
   <p style="font-size: 14px; line-height: 20px;">
     In the coming months I plan on adding a few new features and improving the interface.
-    If you have any questions, comments, concerns, or just want to send some feedback feel free to use the <a href="http://cavesofkoilos.com/contact">contact form</a> or <a href="mailto:sean@cavesofkoilos.com">email me directly</a>.
+    If you have any questions, comments, concerns, or just want to send some feedback feel free to use the <%= link_to 'contact form', contact_url %> or <%= mail_to 'sean@cavesofkoilos.com', 'email me directly' %>.
     Thanks for signing up, I look forward to hearing from you!
   </p>
 </body>

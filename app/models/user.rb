@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
     @alert_recipients = User.where('users.role != ? AND users.receive_sign_up_alerts = ?', Ability::ROLES[:read_only], true)
 
     @alert_recipients.each do |alert_recipient|
-      RegistrationMailer.delay.new_sign_up_message(alert_recipient, self)
+      RegistrationMailer.new_sign_up_message(alert_recipient, self).deliver
     end
 
     RegistrationMailer.delay(:run_at => 45.minutes.from_now).welcome_message(self)
