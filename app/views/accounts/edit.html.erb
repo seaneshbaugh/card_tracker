@@ -1,6 +1,6 @@
 <div id="edit-account">
   <h1><%= t('accounts.edit.title') %></h1>
-  <%= simple_form_for(@account, :as => :account, :url => account_path, :html => { :class => 'form-horizontal' }) do |f| %>
+  <%= simple_form_for(@account, :as => :account, :url => account_path, :html => { :autocomplete => 'off', :class => 'form-horizontal' }) do |f| %>
     <fieldset>
       <legend><%= t('users.sections.contact_information') %></legend>
       <%= f.input :first_name %>
