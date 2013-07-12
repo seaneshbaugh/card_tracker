@@ -33,6 +33,10 @@ $.fn.fadingLinks = function(color, duration) {
 };
 
 $(function() {
+    $("#account_password").val("");
+
+    $("#account_password_confirmation").val("");
+
     $("body").on("click", ".card .increment", function(event) {
         var increment, cardId, quantity;
 
