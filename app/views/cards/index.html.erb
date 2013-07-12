@@ -3,7 +3,7 @@
   <% @card_set.cards.each do |card| %>
     <% collection = card.collection_for(current_user) %>
     <div id="<%= card.multiverse_id %>" class="row card <%= card.color.join(' ') %>" data-card-id="<%= card.id %>" data-quantity="<%= collection.present? ? collection.quantity : 0 %>">
-      <div class="card-name span2">
+      <div class="card-name span3">
         <%= link_to card.name, set_card_path(@card_set, card) %>
       </div>
       <div class="card-quantity span1">

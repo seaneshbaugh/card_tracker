@@ -1,7 +1,7 @@
 <div id="<%= @card.id %>" class="card">
   <div class="row">
     <div class="span12">
-      <h1 class="card-name"><%= card_set_symbol(@card_set, :rarity => @card.rarity.downcase.to_sym, :class => 'large') %> <%= @card.name %></h1>
+      <h1 class="card-name"><%= link_to card_set_symbol(@card_set, :rarity => @card.rarity.downcase.to_sym, :class => 'large'), set_cards_path(@card_set) %> <%= @card.name %></h1>
     </div>
   </div>
   <div class="row">
