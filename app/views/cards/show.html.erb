@@ -30,6 +30,24 @@
       <strong>Artist:</strong> <span class="artist"><%= @card.artist %></span>
     </div>
   </div>
+  <div class="row quantity" data-card-id="<%= @card.id %>" data-quantity="<%= @collection.present? ? @collection.quantity : 0 %>">
+    <div class="span1">
+      <strong>Quantity:</strong>
+    </div>
+    <div class="card-quantity span1">
+      <% if @collection.present? && @collection.quantity > 0 %>
+        <%= @collection.quantity %>
+      <% else %>
+        -
+      <% end %>
+    </div>
+    <div class="span1">
+      <button class="increment btn"><i class="icon-chevron-up"></i></button>
+    </div>
+    <div class="span1">
+      <button class="decrement btn"><i class="icon-chevron-down"></i></button>
+    </div>
+  </div>
   <div class="row">
     <div class="span12 show-on-gatherer">
       <%= link_to 'Show on Gatherer', "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=#{@card.multiverse_id}", :target => '_blank' %>

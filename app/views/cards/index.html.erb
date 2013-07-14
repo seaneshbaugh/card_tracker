@@ -6,8 +6,11 @@
       <div class="card-name span3">
         <%= link_to card.name, set_card_path(@card_set, card) %>
       </div>
+      <div class="card-rarity span1">
+        <%= card.rarity.first %>
+      </div>
       <div class="card-quantity span1">
-        <% if collection.present? %>
+        <% if collection.present? && collection.quantity > 0%>
           <%= collection.quantity %>
         <% else %>
           -

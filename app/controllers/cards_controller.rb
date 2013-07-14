@@ -12,7 +12,7 @@ class CardsController < ApplicationController
   end
 
   def show
-    @card_set = CardSet.includes(:cards).where(:id => params[:set_id]).first
+    @card_set = CardSet.where(:id => params[:set_id]).first
 
     if @card_set.nil?
       flash[:error] = t('messages.card_sets.could_not_find')
@@ -20,7 +20,9 @@ class CardsController < ApplicationController
       redirect_to sets_url
     end
 
-    @card = Card.where(:id => params[:id]).first
+    @card = Card.includes(:collections).where(:id => params[:id]).first
+
+    @collection = @card.collection_for(current_user)
 
     if @card.nil?
       flash[:error] = t('messages.cards.could_not_find')
