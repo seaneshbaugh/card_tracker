@@ -9,11 +9,11 @@
       </tr>
       <tr>
         <th class="span3"><%= t('activerecord.attributes.card.created_at') %></th>
-        <td><%= @card.created_at.present? ? @card.created_at.iso8601 : '&nbsp;'.html_safe %></td>
+        <td><%= @card.created_at %></td>
       </tr>
       <tr>
         <th class="span3"><%= t('activerecord.attributes.card.updated_at') %></th>
-        <td><%= @card.updated_at.present? ? @card.updated_at.iso8601 : '&nbsp'.html_safe %></td>
+        <td><%= @card.updated_at %></td>
       </tr>
     </tbody>
   </table>

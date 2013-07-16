@@ -6,6 +6,7 @@ en:
       user:
         create: "Add User"
         update: "Update User"
+        redirect_to_new: "Create and Add Another"
     button:
       user:
   messages:

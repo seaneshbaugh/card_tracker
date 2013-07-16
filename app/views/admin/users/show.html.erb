@@ -43,11 +43,11 @@
       </tr>
       <tr>
         <th class="span3"><%= t('activerecord.attributes.user.current_sign_in_at') %></th>
-        <td><%= @user.current_sign_in_at.blank? ? t('na') : @user.current_sign_in_at.to_s(:normal) %></td>
+        <td><%= @user.current_sign_in_at.blank? ? t('na') : @user.current_sign_in_at %></td>
       </tr>
       <tr>
         <th class="span3"><%= t('activerecord.attributes.user.last_sign_in_at') %></th>
-        <td><%= @user.last_sign_in_at.blank? ? t('na') : @user.last_sign_in_at.to_s(:normal) %></td>
+        <td><%= @user.last_sign_in_at.blank? ? t('na') : @user.last_sign_in_at %></td>
       </tr>
       <tr>
         <th class="span3"><%= t('activerecord.attributes.user.current_sign_in_ip') %></th>

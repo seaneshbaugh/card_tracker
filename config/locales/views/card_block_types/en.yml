@@ -6,6 +6,7 @@ en:
       card_block_type:
         create: "Add Card Block Type"
         update: "Update Card Block Type"
+        redirect_to_new: "Create and Add Another"
     button:
       card_block_type:
   messages:

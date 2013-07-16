@@ -25,8 +25,8 @@
         <% @card_sets.each do |card_set| %>
           <tr>
             <td><%= link_to truncate(card_set.name, :length => 64), admin_card_set_path(card_set) %></td>
-            <td><%= card_set.created_at.iso8601 %></td>
-            <td><%= card_set.updated_at.iso8601 %></td>
+            <td><%= card_set.created_at %></td>
+            <td><%= card_set.updated_at %></td>
             <% if can? :edit, CardSet, current_user %><td class="icon"><%= icon_edit_link edit_admin_card_set_path(card_set) %></td><% end %>
             <% if can? :destroy, CardSet, current_user %><td class="icon"><%= icon_delete_link admin_card_set_path(card_set) %></td><% end %>
           </tr>

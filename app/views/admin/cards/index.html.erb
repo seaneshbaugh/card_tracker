@@ -15,8 +15,7 @@
       <thead>
         <tr>
           <th><%= sort_link @search, :name %></th>
-          <th><%= sort_link @search, :created_at %></th>
-          <th><%= sort_link @search, :updated_at %></th>
+          <th><%= sort_link @search, :card_set_id %></th>
           <% if can? :edit, Card, current_user %><th class="icon">&nbsp;</th><% end %>
           <% if can? :destroy, Card, current_user %><th class="icon">&nbsp;</th><% end %>
         </tr>
@@ -25,8 +24,7 @@
         <% @cards.each do |card| %>
           <tr>
             <td><%= link_to truncate(card.name, :length => 64), admin_card_path(card) %></td>
-            <td><%= card.created_at.present? ? card.created_at.iso8601 : '&nbsp;'.html_safe %></td>
-            <td><%= card.updated_at.present? ? card.updated_at.iso8601 : '&nbsp;'.html_safe %></td>
+            <td><%= card.card_set.name %></td>
             <% if can? :edit, Card, current_user %><td class="icon"><%= icon_edit_link edit_admin_card_path(card) %></td><% end %>
             <% if can? :destroy, Card, current_user %><td class="icon"><%= icon_delete_link admin_card_path(card) %></td><% end %>
           </tr>

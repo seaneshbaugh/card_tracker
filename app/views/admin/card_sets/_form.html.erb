@@ -2,6 +2,10 @@
 <%= simple_form_for [:admin, @card_set], :html => { :class => 'form-horizontal' } do |f| %>
   <fieldset>
     <%= f.input :name %>
+    <%= f.association :card_block, :include_blank => false %>
+    <%= f.input :code %>
+    <%= f.input :release_date %>
+    <%= f.input :prerelease_date %>
   </fieldset>
   <div class="form-actions">
     <%= link_to t('card_sets.links.back_to_index'), admin_card_sets_path, :class => 'btn' %>

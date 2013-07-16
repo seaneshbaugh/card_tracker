@@ -8,12 +8,24 @@
         <td><%= @card_set.name %></td>
       </tr>
       <tr>
+        <th class="span3"><%= t('activerecord.attributes.card_set.card_block_id') %></th>
+        <td><%= @card_set.card_block.name %></td>
+      </tr>
+      <tr>
+        <th class="span3"><%= t('activerecord.attributes.card_set.release_date') %></th>
+        <td><%= @card_set.release_date %></td>
+      </tr>
+      <tr>
+        <th class="span3"><%= t('activerecord.attributes.card_set.prerelease_date') %></th>
+        <td><%= @card_set.prerelease_date %></td>
+      </tr>
+      <tr>
         <th class="span3"><%= t('activerecord.attributes.card_set.created_at') %></th>
-        <td><%= @card_set.created_at.iso8601 %></td>
+        <td><%= @card_set.created_at %></td>
       </tr>
       <tr>
         <th class="span3"><%= t('activerecord.attributes.card_set.updated_at') %></th>
-        <td><%= @card_set.updated_at.iso8601 %></td>
+        <td><%= @card_set.updated_at %></td>
       </tr>
     </tbody>
   </table>

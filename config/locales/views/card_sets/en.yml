@@ -6,6 +6,7 @@ en:
       card_set:
         create: "Add Card Set"
         update: "Update Card Set"
+        redirect_to_new: "Create and Add Another"
     button:
       card_set:
   messages:
