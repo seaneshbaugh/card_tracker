@@ -6,6 +6,6 @@
 <body style="background: #ffffff; color: #555555; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
   <p style="font-size: 20px; line-height: 26px;">Welcome to The Caves of Koilos!</p>
   <p style="font-size: 20px; line-height: 26px;">You can confirm your account email through the link below:</p>
-  <p style="font-size: 20px; line-height: 26px;"><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resoxurce.confirmation_token) %></p>
+  <p style="font-size: 20px; line-height: 26px;"><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
 </body>
 </html>
