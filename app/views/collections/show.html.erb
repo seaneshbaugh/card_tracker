@@ -3,7 +3,7 @@
   <% if @collections.present? %>
     <% @sets.each do |set| %>
       <h2><%= set[0].name %></h2>
-      <% set[1].each do |collection| %>
+      <% set[1].sort_by { |collection| collection.card.card_number }.each do |collection| %>
         <div id="card-<%= collection.card.multiverse_id %>" class="row card" data-card-id="<%= collection.card_id %>" data-quantity="<%= collection.quantity %>">
           <div class="card-name span2">
             <%= collection.card.name %>
