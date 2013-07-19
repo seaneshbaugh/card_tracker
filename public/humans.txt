@@ -16,3 +16,4 @@
   Lovingly Made In: RubyMine 5.4.3.2.1
   Lovingly Made On: OSX 10.7 Lion
   Lovingly Made With: Ruby, Ruby on Rails, ERB, HTML5, CSS3, LESS, JavaScript, jQuery
+  Source Available At: https://github.com/seaneshbaugh/card_tracker

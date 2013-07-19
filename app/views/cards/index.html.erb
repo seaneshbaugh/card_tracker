@@ -1,6 +1,13 @@
 <div id="set-<%= @card_set.id %>" class="set">
   <h1><%= card_set_symbol(@card_set, :class => 'large') %> <%= @card_set.name %></h1>
-  <% @card_set.cards.each do |card| %>
+  <%= search_form_for @search, :url => set_cards_path(@card_set), :html => { :method => :get, :id => 'search-form', :class => 'form-search well' } do |f| %>
+    <%= f.text_field :name_cont, :placeholder => t('activerecord.attributes.card.name') %>
+    <%= f.text_field :card_type_cont, :placeholder => t('activerecord.attributes.card.card_type') %>
+    <%= f.text_field :card_text_cont, :placeholder => t('activerecord.attributes.card.card_text') %>
+    <%= f.button '<i class="icon-search"></i> Search'.html_safe, :type => :submit, :class => 'btn btn-primary' %>
+    <%= link_to '<i class="icon-remove"></i>'.html_safe, set_cards_path(@card_set), :class => 'btn', :rel => 'tooltip', :title => t('clear_search') %>
+  <% end %>
+  <% @cards.each do |card| %>
     <% collection = card.collection_for(current_user) %>
     <div id="<%= card.multiverse_id %>" class="row card <%= card.color.join(' ') %>" data-card-id="<%= card.id %>" data-quantity="<%= collection.present? ? collection.quantity : 0 %>">
       <div class="card-name span3">

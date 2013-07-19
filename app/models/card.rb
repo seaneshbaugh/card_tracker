@@ -50,4 +50,8 @@ class Card < ActiveRecord::Base
   def collection_for(user)
     self.collections.select { |collection| collection.user = user }.first
   end
+
+  def other_versions
+    Card.includes(:card_set).where('`cards`.`name` = ? AND `cards`.`id` <> ?', self.name, self.id)
+  end
 end

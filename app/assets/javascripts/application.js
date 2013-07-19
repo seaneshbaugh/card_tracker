@@ -7,7 +7,9 @@
 //= require_self
 
 $(function() {
-    var ErrorMessages = {
+    var ErrorMessages;
+
+    ErrorMessages = {
         title: "An error has occurred.",
         invalidServerResponse: "The server returned an invalid response, but your request may have been successful. Please reload the page and try again if necessary (clearing your browser's cache might help). If you continue to see this error message please contact help@cavesofkoilos.com with your username, what you were trying to do, and when.",
         nonNumericCardQuantity: "Somehow this card's quantity was recorded as a non-numeric value. Please reload the page and try again (clearing your browser's cache might help). If you continue to see this error message please contact help@cavesofkoilos.com with your username and the set and card that is producing the error."
@@ -23,6 +25,8 @@ $(function() {
             }).popover("show");
         });
     };
+
+    $("[rel*=tooltip]").tooltip({placement: "top"});
 
     $("body").on("click", ".card .increment", function(event) {
         var increment, card, quantity;

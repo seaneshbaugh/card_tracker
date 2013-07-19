@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email, :case_sensitive => false
 
   validates_confirmation_of :password
-  validates_length_of       :password, :within => 16..255, :if => :password_required?
+  validates_length_of       :password, :within => 8..255, :if => :password_required?
   validates_presence_of     :password, :if => :password_required?
 
   validates_inclusion_of :role, :in => Ability::ROLES.map { |key, value| value }
