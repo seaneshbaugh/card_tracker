@@ -219,8 +219,16 @@ $(function() {
         }
     });
 
-    $("#confirm_delete_account #enter_username, #confirm_delete_account #enter_username_confirmation").on("keyup", function() {
-        if ($("#confirm_delete_account #enter_username").val() === $("#confirm_delete_account #username").val() && $("#confirm_delete_account #enter_username_confirmation").val() === $("#confirm_delete_account #username").val()) {
+    $("body").on("keyup", "#confirm_delete_account #enter_username, #confirm_delete_account #enter_username_confirmation", function() {
+        var username, enterUsername, enterUsernameConfirmation;
+
+        username = $("#confirm_delete_account #username").val();
+
+        enterUsername = $("#confirm_delete_account #enter_username").val();
+
+        enterUsernameConfirmation = $("#confirm_delete_account #enter_username_confirmation").val();
+
+        if (enterUsername === username && enterUsernameConfirmation === username) {
             $("#confirm_delete_account input[type='submit']").attr("disabled", false);
         } else {
             $("#confirm_delete_account input[type='submit']").attr("disabled", true);
@@ -228,7 +236,15 @@ $(function() {
     });
 
     $("body").on("submit", "#confirm_delete_account", function(event) {
-        if ($("#confirm_delete_account #enter_username").val() !== $("#confirm_delete_account #username").val() && $("#confirm_delete_account #enter_username_confirmation").val() !== $("#confirm_delete_account #username").val()) {
+        var username, enterUsername, enterUsernameConfirmation;
+
+        username = $("#confirm_delete_account #username").val();
+
+        enterUsername = $("#confirm_delete_account #enter_username").val();
+
+        enterUsernameConfirmation = $("#confirm_delete_account #enter_username_confirmation").val();
+
+        if (enterUsername !== username && enterUsernameConfirmation !== username) {
             event.preventDefault();
         }
     });
