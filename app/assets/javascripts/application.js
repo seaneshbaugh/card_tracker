@@ -141,6 +141,8 @@ $(function() {
             input.numeric("positiveInteger");
 
             input.focus();
+
+            input.select();
         }
     });
 
