@@ -33,6 +33,8 @@ CardTracker::Application.routes.draw do
     resources :cards, :only => [:index, :show]
   end
 
+  resource :stats, :only => [:show]
+
   resource :account, :only => [:edit, :update, :destroy] do
     member do
       get :confirm_delete

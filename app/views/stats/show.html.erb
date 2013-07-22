@@ -1,0 +1,19 @@
+<div id="stats" class="row">
+  <div id="total-cards-in-collections" class="stat span12">
+    You have a total of <span class="stat-value"><%= @total_cards_in_collections %></span> cards.
+  </div>
+  <div id="unique-cards-in-collections" class="stat span12">
+    You have a <span class="stat-value"><%= @unique_cards_in_collections %></span> unique cards.
+  </div>
+  <% ['white', 'blue', 'black', 'red', 'green', 'colorless', 'multi', 'land'].each do |color| %>
+    <div class="span12">
+      <strong><%= color.capitalize %>:</strong> <%= instance_variable_get("@#{color}_collections").length %>
+    </div>
+  <% end %>
+  <% @card_sets.each do |card_set| %>
+    <div class="span12">
+      <% card_set_collections = @collections.select { |collection| collection.card.card_set == card_set } %>
+      <strong><%= card_set.name %>:</strong> <%= card_set_collections.length %> / <%= card_set.cards.length %><% if card_set_collections.length > 0 %> (<%= card_set_collections.map { |collection| collection.quantity }.inject(:+) %> total)<% end %>
+    </div>
+  <% end %>
+</div>

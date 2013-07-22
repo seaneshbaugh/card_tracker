@@ -32,6 +32,7 @@
       <div class="nav-collapse collapse">
         <ul class="nav" role="navigation">
           <% if current_user %><li class="collection-nav-link"><%= link_to ('<i class="icon-reorder"></i> ' + 'Sets').html_safe, sets_path, :class => is_active_controller?('card_sets') %></li><% end %>
+          <% if current_user %><li class="stats-nav-link"><%= link_to ('<i class="icon-bar-chart"></i> ' + 'Stats').html_safe, stats_path, :class => is_active_controller?('stats') %></li><% end %>
           <% if can? :read, :admin %><li class="admin-nav-link hidden-desktop"><%= link_to ('<i class="icon-sitemap"></i> ' + t('navigation.admin_home')).html_safe, admin_root_path %></li><% end %>
           <% if current_user %><li class="account-nav-link hidden-desktop"><%= link_to ('<i class="icon-cogs"></i> ' + t('accounts.edit.title')).html_safe, edit_account_path, :class => is_active_controller?('accounts') %></li><% end %>
           <% if current_user %><li class="logout-nav-link hidden-desktop"><%= link_to ('<i class="icon-signout"></i> ' + t('navigation.sign_out')).html_safe, destroy_user_session_path, :method => :delete %></li><% end %>
@@ -75,6 +76,21 @@
     <p>The Caves of Koilos is in no way associated with Wizards of the Coast LLC or Hasbro, Inc.</p>
   </div>
 </footer>
-<%= render 'shared/google_analytics' %>
+<% if Rails.env.production? && !(current_user && !current_user.read_only?) %>
+  <script>
+    var _gaq = _gaq || [];
+    _gaq.push(["_setAccount", "UA-38365306-1"]);
+    _gaq.push(["_trackPageview"]);
+
+    (function() {
+      var ga = document.createElement("script");
+      ga.type = "text/javascript";
+      ga.async = true;
+      ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+<% end %>
 </body>
 </html>

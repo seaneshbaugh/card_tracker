@@ -47,6 +47,12 @@ class Card < ActiveRecord::Base
     colors
   end
 
+  ['white', 'blue', 'black', 'red', 'green', 'colorless', 'multi', 'land'].each do |color|
+    define_method("is_#{color}?") do
+      self.color.include? color
+    end
+  end
+
   def collection_for(user)
     self.collections.select { |collection| collection.user = user }.first
   end
