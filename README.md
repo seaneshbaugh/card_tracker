@@ -20,13 +20,16 @@ The following gems are required to run this application:
 * delayed_job_active_record
 * devise
 * exception_notification
+* honeypot-captcha
 * kaminari
 * ransack
 * sanitize
 * simple_form
 * yaml_db
 * coffee-rails
+* font-awesome-rails
 * jquery-rails
+* jquery-ui-rails
 * less-trails
 * libv8
 * therubyracer
@@ -36,11 +39,11 @@ The following gems are required to run this application:
 * capistrano-ext
 * mailcatcher
 * quiet_assets
-* capybara
+* capybara (2.0.3)
 * database_cleaner
 * factory_girl_rails (~2.0)
 * rspec-rails
-* shoulda-matchers
+* shoulda-matchers (1.5.6)
 * simplecov
 
 ## Local Development Installation
@@ -59,7 +62,7 @@ Install the necessary gems.
 
 Create the databases.
 
-    $ rake db:create:all
+    $ rake db:create
 
 Add the database tables.
 
