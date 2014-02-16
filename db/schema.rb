@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130210155125) do
+ActiveRecord::Schema.define(:version => 20130731150004) do
 
   create_table "card_block_types", :force => true do |t|
     t.string   "name",       :default => "", :null => false
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20130210155125) do
 
   create_table "card_sets", :force => true do |t|
     t.string   "name",            :default => "", :null => false
+    t.string   "slug",            :default => "", :null => false
     t.integer  "card_block_id"
     t.string   "code",            :default => "", :null => false
     t.date     "release_date"
@@ -49,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20130210155125) do
   add_index "card_sets", ["name"], :name => "index_card_sets_on_name"
   add_index "card_sets", ["prerelease_date"], :name => "index_card_sets_on_prerelease_date"
   add_index "card_sets", ["release_date"], :name => "index_card_sets_on_release_date"
+  add_index "card_sets", ["slug"], :name => "index_card_sets_on_slug"
   add_index "card_sets", ["updated_at"], :name => "index_card_sets_on_updated_at"
 
   create_table "cards", :force => true do |t|

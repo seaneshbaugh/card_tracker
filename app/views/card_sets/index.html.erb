@@ -3,7 +3,7 @@
     <div class="span3">
       <% card_set_column.each do |card_set| %>
         <div id="set-<%= card_set.id %>" class="set">
-          <%= link_to card_set_symbol(card_set).html_safe, set_cards_path(card_set) %> <%= link_to card_set.name, set_cards_path(card_set) %>
+          <%= link_to card_set_symbol(card_set).html_safe, set_cards_path(card_set) %> <%= link_to card_set.name, set_cards_path(card_set.slug) %>
         </div>
       <% end %>
     </div>

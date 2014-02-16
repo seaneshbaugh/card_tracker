@@ -1,4 +1,4 @@
-<div id="<%= @card.id %>" class="card">
+<div id="<%= @card.id %>" class="card" data-card-id="<%= @card.id %>" data-quantity="<%= @collection.present? ? @collection.quantity : 0 %>">
   <div class="row">
     <div class="span12">
       <h1 class="card-name"><%= link_to card_set_symbol(@card_set, :rarity => @card.rarity.downcase.to_sym, :class => 'large'), set_cards_path(@card_set) %> <%= @card.name %></h1>
@@ -33,7 +33,7 @@
       <strong>Other Versions:</strong> <span class="other-versions"><% @card.other_versions.each do |other_version| %><%= link_to card_set_symbol(other_version.card_set, :rarity => other_version.rarity.downcase.to_sym), set_card_path(other_version.card_set, other_version) %><% end %></span>
     </div>
   </div>
-  <div class="row" data-card-id="<%= @card.id %>" data-quantity="<%= @collection.present? ? @collection.quantity : 0 %>">
+  <div class="row">
     <div class="span1">
       <strong>Quantity:</strong>
     </div>

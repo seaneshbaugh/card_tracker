@@ -2,7 +2,11 @@ class CardsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @card_set = CardSet.where(:id => params[:set_id]).first
+    if params[:set_id].to_i.to_s == params[:set_id]
+      @card_set = CardSet.where(:id => params[:set_id]).first
+    else
+      @card_set = CardSet.where(:slug => params[:set_id]).first
+    end
 
     if @card_set.nil?
       flash[:error] = t('messages.card_sets.could_not_find')
@@ -12,19 +16,15 @@ class CardsController < ApplicationController
 
     @search = Card.search(params[:q])
 
-    @cards = @search.result.includes(:collections).where(:card_set_id => @card_set.id).order('cast(`cards`.`card_number` as unsigned) ASC')
-
-    #@card_set = CardSet.includes(:cards => :collections).where(:id => params[:set_id]).order('cast(`cards`.`card_number` as unsigned) ASC').first
-    #
-    #if @card_set.nil?
-    #  flash[:error] = t('messages.card_sets.could_not_find')
-    #
-    #  redirect_to sets_url
-    #end
+    @cards = @search.result.includes(:collections).where(:card_set_id => @card_set.id).order('cast(`cards`.`card_number` as unsigned) ASC, `cards`.`id` ASC')
   end
 
   def show
-    @card_set = CardSet.where(:id => params[:set_id]).first
+    if params[:set_id].to_i.to_s == params[:set_id]
+      @card_set = CardSet.where(:id => params[:set_id]).first
+    else
+      @card_set = CardSet.where(:slug => params[:set_id]).first
+    end
 
     if @card_set.nil?
       flash[:error] = t('messages.card_sets.could_not_find')

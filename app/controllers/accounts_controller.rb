@@ -2,11 +2,11 @@ class AccountsController < ApplicationController
   before_filter :authenticate_user!
 
   def edit
-    @account = User.where(:id => current_user.id).first
+    @account = current_user
   end
 
   def update
-    @account = User.where(:id => current_user.id).first
+    @account = current_user
 
     params[:account].delete(:role) if params[:account]
 

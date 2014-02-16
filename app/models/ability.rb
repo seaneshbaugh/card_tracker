@@ -38,7 +38,7 @@ class Ability
     end
   end
 
-  def self.valid_roles user
+  def self.valid_roles(user)
     roles = {}
 
     if user.role == ROLES[:admin]
