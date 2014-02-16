@@ -29,7 +29,7 @@ class CardSet < ActiveRecord::Base
     if self.name.blank?
       self.slug = self.id.to_s
     else
-      self.slug = self.name.parameterize
+      self.slug = CGI.unescapeHTML(Sanitize.clean(self.name)).gsub(/'|"/, '').gsub('&', 'and').squeeze(' ').parameterize
     end
   end
 end
