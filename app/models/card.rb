@@ -6,7 +6,7 @@ class Card < ActiveRecord::Base
   has_many :collections
   has_many :users, :through => :collections
 
-  validates_presence_of   :multiverse_id
+  validates_presence_of :multiverse_id
 
   validates_presence_of :name
 
@@ -14,7 +14,7 @@ class Card < ActiveRecord::Base
 
   after_initialize do
     if self.new_record?
-      self.multiverse_id = ''
+      self.multiverse_id ||= ''
       self.name ||= ''
       self.mana_cost ||= ''
       self.converted_mana_cost ||= ''

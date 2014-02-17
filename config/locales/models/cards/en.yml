@@ -4,7 +4,7 @@ en:
       card: "Card"
     attributes:
       card:
-        multiverse_id: "Multiverse"
+        multiverse_id: "Multiverse ID"
         name: "Name"
         card_set_id: "Card Set"
         mana_cost: "Mana Cost"
