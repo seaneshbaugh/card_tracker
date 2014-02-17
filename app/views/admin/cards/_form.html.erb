@@ -12,7 +12,7 @@
     <%= f.input :power %>
     <%= f.input :toughness %>
     <%= f.input :loyalty %>
-    <%= f.input :rarity %>
+    <%= f.input :rarity, :collection => [['Common', 'Common'], ['Uncommon', 'Uncommon'], ['Rare', 'Rare'], ['Mythic Rare', 'Mythic Rare'], ['Basic Land', 'Basic Land'], ['Special', 'Special']], :include_blank => false %>
     <%= f.input :card_number %>
     <%= f.input :artist %>
   </fieldset>
