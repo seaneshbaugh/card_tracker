@@ -31,6 +31,26 @@ class Card < ActiveRecord::Base
   end
 
   def color
+    @color ||= self.get_colors
+  end
+
+  %w(white blue black red green colorless multi land).each do |color|
+    define_method("is_#{color}?") do
+      self.color.include? color
+    end
+  end
+
+  def collection_for(user)
+    self.collections.select { |collection| collection.user = user }.first
+  end
+
+  def other_versions
+    Card.includes(:card_set).where('`cards`.`name` = ? AND `cards`.`id` <> ?', self.name, self.id)
+  end
+
+  protected
+
+  def get_colors
     colors = self.mana_cost.downcase.gsub(' ', '-').split(';').reject { |mana| mana =~ /\d|variable-colorless/ }.uniq
 
     if colors.blank? or self.card_text.downcase =~ /#{self.name} is colorless/
@@ -44,19 +64,5 @@ class Card < ActiveRecord::Base
     end
 
     colors
-  end
-
-  ['white', 'blue', 'black', 'red', 'green', 'colorless', 'multi', 'land'].each do |color|
-    define_method("is_#{color}?") do
-      self.color.include? color
-    end
-  end
-
-  def collection_for(user)
-    self.collections.select { |collection| collection.user = user }.first
-  end
-
-  def other_versions
-    Card.includes(:card_set).where('`cards`.`name` = ? AND `cards`.`id` <> ?', self.name, self.id)
   end
 end

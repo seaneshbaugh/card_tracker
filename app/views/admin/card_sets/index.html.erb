@@ -2,6 +2,8 @@
   <h1><%= t('activerecord.models.card_set').pluralize %> <small><%= @card_sets.total_count %></small></h1>
   <%= search_form_for @search, :url => admin_card_sets_path, :html => { :method => :get, :class => 'form-search well' } do |f| %>
     <%= f.text_field :name_cont, :placeholder => t('activerecord.attributes.card_set.name') %>
+    <%= f.text_field :code_cont, :placeholder => t('activerecord.attributes.card_set.code') %>
+    <%= f.select :card_block_id_eq, CardBlock.all.map{ |card_block| [card_block.name, card_block.id] }, { :include_blank => t('show_only'), :selected => params[:q].present? ? params[:q][:card_block_id_eq] : '' } %>
     <%= f.button "<i class=\"icon-search\"></i> #{t('search')}".html_safe, :type => :submit, :class => 'btn btn-primary' %>
     <%= link_to '<i class="icon-remove"></i>'.html_safe, admin_card_sets_path, :class => 'btn', :rel => 'tooltip', :title => t('clear_search') %>
   <% end %>
@@ -15,8 +17,9 @@
       <thead>
         <tr>
           <th><%= sort_link @search, :name %></th>
-          <th><%= sort_link @search, :created_at %></th>
-          <th><%= sort_link @search, :updated_at %></th>
+          <th><%= sort_link @search, :code %></th>
+          <th><%= sort_link @search, :card_block_name, t('activerecord.models.card_block') %></th>
+          <th><%= sort_link @search, :release_date %></th>
           <% if can? :edit, CardSet, current_user %><th class="icon">&nbsp;</th><% end %>
           <% if can? :destroy, CardSet, current_user %><th class="icon">&nbsp;</th><% end %>
         </tr>
@@ -24,9 +27,10 @@
       <tbody>
         <% @card_sets.each do |card_set| %>
           <tr>
-            <td><%= link_to truncate(card_set.name, :length => 64), admin_card_set_path(card_set) %></td>
-            <td><%= card_set.created_at %></td>
-            <td><%= card_set.updated_at %></td>
+            <td><%= link_to card_set.name, admin_card_set_path(card_set) %></td>
+            <td><%= card_set.code %></td>
+            <td><%= card_set.card_block.name %></td>
+            <td><%= card_set.release_date.strftime('%Y-%m-%d') %></td>
             <% if can? :edit, CardSet, current_user %><td class="icon"><%= icon_edit_link edit_admin_card_set_path(card_set) %></td><% end %>
             <% if can? :destroy, CardSet, current_user %><td class="icon"><%= icon_delete_link admin_card_set_path(card_set) %></td><% end %>
           </tr>

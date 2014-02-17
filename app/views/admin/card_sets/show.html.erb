@@ -3,29 +3,28 @@
   <table class="table table-condensed table-striped">
     <tbody>
       <tr>
-      <tr>
         <th class="span3"><%= t('activerecord.attributes.card_set.name') %></th>
         <td><%= @card_set.name %></td>
       </tr>
       <tr>
         <th class="span3"><%= t('activerecord.attributes.card_set.card_block_id') %></th>
-        <td><%= @card_set.card_block.name %></td>
+        <td><%= link_to @card_set.card_block.name, admin_card_block_path(@card_set.card_block) %></td>
       </tr>
       <tr>
         <th class="span3"><%= t('activerecord.attributes.card_set.release_date') %></th>
-        <td><%= @card_set.release_date %></td>
+        <td><%= @card_set.release_date.strftime('%Y-%m-%d') %></td>
       </tr>
       <tr>
         <th class="span3"><%= t('activerecord.attributes.card_set.prerelease_date') %></th>
-        <td><%= @card_set.prerelease_date %></td>
+        <td><%= @card_set.prerelease_date.strftime('%Y-%m-%d') %></td>
       </tr>
       <tr>
         <th class="span3"><%= t('activerecord.attributes.card_set.created_at') %></th>
-        <td><%= @card_set.created_at %></td>
+        <td><%= @card_set.created_at.present? ? @card_set.created_at.strftime('%Y-%m-%d %H:%M:%S') : '-' %></td>
       </tr>
       <tr>
         <th class="span3"><%= t('activerecord.attributes.card_set.updated_at') %></th>
-        <td><%= @card_set.updated_at %></td>
+        <td><%= @card_set.updated_at.present? ? @card_set.updated_at.strftime('%Y-%m-%d %H:%M:%S') : '-' %></td>
       </tr>
     </tbody>
   </table>

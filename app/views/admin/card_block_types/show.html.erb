@@ -9,11 +9,11 @@
       </tr>
       <tr>
         <th class="span3"><%= t('activerecord.attributes.card_block_type.created_at') %></th>
-        <td><%= @card_block_type.created_at %></td>
+        <td><%= @card_block_type.created_at.present? ? @card_block_type.created_at.strftime('%Y-%m-%d %H:%M:%S') : '-' %></td>
       </tr>
       <tr>
         <th class="span3"><%= t('activerecord.attributes.card_block_type.updated_at') %></th>
-        <td><%= @card_block_type.updated_at %></td>
+        <td><%= @card_block_type.updated_at.present? ? @card_block_type.updated_at.strftime('%Y-%m-%d %H:%M:%S') : '-' %></td>
       </tr>
     </tbody>
   </table>

@@ -3,17 +3,72 @@
   <table class="table table-condensed table-striped">
     <tbody>
       <tr>
+        <th class="span3"><%= t('activerecord.attributes.card.multiverse_id') %></th>
+        <td><%= link_to @card.multiverse_id, "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=#{@card.multiverse_id}", :target => '_blank' %></td>
+      </tr>
       <tr>
         <th class="span3"><%= t('activerecord.attributes.card.name') %></th>
         <td><%= @card.name %></td>
       </tr>
       <tr>
+        <th class="span3"><%= t('activerecord.attributes.card.card_set_id') %></th>
+        <td><%= @card.card_set.name %></td>
+      </tr>
+      <tr>
+        <th class="span3"><%= t('activerecord.attributes.card.color') %></th>
+        <td><%= @card.color.map { |color| color.titleize }.join(', ') %></td>
+      </tr>
+      <tr>
+        <th class="span3"><%= t('activerecord.attributes.card.mana_cost') %></th>
+        <td><%= @card.mana_cost %></td>
+      </tr>
+      <tr>
+        <th class="span3"><%= t('activerecord.attributes.card.converted_mana_cost') %></th>
+        <td><%= @card.converted_mana_cost %></td>
+      </tr>
+      <tr>
+        <th class="span3"><%= t('activerecord.attributes.card.card_type') %></th>
+        <td><%= @card.card_type %></td>
+      </tr>
+      <tr>
+        <th class="span3"><%= t('activerecord.attributes.card.card_text') %></th>
+        <td><%= @card.card_text %></td>
+      </tr>
+      <tr>
+        <th class="span3"><%= t('activerecord.attributes.card.flavor_text') %></th>
+        <td><%= @card.flavor_text %></td>
+      </tr>
+      <tr>
+        <th class="span3"><%= t('activerecord.attributes.card.power') %></th>
+        <td><%= @card.power %></td>
+      </tr>
+      <tr>
+        <th class="span3"><%= t('activerecord.attributes.card.toughness') %></th>
+        <td><%= @card.toughness %></td>
+      </tr>
+      <tr>
+        <th class="span3"><%= t('activerecord.attributes.card.loyalty') %></th>
+        <td><%= @card.loyalty %></td>
+      </tr>
+      <tr>
+        <th class="span3"><%= t('activerecord.attributes.card.rarity') %></th>
+        <td><%= @card.rarity %></td>
+      </tr>
+      <tr>
+        <th class="span3"><%= t('activerecord.attributes.card.card_number') %></th>
+        <td><%= @card.card_number %></td>
+      </tr>
+      <tr>
+        <th class="span3"><%= t('activerecord.attributes.card.artist') %></th>
+        <td><%= @card.artist %></td>
+      </tr>
+      <tr>
         <th class="span3"><%= t('activerecord.attributes.card.created_at') %></th>
-        <td><%= @card.created_at %></td>
+        <td><%= @card.created_at.present? ? @card.created_at.strftime('%Y-%m-%d %H:%M:%S') : '-' %></td>
       </tr>
       <tr>
         <th class="span3"><%= t('activerecord.attributes.card.updated_at') %></th>
-        <td><%= @card.updated_at %></td>
+        <td><%= @card.updated_at.present? ? @card.updated_at.strftime('%Y-%m-%d %H:%M:%S') : '-' %></td>
       </tr>
     </tbody>
   </table>

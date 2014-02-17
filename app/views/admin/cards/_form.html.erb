@@ -1,7 +1,20 @@
 <h1><%= t("cards.#{@card.persisted? ? 'edit' : 'new'}.title") %></h1>
 <%= simple_form_for [:admin, @card], :html => { :class => 'form-horizontal' } do |f| %>
   <fieldset>
+    <%= f.input :multiverse_id %>
     <%= f.input :name %>
+    <%= f.association :card_set, :include_blank => false %>
+    <%= f.input :mana_cost %>
+    <%= f.input :converted_mana_cost %>
+    <%= f.input :card_type %>
+    <%= f.input :card_text %>
+    <%= f.input :flavor_text %>
+    <%= f.input :power %>
+    <%= f.input :toughness %>
+    <%= f.input :loyalty %>
+    <%= f.input :rarity %>
+    <%= f.input :card_number %>
+    <%= f.input :artist %>
   </fieldset>
   <div class="form-actions">
     <%= link_to t('cards.links.back_to_index'), admin_cards_path, :class => 'btn' %>

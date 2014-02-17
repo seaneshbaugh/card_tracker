@@ -12,11 +12,11 @@
       </tr>
       <tr>
         <th class="span3"><%= t('activerecord.attributes.card_block.created_at') %></th>
-        <td><%= @card_block.created_at %></td>
+        <td><%= @card_block.created_at.present? ? @card_block.created_at.strftime('%Y-%m-%d %H:%M:%S') : '-' %></td>
       </tr>
       <tr>
         <th class="span3"><%= t('activerecord.attributes.card_block.updated_at') %></th>
-        <td><%= @card_block.updated_at %></td>
+        <td><%= @card_block.updated_at.present? ? @card_block.updated_at.strftime('%Y-%m-%d %H:%M:%S') : '-' %></td>
       </tr>
     </tbody>
   </table>
@@ -26,8 +26,8 @@
       <tbody>
         <% @card_block.card_sets.each do |card_set| %>
           <tr>
-            <th style="text-align: center; width: 71px;"><%= link_to card_set_symbol(card_set).html_safe, admin_card_set_path(card_set) %></th>
-            <th><%= link_to card_set.name, admin_card_set_path(card_set) %></th>
+            <td style="text-align: center; width: 71px;"><%= link_to card_set_symbol(card_set).html_safe, admin_card_set_path(card_set) %></td>
+            <td><%= link_to card_set.name, admin_card_set_path(card_set) %></td>
             <td><%= card_set.release_date %></td>
           </tr>
         <% end %>

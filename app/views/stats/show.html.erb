@@ -5,15 +5,15 @@
   <div id="unique-cards-in-collections" class="stat span12">
     You have <span class="stat-value"><%= @unique_cards_in_collections %></span> unique cards.
   </div>
-  <% ['white', 'blue', 'black', 'red', 'green', 'colorless', 'multi', 'land'].each do |color| %>
+  <% %w(white blue black red green colorless multi land).each do |color| %>
     <div class="span12">
       <strong><%= color.capitalize %>:</strong> <%= instance_variable_get("@#{color}_collections").length %>
     </div>
   <% end %>
   <% @card_sets.each do |card_set| %>
     <div class="span12">
-      <% card_set_collections = @collections.select { |collection| collection.card.card_set == card_set } %>
-      <strong><%= card_set.name %>:</strong> <%= card_set_collections.length %> / <%= card_set.cards.length %><% if card_set_collections.length > 0 %> (<%= card_set_collections.map { |collection| collection.quantity }.inject(:+) %> total)<% end %>
+      <% card_set_collections = @collections.select { |collection| collection.card.card_set_id == card_set.id } %>
+      <strong><%= card_set.name %>:</strong> <%= card_set_collections.length %> / <%= card_set.cards.count %><% if card_set_collections.length > 0 %> (<%= card_set_collections.inject(0) { |total, collection| total += collection.quantity } %> total)<% end %>
     </div>
   <% end %>
 </div>

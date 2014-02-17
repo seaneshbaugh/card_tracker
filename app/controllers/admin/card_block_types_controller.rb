@@ -4,7 +4,7 @@ class Admin::CardBlockTypesController < Admin::AdminController
   def index
     @search = CardBlockType.search(params[:q])
 
-    @card_block_types = @search.result.order('card_block_types.name ASC').page(params[:page])
+    @card_block_types = @search.result.order('`card_block_types`.`name` ASC').page(params[:page])
   end
 
   def show

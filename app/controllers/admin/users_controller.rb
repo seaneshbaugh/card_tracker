@@ -6,7 +6,7 @@ class Admin::UsersController < Admin::AdminController
   def index
     @search = User.search(params[:q])
 
-    @users = @search.result.order('users.created_at ASC').page(params[:page])
+    @users = @search.result.order('`users`.`created_at` ASC').page(params[:page])
   end
 
   def show

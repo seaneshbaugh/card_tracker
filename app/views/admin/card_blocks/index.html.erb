@@ -24,7 +24,7 @@
       <tbody>
         <% @card_blocks.each do |card_block| %>
           <tr>
-            <td><%= link_to truncate(card_block.name, :length => 64), admin_card_block_path(card_block) %></td>
+            <td><%= link_to card_block.name, admin_card_block_path(card_block) %></td>
             <td><%= card_block.card_block_type.name %></td>
             <% if can? :edit, CardBlock, current_user %><td class="icon"><%= icon_edit_link edit_admin_card_block_path(card_block) %></td><% end %>
             <% if can? :destroy, CardBlock, current_user %><td class="icon"><%= icon_delete_link admin_card_block_path(card_block) %></td><% end %>

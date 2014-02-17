@@ -15,8 +15,6 @@
       <thead>
         <tr>
           <th><%= sort_link @search, :name %></th>
-          <th><%= sort_link @search, :created_at %></th>
-          <th><%= sort_link @search, :updated_at %></th>
           <% if can? :edit, CardBlockType, current_user %><th class="icon">&nbsp;</th><% end %>
           <% if can? :destroy, CardBlockType, current_user %><th class="icon">&nbsp;</th><% end %>
         </tr>
@@ -24,9 +22,7 @@
       <tbody>
         <% @card_block_types.each do |card_block_type| %>
           <tr>
-            <td><%= link_to truncate(card_block_type.name, :length => 64), admin_card_block_type_path(card_block_type) %></td>
-            <td><%= card_block_type.created_at %></td>
-            <td><%= card_block_type.updated_at %></td>
+            <td><%= link_to card_block_type.name, admin_card_block_type_path(card_block_type) %></td>
             <% if can? :edit, CardBlockType, current_user %><td class="icon"><%= icon_edit_link edit_admin_card_block_type_path(card_block_type) %></td><% end %>
             <% if can? :destroy, CardBlockType, current_user %><td class="icon"><%= icon_delete_link admin_card_block_type_path(card_block_type) %></td><% end %>
           </tr>

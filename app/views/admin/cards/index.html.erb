@@ -2,6 +2,8 @@
   <h1><%= t('activerecord.models.card').pluralize %> <small><%= @cards.total_count %></small></h1>
   <%= search_form_for @search, :url => admin_cards_path, :html => { :method => :get, :class => 'form-search well' } do |f| %>
     <%= f.text_field :name_cont, :placeholder => t('activerecord.attributes.card.name') %>
+    <%= f.select :card_set_id_eq, CardSet.all.map{ |card_set| [card_set.name, card_set.id] }, { :include_blank => t('activerecord.models.card_set'), :selected => params[:q].present? ? params[:q][:card_set_id_eq] : '' } %>
+    <%= f.select :card_type_eq, Card.uniq.pluck(:card_type).reject { |card_type| card_type.blank? || card_type == '(none)' }.map { |card_type| [card_type, card_type] }, { :include_blank => t('activerecord.attributes.card.card_type'), :selected => params[:q].present? ? params[:q][:card_type_eq] : '' } %>
     <%= f.button "<i class=\"icon-search\"></i> #{t('search')}".html_safe, :type => :submit, :class => 'btn btn-primary' %>
     <%= link_to '<i class="icon-remove"></i>'.html_safe, admin_cards_path, :class => 'btn', :rel => 'tooltip', :title => t('clear_search') %>
   <% end %>
@@ -16,6 +18,7 @@
         <tr>
           <th><%= sort_link @search, :name %></th>
           <th><%= sort_link @search, :card_set_id %></th>
+          <th><%= sort_link @search, :card_type %></th>
           <% if can? :edit, Card, current_user %><th class="icon">&nbsp;</th><% end %>
           <% if can? :destroy, Card, current_user %><th class="icon">&nbsp;</th><% end %>
         </tr>
@@ -23,8 +26,9 @@
       <tbody>
         <% @cards.each do |card| %>
           <tr>
-            <td><%= link_to truncate(card.name, :length => 64), admin_card_path(card) %></td>
+            <td><%= link_to card.name, admin_card_path(card) %></td>
             <td><%= card.card_set.name %></td>
+            <td><%= card.card_type %></td>
             <% if can? :edit, Card, current_user %><td class="icon"><%= icon_edit_link edit_admin_card_path(card) %></td><% end %>
             <% if can? :destroy, Card, current_user %><td class="icon"><%= icon_delete_link admin_card_path(card) %></td><% end %>
           </tr>

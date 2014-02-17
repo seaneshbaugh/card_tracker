@@ -4,7 +4,7 @@ class Admin::CardBlocksController < Admin::AdminController
   def index
     @search = CardBlock.search(params[:q])
 
-    @card_blocks = @search.result.includes(:card_sets).order('card_sets.release_date ASC').page(params[:page])
+    @card_blocks = @search.result.includes(:card_sets).order('`card_sets`.`release_date` ASC').page(params[:page])
   end
 
   def show
