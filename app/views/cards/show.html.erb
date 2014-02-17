@@ -1,7 +1,7 @@
 <div id="<%= @card.id %>" class="card" data-card-id="<%= @card.id %>" data-quantity="<%= @collection.present? ? @collection.quantity : 0 %>">
   <div class="row">
     <div class="span12">
-      <h1 class="card-name"><%= link_to card_set_symbol(@card_set, :rarity => @card.rarity.downcase.to_sym, :class => 'large'), set_cards_path(@card_set) %> <%= @card.name %></h1>
+      <h1 class="card-name"><%= link_to card_set_symbol(@card_set, :rarity => @card.rarity.downcase.to_sym, :class => 'large'), set_cards_path(@card_set.slug) %> <%= @card.name %></h1>
     </div>
   </div>
   <div class="row">
@@ -21,10 +21,13 @@
       <strong>Flavor Text:</strong> <span class="flavor-text"><%= @card.flavor_text.html_safe %></span>
     </div>
     <div class="span12">
-      <strong>P/T:</strong> <span class="power-toughness"><% if @card.power && @card.toughness %><span class="power"><%= @card.power %></span> / <span class="toughness"><%= @card.toughness %></span><% end %></span>
+      <strong>P/T:</strong> <span class="power-toughness"><% if @card.power.present? && @card.toughness.present? %><span class="power"><%= @card.power %></span> / <span class="toughness"><%= @card.toughness %></span><% end %></span>
     </div>
     <div class="span12">
       <strong>Rarity:</strong> <span class="rarity"><%= @card.rarity %></span>
+    </div>
+    <div class="span12">
+      <strong>Card Number:</strong> <span class="artist"><%= @card.card_number %></span>
     </div>
     <div class="span12">
       <strong>Artist:</strong> <span class="artist"><%= @card.artist %></span>
