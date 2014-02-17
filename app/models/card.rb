@@ -7,7 +7,6 @@ class Card < ActiveRecord::Base
   has_many :users, :through => :collections
 
   validates_presence_of   :multiverse_id
-  validates_uniqueness_of :multiverse_id
 
   validates_presence_of :name
 
