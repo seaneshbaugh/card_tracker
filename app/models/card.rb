@@ -41,7 +41,7 @@ class Card < ActiveRecord::Base
   end
 
   def collection_for(user)
-    self.collections.where(:user_id => user.id)
+    self.collections.where(:user_id => user.id).first
   end
 
   def other_versions
