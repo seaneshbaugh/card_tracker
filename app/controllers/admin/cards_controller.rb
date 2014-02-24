@@ -4,7 +4,7 @@ class Admin::CardsController < Admin::AdminController
   def index
     @search = Card.search(params[:q])
 
-    @cards = @search.result.order('`cards`.`created_at` ASC').includes(:card_set).page(params[:page])
+    @cards = @search.result.order('`card_block_types`.`id`, `card_blocks`.`id`, `card_sets`.`release_date` ASC, cast(`cards`.`card_number` as unsigned) ASC, `cards`.`name` ASC').includes(:card_set => { :card_block => :card_block_type }).page(params[:page])
   end
 
   def show

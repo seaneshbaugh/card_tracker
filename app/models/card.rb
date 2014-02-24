@@ -41,11 +41,27 @@ class Card < ActiveRecord::Base
   end
 
   def collection_for(user)
-    self.collections.select { |collection| collection.user = user }.first
+    self.collections.select { |collection| collection.user_id = user_id }.first
   end
 
   def other_versions
     Card.includes(:card_set).where('`cards`.`name` = ? AND `cards`.`id` <> ?', self.name, self.id)
+  end
+
+  def <=>(other)
+    if self.card_set_id == other.card_set_id
+      self.card_number.to_i <=> other.card_number.to_i
+    else
+      if self.card_set.card_block.card_block_type_id != other.card_set.card_block.card_block.card_block_type_id
+        self.card_set.card_block.card_block_type_id <=> other.card_set.card_block.card_block.card_block_type_id
+      else
+        if self.card_set.card_block_id != other.card_set.card_block_id
+          self.card_set.card_block.card_sets.first.release_date <=> other.card_set.card_block.card_sets.first.release_date
+        else
+          self.card_set.release_date <=> other.card_set.release_date
+        end
+      end
+    end
   end
 
   protected

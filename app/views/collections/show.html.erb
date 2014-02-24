@@ -1,10 +1,16 @@
 <div id="collection">
   <h1>Your Collection</h1>
+  <%= search_form_for @search, :url => root_path, :html => { :method => :get, :id => 'search-form', :class => 'form-search well' } do |f| %>
+    <%= f.text_field :card_name_cont, :placeholder => t('activerecord.attributes.card.name') %>
+    <%= f.select :card_card_set_id_eq, CardSet.all.map{ |card_set| [card_set.name, card_set.id] }, { :include_blank => t('activerecord.models.card_set'), :selected => params[:q].present? ? params[:q][:card_set_id_eq] : '' } %>
+    <%= f.button '<i class="icon-search"></i> Search'.html_safe, :type => :submit, :class => 'btn btn-primary' %>
+    <%= link_to '<i class="icon-remove"></i>'.html_safe, root_path, :class => 'btn', :rel => 'tooltip', :title => t('clear_search') %>
+  <% end %>
   <% if @collections.present? %>
     <% @sets.each do |set| %>
       <div id="set-<%= set[0].id %>" class="set">
         <h2><%= set[0].name %></h2>
-        <% set[1].sort_by { |collection| collection.card.card_number }.each do |collection| %>
+        <% set[1].sort_by { |collection| collection.card.card_number.to_i }.each do |collection| %>
           <div id="card-<%= collection.card.multiverse_id %>" class="row card <%= collection.card.color.join(' ') %>" data-card-id="<%= collection.card_id %>" data-quantity="<%= collection.quantity %>">
             <div class="card-name span3">
               <%= link_to collection.card.name, set_card_path(set[0], collection.card) %>
@@ -26,6 +32,8 @@
       </div>
     <% end %>
     <%= paginate @collections %>
+  <% elsif params[:q].present? %>
+    <p class="lead">No matching cards found in your collection.</p>
   <% else %>
     <p class="lead">You don't seem to have any cards in your collection. Why not browse through the Magic card <%= link_to 'sets', sets_path %> and add some.</p>
   <% end %>
