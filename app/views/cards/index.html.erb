@@ -11,7 +11,7 @@
     <% collection = card.collection_for(current_user) %>
     <div id="<%= card.multiverse_id %>" class="row card <%= card.color.join(' ') %>" data-card-id="<%= card.id %>" data-quantity="<%= collection.present? ? collection.quantity : 0 %>">
       <div class="card-name span3">
-        <%= link_to card.name, set_card_path(@card_set.slug, card), :rel => card.card_number.present? ? 'tooltip' : nil, :title => card.card_number.present? ? "#{t('activerecord.attributes.card.card_number')}: #{card.card_number}" : nil %>
+        <%= link_to card.name, set_card_path(@card_set.slug, card), :rel => 'tooltip', :title => "##{card.card_number} - #{card.artist}" %>
       </div>
       <div class="card-rarity span1">
         <%= card.rarity.first %>
