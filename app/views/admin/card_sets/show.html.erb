@@ -19,6 +19,10 @@
         <td><%= @card_set.prerelease_date.strftime('%Y-%m-%d') %></td>
       </tr>
       <tr>
+        <th class="span3"><%= t('activerecord.attributes.card_set.show_card_numbers') %></th>
+        <td><%= @card_set.show_card_numbers? ? t('yes') : t('no') %></td>
+      </tr>
+      <tr>
         <th class="span3"><%= t('activerecord.attributes.card_set.created_at') %></th>
         <td><%= @card_set.created_at.present? ? @card_set.created_at.strftime('%Y-%m-%d %H:%M:%S') : '-' %></td>
       </tr>

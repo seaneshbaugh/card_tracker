@@ -9,6 +9,7 @@ en:
         code: "Code"
         release_date: "Release Date"
         prerelease_date: "Prerelease Date"
+        show_card_numbers: "Show Card Numbers"
         created_at: "Created At"
         updated_at: "Updated At"
     errors:
@@ -20,5 +21,6 @@ en:
             code: "Code"
             release_date: "Release Date"
             prerelease_date: "Prerelease Date"
+            show_card_numbers: "Show Card Numbers"
             created_at: "Created At"
             updated_at: "Updated At"

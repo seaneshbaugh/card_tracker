@@ -26,9 +26,11 @@
     <div class="span12">
       <strong>Rarity:</strong> <span class="rarity"><%= @card.rarity %></span>
     </div>
-    <div class="span12">
-      <strong>Card Number:</strong> <span class="artist"><%= @card.card_number %></span>
-    </div>
+    <% if @card.card_set.show_card_numbers? %>
+      <div class="span12">
+        <strong>Card Number:</strong> <span class="artist"><%= @card.card_number %></span>
+      </div>
+     <% end %>
     <div class="span12">
       <strong>Artist:</strong> <span class="artist"><%= @card.artist %></span>
     </div>

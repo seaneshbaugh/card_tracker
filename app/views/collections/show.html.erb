@@ -13,7 +13,7 @@
         <% set[1].sort_by { |collection| collection.card.card_number.to_i }.each do |collection| %>
           <div id="card-<%= collection.card.multiverse_id %>" class="row card <%= collection.card.color.join(' ') %>" data-card-id="<%= collection.card_id %>" data-quantity="<%= collection.quantity %>">
             <div class="card-name span3">
-              <%= link_to collection.card.name, set_card_path(set[0], collection.card) %>
+              <%= link_to collection.card.name, set_card_path(set[0], collection.card), :rel => 'tooltip', :title => card_tooltip_text(collection.card), :data => { :html => 'true' } %>
             </div>
             <div class="card-rarity span1">
               <%= collection.card.rarity.first %>

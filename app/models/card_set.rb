@@ -1,5 +1,5 @@
 class CardSet < ActiveRecord::Base
-  attr_accessible :name, :slug, :card_block_id, :code, :release_date, :prerelease_date
+  attr_accessible :name, :slug, :card_block_id, :code, :release_date, :prerelease_date, :show_card_numbers
 
   belongs_to :card_block
 
@@ -18,6 +18,10 @@ class CardSet < ActiveRecord::Base
       self.name ||= ''
       self.slug ||= ''
       self.code ||= ''
+
+      if self.show_card_numbers.nil?
+        self.show_card_numbers = true
+      end
     end
   end
 

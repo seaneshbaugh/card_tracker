@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130731150004) do
+ActiveRecord::Schema.define(:version => 20140316061846) do
 
   create_table "card_block_types", :force => true do |t|
     t.string   "name",       :default => "", :null => false
@@ -35,14 +35,15 @@ ActiveRecord::Schema.define(:version => 20130731150004) do
   add_index "card_blocks", ["updated_at"], :name => "index_card_blocks_on_updated_at"
 
   create_table "card_sets", :force => true do |t|
-    t.string   "name",            :default => "", :null => false
-    t.string   "slug",            :default => "", :null => false
+    t.string   "name",              :default => "",   :null => false
+    t.string   "slug",              :default => "",   :null => false
     t.integer  "card_block_id"
-    t.string   "code",            :default => "", :null => false
+    t.string   "code",              :default => "",   :null => false
     t.date     "release_date"
     t.date     "prerelease_date"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.boolean  "show_card_numbers", :default => true, :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
   add_index "card_sets", ["code"], :name => "index_card_sets_on_code"
@@ -50,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20130731150004) do
   add_index "card_sets", ["name"], :name => "index_card_sets_on_name"
   add_index "card_sets", ["prerelease_date"], :name => "index_card_sets_on_prerelease_date"
   add_index "card_sets", ["release_date"], :name => "index_card_sets_on_release_date"
+  add_index "card_sets", ["show_card_numbers"], :name => "index_card_sets_on_show_card_numbers"
   add_index "card_sets", ["slug"], :name => "index_card_sets_on_slug"
   add_index "card_sets", ["updated_at"], :name => "index_card_sets_on_updated_at"
 

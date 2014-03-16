@@ -33,7 +33,15 @@ module CardsHelper
 
       mana_symbol ||= mana.upcase
 
-      image_tag("symbols/#{mana_symbol}.png", :alt => mana)
+      image_tag("symbols/#{mana_symbol}.png", :alt => mana, :class => "mana-symbol #{mana_symbol.parameterize}")
     end.join.html_safe
+  end
+
+  def card_tooltip_text(card)
+    if card.card_set.show_card_numbers? && card.card_number.present?
+      "<p class='mana-cost'>#{mana_cost(card).gsub("\"", "'")}</p><p class='card-text'>#{CGI.escapeHTML(card.card_text)}</p><hr><p class='flavor-text'>#{CGI.escapeHTML(card.flavor_text)}</p><p class='card-number'>Card Number: #{card.card_number}</p><p class='artist'>Artist: #{CGI.escapeHTML(card.artist)}</p>".html_safe
+    else
+      "<p class='mana-cost'>#{mana_cost(card).gsub("\"", "'")}</p><p class='card-text'>#{CGI.escapeHTML(card.card_text)}</p><hr><p class='flavor-text'>#{CGI.escapeHTML(card.flavor_text)}</p><p class='artist'>Artist: #{CGI.escapeHTML(card.artist)}</p>".html_safe
+    end
   end
 end
