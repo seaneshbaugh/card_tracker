@@ -172,7 +172,7 @@ $(function() {
 
         quantityContainer = input.parent();
 
-        card = quantityContainer.parent();
+        card = quantityContainer.closest(".card");
 
         initialQuantity = parseInt(input.data("initial-quantity"));
 
