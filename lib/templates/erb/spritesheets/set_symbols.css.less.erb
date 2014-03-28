@@ -1,0 +1,42 @@
+.set-symbol {
+  background-clip: padding-box;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  display: inline-block;
+  line-height: 20px;
+  vertical-align: middle;
+
+<% @results.reject { |size, _| size.present? }.each do |_, rarities| %>
+<% rarities.each do |rarity, values| %>
+  &.<%= rarity %> {
+    background-image: url(/assets/sets/<%= values['spritesheet'] %>);
+
+<% values['sets'].each do |set, positions| %>
+    &.set-<%= set %> {
+      background-position: <%= positions[:x1] > 0 ? "-#{positions[:x1]}px" : '0' %> <%= positions[:y1] > 0 ? "-#{positions[:y1]}px" : '0' %>;
+      height: <%= positions[:y2] - positions[:y1] %>px;
+      width: <%= positions[:x2] - positions[:x1] %>px;
+    }
+<% end %>
+  }
+<% end %>
+<% end %>
+
+<% @results.select { |size, _| size.present? }.each do |size, rarities| %>
+  &.<%= size %> {
+<% rarities.each do |rarity, values| %>
+    &.<%= rarity %> {
+      background-image: url(/assets/sets/<%= values['spritesheet'] %>);
+
+<% values['sets'].each do |set, positions| %>
+      &.set-<%= set %> {
+        background-position: <%= positions[:x1] > 0 ? "-#{positions[:x1]}px" : '0' %> <%= positions[:y1] > 0 ? "-#{positions[:y1]}px" : '0' %>;
+        height: <%= positions[:y2] - positions[:y1] %>px;
+        width: <%= positions[:x2] - positions[:x1] %>px;
+      }
+<% end %>
+    }
+<% end %>
+  }
+<% end %>
+}

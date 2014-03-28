@@ -1,12 +1,12 @@
 <div id="<%= @card.id %>" class="card" data-card-id="<%= @card.id %>" data-quantity="<%= @collection.present? ? @collection.quantity : 0 %>">
   <div class="row">
     <div class="span12">
-      <h1 class="card-name"><%= link_to card_set_symbol(@card_set, :rarity => @card.rarity.downcase.to_sym, :class => 'large'), set_cards_path(@card_set.slug) %> <%= @card.name %></h1>
+      <h1 class="card-name"><%= link_to card_set_symbol(@card_set, :rarity => @card.rarity.downcase.to_sym, :size => 'large'), set_cards_path(@card_set.slug) %> <%= @card.name %></h1>
     </div>
   </div>
   <div class="row">
     <div class="span12">
-      <strong>Mana Cost:</strong> <span class="mana-cost"><%= mana_cost(@card) %></span>
+      <strong>Mana Cost:</strong> <span class="mana-cost"><%= mana_cost(@card, :size => 'small') %></span>
     </div>
     <div class="span12">
       <strong>Converted Mana Cost:</strong> <span class="converted-mana-cost"><%= @card.converted_mana_cost %></span>
@@ -35,7 +35,7 @@
       <strong>Artist:</strong> <span class="artist"><%= @card.artist %></span>
     </div>
     <div class="span12">
-      <strong>Other Versions:</strong> <span class="other-versions"><% @card.other_versions.each do |other_version| %><%= link_to card_set_symbol(other_version.card_set, :rarity => other_version.rarity.downcase.to_sym), set_card_path(other_version.card_set.slug, other_version) %><% end %></span>
+      <strong>Other Versions:</strong> <span class="other-versions"><% @card.other_versions.each do |other_version| %><%= link_to card_set_symbol(other_version.card_set, :rarity => other_version.rarity.downcase.to_sym, :size => 'small'), set_card_path(other_version.card_set.slug, other_version) %><% end %></span>
     </div>
   </div>
   <div class="row">
