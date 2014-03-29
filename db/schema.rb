@@ -91,24 +91,6 @@ ActiveRecord::Schema.define(:version => 20140328125729) do
   add_index "cards", ["toughness"], :name => "index_cards_on_toughness"
   add_index "cards", ["updated_at"], :name => "index_cards_on_updated_at"
 
-  create_table "collection_stats", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "total_cards",  :default => 0, :null => false
-    t.integer  "unique_cards", :default => 0, :null => false
-    t.integer  "locked_by"
-    t.datetime "locked_at"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
-  end
-
-  add_index "collection_stats", ["created_at"], :name => "index_collection_stats_on_created_at"
-  add_index "collection_stats", ["locked_at"], :name => "index_collection_stats_on_locked_at"
-  add_index "collection_stats", ["locked_by"], :name => "index_collection_stats_on_locked_by"
-  add_index "collection_stats", ["total_cards"], :name => "index_collection_stats_on_total_cards"
-  add_index "collection_stats", ["unique_cards"], :name => "index_collection_stats_on_unique_cards"
-  add_index "collection_stats", ["updated_at"], :name => "index_collection_stats_on_updated_at"
-  add_index "collection_stats", ["user_id"], :name => "index_collection_stats_on_user_id"
-
   create_table "collections", :force => true do |t|
     t.integer  "card_id",                   :null => false
     t.integer  "user_id",                   :null => false
