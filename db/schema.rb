@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140316061846) do
+ActiveRecord::Schema.define(:version => 20140328125729) do
 
   create_table "card_block_types", :force => true do |t|
     t.string   "name",       :default => "", :null => false
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20140316061846) do
     t.integer  "card_set_id"
     t.string   "mana_cost",           :default => "", :null => false
     t.string   "converted_mana_cost", :default => "", :null => false
+    t.string   "colors",              :default => "", :null => false
     t.string   "card_type",           :default => "", :null => false
     t.text     "card_text",                           :null => false
     t.text     "flavor_text",                         :null => false
@@ -78,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20140316061846) do
   add_index "cards", ["card_number"], :name => "index_cards_on_card_number"
   add_index "cards", ["card_set_id"], :name => "index_cards_on_card_set_id"
   add_index "cards", ["card_type"], :name => "index_cards_on_card_type"
+  add_index "cards", ["colors"], :name => "index_cards_on_colors"
   add_index "cards", ["converted_mana_cost"], :name => "index_cards_on_converted_mana_cost"
   add_index "cards", ["created_at"], :name => "index_cards_on_created_at"
   add_index "cards", ["loyalty"], :name => "index_cards_on_loyalty"
@@ -88,6 +90,24 @@ ActiveRecord::Schema.define(:version => 20140316061846) do
   add_index "cards", ["rarity"], :name => "index_cards_on_rarity"
   add_index "cards", ["toughness"], :name => "index_cards_on_toughness"
   add_index "cards", ["updated_at"], :name => "index_cards_on_updated_at"
+
+  create_table "collection_stats", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "total_cards",  :default => 0, :null => false
+    t.integer  "unique_cards", :default => 0, :null => false
+    t.integer  "locked_by"
+    t.datetime "locked_at"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
+
+  add_index "collection_stats", ["created_at"], :name => "index_collection_stats_on_created_at"
+  add_index "collection_stats", ["locked_at"], :name => "index_collection_stats_on_locked_at"
+  add_index "collection_stats", ["locked_by"], :name => "index_collection_stats_on_locked_by"
+  add_index "collection_stats", ["total_cards"], :name => "index_collection_stats_on_total_cards"
+  add_index "collection_stats", ["unique_cards"], :name => "index_collection_stats_on_unique_cards"
+  add_index "collection_stats", ["updated_at"], :name => "index_collection_stats_on_updated_at"
+  add_index "collection_stats", ["user_id"], :name => "index_collection_stats_on_user_id"
 
   create_table "collections", :force => true do |t|
     t.integer  "card_id",                   :null => false
