@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140329235639) do
+ActiveRecord::Schema.define(:version => 20140330171656) do
 
   create_table "card_block_types", :force => true do |t|
     t.string   "name",       :default => "", :null => false
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20140329235639) do
     t.string   "multiverse_id",       :default => "", :null => false
     t.string   "name",                :default => "", :null => false
     t.integer  "card_set_id"
+    t.string   "layout",              :default => "", :null => false
     t.string   "mana_cost",           :default => "", :null => false
     t.string   "converted_mana_cost", :default => "", :null => false
     t.string   "colors",              :default => "", :null => false
@@ -88,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20140329235639) do
   add_index "cards", ["colors"], :name => "index_cards_on_colors"
   add_index "cards", ["converted_mana_cost"], :name => "index_cards_on_converted_mana_cost"
   add_index "cards", ["created_at"], :name => "index_cards_on_created_at"
+  add_index "cards", ["layout"], :name => "index_cards_on_layout"
   add_index "cards", ["loyalty"], :name => "index_cards_on_loyalty"
   add_index "cards", ["mana_cost"], :name => "index_cards_on_mana_cost"
   add_index "cards", ["multiverse_id"], :name => "index_cards_on_multiverse_id"
