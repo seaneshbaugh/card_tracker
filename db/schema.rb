@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140328125729) do
+ActiveRecord::Schema.define(:version => 20140329235639) do
 
   create_table "card_block_types", :force => true do |t|
     t.string   "name",       :default => "", :null => false
@@ -63,6 +63,9 @@ ActiveRecord::Schema.define(:version => 20140328125729) do
     t.string   "converted_mana_cost", :default => "", :null => false
     t.string   "colors",              :default => "", :null => false
     t.string   "card_type",           :default => "", :null => false
+    t.string   "card_supertypes",     :default => "", :null => false
+    t.string   "card_types",          :default => "", :null => false
+    t.string   "card_subtypes",       :default => "", :null => false
     t.text     "card_text",                           :null => false
     t.text     "flavor_text",                         :null => false
     t.string   "power",               :default => "", :null => false
@@ -78,7 +81,10 @@ ActiveRecord::Schema.define(:version => 20140328125729) do
   add_index "cards", ["artist"], :name => "index_cards_on_artist"
   add_index "cards", ["card_number"], :name => "index_cards_on_card_number"
   add_index "cards", ["card_set_id"], :name => "index_cards_on_card_set_id"
+  add_index "cards", ["card_subtypes"], :name => "index_cards_on_card_subtypes"
+  add_index "cards", ["card_supertypes"], :name => "index_cards_on_card_supertypes"
   add_index "cards", ["card_type"], :name => "index_cards_on_card_type"
+  add_index "cards", ["card_types"], :name => "index_cards_on_card_types"
   add_index "cards", ["colors"], :name => "index_cards_on_colors"
   add_index "cards", ["converted_mana_cost"], :name => "index_cards_on_converted_mana_cost"
   add_index "cards", ["created_at"], :name => "index_cards_on_created_at"
