@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140330171656) do
+ActiveRecord::Schema.define(:version => 20140330174319) do
 
   create_table "card_block_types", :force => true do |t|
     t.string   "name",       :default => "", :null => false
@@ -33,6 +33,50 @@ ActiveRecord::Schema.define(:version => 20140330171656) do
   add_index "card_blocks", ["created_at"], :name => "index_card_blocks_on_created_at"
   add_index "card_blocks", ["name"], :name => "index_card_blocks_on_name", :unique => true
   add_index "card_blocks", ["updated_at"], :name => "index_card_blocks_on_updated_at"
+
+  create_table "card_parts", :force => true do |t|
+    t.string   "multiverse_id",       :default => "", :null => false
+    t.string   "name",                :default => "", :null => false
+    t.integer  "card_id"
+    t.string   "layout",              :default => "", :null => false
+    t.string   "mana_cost",           :default => "", :null => false
+    t.string   "converted_mana_cost", :default => "", :null => false
+    t.string   "colors",              :default => "", :null => false
+    t.string   "card_type",           :default => "", :null => false
+    t.string   "card_supertypes",     :default => "", :null => false
+    t.string   "card_types",          :default => "", :null => false
+    t.string   "card_subtypes",       :default => "", :null => false
+    t.text     "card_text",                           :null => false
+    t.text     "flavor_text",                         :null => false
+    t.string   "power",               :default => "", :null => false
+    t.string   "toughness",           :default => "", :null => false
+    t.string   "loyalty",             :default => "", :null => false
+    t.string   "rarity",              :default => "", :null => false
+    t.string   "card_number",         :default => "", :null => false
+    t.string   "artist",              :default => "", :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+  end
+
+  add_index "card_parts", ["artist"], :name => "index_card_parts_on_artist"
+  add_index "card_parts", ["card_id"], :name => "index_card_parts_on_card_id"
+  add_index "card_parts", ["card_number"], :name => "index_card_parts_on_card_number"
+  add_index "card_parts", ["card_subtypes"], :name => "index_card_parts_on_card_subtypes"
+  add_index "card_parts", ["card_supertypes"], :name => "index_card_parts_on_card_supertypes"
+  add_index "card_parts", ["card_type"], :name => "index_card_parts_on_card_type"
+  add_index "card_parts", ["card_types"], :name => "index_card_parts_on_card_types"
+  add_index "card_parts", ["colors"], :name => "index_card_parts_on_colors"
+  add_index "card_parts", ["converted_mana_cost"], :name => "index_card_parts_on_converted_mana_cost"
+  add_index "card_parts", ["created_at"], :name => "index_card_parts_on_created_at"
+  add_index "card_parts", ["layout"], :name => "index_card_parts_on_layout"
+  add_index "card_parts", ["loyalty"], :name => "index_card_parts_on_loyalty"
+  add_index "card_parts", ["mana_cost"], :name => "index_card_parts_on_mana_cost"
+  add_index "card_parts", ["multiverse_id"], :name => "index_card_parts_on_multiverse_id"
+  add_index "card_parts", ["name"], :name => "index_card_parts_on_name"
+  add_index "card_parts", ["power"], :name => "index_card_parts_on_power"
+  add_index "card_parts", ["rarity"], :name => "index_card_parts_on_rarity"
+  add_index "card_parts", ["toughness"], :name => "index_card_parts_on_toughness"
+  add_index "card_parts", ["updated_at"], :name => "index_card_parts_on_updated_at"
 
   create_table "card_sets", :force => true do |t|
     t.string   "name",              :default => "",   :null => false
