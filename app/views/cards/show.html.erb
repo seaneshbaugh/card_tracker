@@ -1,4 +1,4 @@
-<div id="<%= @card.id %>" class="card" data-card-id="<%= @card.id %>" data-quantity="<%= @collection.present? ? @collection.quantity : 0 %>">
+<div id="card-<%= @card.multiverse_id %>" class="card" data-card-id="<%= @card.id %>" data-quantity="<%= @collection.present? ? @collection.quantity : 0 %>">
   <div class="row">
     <div class="span12">
       <h1 class="card-name"><%= link_to card_set_symbol(@card_set, :rarity => @card.rarity.downcase.to_sym, :size => 'large'), set_cards_path(@card_set.slug) %> <%= @card.name %></h1>
@@ -15,7 +15,7 @@
       <strong>Types:</strong> <span class="card-type"><%= @card.card_type %></span>
     </div>
     <div class="span12">
-      <strong>Card Text:</strong> <span class="card-text"><%= @card.card_text.html_safe %></span>
+      <strong>Card Text:</strong> <span class="card-text"><%= card_text_with_symbols(@card.card_text, :size => 'small') %></span>
     </div>
     <div class="span12">
       <strong>Flavor Text:</strong> <span class="flavor-text"><%= @card.flavor_text.html_safe %></span>

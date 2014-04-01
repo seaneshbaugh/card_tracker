@@ -7,13 +7,13 @@
   </div>
   <% %w(white blue black red green colorless multi land).each do |color| %>
     <div class="span12">
-      <strong><%= color.capitalize %>:</strong> <%= instance_variable_get("@#{color}_collections").length %>
+      <strong><%= color.capitalize %>:</strong> <%= instance_variable_get("@number_of_#{color}") %>
     </div>
   <% end %>
-  <% @card_sets.each do |card_set| %>
+  <!--<%# @card_sets.each do |card_set| %>
     <div class="span12">
-      <% card_set_collections = @collections.select { |collection| collection.card.card_set_id == card_set.id } %>
-      <strong><%= card_set.name %>:</strong> <%= card_set_collections.length %> / <%= card_set.cards.count %><% if card_set_collections.length > 0 %> (<%= card_set_collections.inject(0) { |total, collection| total += collection.quantity } %> total)<% end %>
+      <%# card_set_collections = @collections.select { |collection| collection.card.card_set_id == card_set.id } %>
+      <strong><%#= card_set.name %>:</strong> <%#= card_set_collections.length %> / <%#= card_set.cards.count %><%# if card_set_collections.length > 0 %> (<%#= card_set_collections.inject(0) { |total, collection| total += collection.quantity } %> total)<#% end %>
     </div>
-  <% end %>
+  <#% end %>-->
 </div>
