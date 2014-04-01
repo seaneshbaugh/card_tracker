@@ -303,7 +303,7 @@ namespace :import do
                                       :card_types => card_types,
                                       :card_subtypes => card_subtypes,
                                       :card_text => imported_card['text'].to_s.gsub("\n", '<br>'),
-                                      :flavor_text => imported_card['flavor'].to_s,
+                                      :flavor_text => imported_card['flavor'].to_s.gsub("\n", '<br>'),
                                       :power => imported_card['power'].to_s,
                                       :toughness => imported_card['toughness'].to_s,
                                       :loyalty => imported_card['loyalty'].to_s,
@@ -329,7 +329,7 @@ namespace :import do
                             :card_types => card_types,
                             :card_subtypes => card_subtypes,
                             :card_text => imported_card['text'].to_s.gsub("\n", '<br>'),
-                            :flavor_text => imported_card['flavor'].to_s,
+                            :flavor_text => imported_card['flavor'].to_s.gsub("\n", '<br>'),
                             :power => imported_card['power'].to_s,
                             :toughness => imported_card['toughness'].to_s,
                             :loyalty => imported_card['loyalty'].to_s,
@@ -415,7 +415,7 @@ namespace :import do
                                         :card_types => card_types,
                                         :card_subtypes => card_subtypes,
                                         :card_text => imported_card_part['text'].to_s.gsub("\n", '<br>'),
-                                        :flavor_text => imported_card_part['flavor'].to_s,
+                                        :flavor_text => imported_card_part['flavor'].to_s.gsub("\n", '<br>'),
                                         :power => imported_card_part['power'].to_s,
                                         :toughness => imported_card_part['toughness'].to_s,
                                         :loyalty => imported_card_part['loyalty'].to_s,
@@ -441,7 +441,7 @@ namespace :import do
                                   :card_types => card_types,
                                   :card_subtypes => card_subtypes,
                                   :card_text => imported_card_part['text'].to_s.gsub("\n", '<br>'),
-                                  :flavor_text => imported_card_part['flavor'].to_s,
+                                  :flavor_text => imported_card_part['flavor'].to_s.gsub("\n", '<br>'),
                                   :power => imported_card_part['power'].to_s,
                                   :toughness => imported_card_part['toughness'].to_s,
                                   :loyalty => imported_card_part['loyalty'].to_s,
@@ -520,7 +520,7 @@ namespace :import do
                                              :card_types => card_types,
                                              :card_subtypes => card_subtypes,
                                              :card_text => imported_card_part['text'].to_s.gsub("\n", '<br>'),
-                                             :flavor_text => imported_card_part['flavor'].to_s,
+                                             :flavor_text => imported_card_part['flavor'].to_s.gsub("\n", '<br>'),
                                              :power => imported_card_part['power'].to_s,
                                              :toughness => imported_card_part['toughness'].to_s,
                                              :loyalty => imported_card_part['loyalty'].to_s,
@@ -546,7 +546,7 @@ namespace :import do
                                        :card_types => card_types,
                                        :card_subtypes => card_subtypes,
                                        :card_text => imported_card_part['text'].to_s.gsub("\n", '<br>'),
-                                       :flavor_text => imported_card_part['flavor'].to_s,
+                                       :flavor_text => imported_card_part['flavor'].to_s.gsub("\n", '<br>'),
                                        :power => imported_card_part['power'].to_s,
                                        :toughness => imported_card_part['toughness'].to_s,
                                        :loyalty => imported_card_part['loyalty'].to_s,
@@ -625,7 +625,7 @@ namespace :import do
                                              :card_types => card_types,
                                              :card_subtypes => card_subtypes,
                                              :card_text => imported_card_part['text'].to_s.gsub("\n", '<br>'),
-                                             :flavor_text => imported_card_part['flavor'].to_s,
+                                             :flavor_text => imported_card_part['flavor'].to_s.gsub("\n", '<br>'),
                                              :power => imported_card_part['power'].to_s,
                                              :toughness => imported_card_part['toughness'].to_s,
                                              :loyalty => imported_card_part['loyalty'].to_s,
@@ -651,7 +651,7 @@ namespace :import do
                                        :card_types => card_types,
                                        :card_subtypes => card_subtypes,
                                        :card_text => imported_card_part['text'].to_s.gsub("\n", '<br>'),
-                                       :flavor_text => imported_card_part['flavor'].to_s,
+                                       :flavor_text => imported_card_part['flavor'].to_s.gsub("\n", '<br>'),
                                        :power => imported_card_part['power'].to_s,
                                        :toughness => imported_card_part['toughness'].to_s,
                                        :loyalty => imported_card_part['loyalty'].to_s,
@@ -671,6 +671,82 @@ namespace :import do
 
       imported_cards.select { |imported_card| imported_card['layout'] == 'token' }.each do |imported_card|
         puts "Warning: Ignoring token card #{imported_card['name']}(#{imported_card['multiverseid']})."
+      end
+    end
+  end
+
+  desc 'Fix Anthologies.'
+  task :fix_ant => :environment do
+    card_set = CardSet.where(:code => 'ANT').first
+
+    raise 'Expected 80 cards.' if card_set.cards.length != 80
+
+    card_set.cards.each do |card|
+      first_similar_card = Card.where('`cards`.`multiverse_id` = ? AND `cards`.`card_set_id` != ?', card.multiverse_id, card_set.id).sort { |a, b| a.card_set.release_date <=> b.card_set.release_date }.first
+
+      if first_similar_card.present?
+        if card.update_attributes({
+                                    :name => first_similar_card.name,
+                                    :layout => first_similar_card.layout,
+                                    :mana_cost => first_similar_card.mana_cost,
+                                    :converted_mana_cost => first_similar_card.converted_mana_cost,
+                                    :colors => first_similar_card.colors,
+                                    :card_type => first_similar_card.card_type,
+                                    :card_supertypes => first_similar_card.card_supertypes,
+                                    :card_types => first_similar_card.card_types,
+                                    :card_subtypes => first_similar_card.card_subtypes,
+                                    :card_text => first_similar_card.card_text,
+                                    :flavor_text => first_similar_card.flavor_text,
+                                    :power => first_similar_card.power,
+                                    :toughness => first_similar_card.toughness,
+                                    :loyalty => first_similar_card.loyalty,
+                                    :rarity => first_similar_card.rarity,
+                                    :artist => first_similar_card.artist
+                                  })
+          puts "Updated existing card #{card.id} #{card.name}(#{card.multiverse_id})."
+        else
+          puts "Failed to update existing card #{card.name}(#{card.multiverse_id}). #{card.errors.full_messages.join('. ')}."
+        end
+      else
+        raise "Could not find similar card to #{card.name}(#{card.multiverse_id})."
+      end
+    end
+  end
+
+  desc 'Fix Deckmasters: Garfield vs. Finkel.'
+  task :fix_dkm => :environment do
+    card_set = CardSet.where(:code => 'DKM').first
+
+    raise 'Expected 52 cards.' if card_set.cards.length != 52
+
+    card_set.cards.each do |card|
+      first_similar_card = Card.where('`cards`.`multiverse_id` = ? AND `cards`.`card_set_id` != ?', card.multiverse_id, card_set.id).sort { |a, b| a.card_set.release_date <=> b.card_set.release_date }.first
+
+      if first_similar_card.present?
+        if card.update_attributes({
+                                 :name => first_similar_card.name,
+                                 :layout => first_similar_card.layout,
+                                 :mana_cost => first_similar_card.mana_cost,
+                                 :converted_mana_cost => first_similar_card.converted_mana_cost,
+                                 :colors => first_similar_card.colors,
+                                 :card_type => first_similar_card.card_type,
+                                 :card_supertypes => first_similar_card.card_supertypes,
+                                 :card_types => first_similar_card.card_types,
+                                 :card_subtypes => first_similar_card.card_subtypes,
+                                 :card_text => first_similar_card.card_text,
+                                 :flavor_text => first_similar_card.flavor_text,
+                                 :power => first_similar_card.power,
+                                 :toughness => first_similar_card.toughness,
+                                 :loyalty => first_similar_card.loyalty,
+                                 :rarity => first_similar_card.rarity,
+                                 :artist => first_similar_card.artist
+                               })
+          puts "Updated existing card #{card.id} #{card.name}(#{card.multiverse_id})."
+        else
+          puts "Failed to update existing card #{card.name}(#{card.multiverse_id}). #{card.errors.full_messages.join('. ')}."
+        end
+      else
+        raise "Could not find similar card to #{card.name}(#{card.multiverse_id})."
       end
     end
   end
