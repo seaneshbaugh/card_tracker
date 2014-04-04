@@ -16,7 +16,7 @@ class CardsController < ApplicationController
 
     @search = Card.search(params[:q])
 
-    @cards = @search.result.includes(:collections).where(:card_set_id => @card_set.id).order('cast(`cards`.`card_number` as unsigned) ASC, `cards`.`id` ASC')
+    @cards = @search.result.includes(:card_set, :card_parts, :collections).where(:card_set_id => @card_set.id).order('cast(`cards`.`card_number` as unsigned) ASC, `cards`.`id` ASC')
   end
 
   def show

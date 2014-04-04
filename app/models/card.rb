@@ -55,7 +55,11 @@ class Card < ActiveRecord::Base
   end
 
   def collection_for(user)
-    self.collections.where(:user_id => user.id).first
+    if self.collections.loaded?
+      self.collections.select { |collection| collection.user_id == user.id }.first
+    else
+      self.collections.where(:user_id => user.id).first
+    end
   end
 
   def other_versions

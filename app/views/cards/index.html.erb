@@ -11,7 +11,7 @@
     <% collection = card.collection_for(current_user) %>
     <div id="card-<%= card.multiverse_id %>" class="row card <%= color_class(card) %>" data-card-id="<%= card.id %>" data-quantity="<%= collection.present? ? collection.quantity : 0 %>">
       <div class="card-name span3">
-        <%= link_to card.name, set_card_path(@card_set.slug, card), :rel => 'tooltip', :title => card_tooltip_text(card), :data => { :html => 'true' } %>
+        <%= link_to card.name, set_card_path(@card_set.slug, card), :rel => 'tooltip', :title => card_tooltip_text(card).gsub("\"", "'"), :data => { :html => 'true' } %>
       </div>
       <div class="card-rarity span1">
         <%= card.rarity.first %>

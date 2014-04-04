@@ -1,0 +1,25 @@
+<div class="card-tooltip plane">
+  <div class="card-name">
+    <%= card.name %>
+  </div>
+  <div class="mana-cost">
+    <%= mana_cost(card, :size => 'small') %>
+  </div>
+  <div class="card-type">
+    <%= card.card_type %>
+  </div>
+  <div class="card-text">
+    <%= card_text_with_symbols(card.card_text, :size => 'small') %>
+  </div>
+  <div class="flavor-text">
+    <%= card.flavor_text.html_safe %>
+  </div>
+  <div class="artist">
+    Artist: <%= card.artist %>
+  </div>
+  <% if card.card_set.show_card_numbers? && card.card_number.present? %>
+    <div class="card-number">
+      <%= card.card_number %>
+    </div>
+  <% end %>
+</div>

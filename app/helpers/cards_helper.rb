@@ -24,11 +24,7 @@ module CardsHelper
   end
 
   def card_tooltip_text(card)
-    if card.card_set.show_card_numbers? && card.card_number.present?
-      "<p class='mana-cost'>#{mana_cost(card, :size => 'small').gsub("\"", "'")}</p><p class='card-text'>#{CGI.escapeHTML(card_text_with_symbols(card.card_text, :size => 'small'))}</p><hr><p class='flavor-text'>#{CGI.escapeHTML(card.flavor_text)}</p><p class='card-number'>Card Number: #{card.card_number}</p><p class='artist'>Artist: #{CGI.escapeHTML(card.artist)}</p>".html_safe
-    else
-      "<p class='mana-cost'>#{mana_cost(card, :size => 'small').gsub("\"", "'")}</p><p class='card-text'>#{CGI.escapeHTML(card_text_with_symbols(card.card_text, :size => 'small'))}</p><hr><p class='flavor-text'>#{CGI.escapeHTML(card.flavor_text)}</p><p class='artist'>Artist: #{CGI.escapeHTML(card.artist)}</p>".html_safe
-    end
+    render :partial => "cards/tooltip/#{card.layout.underscore}", :locals => { :card => card }
   end
 
   def color_class(card)
@@ -45,8 +41,12 @@ module CardsHelper
     else
       colored_mana = card.mana_cost.gsub('{', '').split('}').uniq.reject { |mana| !mana.match(/W|U|B|R|G/) }
 
-      if colored_mana.length == 0 || colored_mana.length > 1 #|| colored_mana.reject { |mana| !mana.match(/\//) || mana.match(/\d/) }.length == 0
-        'multi'
+      if colored_mana.length == 0 || colored_mana.length > 1
+        if card.layout == 'double-faced'
+          "double-faced-#{card.card_parts.first.colors.split(';').join('-').downcase}-to-#{card.card_parts.last.colors.split(';').join('-').downcase}"
+        else
+          'multi'
+        end
       else
         {
           'W/U' => 'white-or-blue',

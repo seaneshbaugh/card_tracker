@@ -1,0 +1,22 @@
+<div class="plane row">
+  <div class="span12">
+    <strong>Types:</strong> <span class="card-type"><%= @card.card_type %></span>
+  </div>
+  <div class="span12">
+    <strong>Card Text:</strong> <span class="card-text"><%= card_text_with_symbols(@card.card_text, :size => 'small') %></span>
+  </div>
+  <div class="span12">
+    <strong>Flavor Text:</strong> <span class="flavor-text"><%= @card.flavor_text.html_safe %></span>
+  </div>
+  <div class="span12">
+    <strong>Rarity:</strong> <span class="rarity"><%= @card.rarity %></span>
+  </div>
+  <% if @card.card_set.show_card_numbers? && @card.card_number.present? %>
+    <div class="span12">
+      <strong>Card Number:</strong> <span class="artist"><%= @card.card_number %></span>
+    </div>
+  <% end %>
+  <div class="span12">
+    <strong>Artist:</strong> <span class="artist"><%= @card.artist %></span>
+  </div>
+</div>

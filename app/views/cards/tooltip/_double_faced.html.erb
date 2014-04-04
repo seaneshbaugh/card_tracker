@@ -1,0 +1,31 @@
+<div class="card-tooltip double-faced">
+  <% card.card_parts.each_with_index do |card_part, index| %>
+    <div class="card-part">
+      <div class="card-name">
+        <%= card_part.name %>
+      </div>
+      <% if index == 0 %>
+        <div class="mana-cost">
+          <%= mana_cost(card_part, :size => 'small') %>
+        </div>
+      <% end %>
+      <div class="card-type">
+        <%= card_part.card_type %>
+      </div>
+      <div class="card-text">
+        <%= card_text_with_symbols(card_part.card_text, :size => 'small') %>
+      </div>
+      <div class="flavor-text">
+        <%= card_part.flavor_text.html_safe %>
+      </div>
+      <div class="artist">
+        Artist: <%= card_part.artist %>
+      </div>
+    </div>
+  <% end %>
+  <% if card.card_set.show_card_numbers? && card.card_number.present? %>
+    <div class="card-number">
+      <%= card.card_number %>
+    </div>
+  <% end %>
+</div>

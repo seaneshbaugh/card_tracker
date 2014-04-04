@@ -1,0 +1,40 @@
+<% @card.card_parts.each_slice(2) do |card_parts| %>
+  <div class="split row">
+    <% card_parts.sort_by(&:card_number).each do |card_part| %>
+      <div class="card-part span6">
+        <h2 class="span6">
+          <%= card_part.name %>
+        </h2>
+        <div class="span6">
+          <strong>Mana Cost:</strong> <span class="mana-cost"><%= mana_cost(card_part, :size => 'small') %></span>
+        </div>
+        <div class="span6">
+          <strong>Converted Mana Cost:</strong> <span class="converted-mana-cost"><%= card_part.converted_mana_cost %></span>
+        </div>
+        <div class="span6">
+          <strong>Types:</strong> <span class="card-type"><%= card_part.card_type %></span>
+        </div>
+        <div class="span6">
+          <strong>Card Text:</strong> <span class="card-text"><%= card_text_with_symbols(card_part.card_text, :size => 'small') %></span>
+        </div>
+        <div class="span6">
+          <strong>Flavor Text:</strong> <span class="flavor-text"><%= card_part.flavor_text.html_safe %></span>
+        </div>
+        <div class="span6">
+          <strong>P/T:</strong> <span class="power-toughness"><% if card_part.power.present? && card_part.toughness.present? %><span class="power"><%= card_part.power %></span> / <span class="toughness"><%= card_part.toughness %></span><% end %></span>
+        </div>
+        <div class="span6">
+          <strong>Rarity:</strong> <span class="rarity"><%= card_part.rarity %></span>
+        </div>
+        <% if @card.card_set.show_card_numbers? && card_part.card_number.present? %>
+          <div class="span6">
+            <strong>Card Number:</strong> <span class="artist"><%= card_part.card_number %></span>
+          </div>
+        <% end %>
+        <div class="span6">
+          <strong>Artist:</strong> <span class="artist"><%= card_part.artist %></span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
