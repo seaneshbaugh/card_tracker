@@ -1,40 +1,59 @@
-<div id="cards">
-  <h1><%= t('activerecord.models.card').pluralize %> <small><%= @cards.total_count %></small></h1>
-  <%= search_form_for @search, :url => admin_cards_path, :html => { :method => :get, :class => 'form-search well' } do |f| %>
-    <%= f.text_field :name_cont, :placeholder => t('activerecord.attributes.card.name') %>
-    <%= f.select :card_set_id_eq, CardSet.all.map{ |card_set| [card_set.name, card_set.id] }, { :include_blank => t('activerecord.models.card_set'), :selected => params[:q].present? ? params[:q][:card_set_id_eq] : '' } %>
-    <%= f.select :card_type_eq, Card.uniq.pluck(:card_type).reject { |card_type| card_type.blank? || card_type == '(none)' }.map { |card_type| [card_type, card_type] }, { :include_blank => t('activerecord.attributes.card.card_type'), :selected => params[:q].present? ? params[:q][:card_type_eq] : '' } %>
-    <%= f.button "<i class=\"icon-search\"></i> #{t('search')}".html_safe, :type => :submit, :class => 'btn btn-primary' %>
-    <%= link_to '<i class="icon-remove"></i>'.html_safe, admin_cards_path, :class => 'btn', :rel => 'tooltip', :title => t('clear_search') %>
-  <% end %>
-  <% if can? :create, Card, current_user %>
+<div id="cards" class="admin-content">
+  <h1><%= t('activerecord.models.card').pluralize %></h1>
+  <div class="well">
+    <%= search_form_for @search, :url => admin_cards_path, :html => { :method => :get, :class => 'form-inline' } do |f| %>
+      <div class="form-group">
+        <%= f.text_field :name_cont, :class => 'form-control', :placeholder => t('activerecord.attributes.card.name') %>
+      </div>
+      <!--<div class="form-group">
+        <%= f.select :colors_cont, [%w(White White), %w(Blue Blue), %w(Black Black), %w(Red Red), %w(Green Green)], { :include_blank => t('activerecord.attributes.card.colors').singularize, :selected => params[:q].present? ? params[:q][:colors_cont] : '' }, { :class => 'form-control' } %>
+      </div>-->
+      <div class="form-group">
+        <%= f.select :card_set_id_eq, CardSet.all.map{ |card_set| [card_set.name, card_set.id] }, { :include_blank => t('activerecord.models.card_set'), :selected => params[:q].present? ? params[:q][:card_set_id_eq] : '' }, { :class => 'form-control' } %>
+      </div>
+      <!--<div class="form-group">
+        <%= f.select :card_supertypes_cont, Card.card_supertypes.map { |card_supertype| [card_supertype, card_supertype] }, { :include_blank => t('activerecord.attributes.card.card_supertypes').singularize, :selected => params[:q].present? ? params[:q][:card_supertypes_cont] : '' }, { :class => 'form-control' } %>
+      </div>
+      <div class="form-group">
+        <%= f.select :card_types_cont, Card.card_types.map { |card_type| [card_type, card_type] }, { :include_blank => t('activerecord.attributes.card.card_types').singularize, :selected => params[:q].present? ? params[:q][:card_types_cont] : '' }, { :class => 'form-control' } %>
+      </div>
+      <div class="form-group">
+        <%= f.select :card_subtypes_cont, Card.card_subtypes.map { |card_subtype| [card_subtype, card_subtype] }, { :include_blank => t('activerecord.attributes.card.card_subtypes').singularize, :selected => params[:q].present? ? params[:q][:card_subtypes_cont] : '' }, { :class => 'form-control' } %>
+      </div>-->
+      <div class="form-group">
+        <%= f.button "<span class=\"glyphicon glyphicon-search\"></span> #{t('search')}".html_safe, :type => :submit, :class => 'btn btn-primary' %>
+        <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, admin_cards_path, :class => 'btn btn-default', :rel => 'tooltip', :title => t('clear_search') %>
+      </div>
+    <% end %>
+  </div>
+  <% if can? :create, Card %>
     <div class="clearfix">
-      <%= link_to t('cards.new.title'), new_admin_card_path, :class => 'btn btn-primary pull-right' %>
+      <%= link_to t('cards.new.title'), new_admin_card_path, :class => 'btn btn-primary new-object' %>
     </div>
   <% end %>
   <% if @cards.present? %>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th><%= sort_link @search, :name %></th>
-          <th><%= sort_link @search, :card_set_id %></th>
-          <th><%= sort_link @search, :card_type %></th>
-          <% if can? :edit, Card, current_user %><th class="icon">&nbsp;</th><% end %>
-          <% if can? :destroy, Card, current_user %><th class="icon">&nbsp;</th><% end %>
-        </tr>
-      </thead>
-      <tbody>
-        <% @cards.each do |card| %>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover table-condensed">
+        <thead>
           <tr>
-            <td><%= link_to card.name, admin_card_path(card) %></td>
-            <td><%= card.card_set.name %></td>
-            <td><%= card.card_type %></td>
-            <% if can? :edit, Card, current_user %><td class="icon"><%= icon_edit_link edit_admin_card_path(card) %></td><% end %>
-            <% if can? :destroy, Card, current_user %><td class="icon"><%= icon_delete_link admin_card_path(card) %></td><% end %>
+            <th><%= sort_link @search, :name %></th>
+            <th><%= sort_link @search, :card_set_id %></th>
+            <%= edit_and_delete_header_columns(Card) %>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @cards.each do |card| %>
+            <% present card do |card_presenter| %>
+              <tr>
+                <td><%= link_to card_presenter.name, admin_card_path(card) %></td>
+                <td><%= card_presenter.card_set_name %></td>
+                <%= edit_and_delete_columns(card) %>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
     <%= paginate @cards %>
   <% else %>
     <p class="lead"><%= t('messages.cards.none') %></p>

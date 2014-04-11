@@ -1,67 +1,81 @@
-<div id="user">
-  <h1><%= t('users.show.title') %> <small><%= @user.full_name %></small></h1>
-  <h2><%= t('users.sections.contact_information') %></h2>
-  <table class="table table-condensed table-striped">
-    <tbody>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.user.first_name') %></th>
-        <td><%= @user.first_name %></td>
-      </tr>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.user.last_name') %></th>
-        <td><%= @user.last_name %></td>
-      </tr>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.user.email') %></th>
-        <td><%= @user.email %> <%= link_to '<i class="icon-envelope">'.html_safe, "mailto:#{@user.email}", :rel => 'tooltip', :title => 'Send Email' %></td>
-      </tr>
-    </tbody>
-  </table>
-  <h2><%= t('users.sections.account_information') %></h2>
-  <table class="table table-condensed table-striped">
-    <tbody>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.user.username') %></th>
-        <td><%= @user.username %></td>
-      </tr>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.user.created_at') %></th>
-        <td><%= @user.created_at.to_s(:normal) %></td>
-      </tr>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.user.updated_at') %></th>
-        <td><%= @user.updated_at.to_s(:normal) %></td>
-      </tr>
-    </tbody>
-  </table>
-  <h2><%= t('users.sections.login_activity') %></h2>
-  <table class="table table-condensed table-striped">
-    <tbody>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.user.sign_in_count') %></th>
-        <td><%= @user.sign_in_count %></td>
-      </tr>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.user.current_sign_in_at') %></th>
-        <td><%= @user.current_sign_in_at.blank? ? t('na') : @user.current_sign_in_at %></td>
-      </tr>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.user.last_sign_in_at') %></th>
-        <td><%= @user.last_sign_in_at.blank? ? t('na') : @user.last_sign_in_at %></td>
-      </tr>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.user.current_sign_in_ip') %></th>
-        <td><%= @user.current_sign_in_ip.blank? ? t('na') : @user.current_sign_in_ip %></td>
-      </tr>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.user.last_sign_in_ip') %></th>
-        <td><%= @user.last_sign_in_ip.blank? ? t('na') : @user.last_sign_in_ip %></td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="form-actions">
-    <%= link_to t('users.links.back_to_index'), admin_users_path, :class => 'btn' %>
-    <% if can? :edit, User %><%= link_to t('users.edit.title'), edit_admin_user_path(@user), :class => 'btn' %><% end %>
-    <% if can? :destroy, User %><%= link_to t('users.delete.title'), admin_user_path(@user), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') } %><% end %>
+<% present @user do |user_presenter| %>
+  <div id="user-<%= @user.id %>" class="admin-content">
+    <h1><%= t('users.show.title') %> <small><%= user_presenter.full_name %></small></h1>
+    <div class="object-actions">
+      <%= link_to t('users.links.back_to_index'), admin_users_path, :class => 'btn btn-default' %>
+      <% if can? :edit, User %><%= link_to t('users.edit.title'), edit_admin_user_path(@user), :class => 'btn btn-primary' %><% end %>
+      <% if can? :destroy, User %><%= link_to t('users.delete.title'), admin_user_path(@user), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') } %><% end %>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped table-condensed">
+        <tbody>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.user.username') %></th>
+            <td class="col-xs-8 col-sm-10"><%= user_presenter.username %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.user.email') %></th>
+            <td class="col-xs-8 col-sm-10"><%= user_presenter.email %> <%= user_presenter.email_link %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.user.role') %></th>
+            <td class="col-xs-8 col-sm-10"><%= user_presenter.role %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.user.first_name') %></th>
+            <td class="col-xs-8 col-sm-10"><%= user_presenter.first_name %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.user.last_name') %></th>
+            <td class="col-xs-8 col-sm-10"><%= user_presenter.last_name %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.user.sign_in_count') %></th>
+            <td class="col-xs-8 col-sm-10"><%= user_presenter.sign_in_count %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.user.current_sign_in_at') %></th>
+            <td class="col-xs-8 col-sm-10"><%= user_presenter.current_sign_in_at %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.user.last_sign_in_at') %></th>
+            <td class="col-xs-8 col-sm-10"><%= user_presenter.last_sign_in_at %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.user.current_sign_in_ip') %></th>
+            <td class="col-xs-8 col-sm-10"><%= user_presenter.current_sign_in_ip %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.user.last_sign_in_ip') %></th>
+            <td class="col-xs-8 col-sm-10"><%= user_presenter.last_sign_in_ip %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.user.receive_newsletters') %></th>
+            <td class="col-xs-8 col-sm-10"><%= user_presenter.receive_newsletters %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.user.receive_sign_up_alerts') %></th>
+            <td class="col-xs-8 col-sm-10"><%= user_presenter.receive_sign_up_alerts %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.user.receive_contact_alerts') %></th>
+            <td class="col-xs-8 col-sm-10"><%= user_presenter.receive_contact_alerts %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.user.created_at') %></th>
+            <td class="col-xs-8 col-sm-10"><%= user_presenter.created_at %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.user.updated_at') %></th>
+            <td class="col-xs-8 col-sm-10"><%= user_presenter.updated_at %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="object-actions">
+      <%= link_to t('users.links.back_to_index'), admin_users_path, :class => 'btn btn-default' %>
+      <% if can? :edit, User %><%= link_to t('users.edit.title'), edit_admin_user_path(@user), :class => 'btn btn-primary' %><% end %>
+      <% if can? :destroy, User %><%= link_to t('users.delete.title'), admin_user_path(@user), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') } %><% end %>
+    </div>
   </div>
-</div>
+<% end %>

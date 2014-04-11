@@ -134,6 +134,8 @@ $(function() {
 
             input.val(initialQuantity);
 
+            input.addClass("form-control");
+
             quantityContainer.empty();
 
             quantityContainer.append(input);

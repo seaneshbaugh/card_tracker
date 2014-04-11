@@ -36,6 +36,18 @@ class Card < ActiveRecord::Base
     end
   end
 
+  def self.card_supertypes
+    Card.pluck(:card_supertypes).uniq.map { |card_supertype| card_supertype.split(';') }.flatten.uniq.reject { |card_supertype| card_supertype.blank? }.sort
+  end
+
+  def self.card_types
+    Card.pluck(:card_types).uniq.map { |card_type| card_type.split(';') }.flatten.uniq.reject { |card_type| card_type.blank? }.sort
+  end
+
+  def self.card_subtypes
+    Card.pluck(:card_subtypes).uniq.map { |card_subtype| card_subtype.split(';') }.flatten.uniq.reject { |card_subtype| card_subtype.blank? }.sort
+  end
+
   %w(White Blue Black Red Green).each do |color|
     define_method("is_#{color.downcase}?") do
       self.colors.split(';').include? color

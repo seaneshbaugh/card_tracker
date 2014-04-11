@@ -1,15 +1,10 @@
 module ApplicationHelper
-  def icon_edit_link(url_or_path)
-    render :partial => 'shared/icon_edit_link', :locals => { :url_or_path => build_url_or_path_for(url_or_path) }
-  end
-
-  def icon_delete_link(url_or_path)
-    render :partial => 'shared/icon_delete_link', :locals => { :url_or_path => build_url_or_path_for(url_or_path) }
-  end
-
-  def build_url_or_path_for(url_or_path = '')
-    url_or_path = eval(url_or_path) if url_or_path =~ /_path|_url|@/
-    url_or_path
+  def body_class
+    if content_for?(:body_class)
+      " class=\"#{content_for(:body_class).strip}\"".html_safe
+    else
+      ''
+    end
   end
 
   def flash_messages
@@ -22,5 +17,15 @@ module ApplicationHelper
 
   def is_active_action?(action_name)
     'active' if params[:action] == action_name
+  end
+
+  def present(object, klass = nil)
+    klass ||= "#{object.class}Presenter".constantize
+
+    presenter = klass.new(object, self)
+
+    yield presenter if block_given?
+
+    presenter
   end
 end

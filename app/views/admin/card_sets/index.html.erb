@@ -1,42 +1,54 @@
-<div id="card-sets">
-  <h1><%= t('activerecord.models.card_set').pluralize %> <small><%= @card_sets.total_count %></small></h1>
-  <%= search_form_for @search, :url => admin_card_sets_path, :html => { :method => :get, :class => 'form-search well' } do |f| %>
-    <%= f.text_field :name_cont, :placeholder => t('activerecord.attributes.card_set.name') %>
-    <%= f.text_field :code_cont, :placeholder => t('activerecord.attributes.card_set.code') %>
-    <%= f.select :card_block_id_eq, CardBlock.all.map{ |card_block| [card_block.name, card_block.id] }, { :include_blank => t('show_only'), :selected => params[:q].present? ? params[:q][:card_block_id_eq] : '' } %>
-    <%= f.button "<i class=\"icon-search\"></i> #{t('search')}".html_safe, :type => :submit, :class => 'btn btn-primary' %>
-    <%= link_to '<i class="icon-remove"></i>'.html_safe, admin_card_sets_path, :class => 'btn', :rel => 'tooltip', :title => t('clear_search') %>
-  <% end %>
-  <% if can? :create, CardSet, current_user %>
+<div id="card-sets" class="admin-content">
+  <h1><%= t('activerecord.models.card_set').pluralize %></h1>
+  <div class="well">
+    <%= search_form_for @search, :url => admin_card_sets_path, :html => { :method => :get, :class => 'form-inline' } do |f| %>
+      <div class="form-group">
+        <%= f.text_field :name_cont, :class => 'form-control', :placeholder => t('activerecord.attributes.card_set.name') %>
+      </div>
+      <div class="form-group">
+        <%= f.text_field :code_cont, :class => 'form-control', :placeholder => t('activerecord.attributes.card_set.code') %>
+      </div>
+      <div class="form-group">
+        <%= f.select :card_block_id_eq, CardBlock.all.map{ |card_block| [card_block.name, card_block.id] }, { :include_blank => t('show_only'), :selected => params[:q].present? ? params[:q][:card_block_id_eq] : '' }, { :class => 'form-control' } %>
+      </div>
+      <div class="form-group">
+        <%= f.button "<span class=\"glyphicon glyphicon-search\"></span> #{t('search')}".html_safe, :type => :submit, :class => 'btn btn-primary' %>
+        <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, admin_card_sets_path, :class => 'btn btn-default', :rel => 'tooltip', :title => t('clear_search') %>
+      </div>
+    <% end %>
+  </div>
+  <% if can? :create, CardSet %>
     <div class="clearfix">
-      <%= link_to t('card_sets.new.title'), new_admin_card_set_path, :class => 'btn btn-primary pull-right' %>
+      <%= link_to t('card_sets.new.title'), new_admin_card_set_path, :class => 'btn btn-primary new-object' %>
     </div>
   <% end %>
   <% if @card_sets.present? %>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th><%= sort_link @search, :name %></th>
-          <th><%= sort_link @search, :code %></th>
-          <th><%= sort_link @search, :card_block_name, t('activerecord.models.card_block') %></th>
-          <th><%= sort_link @search, :release_date %></th>
-          <% if can? :edit, CardSet, current_user %><th class="icon">&nbsp;</th><% end %>
-          <% if can? :destroy, CardSet, current_user %><th class="icon">&nbsp;</th><% end %>
-        </tr>
-      </thead>
-      <tbody>
-        <% @card_sets.each do |card_set| %>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover table-condensed">
+        <thead>
           <tr>
-            <td><%= link_to card_set.name, admin_card_set_path(card_set) %></td>
-            <td><%= card_set.code %></td>
-            <td><%= card_set.card_block.name %></td>
-            <td><%= card_set.release_date.strftime('%Y-%m-%d') %></td>
-            <% if can? :edit, CardSet, current_user %><td class="icon"><%= icon_edit_link edit_admin_card_set_path(card_set) %></td><% end %>
-            <% if can? :destroy, CardSet, current_user %><td class="icon"><%= icon_delete_link admin_card_set_path(card_set) %></td><% end %>
+            <th><%= sort_link @search, :name %></th>
+            <th><%= sort_link @search, :code %></th>
+            <th><%= sort_link @search, :card_block_name, t('activerecord.models.card_block') %></th>
+            <th><%= sort_link @search, :release_date %></th>
+            <%= edit_and_delete_header_columns(CardSet) %>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @card_sets.each do |card_set| %>
+            <% present card_set do |card_set_presenter| %>
+              <tr>
+                <td><%= link_to card_set_presenter.name, admin_card_set_path(card_set) %></td>
+                <td><%= card_set_presenter.code %></td>
+                <td><%= card_set_presenter.card_block_name %></td>
+                <td><%= card_set_presenter.release_date %></td>
+                <%= edit_and_delete_columns(card_set) %>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
     <%= paginate @card_sets %>
   <% else %>
     <p class="lead"><%= t('messages.card_sets.none') %></p>

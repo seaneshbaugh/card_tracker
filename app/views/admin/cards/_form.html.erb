@@ -1,28 +1,35 @@
-<h1><%= t("cards.#{@card.persisted? ? 'edit' : 'new'}.title") %></h1>
-<%= simple_form_for [:admin, @card], :html => { :class => 'form-horizontal' } do |f| %>
-  <fieldset>
+<% present @card do |card_presenter| %>
+  <h1><%= card_presenter.form_title %></h1>
+  <%= simple_form_for [:admin, @card], :html => { :class => 'form-horizontal' } do |f| %>
     <%= f.input :multiverse_id %>
     <%= f.input :name %>
     <%= f.association :card_set, :include_blank => false %>
+    <%= f.input :layout, :collection => [%w(normal normal), %w(split split), %w(flip flip), %w(double-faced double-faced), %w(plane plane), %w(scheme scheme), %w(phenomenon phenomenon)], :include_blank => false %>
     <%= f.input :mana_cost %>
     <%= f.input :converted_mana_cost %>
+    <%= f.input :colors %>
     <%= f.input :card_type %>
+    <%= f.input :card_supertypes %>
+    <%= f.input :card_types %>
+    <%= f.input :card_subtypes %>
     <%= f.input :card_text %>
     <%= f.input :flavor_text %>
     <%= f.input :power %>
     <%= f.input :toughness %>
     <%= f.input :loyalty %>
-    <%= f.input :rarity, :collection => [['Common', 'Common'], ['Uncommon', 'Uncommon'], ['Rare', 'Rare'], ['Mythic Rare', 'Mythic Rare'], ['Basic Land', 'Basic Land'], ['Special', 'Special']], :include_blank => false %>
+    <%= f.input :rarity, :collection => [%w(Common Common), %w(Uncommon Uncommon), %w(Rare Rare), ['Mythic Rare', 'Mythic Rare']], :include_blank => false %>
     <%= f.input :card_number %>
     <%= f.input :artist %>
-  </fieldset>
-  <div class="form-actions">
-    <%= link_to t('cards.links.back_to_index'), admin_cards_path, :class => 'btn' %>
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <% unless @card.persisted? %>
-      <label class="checkbox inline">
-        <%= check_box_tag 'redirect_to_new', 1, true %> <%= t('helpers.submit.card.redirect_to_new') %>
-      </label>
-    <% end %>
-  </div>
+    <div class="form-group">
+      <div class="col-lg-offset-2 col-lg-10">
+        <%= link_to t('cards.links.back_to_index'), admin_cards_path, :class => 'btn btn-default' %>
+        <%= f.button :submit, 'Submit', :class => 'btn btn-primary' %>
+        <% unless @card.persisted? %>
+          <label for="redirect_to_new">
+            <%= check_box_tag 'redirect_to_new', 1, true %> <%= t('helpers.submit.card.redirect_to_new') %>
+          </label>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 <% end %>

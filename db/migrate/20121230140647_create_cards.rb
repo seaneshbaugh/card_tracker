@@ -7,8 +7,8 @@ class CreateCards < ActiveRecord::Migration
       t.string :mana_cost,           :null => false, :default => ''
       t.string :converted_mana_cost, :null => false, :default => ''
       t.string :card_type,           :null => false, :default => ''
-      t.text :card_text,             :null => false, :default => ''
-      t.text :flavor_text,           :null => false, :default => ''
+      t.text :card_text,             :null => false
+      t.text :flavor_text,           :null => false
       t.string :power,               :null => false, :default => ''
       t.string :toughness,           :null => false, :default => ''
       t.string :loyalty,             :null => false, :default => ''

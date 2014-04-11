@@ -3,6 +3,8 @@ require File.expand_path('../boot', __FILE__)
 # load smtp.yml
 require 'yaml'
 SMTP_SETTINGS = YAML.load(File.read(File.expand_path('../smtp.yml', __FILE__)))
+DEVISE_SETTINGS = YAML.load(File.read(File.expand_path('../devise.yml', __FILE__)))
+SECRET_SETTINGS = YAML.load(File.read(File.expand_path('../secret.yml', __FILE__)))
 
 # Pick the frameworks you want:
 require "active_record/railtie"

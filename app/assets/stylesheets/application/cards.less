@@ -1,0 +1,150 @@
+@import "twitter/bootstrap/variables.less";
+@import "application/variables.less";
+@import "twitter/bootstrap/mixins.less";
+@import "application/mixins.less";
+
+.card {
+  .card-attribute-label {
+    font-weight: bold;
+  }
+
+  .card-attribute {
+    margin-bottom: 15px;
+  }
+
+  .card-quantity {
+    input[type='number'] {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      width: 56px;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  .show-on-gatherer {
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+}
+
+.tooltip {
+  .card-tooltip {
+    overflow: hidden;
+    text-align: left;
+
+    .card-name {
+      font-size: 16px;
+    }
+
+    .mana-cost {
+
+    }
+
+    .card-type {
+      font-size: 14px;
+    }
+
+    .card-text {
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .flavor-text {
+      border-bottom: 1px solid #ffffff;
+      font-size: 11px;
+      font-style: italic;
+      margin-top: 10px;
+    }
+
+    .artist {
+      float: left;
+    }
+
+    .card-number {
+      float: right;
+      text-align: right;
+    }
+
+    &.split {
+      .card-part {
+        margin-top: 5px;
+
+        .card-name {
+          font-size: 12px;
+        }
+
+        .card-text {
+          font-size: 10px;
+          margin-top: 5px;
+        }
+
+        .flavor-text {
+          font-size: 9px;
+          font-style: italic;
+          margin-top: 5px;
+        }
+
+        .artist {
+          float: none;
+          font-size: 9px;
+        }
+      }
+    }
+
+    &.flip {
+      .card-part {
+        margin-top: 5px;
+
+        .card-text {
+          font-size: 10px;
+          margin-top: 5px;
+        }
+
+        .flavor-text {
+          font-size: 9px;
+          font-style: italic;
+          margin-top: 5px;
+        }
+      }
+    }
+
+    &.double-faced {
+      .card-part {
+        margin-top: 5px;
+
+        .card-text {
+          font-size: 10px;
+          margin-top: 5px;
+        }
+
+        .flavor-text {
+          font-size: 9px;
+          font-style: italic;
+          margin-top: 5px;
+        }
+
+        .artist {
+          float: none;
+          font-size: 9px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: @screen-sm-min) {
+  .card-attribute-label {
+    margin-bottom: 10px;
+    text-align: right;
+  }
+
+  .card-attribute {
+    margin-bottom: 0;
+  }
+}

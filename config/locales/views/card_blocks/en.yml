@@ -16,6 +16,7 @@ en:
       updated: "Card Block has been updated."
       deleted: "Card Block has been deleted."
       none: "There are no card blocks yet. Click 'New Card Block' to get started."
+      no_card_sets: "No Card Sets."
   card_blocks:
     links:
       back_to_index: "Back to Card Blocks"

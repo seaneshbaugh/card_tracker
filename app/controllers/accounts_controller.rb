@@ -28,11 +28,11 @@ class AccountsController < ApplicationController
   end
 
   def confirm_delete
-    @account = User.where(:id => current_user.id).first
+    @account = current_user
   end
 
   def destroy
-    @account = User.where(:id => current_user.id).first
+    @account = current_user
 
     @account.destroy
 

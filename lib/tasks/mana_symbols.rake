@@ -16,7 +16,7 @@ namespace :mana_symbols do
 
   desc 'Make spritesheet PNG files and accompanying LESS files.'
   task :make_spritesheets => :environment do
-    template_file = Rails.root.join('lib', 'templates', 'erb', 'spritesheets', 'mana_symbols.css.less.erb')
+    template_file = Rails.root.join('lib', 'templates', 'erb', 'spritesheets', 'mana_symbols.less.erb')
 
     @results = {}
 
@@ -72,7 +72,7 @@ namespace :mana_symbols do
       end
     end
 
-    less_file = File.new(Rails.root.join('app', 'assets', 'stylesheets', 'application', 'mana_symbols.css.less'), 'w')
+    less_file = File.new(Rails.root.join('app', 'assets', 'stylesheets', 'application', 'mana_symbols.less'), 'w')
 
     less_file.puts ERB.new(File.read(template_file), 0, '>').result(binding)
 

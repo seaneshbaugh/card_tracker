@@ -1,0 +1,75 @@
+@import "twitter/bootstrap/variables.less";
+@import "application/variables.less";
+@import "twitter/bootstrap/mixins.less";
+@import "application/mixins.less";
+
+body.home {
+  .jumbotron {
+    background: url(/assets/masthead.jpg) center center no-repeat;
+    color: #e3fdff;
+    margin-top: -20px;
+    padding: 75px 0 50px 0;
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(101, 98, 145, 0.40), 0 0 30px rgba(221, 212, 222, 0.67);
+
+    h1 {
+      font-size: 40px;
+    }
+
+    p.lead {
+      font-size: 20px;
+    }
+  }
+
+  >.container {
+    padding-top: 0;
+  }
+}
+
+@media (min-width: @screen-sm-min) {
+  body.home {
+    .jumbotron {
+      padding: 100px 0 100px 0;
+
+      h1 {
+        font-size: 78px;
+      }
+
+      p.lead {
+        font-size: 29px;
+      }
+    }
+  }
+}
+
+@media (min-width: @screen-md-min) {
+  body.home {
+    .jumbotron {
+      padding: 100px 0 130px 0;
+
+      h1 {
+        font-size: 80px;
+      }
+
+      p.lead {
+        font-size: 32px;
+      }
+    }
+  }
+}
+
+@media (min-width: @screen-lg-min) {
+  body.home {
+    .jumbotron {
+      padding: 100px 0 200px 0;
+
+      h1 {
+        font-size: 80px;
+      }
+
+      p.lead {
+        font-size: 32px;
+      }
+    }
+  }
+}

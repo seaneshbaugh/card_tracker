@@ -1,0 +1,89 @@
+@import "twitter/bootstrap/variables.less";
+@import "admin/variables.less";
+@import "twitter/bootstrap/mixins.less";
+@import "admin/mixins.less";
+
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  margin-bottom: 60px;
+
+  >.container {
+    padding: 60px 15px 0;
+  }
+}
+
+footer {
+  background-color: #f5f5f5;
+  bottom: 0;
+  height: 60px;
+  position: absolute;
+  width: 100%;
+
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+a.new-object {
+  margin-bottom: 20px;
+}
+
+.object-actions {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+@media (min-width: @screen-sm) and (max-width: @screen-md) {
+  .nav > li > a {
+    padding: 15px 5px;
+  }
+
+  #user_search .form-group:last-child {
+    padding-top: 15px;
+  }
+}
+
+//a:focus, a:active {
+//  outline: none;
+//}
+//
+//button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="reset"]::-moz-focus-inner, input[type="submit"]::-moz-focus-inner, input[type="file"] > input[type="button"]::-moz-focus-inner { border: solid 1px transparent; }
+//input[type="button"]:focus, input[type="reset"]:focus, input[type="submit"]:focus, input[type="file"] > intput[type="button"]:focus { outline: none; }
+//
+//body {
+//  margin-top: 60px;
+//  overflow-y: scroll;
+//}
+//
+//#routes {
+//  pre {
+//    line-height: 0px;
+//  }
+//}
+//
+//.set-symbol {
+//  height: 30px;
+//}
+//
+//@media (min-width: 980px) and (max-width: 1199px) {
+//  .navbar {
+//    .nav {
+//      li {
+//        a {
+//          padding: 10px 8px 10px;
+//        }
+//      }
+//    }
+//  }
+//}
+//
+//@media (max-width: 979px) {
+//  body {
+//    margin-top: 0;
+//  }
+//}

@@ -37,7 +37,7 @@ namespace :set_symbols do
 
   desc 'Make spritesheet PNG files and accompanying LESS files.'
   task :make_spritesheets => :environment do
-    template_file = Rails.root.join('lib', 'templates', 'erb', 'spritesheets', 'set_symbols.css.less.erb')
+    template_file = Rails.root.join('lib', 'templates', 'erb', 'spritesheets', 'set_symbols.less.erb')
 
     @results = {}
 
@@ -97,7 +97,7 @@ namespace :set_symbols do
       end
     end
 
-    less_file = File.new(Rails.root.join('app', 'assets', 'stylesheets', 'application', 'set_symbols.css.less'), 'w')
+    less_file = File.new(Rails.root.join('app', 'assets', 'stylesheets', 'application', 'set_symbols.less'), 'w')
 
     less_file.puts ERB.new(File.read(template_file), 0, '>').result(binding)
 

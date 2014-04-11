@@ -1,19 +1,24 @@
-<div id="stats" class="row">
-  <div id="total-cards-in-collections" class="stat span12">
-    You have a total of <span class="stat-value"><%= @total_cards_in_collections %></span> cards.
-  </div>
-  <div id="unique-cards-in-collections" class="stat span12">
-    You have <span class="stat-value"><%= @unique_cards_in_collections %></span> unique cards.
-  </div>
-  <% %w(white blue black red green colorless multi land).each do |color| %>
-    <div class="span12">
-      <strong><%= color.capitalize %>:</strong> <%= instance_variable_get("@number_of_#{color}") %>
+<div class="page-header">
+  <h1>Collection Stats</h1>
+</div>
+<div id="stats" class="page row">
+  <div class="page-body col-xs-12">
+    <div id="total-cards-in-collections" class="stat">
+      You have a total of <span class="stat-value"><%= @total_cards_in_collections %></span> cards.
     </div>
-  <% end %>
-  <!--<%# @card_sets.each do |card_set| %>
-    <div class="span12">
-      <%# card_set_collections = @collections.select { |collection| collection.card.card_set_id == card_set.id } %>
-      <strong><%#= card_set.name %>:</strong> <%#= card_set_collections.length %> / <%#= card_set.cards.count %><%# if card_set_collections.length > 0 %> (<%#= card_set_collections.inject(0) { |total, collection| total += collection.quantity } %> total)<#% end %>
+    <div id="unique-cards-in-collections" class="stat">
+      You have <span class="stat-value"><%= @unique_cards_in_collections %></span> unique cards.
     </div>
-  <#% end %>-->
+    <% %w(white blue black red green colorless multi land).each do |color| %>
+      <div class="stat">
+        <strong><%= color.capitalize %>:</strong> <span class="stat-value"><%= instance_variable_get("@number_of_#{color}") %></span>
+      </div>
+    <% end %>
+    <!--<%# @card_sets.each do |card_set| %>
+      <div class="stat">
+        <%# card_set_collections = @collections.select { |collection| collection.card.card_set_id == card_set.id } %>
+        <strong><%#= card_set.name %>:</strong> <span class="stat-value"><%#= card_set_collections.length %> / <%#= card_set.cards.count %><%# if card_set_collections.length > 0 %> (<%#= card_set_collections.inject(0) { |total, collection| total += collection.quantity } %> total)<#% end %></span>
+      </div>
+    <#% end %>-->
+  </div>
 </div>

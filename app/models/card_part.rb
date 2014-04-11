@@ -3,6 +3,8 @@ class CardPart < ActiveRecord::Base
 
   belongs_to :card
 
+  delegate :card_set, :to => :card, :allow_nil => true
+
   validates_presence_of :multiverse_id
 
   validates_presence_of :name

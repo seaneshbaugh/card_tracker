@@ -10,6 +10,8 @@ load 'config/recipes/check'
 load 'config/recipes/db'
 load 'config/recipes/mysql'
 load 'config/recipes/smtp'
+load 'config/recipes/secret'
+load 'config/recipes/devise'
 load 'config/recipes/uploads'
 
 set :application, 'card_tracker'

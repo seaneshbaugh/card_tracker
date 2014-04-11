@@ -23,7 +23,7 @@ class ContactController < ApplicationController
 
       flash[:success] = 'Thanks for your message! We will get back to you soon.'
 
-      redirect_to root_url
+      render 'thanks'
     else
       render 'new'
     end

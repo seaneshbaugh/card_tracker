@@ -1,0 +1,41 @@
+@import "twitter/bootstrap/variables.less";
+@import "application/variables.less";
+@import "twitter/bootstrap/mixins.less";
+@import "application/mixins.less";
+
+.set {
+  .card {
+    line-height: 34px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+  }
+}
+
+#sets {
+  margin: 40px 0 20px;
+
+  .set {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+}
+
+@media (min-width: @screen-sm-min) {
+  #sets {
+    margin: 20px 0 20px;
+
+    .set {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+@media (min-width: @screen-md-min) {
+  #sets {
+    .set {
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+  }
+}

@@ -1,20 +1,22 @@
-<h1><%= t("card_sets.#{@card_set.persisted? ? 'edit' : 'new'}.title") %></h1>
-<%= simple_form_for [:admin, @card_set], :html => { :class => 'form-horizontal' } do |f| %>
-  <fieldset>
+<% present @card_set do |card_set_presenter| %>
+  <h1><%= card_set_presenter.form_title %></h1>
+  <%= simple_form_for [:admin, @card_set], :html => { :class => 'form-horizontal' } do |f| %>
     <%= f.input :name %>
     <%= f.association :card_block, :include_blank => false %>
     <%= f.input :code %>
     <%= f.input :release_date %>
     <%= f.input :prerelease_date %>
     <%= f.input :show_card_numbers %>
-  </fieldset>
-  <div class="form-actions">
-    <%= link_to t('card_sets.links.back_to_index'), admin_card_sets_path, :class => 'btn' %>
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <% unless @card_set.persisted? %>
-      <label class="checkbox inline">
-        <%= check_box_tag 'redirect_to_new', 1, true %> <%= t('helpers.submit.card_set.redirect_to_new') %>
-      </label>
-    <% end %>
-  </div>
+    <div class="form-group">
+      <div class="col-lg-offset-2 col-lg-10">
+        <%= link_to t('card_sets.links.back_to_index'), admin_card_sets_path, :class => 'btn btn-default' %>
+        <%= f.button :submit, 'Submit', :class => 'btn btn-primary' %>
+        <% unless @card_set.persisted? %>
+          <label for="redirect_to_new">
+            <%= check_box_tag 'redirect_to_new', 1, true %> <%= t('helpers.submit.card_set.redirect_to_new') %>
+          </label>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 <% end %>

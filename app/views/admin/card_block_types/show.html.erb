@@ -1,25 +1,33 @@
-<div id="card-block-type">
-  <h1><%= t('card_block_types.show.title') %> <small><%= @card_block_type.name %></small></h1>
-  <table class="table table-condensed table-striped">
-    <tbody>
-      <tr>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.card_block_type.name') %></th>
-        <td><%= @card_block_type.name %></td>
-      </tr>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.card_block_type.created_at') %></th>
-        <td><%= @card_block_type.created_at.present? ? @card_block_type.created_at.strftime('%Y-%m-%d %H:%M:%S') : '-' %></td>
-      </tr>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.card_block_type.updated_at') %></th>
-        <td><%= @card_block_type.updated_at.present? ? @card_block_type.updated_at.strftime('%Y-%m-%d %H:%M:%S') : '-' %></td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="form-actions">
-    <%= link_to t('card_block_types.links.back_to_index'), admin_card_block_types_path, :class => 'btn' %>
-    <% if can? :edit, CardBlockType, current_user %><%= link_to t('card_block_types.edit.title'), edit_admin_card_block_type_path(@card_block_type), :class => 'btn' %><% end %>
-    <% if can? :destroy, CardBlockType, current_user %><%= link_to t('card_block_types.delete.title'), admin_card_block_type_path(@card_block_type), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') } %><% end %>
+<% present @card_block_type do |card_block_type_presenter| %>
+  <div id="card-block-type-<%= @card_block_type.id %>" class="admin-content">
+    <h1><%= t('card_block_types.show.title') %> <small><%= @card_block_type.name %></small></h1>
+    <div class="object-actions">
+      <%= link_to t('card_block_types.links.back_to_index'), admin_card_block_types_path, :class => 'btn btn-default' %>
+      <% if can? :edit, CardBlockType %><%= link_to t('card_block_types.edit.title'), edit_admin_card_block_type_path(@card_block_type), :class => 'btn btn-primary' %><% end %>
+      <% if can? :destroy, CardBlockType %><%= link_to t('card_block_types.delete.title'), admin_card_block_type_path(@card_block_type), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') } %><% end %>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped table-condensed">
+        <tbody>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.card_block_type.name') %></th>
+            <td class="col-xs-8 col-sm-10"><%= card_block_type_presenter.name %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.card_block_type.created_at') %></th>
+            <td class="col-xs-8 col-sm-10"><%= card_block_type_presenter.created_at %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.card_block_type.updated_at') %></th>
+            <td class="col-xs-8 col-sm-10"><%= card_block_type_presenter.updated_at %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="object-actions">
+      <%= link_to t('card_block_types.links.back_to_index'), admin_card_block_types_path, :class => 'btn btn-default' %>
+      <% if can? :edit, CardBlockType %><%= link_to t('card_block_types.edit.title'), edit_admin_card_block_type_path(@card_block_type), :class => 'btn btn-primary' %><% end %>
+      <% if can? :destroy, CardBlockType %><%= link_to t('card_block_types.delete.title'), admin_card_block_type_path(@card_block_type), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') } %><% end %>
+    </div>
   </div>
-</div>
+<% end %>

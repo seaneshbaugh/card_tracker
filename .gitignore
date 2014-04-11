@@ -13,3 +13,5 @@ database.yml
 /tmp
 /vendor/bundle
 /config/smtp.yml
+/config/devise.yml
+/config/secret.yml

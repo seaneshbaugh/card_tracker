@@ -1,40 +1,53 @@
-<div id="collection">
+<% content_for :body_class, 'collection' %>
+<div class="page-header">
   <h1>Your Collection</h1>
-  <%= search_form_for @search, :url => root_path, :html => { :method => :get, :id => 'search-form', :class => 'form-search well' } do |f| %>
-    <%= f.text_field :card_name_cont, :placeholder => t('activerecord.attributes.card.name') %>
-    <%= f.select :card_card_set_id_eq, CardSet.all.map{ |card_set| [card_set.name, card_set.id] }, { :include_blank => t('activerecord.models.card_set'), :selected => params[:q].present? ? params[:q][:card_set_id_eq] : '' } %>
-    <%= f.button '<i class="icon-search"></i> Search'.html_safe, :type => :submit, :class => 'btn btn-primary' %>
-    <%= link_to '<i class="icon-remove"></i>'.html_safe, root_path, :class => 'btn', :rel => 'tooltip', :title => t('clear_search') %>
-  <% end %>
+</div>
+<div id="collection" class="page row">
+  <div class="well col-xs-12">
+    <%= search_form_for @search, :url => root_path, :html => { :method => :get, :id => 'search-form', :class => 'form-inline' } do |f| %>
+      <div class="form-group">
+        <%= f.text_field :card_name_cont, :class => 'form-control', :placeholder => t('activerecord.attributes.card.name') %>
+      </div>
+      <div class="form-group">
+        <%= f.select :card_card_set_id_eq, CardSet.all.map{ |card_set| [card_set.name, card_set.id] }, { :include_blank => t('activerecord.models.card_set'), :selected => params[:q].present? ? params[:q][:card_set_id_eq] : '' }, { :class => 'form-control' } %>
+      </div>
+      <div class="form-group">
+        <%= f.button "<span class=\"glyphicon glyphicon-search\"></span> #{t('search')}".html_safe, :type => :submit, :class => 'btn btn-primary' %>
+        <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, root_path, :class => 'btn btn-default', :rel => 'tooltip', :title => t('clear_search') %>
+      </div>
+    <% end %>
+  </div>
   <% if @collections.present? %>
-    <% @sets.each do |set| %>
-      <div id="set-<%= set[0].id %>" class="set">
-        <h2><%= set[0].name %></h2>
-        <% set[1].sort_by { |collection| collection.card.card_number.to_i }.each do |collection| %>
-          <div id="card-<%= collection.card.multiverse_id %>" class="row card <%= color_class(collection.card) %>" data-card-id="<%= collection.card_id %>" data-quantity="<%= collection.quantity %>">
-            <div class="card-name span3">
-              <%= link_to collection.card.name, set_card_path(set[0], collection.card), :rel => 'tooltip', :title => card_tooltip_text(collection.card), :data => { :html => 'true' } %>
+    <% @sets.each do |set, collections| %>
+      <div id="set-<%= set.id %>" class="set col-xs-12">
+        <h2><%= set.name %></h2>
+        <% collections.sort_by { |collection| collection.card.card_number.to_i }.each do |collection| %>
+          <% present collection.card do |card_presenter| %>
+            <div id="card-<%= card_presenter.multiverse_id %>" class="row card <%= card_presenter.color_class %>" data-card-id="<%= collection.card_id %>" data-quantity="<%= collection.quantity %>">
+              <div class="card-name col-xs-12 col-sm-8">
+                <%= link_to card_presenter.name, set_card_path(set, collection.card), :rel => 'tooltip', :title => card_tooltip_text(collection.card).gsub('"', "'"), :data => { :html => 'true' } %>
+              </div>
+              <div class="card-rarity col-xs-1">
+                <%= card_presenter.rarity.first %>
+              </div>
+              <div class="card-quantity col-xs-1">
+                <%= collection.quantity %>
+              </div>
+              <div class="col-xs-2 col-xs-offset-5 col-sm-1 col-sm-offset-0">
+                <button class="increment btn btn-default center-block"><span class="glyphicon glyphicon-chevron-up"></span></button>
+              </div>
+              <div class="col-xs-2 col-sm-1">
+                <button class="decrement btn btn-default center-block"><span class="glyphicon glyphicon-chevron-down"></span></button>
+              </div>
             </div>
-            <div class="card-rarity span1">
-              <%= collection.card.rarity.first %>
-            </div>
-            <div class="card-quantity span1">
-              <%= collection.quantity %>
-            </div>
-            <div class="span1">
-              <button class="increment btn"><i class="icon-chevron-up"></i></button>
-            </div>
-            <div class="span1">
-              <button class="decrement btn"><i class="icon-chevron-down"></i></button>
-            </div>
-          </div>
+          <% end %>
         <% end %>
       </div>
     <% end %>
-    <%= paginate @collections %>
+    <%= paginate @collections, :route => :root_path %>
   <% elsif params[:q].present? %>
     <p class="lead">No matching cards found in your collection.</p>
   <% else %>
-    <p class="lead">You don't seem to have any cards in your collection. Why not browse through the Magic card <%= link_to 'sets', sets_path %> and add some.</p>
+    <p class="lead">You don't seem to have any cards in your collection. Why not browse through the Magic card <%= link_to 'sets', sets_path %> and add some?</p>
   <% end %>
 </div>

@@ -5,8 +5,10 @@ en:
     attributes:
       card_set:
         name: "Name"
+        slug: "Slug"
         card_block_id: "Card Block"
         code: "Code"
+        symbol: "Symbol"
         release_date: "Release Date"
         prerelease_date: "Prerelease Date"
         show_card_numbers: "Show Card Numbers"
@@ -17,6 +19,7 @@ en:
         card_set:
           attributes:
             name: "Name"
+            slug: "Slug"
             card_block_id: "Card Block"
             code: "Code"
             release_date: "Release Date"

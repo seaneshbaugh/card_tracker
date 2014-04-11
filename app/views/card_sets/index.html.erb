@@ -1,11 +1,34 @@
-<div id="sets" class="row">
+<% content_for :body_class, 'sets' %>
+<div id="sets" class="page row">
   <% @card_sets.in_groups(4, false) do |card_set_column| %>
-    <div class="span3">
+    <div class="col-md-3 visible-md visible-lg">
       <% card_set_column.each do |card_set| %>
-        <div id="set-<%= card_set.id %>" class="set">
-          <%= link_to card_set_symbol(card_set, :size => 'small').html_safe, set_cards_path(card_set) %> <%= link_to card_set.name, set_cards_path(card_set.slug) %>
-        </div>
+        <% present card_set do |card_set_presenter| %>
+          <div id="set-<%= card_set.id %>" class="set">
+            <%= link_to card_set_presenter.symbol(:size => 'small'), set_cards_path(card_set) %> <%= link_to card_set_presenter.name, set_cards_path(card_set.slug) %>
+          </div>
+        <% end %>
       <% end %>
     </div>
   <% end %>
+  <% @card_sets.in_groups(2, false) do |card_set_column| %>
+    <div class="col-sm-6 visible-sm">
+      <% card_set_column.each do |card_set| %>
+        <% present card_set do |card_set_presenter| %>
+          <div id="set-<%= card_set.id %>" class="set">
+            <%= link_to card_set_presenter.symbol(:size => 'small'), set_cards_path(card_set) %> <%= link_to card_set_presenter.name, set_cards_path(card_set.slug) %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="col-xs-12 visible-xs">
+    <% @card_sets.each do |card_set| %>
+      <% present card_set do |card_set_presenter| %>
+        <div id="set-<%= card_set.id %>" class="set">
+          <%= link_to card_set_presenter.symbol(:size => 'small'), set_cards_path(card_set) %> <%= link_to card_set_presenter.name, set_cards_path(card_set.slug) %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>

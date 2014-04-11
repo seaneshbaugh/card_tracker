@@ -99,7 +99,7 @@ namespace :import do
       'Planechase 2012' => 'pc2',
       'Planeshift' => 'pls',
       'Portal' => 'por',
-      'Portal Second Age' => 'p02',
+      'Portal Second Age' => 'po2',
       'Portal Three Kingdoms' => 'ptk',
       'Premium Deck Series Fire & Lightning' => 'pd2',
       'Premium Deck Series Graveborn' => 'pd3',

@@ -2,7 +2,7 @@
 
 ## Ruby Version
 
-This application is intended to be run on Ruby 1.8.7-p173. Due to limitations of my current host Ruby 1.9 is not directly supported.
+This application is intended to be run on Ruby 1.8.7-p173. Due to limitations of my current host Ruby 1.9+ is not directly supported.
 
 ## Rails Version
 
@@ -18,33 +18,24 @@ The following gems are required to run this application:
 * daemons
 * delayed_job
 * delayed_job_active_record
-* devise
-* exception_notification
+* devise (3.1.2)
+* exception_notification (~> 3.0.1)
 * honeypot-captcha
-* kaminari
+* kaminari (0.14.1)
 * ransack
-* sanitize
+* sanitize (2.0.3)
 * simple_form
 * yaml_db
-* coffee-rails
-* font-awesome-rails
 * jquery-rails
 * jquery-ui-rails
-* less-trails
-* libv8
+* less-rails
+* less-rails-bootstrap
 * therubyracer
-* twitter-bootstrap-rails
 * uglifier
-* capistrano
+* capistrano (~> 2.15.5)
 * capistrano-ext
 * mailcatcher
 * quiet_assets
-* capybara (2.0.3)
-* database_cleaner
-* factory_girl_rails (~2.0)
-* rspec-rails
-* shoulda-matchers (1.5.6)
-* simplecov
 
 ## Local Development Installation
 

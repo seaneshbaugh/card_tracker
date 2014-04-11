@@ -1,6 +1,8 @@
 /*
  *= require_self
  *= require vendor_assets
+ *= require ./application/set_symbols
+ *= require ./application/mana_symbols
  *= require_tree ./admin
 */
 

@@ -3,13 +3,14 @@
 <head>
   <meta charset="utf-8">
   <title><%= content_for?(:title) ? yield(:title).strip : t('application.title') %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="<%= t('application.description') %>">
   <meta name="author" content="<%= t('application.author') %>">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag 'application', :media => 'all' %>
   <%= javascript_include_tag 'application' %>
   <!--[if lt IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
   <link href="/favicon.ico" rel="shortcut icon">
   <link href="<%= image_path('apple-touch-icon-iphone.png') %>" rel="apple-touch-icon" sizes="57x57">
@@ -19,78 +20,72 @@
   <link href="/humans.txt" rel="author">
   <%= csrf_meta_tags %>
 </head>
-<body>
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
+<body<%= body_class %>>
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to t('application.title'), root_path, :title => t('application.title'), :class => 'brand' %>
-      <div class="nav-collapse collapse">
-        <ul class="nav" role="navigation">
-          <% if current_user %><li class="collection-nav-link"><%= link_to ('<i class="icon-reorder"></i> ' + 'Sets').html_safe, sets_path, :class => is_active_controller?('card_sets') %></li><% end %>
-          <% if current_user %><li class="stats-nav-link"><%= link_to ('<i class="icon-bar-chart"></i> ' + 'Stats').html_safe, stats_path, :class => is_active_controller?('stats') %></li><% end %>
-          <% if can? :read, :admin %><li class="admin-nav-link hidden-desktop"><%= link_to ('<i class="icon-sitemap"></i> ' + t('navigation.admin_home')).html_safe, admin_root_path %></li><% end %>
-          <% if current_user %><li class="account-nav-link hidden-desktop"><%= link_to ('<i class="icon-cogs"></i> ' + t('accounts.edit.title')).html_safe, edit_account_path, :class => is_active_controller?('accounts') %></li><% end %>
-          <% if current_user %><li class="logout-nav-link hidden-desktop"><%= link_to ('<i class="icon-signout"></i> ' + t('navigation.sign_out')).html_safe, destroy_user_session_path, :method => :delete %></li><% end %>
-          <% unless current_user %><li class="login-nav-link hidden-desktop"><%= link_to ('<i class="icon-signin"></i> ' + t('navigation.sign_in')).html_safe, new_user_session_path %></li><% end %>
-          <% unless current_user %><li class="register-nav-link hidden-desktop"><%= link_to ('<i class="icon-star"></i> ' + t('navigation.register')).html_safe, new_user_registration_path %></li><% end %>
-        </ul>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= link_to t('application.title'), root_path, :class => 'navbar-brand' %>
       </div>
-      <div class="nav-collapse collapse pull-right visible-desktop">
-        <ul class="nav">
-          <% if can? :read, :admin %><li class="admin-nav-link"><%= link_to ('<i class="icon-sitemap"></i> ' + t('navigation.admin_home')).html_safe, admin_root_path %></li><% end %>
-          <% if current_user %><li class="account-nav-link"><%= link_to ('<i class="icon-cogs"></i> ' + t('accounts.edit.title')).html_safe, edit_account_path, :class => is_active_controller?('accounts') %></li><% end %>
-          <% if current_user %><li class="logout-nav-link"><%= link_to ('<i class="icon-signout"></i> ' + t('navigation.sign_out')).html_safe, destroy_user_session_path, :method => :delete %></li><% end %>
-          <% unless current_user %><li class="login-nav-link"><%= link_to ('<i class="icon-signin"></i> ' + t('navigation.sign_in')).html_safe, new_user_session_path %></li><% end %>
-          <% unless current_user %><li class="register-nav-link"><%= link_to ('<i class="icon-star"></i> ' + t('navigation.register')).html_safe, new_user_registration_path %></li><% end %>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <% if current_user %><li class="collection-nav-link"><%= link_to ('<span class="glyphicon glyphicon-align-justify"></span> ' + 'Sets').html_safe, sets_path, :class => is_active_controller?('card_sets') %></li><% end %>
+          <% if current_user %><li class="stats-nav-link"><%= link_to ('<span class="glyphicon glyphicon-stats"></span> ' + 'Stats').html_safe, stats_path, :class => is_active_controller?('stats') %></li><% end %>
+          <% if can? :read, :admin %><li class="admin-nav-link visible-xs"><%= link_to ('<span class="glyphicon glyphicon-wrench"></span> ' + t('navigation.admin_home')).html_safe, admin_root_path %></li><% end %>
+          <% if current_user %><li class="account-nav-link visible-xs"><%= link_to ('<span class="glyphicon glyphicon-cog"></span> ' + t('accounts.edit.title')).html_safe, edit_account_path, :class => is_active_controller?('accounts') %></li><% end %>
+          <% if current_user %><li class="logout-nav-link visible-xs"><%= link_to ('<span class="glyphicon glyphicon-log-out"></span> ' + t('navigation.sign_out')).html_safe, destroy_user_session_path, :method => :delete %></li><% end %>
+          <% unless current_user %><li class="login-nav-link visible-xs"><%= link_to ('<span class="glyphicon glyphicon-log-in"></span> ' + t('navigation.sign_in')).html_safe, new_user_session_path %></li><% end %>
+          <% unless current_user %><li class="register-nav-link visible-xs"><%= link_to ('<span class="glyphicon glyphicon-star-empty"></span> ' + t('navigation.register')).html_safe, new_user_registration_path %></li><% end %>
+        </ul>
+        <ul class="nav navbar-nav navbar-right hidden-xs">
+          <% if can? :read, :admin %><li class="admin-nav-link"><%= link_to ('<span class="glyphicon glyphicon-wrench"></span> ' + t('navigation.admin_home')).html_safe, admin_root_path %></li><% end %>
+          <% if current_user %><li class="account-nav-link"><%= link_to ('<span class="glyphicon glyphicon-cog"></span> ' + t('accounts.edit.title')).html_safe, edit_account_path, :class => is_active_controller?('accounts') %></li><% end %>
+          <% if current_user %><li class="logout-nav-lin"><%= link_to ('<span class="glyphicon glyphicon-log-out"></span> ' + t('navigation.sign_out')).html_safe, destroy_user_session_path, :method => :delete %></li><% end %>
+          <% unless current_user %><li class="login-nav-link"><%= link_to ('<span class="glyphicon glyphicon-log-in"></span> ' + t('navigation.sign_in')).html_safe, new_user_session_path %></li><% end %>
+          <% unless current_user %><li class="register-nav-link"><%= link_to ('<span class="glyphicon glyphicon-star-empty"></span> ' + t('navigation.register')).html_safe, new_user_registration_path %></li><% end %>
         </ul>
       </div>
     </div>
   </div>
-</div>
-<%= yield :masthead %>
-<div class="container">
-  <%= flash_messages %>
-  <%= yield %>
-</div>
-<footer class="footer">
+  <%= yield :jumbotron %>
   <div class="container">
-    <ul class="footer-links">
-      <li><%= link_to 'About', '/about' %></li>
-      <li class="muted">·</li>
-      <li><%= link_to 'Contact', contact_path %></li>
-      <li class="muted">·</li>
-      <li><%= link_to 'Privacy Policy', '/privacy-policy' %></li>
-      <li class="muted">·</li>
-      <li><%= link_to 'Terms and Conditions', '/terms-and-conditions' %></li>
-      <li class="muted">·</li>
-      <li><%= link_to 'Source', 'https://github.com/seaneshbaugh/card_tracker' %></li>
-    </ul>
-    <p>Created with <%= link_to 'Ruby on Rails', 'http://rubyonrails.org/' %> by <%= link_to 'Sean Eshbaugh', 'http://seaneshbaugh.com/' %>. No copyright.</p>
-    <p>Magic: the Gathering is a registered trademark of <%= link_to 'Wizards of the Coast LLC', 'http://company.wizards.com/' %>, a subsidiary of <%= link_to 'Hasbro, Inc.', 'http://www.hasbro.com/' %></p>
-    <p>Magic: the Gathering and all Magic images are copyright &copy; Wizards of the Coast LLC. All Rights Reserved.</p>
-    <p>The Caves of Koilos is in no way associated with Wizards of the Coast LLC or Hasbro, Inc.</p>
+    <%= flash_messages %>
+    <%= yield %>
   </div>
-</footer>
-<% if Rails.env.production? && !(current_user && !current_user.read_only?) %>
-  <script>
-    var _gaq = _gaq || [];
-    _gaq.push(["_setAccount", "UA-38365306-1"]);
-    _gaq.push(["_trackPageview"]);
+  <footer>
+    <div class="container">
+      <ul class="footer-links">
+        <li><%= link_to 'About', '/about' %></li>
+        <li class="text-muted">·</li>
+        <li><%= link_to 'Contact', contact_path %></li>
+        <li class="text-muted">·</li>
+        <li><%= link_to 'Privacy Policy', '/privacy-policy' %></li>
+        <li class="text-muted">·</li>
+        <li><%= link_to 'Terms and Conditions', '/terms-and-conditions' %></li>
+        <li class="text-muted">·</li>
+        <li><%= link_to 'Source', 'https://github.com/seaneshbaugh/card_tracker' %></li>
+      </ul>
+      <p>Created with <%= link_to 'Ruby on Rails', 'http://rubyonrails.org/' %> by <%= link_to 'Sean Eshbaugh', 'http://seaneshbaugh.com/' %>. No copyright.</p>
+      <p>Magic: the Gathering is a registered trademark of <%= link_to 'Wizards of the Coast LLC', 'http://company.wizards.com/' %>, a subsidiary of <%= link_to 'Hasbro, Inc.', 'http://www.hasbro.com/' %></p>
+      <p>Magic: the Gathering and all Magic images are copyright &copy; Wizards of the Coast LLC. All Rights Reserved.</p>
+      <p>The Caves of Koilos is in no way associated with Wizards of the Coast LLC or Hasbro, Inc.</p>
+    </div>
+  </footer>
+  <% if Rails.env.production? && !(current_user && !current_user.read_only?) %>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    (function() {
-      var ga = document.createElement("script");
-      ga.type = "text/javascript";
-      ga.async = true;
-      ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-<% end %>
+      ga('create', 'UA-38365306-1', 'cavesofkoilos.com');
+      ga('send', 'pageview');
+    </script>
+  <% end %>
 </body>
 </html>

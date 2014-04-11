@@ -1,34 +1,42 @@
-<div id="card-block-types">
-  <h1><%= t('activerecord.models.card_block_type').pluralize %> <small><%= @card_block_types.total_count %></small></h1>
-  <%= search_form_for @search, :url => admin_card_block_types_path, :html => { :method => :get, :class => 'form-search well' } do |f| %>
-    <%= f.text_field :name_cont, :placeholder => t('activerecord.attributes.card_block_type.name') %>
-    <%= f.button "<i class=\"icon-search\"></i> #{t('search')}".html_safe, :type => :submit, :class => 'btn btn-primary' %>
-    <%= link_to '<i class="icon-remove"></i>'.html_safe, admin_card_block_types_path, :class => 'btn', :rel => 'tooltip', :title => t('clear_search') %>
-  <% end %>
-  <% if can? :create, CardBlockType, current_user %>
+<div id="card-block-types" class="admin-content">
+  <h1><%= t('activerecord.models.card_block_type').pluralize %></h1>
+  <div class="well">
+    <%= search_form_for @search, :url => admin_card_block_types_path, :html => { :method => :get, :class => 'form-inline' } do |f| %>
+      <div class="form-group">
+        <%= f.text_field :name_cont, :class => 'form-control', :placeholder => t('activerecord.attributes.card_block_type.name') %>
+      </div>
+      <div class="form-group">
+        <%= f.button "<span class=\"glyphicon glyphicon-search\"></span> #{t('search')}".html_safe, :type => :submit, :class => 'btn btn-primary' %>
+        <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, admin_card_block_types_path, :class => 'btn btn-default', :rel => 'tooltip', :title => t('clear_search') %>
+      </div>
+    <% end %>
+  </div>
+  <% if can? :create, CardBlockType %>
     <div class="clearfix">
-      <%= link_to t('card_block_types.new.title'), new_admin_card_block_type_path, :class => 'btn btn-primary pull-right' %>
+      <%= link_to t('card_block_types.new.title'), new_admin_card_block_type_path, :class => 'btn btn-primary new-object' %>
     </div>
   <% end %>
   <% if @card_block_types.present? %>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th><%= sort_link @search, :name %></th>
-          <% if can? :edit, CardBlockType, current_user %><th class="icon">&nbsp;</th><% end %>
-          <% if can? :destroy, CardBlockType, current_user %><th class="icon">&nbsp;</th><% end %>
-        </tr>
-      </thead>
-      <tbody>
-        <% @card_block_types.each do |card_block_type| %>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover table-condensed">
+        <thead>
           <tr>
-            <td><%= link_to card_block_type.name, admin_card_block_type_path(card_block_type) %></td>
-            <% if can? :edit, CardBlockType, current_user %><td class="icon"><%= icon_edit_link edit_admin_card_block_type_path(card_block_type) %></td><% end %>
-            <% if can? :destroy, CardBlockType, current_user %><td class="icon"><%= icon_delete_link admin_card_block_type_path(card_block_type) %></td><% end %>
+            <th><%= sort_link @search, :name %></th>
+            <%= edit_and_delete_header_columns(CardBlockType) %>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @card_block_types.each do |card_block_type| %>
+            <% present card_block_type do |card_block_type_presenter| %>
+              <tr>
+                <td><%= link_to card_block_type_presenter.name, admin_card_block_type_path(card_block_type) %></td>
+                <%= edit_and_delete_columns(card_block_type) %>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
     <%= paginate @card_block_types %>
   <% else %>
     <p class="lead"><%= t('messages.card_block_types.none') %></p>

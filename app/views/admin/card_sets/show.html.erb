@@ -1,40 +1,65 @@
-<div id="card-set">
-  <h1><%= t('card_sets.show.title') %> <small><%= @card_set.name %></small></h1>
-  <table class="table table-condensed table-striped">
-    <tbody>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.card_set.name') %></th>
-        <td><%= @card_set.name %></td>
-      </tr>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.card_set.card_block_id') %></th>
-        <td><%= link_to @card_set.card_block.name, admin_card_block_path(@card_set.card_block) %></td>
-      </tr>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.card_set.release_date') %></th>
-        <td><%= @card_set.release_date.strftime('%Y-%m-%d') %></td>
-      </tr>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.card_set.prerelease_date') %></th>
-        <td><%= @card_set.prerelease_date.strftime('%Y-%m-%d') %></td>
-      </tr>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.card_set.show_card_numbers') %></th>
-        <td><%= @card_set.show_card_numbers? ? t('yes') : t('no') %></td>
-      </tr>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.card_set.created_at') %></th>
-        <td><%= @card_set.created_at.present? ? @card_set.created_at.strftime('%Y-%m-%d %H:%M:%S') : '-' %></td>
-      </tr>
-      <tr>
-        <th class="span3"><%= t('activerecord.attributes.card_set.updated_at') %></th>
-        <td><%= @card_set.updated_at.present? ? @card_set.updated_at.strftime('%Y-%m-%d %H:%M:%S') : '-' %></td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="form-actions">
-    <%= link_to t('card_sets.links.back_to_index'), admin_card_sets_path, :class => 'btn' %>
-    <% if can? :edit, CardSet, current_user %><%= link_to t('card_sets.edit.title'), edit_admin_card_set_path(@card_set), :class => 'btn' %><% end %>
-    <% if can? :destroy, CardSet, current_user %><%= link_to t('card_sets.delete.title'), admin_card_set_path(@card_set), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') } %><% end %>
+<% present @card_set do |card_set_presenter| %>
+  <div id="card-set-<%= @card_set.id %>" class="admin-content">
+    <h1><%= t('card_sets.show.title') %> <small><%= card_set_presenter.name %></small></h1>
+    <div class="object-actions">
+      <%= link_to t('card_sets.links.back_to_index'), admin_card_sets_path, :class => 'btn btn-default' %>
+      <% if can? :edit, CardSet %><%= link_to t('card_sets.edit.title'), edit_admin_card_set_path(@card_set), :class => 'btn btn-primary' %><% end %>
+      <% if can? :destroy, CardSet %><%= link_to t('card_sets.delete.title'), admin_card_set_path(@card_set), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') } %><% end %>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped table-condensed">
+        <tbody>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.card_set.name') %></th>
+            <td class="col-xs-8 col-sm-10"><%= card_set_presenter.name %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.card_set.slug') %></th>
+            <td class="col-xs-8 col-sm-10"><%= card_set_presenter.slug %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.card_set.card_block_id') %></th>
+            <td class="col-xs-8 col-sm-10"><%= link_to card_set_presenter.card_block_name, admin_card_block_path(@card_set.card_block) %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.card_block.card_block_type_id') %></th>
+            <td class="col-xs-8 col-sm-10"><%= link_to card_set_presenter.card_block_type_name, admin_card_block_type_path(@card_set.card_block.card_block_type) %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.card_set.code') %></th>
+            <td class="col-xs-8 col-sm-10"><%= card_set_presenter.code %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.card_set.symbol') %></th>
+            <td class="col-xs-8 col-sm-10"><%= card_set_presenter.symbol(:rarity => :common, :size => 'large') %><%= card_set_presenter.symbol(:rarity => :uncommon, :size => 'large') %><%= card_set_presenter.symbol(:rarity => :rare, :size => 'large') %><%= card_set_presenter.symbol(:rarity => :mythic, :size => 'large') %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.card_set.release_date') %></th>
+            <td class="col-xs-8 col-sm-10"><%= card_set_presenter.release_date %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.card_set.prerelease_date') %></th>
+            <td class="col-xs-8 col-sm-10"><%= card_set_presenter.prerelease_date %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.card_set.show_card_numbers') %></th>
+            <td class="col-xs-8 col-sm-10"><%= card_set_presenter.show_card_numbers %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.card_set.created_at') %></th>
+            <td class="col-xs-8 col-sm-10"><%= card_set_presenter.created_at %></td>
+          </tr>
+          <tr>
+            <th class="col-xs-4 col-sm-2"><%= t('activerecord.attributes.card_set.updated_at') %></th>
+            <td class="col-xs-8 col-sm-10"><%= card_set_presenter.updated_at %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="object-actions">
+      <%= link_to t('card_sets.links.back_to_index'), admin_card_sets_path, :class => 'btn btn-default' %>
+      <% if can? :edit, CardSet %><%= link_to t('card_sets.edit.title'), edit_admin_card_set_path(@card_set), :class => 'btn btn-primary' %><% end %>
+      <% if can? :destroy, CardSet %><%= link_to t('card_sets.delete.title'), admin_card_set_path(@card_set), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') } %><% end %>
+    </div>
   </div>
-</div>
+<% end %>

@@ -1,18 +1,20 @@
-<% content_for :page_title do %>
-  <% "Contact - #{t('application.title')}" %>
-<% end %>
-<div id="contact">
+<% content_for :body_class, 'contact' %>
+<div class="page-header">
   <h1>Contact</h1>
-  <p>Got a question about The Caves of Koilos? Send us a message! We love feedback.</p>
-  <%= simple_form_for @contact, :url => 'contact', :method => :post, :html => { :class => 'form-horizontal', :honeypot => true } do |f| %>
-    <fieldset>
-      <%= f.input :name, :as => :string %>
-      <%= f.input :email, :as => :email %>
-      <%= f.input :subject, :as => :string %>
-      <%= f.input :body, :as => :text %>
-    </fieldset>
-    <div class="form-actions">
-      <%= f.submit 'Submit', :class => 'btn btn-primary' %>
-    </div>
-  <% end %>
+</div>
+<div id="contact" class="page row">
+  <div class="page-body col-xs-12">
+    <p class="lead">Got a question about The Caves of Koilos? Send us a message! We love feedback.</p>
+    <%= simple_form_for @contact, :url => '/contact', :html => { :class => 'form-horizontal', :honeypot => true } do |f| %>
+      <%= f.input :name, :as => :string, :autofocus => true, :required => true %>
+      <%= f.input :email, :as => :email, :required => true %>
+      <%= f.input :subject, :as => :string, :required => true %>
+      <%= f.input :body, :as => :text, :required => true %>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <%= f.button :submit, 'Submit', :class => 'btn btn-primary' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>

@@ -1,0 +1,40 @@
+@import "twitter/bootstrap/variables.less";
+@import "application/variables.less";
+@import "twitter/bootstrap/mixins.less";
+@import "application/mixins.less";
+
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  margin-bottom: 130px;
+}
+
+footer {
+  bottom: 0;
+  height: 130px;
+  position: absolute;
+  width: 100%;
+}
+
+@media (max-width: @screen-sm-max) {
+  body {
+    margin-bottom: 185px;
+  }
+
+  footer {
+    height: 185px;
+  }
+}
+
+@media (max-width: @screen-xs-max) {
+  body {
+    margin-bottom: 230px;
+  }
+
+  footer {
+    height: 230px;
+  }
+}
