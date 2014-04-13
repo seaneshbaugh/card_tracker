@@ -42,4 +42,12 @@ class CardsController < ApplicationController
       redirect_to set_cards_url(@card_set)
     end
   end
+
+  def search
+    @search = Card.search(params[:q])
+
+    @cards = @search.result.includes(:collections, :card_set => { :card_block => :card_block_type }).order('`card_block_types`.`id`, `card_blocks`.`id`, `card_sets`.`release_date` ASC, cast(`cards`.`card_number` as unsigned) ASC, `cards`.`name` ASC').page(params[:page]).per(200)
+
+    @sets = @cards.group_by { |card| card.card_set }.sort_by { |card_set, _| card_set.release_date }
+  end
 end

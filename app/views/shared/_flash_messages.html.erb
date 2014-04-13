@@ -1,16 +1,17 @@
 <% flash.each do |name, message| %>
   <% if name == :debug %>
-    <div class="alert alert-info alert-block">
-      <button type="button" class="close" data-dismiss="alert">x</button>
-      <h4>Debug Info</h4>
-      <br>
-      <pre><%= message %></pre>
-    </div>
+    <% if Rails.env.development? %>
+      <div class="alert alert-info alert-dismissable alert-block">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Debug Info</strong>
+        <br>
+        <pre><%= message %></pre>
+      </div>
+    <% end %>
   <% else %>
-    <% name = :success if name == :notice %>
-    <div class="alert alert-<%= name.to_s %>">
-      <button type="button" class="close" data-dismiss="alert">x</button>
-      <strong><%= name.to_s.capitalize %>!</strong> <%= message %>
+    <div class="alert <%= flash_message_alert_class(name) %> alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
     </div>
   <% end %>
 <% end %>

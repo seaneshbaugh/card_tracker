@@ -21,7 +21,7 @@
         </div>
       <% end %>
     </div>
-    <div class="col-xs-12">
+    <div class="cards col-xs-12">
       <% @cards.each do |card| %>
         <% present card do |card_presenter| %>
           <% present card.collection_for(current_user), CollectionPresenter do |collection_presenter| %>

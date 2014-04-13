@@ -11,6 +11,21 @@ module ApplicationHelper
     render :partial => 'shared/flash_messages'
   end
 
+  def flash_message_alert_class(name)
+    case name
+      when :auccess, :notice
+        'alert-success'
+      when :info
+        'alert-info'
+      when :warning
+        'alert-warning'
+      when :danger, :alert, :error
+        'alert-danger'
+      else
+        'alert-info'
+    end
+  end
+
   def is_active_controller?(controller_name)
     'active' if params[:controller] == controller_name
   end

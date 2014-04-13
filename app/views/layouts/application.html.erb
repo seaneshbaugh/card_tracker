@@ -39,6 +39,16 @@
           <% if can? :read, :admin %><li class="admin-nav-link visible-xs"><%= link_to ('<span class="glyphicon glyphicon-wrench"></span> ' + t('navigation.admin_home')).html_safe, admin_root_path %></li><% end %>
           <% if current_user %><li class="account-nav-link visible-xs"><%= link_to ('<span class="glyphicon glyphicon-cog"></span> ' + t('accounts.edit.title')).html_safe, edit_account_path, :class => is_active_controller?('accounts') %></li><% end %>
           <% if current_user %><li class="logout-nav-link visible-xs"><%= link_to ('<span class="glyphicon glyphicon-log-out"></span> ' + t('navigation.sign_out')).html_safe, destroy_user_session_path, :method => :delete %></li><% end %>
+          <% if current_user %>
+            <li class="card-search">
+              <%= form_tag card_search_path, :method => :get, :id => 'navbar-card-search', :class => 'navbar-form', :role => 'form' do %>
+                <div class="form-group">
+                  <input type="text" name="q[name_or_card_text_or_card_type_cont]" placeholder="Search Cards" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+              <% end %>
+            </li>
+          <% end %>
           <% unless current_user %><li class="login-nav-link visible-xs"><%= link_to ('<span class="glyphicon glyphicon-log-in"></span> ' + t('navigation.sign_in')).html_safe, new_user_session_path %></li><% end %>
           <% unless current_user %><li class="register-nav-link visible-xs"><%= link_to ('<span class="glyphicon glyphicon-star-empty"></span> ' + t('navigation.register')).html_safe, new_user_registration_path %></li><% end %>
         </ul>

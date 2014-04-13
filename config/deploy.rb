@@ -39,7 +39,7 @@ namespace :deploy do
     task :precompile, :roles => :web, :except => { :no_release => true } do
       %x{bundle exec rake assets:precompile}
       %x{rsync --recursive --times --rsh=ssh --compress --human-readable --progress public/assets #{user}@#{domain}:#{shared_path}}
-      %x{bundle exec rake assets:clean}
+      #%x{bundle exec rake assets:clean}
     end
   end
 end

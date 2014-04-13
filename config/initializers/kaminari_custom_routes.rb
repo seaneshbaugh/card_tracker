@@ -30,7 +30,13 @@ module Kaminari
 
       def page_url_for(page)
         if @route && @route.respond_to?(:to_sym)
-          @template.send(@route.to_sym, { @param_name => (page <= 1 ? nil : page) })
+          params = @params.merge(@param_name => (page <= 1 ? nil : page))
+
+          params.delete(:controller)
+
+          params.delete(:action)
+
+          @template.send(@route.to_sym, params)
         else
           @template.url_for @params.merge(@param_name => (page <= 1 ? nil : page))
         end

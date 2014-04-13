@@ -33,6 +33,8 @@ CardTracker::Application.routes.draw do
     resources :cards, :only => [:index, :show]
   end
 
+  get '/cards/search' => 'cards#search', :as => 'card_search'
+
   resource :stats, :only => [:show]
 
   resource :account, :only => [:edit, :update, :destroy] do
