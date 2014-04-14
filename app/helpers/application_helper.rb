@@ -13,7 +13,7 @@ module ApplicationHelper
 
   def flash_message_alert_class(name)
     case name
-      when :auccess, :notice
+      when :success, :notice
         'alert-success'
       when :info
         'alert-info'
