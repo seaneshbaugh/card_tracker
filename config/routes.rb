@@ -37,7 +37,7 @@ CardTracker::Application.routes.draw do
 
   resource :stats, :only => [:show]
 
-  resource :account, :only => [:edit, :update, :destroy] do
+  resource :account, :only => [:show, :edit, :update, :destroy] do
     member do
       get 'confirm-delete' => 'accounts#confirm_delete', :as => :confirm_delete
     end

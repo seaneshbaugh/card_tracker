@@ -1,3 +1,4 @@
+<% content_for :body_class, 'edit-account' %>
 <div class="page-header">
   <h1><%= t('accounts.edit.title') %></h1>
 </div>
@@ -13,7 +14,7 @@
       <%= f.input :receive_newsletters, :wrapper => :bootstrap3_horizontal_checkbox %>
       <div class="form-group">
         <div class="col-lg-offset-2 col-lg-10">
-          <%= link_to t('cancel'), root_path, :class => 'btn btn-default' %>
+          <%= link_to t('cancel'), account_path, :class => 'btn btn-default' %>
           <%= f.button :submit, t('accounts.update.title'), :class => 'btn btn-primary' %>
         </div>
       </div>

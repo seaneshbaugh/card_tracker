@@ -14,7 +14,7 @@ en:
     update:
       title: "Update Account"
     show:
-      title: "Account Settings"
+      title: "View Account"
     delete:
       title: "Delete Account"
       danger: "Danger!"

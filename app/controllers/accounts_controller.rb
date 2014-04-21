@@ -1,6 +1,10 @@
 class AccountsController < ApplicationController
   before_filter :authenticate_user!
 
+  def show
+    @account = current_user
+  end
+
   def edit
     @account = current_user
   end
@@ -8,11 +12,13 @@ class AccountsController < ApplicationController
   def update
     @account = current_user
 
-    params[:account].delete(:role) if params[:account]
+    if params[:account]
+      params[:account].delete(:role)
 
-    params[:account].delete(:receive_sign_up_alerts) if params[:account]
+      params[:account].delete(:receive_sign_up_alerts)
 
-    params[:account].delete(:receive_contact_alerts) if params[:account]
+      params[:account].delete(:receive_contact_alerts)
+    end
 
     if @account.update_attributes(params[:account])
       sign_in(@account, :bypass => true)

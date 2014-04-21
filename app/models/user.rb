@@ -49,8 +49,18 @@ class User < ActiveRecord::Base
 
   before_validation :define_role
 
+  before_save do
+    if self.authentication_token.blank?
+      self.authentication_token = loop do
+        token = Devise.friendly_token
+
+        break token unless User.where(:authentication_token => token).first
+      end
+    end
+  end
+
   after_create do
-    @alert_recipients = User.where('users.role != ? AND users.receive_sign_up_alerts = ?', Ability::ROLES[:read_only], true)
+    @alert_recipients = User.where('`users`.`role` != ? AND `users`.`receive_sign_up_alerts` = ?', Ability::ROLES[:read_only], true)
 
     @alert_recipients.each do |alert_recipient|
       RegistrationMailer.new_sign_up_message(alert_recipient, self).deliver
@@ -59,7 +69,7 @@ class User < ActiveRecord::Base
     RegistrationMailer.delay(:run_at => 45.minutes.from_now).welcome_message(self)
   end
 
-  Ability::ROLES.each do |k, v|
+  Ability::ROLES.each do |k, _|
     class_eval %Q"scope :#{k.to_s.pluralize}, where(:role => Ability::ROLES[:#{k.to_s}].downcase)"
   end
 
@@ -71,7 +81,7 @@ class User < ActiveRecord::Base
     "#{self.first_name.first.upcase}. #{self.last_name}"
   end
 
-  Ability::ROLES.each do |k, v|
+  Ability::ROLES.each do |k, _|
     define_method("#{k.to_s}?") do
       self.role == k.to_s
     end
@@ -92,8 +102,8 @@ class User < ActiveRecord::Base
   end
 
   def define_role
-    if self.role.present?
-      self.role = Ability::ROLES.include?(role.downcase.to_sym) ? role.downcase : Ability::ROLES[:read_only]
+    if self.role.present? && Ability::ROLES.include?(role.downcase.to_sym)
+      self.role = self.role.downcase
     else
       self.role = Ability::ROLES[:read_only]
     end
