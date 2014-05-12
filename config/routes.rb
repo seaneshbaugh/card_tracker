@@ -37,8 +37,6 @@ CardTracker::Application.routes.draw do
     end
   end
 
-  #resource :collection
-
   put '/collection/quantity' => 'collections#update_quantity'
 
   put '/collection/card_list' => 'collections#move_card_list'
