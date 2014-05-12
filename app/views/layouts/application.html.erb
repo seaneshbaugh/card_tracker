@@ -34,8 +34,6 @@
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <!--<% if current_user %><li class="collection-nav-link"><%= link_to ('<span class="glyphicon glyphicon-align-justify"></span> ' + 'Sets').html_safe, list_sets_path(current_user.default_list.slug), :class => is_active_controller?('card_sets') %></li><% end %>-->
-          <!--<% if current_user %><li class="stats-nav-link"><%= link_to ('<span class="glyphicon glyphicon-stats"></span> ' + 'Stats').html_safe, stats_path, :class => is_active_controller?('stats') %></li><% end %>-->
           <% if current_user %>
             <li class="dropdown <%= is_active_controller?('card_lists') %>">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Your Lists <b class="caret"></b></a>
@@ -51,6 +49,7 @@
           <% if can? :read, :admin %><li class="admin-nav-link visible-xs"><%= link_to ('<span class="glyphicon glyphicon-wrench"></span> ' + t('navigation.admin_home')).html_safe, admin_root_path %></li><% end %>
           <% if current_user %><li class="show-account-nav-link visible-xs"><%= link_to ('<span class="glyphicon glyphicon-user"></span> ' + t('accounts.show.title')).html_safe, account_path, :class => is_active_controller?('accounts') %></li><% end %>
           <% if current_user %><li class="edit-account-nav-link visible-xs"><%= link_to ('<span class="glyphicon glyphicon-cog"></span> ' + t('accounts.edit.title')).html_safe, edit_account_path, :class => is_active_controller?('accounts') %></li><% end %>
+          <% if current_user %><li class="stats-nav-link visible-xs"><%= link_to ('<span class="glyphicon glyphicon-stats"></span> ' + 'Stats').html_safe, stats_path, :class => is_active_controller?('stats') %></li><% end %>
           <% if current_user %><li class="logout-nav-link visible-xs"><%= link_to ('<span class="glyphicon glyphicon-log-out"></span> ' + t('navigation.sign_out')).html_safe, destroy_user_session_path, :method => :delete %></li><% end %>
           <% if current_user %>
             <li class="card-search">
@@ -73,6 +72,7 @@
               <ul class="dropdown-menu">
                 <li class="show-account-nav-link"><%= link_to ('<span class="glyphicon glyphicon-user"></span> ' + t('accounts.show.title')).html_safe, account_path, :class => is_active_controller?('accounts') %></li>
                 <li class="edit-account-nav-link"><%= link_to ('<span class="glyphicon glyphicon-cog"></span> ' + t('accounts.edit.title')).html_safe, edit_account_path, :class => is_active_controller?('accounts') %></li>
+                <li class="stats-nav-link"><%= link_to ('<span class="glyphicon glyphicon-stats"></span> ' + 'Stats').html_safe, stats_path, :class => is_active_controller?('stats') %></li>
               </ul>
             </li>
           <% end %>

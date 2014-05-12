@@ -9,25 +9,25 @@
     <div id="unique-cards-in-collections" class="stat">
       You have <span class="stat-value"><%= @unique_cards_in_collections %></span> unique cards.
     </div>
-    <div>
-      <% @card_sets.each do |card_set| %>
-        <% present card_set do |card_set_presenter| %>
-          <div id="set-<%= card_set.id %>" class="set">
-            <% unique = Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ?', current_user.id, card_set.id).select('distinct `collections`.`card_id`').count %>
-            <% max = card_set.cards.count %>
-            <%= card_set_presenter.symbol(:rarity => unique == max ? :rare : :common) %><br>
+    <div class="row">
+      <% @card_set_stats.each do |card_set_stat| %>
+        <% present card_set_stat[:card_set] do |card_set_presenter| %>
+          <div id="set-<%= card_set_stat[:card_set].id %>" class="set col-xs-6 col-sm-3">
+            <div class="symbol-container">
+              <%= card_set_presenter.symbol(:rarity => card_set_stat[:rarity]) %><br>
+            </div>
             <%= card_set_presenter.name %><br>
-            <%= Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ?', current_user.id, card_set.id).sum(:quantity) %> total<br>
-            <%= unique %> / <%= max %><% if max > 0 %> (<%= ((unique.to_f / max.to_f) * 100.0).to_i %>%)<% end %>
+            <%= card_set_stat[:total_cards] %> total<br>
+            <%= card_set_stat[:unique_cards] %> / <%= card_set_stat[:card_in_set] %>
+            <div class="percent-collected progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="<%= card_set_stat[:percent_collected] %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= card_set_stat[:percent_collected] %>%;">
+                 <%= card_set_stat[:percent_collected] %>%
+              </div>
+            </div>
           </div>
         <% end %>
       <% end %>
     </div>
-
-
-
-
-
     <!--<%# %w(white blue black red green colorless multi land).each do |color| %>
       <div class="stat">
         <strong><%#= color.capitalize %>:</strong> <span class="stat-value"><%#= instance_variable_get("@number_of_#{color}") %></span>
