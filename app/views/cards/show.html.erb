@@ -6,10 +6,13 @@
         <h1 class="card-name"><%= link_to card_set_presenter.symbol(:rarity => card_presenter.rarity.downcase.to_sym, :size => 'hidden-sm hidden-md hidden-lg'), list_set_cards_path(@card_list.slug, card_set_presenter.slug) %><%= link_to card_set_presenter.symbol(:rarity => card_presenter.rarity.downcase.to_sym, :size => 'large hidden-xs'), list_set_cards_path(@card_list.slug, card_set_presenter.slug) %> <%= card_presenter.name %></h1>
       </div>
       <div id="card-<%= card_presenter.multiverse_id %>" class="card" data-card-id="<%= @card.id %>" data-quantity="<%= collection_presenter.quantity_as_integer %>">
-        <%= render :partial => "cards/show/#{card_presenter.partial_name}", :locals => { :card_presenter => card_presenter } %>
         <div class="row">
-          <div class="card-image col-xs-12">
-            <img src="http://mtgimage.com/multiverseid/<%= card_presenter.multiverse_id %>.jpg">
+          <div class="card-image hidden-xs col-sm-3">
+            <img src="http://mtgimage.com/multiverseid/<%= card_presenter.multiverse_id %>.jpg" style="max-width: 100%;">
+          </div>
+          <%= render :partial => "cards/show/#{card_presenter.partial_name}", :locals => { :card_presenter => card_presenter } %>
+          <div class="card-image visible-xs col-xs-12">
+            <img src="http://mtgimage.com/multiverseid/<%= card_presenter.multiverse_id %>.jpg" style="max-width: 100%;">
           </div>
         </div>
         <div class="row">
