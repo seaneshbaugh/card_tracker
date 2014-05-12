@@ -102,6 +102,18 @@ class User < ActiveRecord::Base
     self.card_lists.where(:default => true).first
   end
 
+  def create_default_lists
+    if self.card_lists.length == 0
+      self.card_lists << CardList.new({ :name => 'Have', :have => true, :order => 0, :default => true })
+
+      self.card_lists << CardList.new({ :name => 'Want', :have => false, :order => 1, :default => false })
+
+      self.card_lists << CardList.new({ :name => 'Have (foil)', :have => true, :order => 2, :default => false })
+
+      self.card_lists << CardList.new({ :name => 'Want (foil)', :have => false, :order => 3, :default => false })
+    end
+  end
+
   protected
 
   def password_required?
@@ -113,18 +125,6 @@ class User < ActiveRecord::Base
       self.role = self.role.downcase
     else
       self.role = Ability::ROLES[:read_only]
-    end
-  end
-
-  def create_default_lists
-    if self.card_lists.length == 0
-      self.card_lists << CardList.new({ :name => 'Have', :have => true, :order => 0, :default => true })
-
-      self.card_lists << CardList.new({ :name => 'Want', :have => false, :order => 1, :default => false })
-
-      self.card_lists << CardList.new({ :name => 'Have (foil)', :have => true, :order => 2, :default => false })
-
-      self.card_lists << CardList.new({ :name => 'Want (foil)', :have => false, :order => 3, :default => false })
     end
   end
 end
