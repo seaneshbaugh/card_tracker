@@ -5,7 +5,7 @@
   </div>
   <div id="set-<%= @card_set.id %>" class="set row">
     <div class="well col-xs-12">
-      <%= search_form_for @search, :url => set_cards_path(@card_set), :html => { :method => :get, :id => 'search-form', :class => 'form-inline' } do |f| %>
+      <%= search_form_for @search, :url => list_set_cards_path(@card_list.slug, @card_set.slug), :html => { :method => :get, :id => 'search-form', :class => 'form-inline' } do |f| %>
         <div class="form-group">
           <%= f.text_field :name_cont, :class => 'form-control', :placeholder => t('activerecord.attributes.card.name') %>
         </div>
@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
           <%= f.button "<span class=\"glyphicon glyphicon-search\"></span> #{t('search')}".html_safe, :type => :submit, :class => 'btn btn-primary' %>
-          <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, set_cards_path(@card_set), :class => 'btn btn-default', :rel => 'tooltip', :title => t('clear_search') %>
+          <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, list_set_cards_path(@card_list.slug, @card_set.slug), :class => 'btn btn-default', :rel => 'tooltip', :title => t('clear_search') %>
         </div>
       <% end %>
     </div>
@@ -25,9 +25,9 @@
       <% @cards.each do |card| %>
         <% present card do |card_presenter| %>
           <% present card.collection_for(current_user), CollectionPresenter do |collection_presenter| %>
-            <div id="card-<%= card_presenter.multiverse_id %>" class="row card <%= card_presenter.color_class %>" data-card-id="<%= card.id %>" data-quantity="<%= collection_presenter.quantity_as_integer %>">
-              <div class="card-name col-xs-12 col-sm-8">
-                <%= link_to card_presenter.name, set_card_path(@card_set.slug, card), :rel => 'tooltip', :title => card_tooltip_text(card).gsub("\"", "'"), :data => { :html => 'true' } %>
+            <div id="card-<%= card.id %>" class="row card <%= card_presenter.color_class %>" data-card-list-id="<%= @card_list.id %>" data-card-id="<%= card.id %>" data-quantity="<%= collection_presenter.quantity_as_integer %>">
+              <div class="card-name col-xs-12 col-sm-7">
+                <%= link_to card_presenter.name, list_set_cards_path(@card_list.slug, @card_set.slug, card), :rel => 'tooltip', :title => card_tooltip_text(card).gsub("\"", "'"), :data => { :html => 'true' } %>
               </div>
               <div class="card-rarity col-xs-1">
                 <%= card_presenter.rarity.first %>
@@ -35,11 +35,22 @@
               <div class="card-quantity col-xs-1">
                 <%= collection_presenter.quantity_as_string %>
               </div>
-              <div class="col-xs-2 col-xs-offset-5 col-sm-1 col-sm-offset-0">
+              <div class="col-xs-2 col-xs-offset-3 col-sm-1 col-sm-offset-0">
                 <button class="increment btn btn-default center-block"><span class="glyphicon glyphicon-chevron-up"></span></button>
               </div>
               <div class="col-xs-2 col-sm-1">
                 <button class="decrement btn btn-default center-block"><span class="glyphicon glyphicon-chevron-down"></span></button>
+              </div>
+              <div class="col-xs-2 col-sm-1">
+                <div class="options btn-group center-block">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu pull-right" role="menu">
+                    <li><a href="#" class="toggle-move-collection-modal" data-toggle="modal" data-target="#move-collection-modal">Move to Another List</a></li>
+                    <li><a href="#" class="remove-all-from-list">Remove All from List</a></li>
+                  </ul>
+                </div>
               </div>
             </div>
           <% end %>
@@ -48,3 +59,44 @@
     </div>
   </div>
 <% end %>
+<div class="modal fade" id="move-collection-modal" tabindex="-1" role="dialog" aria-labelledby="move-collection-modal-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_tag '/collection', :method => :put, :id => 'move-collection-form', :role => 'form' do %>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="move-collection-modal-label">Move Cards to Another List</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="page-body col-xs-12">
+              <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <div>
+                  <input type="text" id="move-collection-quantity" name="quantity" class="form-control" min="0" step="1" value="0"> / <span id="move-collection-modal-maximum-quantity">0</span><br>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="new_card_list_id">New List</label>
+                <% current_user.card_lists.each do |card_list| %>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="new_card_list_id" id="move-collection-new-card-list-id-<%= card_list.id %>" value="<%= card_list.id %>"<% if card_list.id == @card_list.id %> disabled="disabled"<% end %>>
+                      <%= card_list.name %>
+                    </label>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input type="hidden" name="card_id" id="move-collection-card-id">
+        <input type="hidden" name="card_list_id" id="move-collection-card-list-id" value="<%= @card_list.id %>">
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Move</button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

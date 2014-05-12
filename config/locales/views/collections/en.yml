@@ -1,0 +1,35 @@
+en:
+  navigation:
+    collections: "Collections"
+  helpers:
+    submit:
+      collection:
+        create: "Add Collection"
+        update: "Update Collection"
+        redirect_to_new: "Create and Add Another"
+    button:
+      collection:
+  messages:
+    collections:
+      could_not_find: "Could not find the specified collection."
+      created: "Collection has been created."
+      updated: "Collection has been updated."
+      deleted: "Collection has been deleted."
+      none: "There are no collections yet. Click 'New Collection' to get started."
+  collections:
+    links:
+      back_to_index: "Back to Collections"
+      deactivate: "Deactivate Collection"
+      activate: "Activate Collection"
+    sections:
+      information: "Collection Information"
+    index:
+      title: "Collections"
+    new:
+      title: "New Collection"
+    edit:
+      title: "Edit Collection"
+    delete:
+      title: "Delete Collection"
+    show:
+      title: "Collection"

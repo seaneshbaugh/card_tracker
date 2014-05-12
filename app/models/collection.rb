@@ -1,12 +1,15 @@
 class Collection < ActiveRecord::Base
-  attr_accessible :card_id, :user_id, :quantity
+  attr_accessible :card_id, :user_id, :card_list_id, :quantity
 
   belongs_to :card
   belongs_to :user
+  belongs_to :card_list
 
   validates_presence_of :card_id
 
   validates_presence_of :user_id
+
+  validates_presence_of :card_list_id
 
   validates_presence_of     :quantity
   validates_numericality_of :quantity, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 2147483647
@@ -15,5 +18,13 @@ class Collection < ActiveRecord::Base
     if self.new_record?
       self.quantity ||= 0
     end
+  end
+
+  def update_quantity(quantity)
+
+  end
+
+  def move_to_card_list(new_card_list_id, quantity)
+
   end
 end

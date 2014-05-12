@@ -1,0 +1,59 @@
+<% content_for :body_class, 'show-card-list' %>
+<% present @card_list do |card_list_presenter| %>
+  <div class="page-header">
+    <h1><%= card_list_presenter.name %></h1>
+  </div>
+  <%= link_to 'Browse Sets', list_sets_path(@card_list.slug), :class => 'btn btn-primary' %>
+  <div id="card-list-<%= @card_list.id %>" class="card-list-cards page row">
+    <% if @collections.present? %>
+      <% @sets.each do |set, collections| %>
+        <div id="set-<%= set.id %>" class="set col-xs-12">
+          <h2><%= set.name %></h2>
+          <% collections.sort_by { |collection| collection.card.card_number.to_i }.each do |collection| %>
+            <% present collection.card do |card_presenter| %>
+              <% present collection do |collection_presenter| %>
+                <div id="card-<%= card_presenter.multiverse_id %>" class="row card <%= card_presenter.color_class %>" data-card-list-id="<%= @card_list.id %>" data-card-id="<%= collection.card_id %>" data-quantity="<%= collection_presenter.quantity_as_integer %>">
+                  <div class="card-name col-xs-12 col-sm-7">
+                    <%= link_to card_presenter.name, list_set_card_path(@card_list.slug, set.slug, collection.card), :rel => 'tooltip', :title => card_tooltip_text(collection.card).gsub('"', "'"), :data => { :html => 'true' } %>
+                  </div>
+                  <div class="card-rarity col-xs-1">
+                    <%= card_presenter.rarity.first %>
+                  </div>
+                  <div class="card-quantity col-xs-1">
+                    <%= collection_presenter.quantity_as_string %>
+                  </div>
+                  <div class="col-xs-2 col-xs-offset-5 col-sm-1 col-sm-offset-0">
+                    <button class="increment btn btn-default center-block"><span class="glyphicon glyphicon-chevron-up"></span></button>
+                  </div>
+                  <div class="col-xs-2 col-sm-1">
+                    <button class="decrement btn btn-default center-block"><span class="glyphicon glyphicon-chevron-down"></span></button>
+                  </div>
+                  <div class="col-xs-2 col-sm-1">
+                    <div class="options btn-group center-block">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu pull-right" role="menu">
+                        <li><a href="#" class="toggle-move-collection-modal" data-toggle="modal" data-target="#move-collection-modal">Move to Another List</a></li>
+                        <li><a href="#" class="remove-all-from-list">Remove All from List</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+      <%= paginate @collections, :route => :root_path %>
+    <% elsif params[:q].present? %>
+      <div class="no-cards col-xs-12">
+        <p class="lead">No matching cards found in this list.</p>
+      </div>
+    <% else %>
+      <div  class="no-cards col-xs-12">
+        <p class="lead">You don't seem to have any cards in this list. Why not browse through the Magic card <%= link_to 'sets', list_sets_path(@card_list.slug) %> and add some?</p>
+      </div>
+    <% end %>
+  </div>
+<% end %>

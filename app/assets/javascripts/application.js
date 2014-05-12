@@ -42,7 +42,7 @@ $(function() {
         if (isNaN(quantity)) {
             increment.error(ErrorMessages.title, ErrorMessages.nonNumericCardQuantity);
         } else {
-            $.post("/collection", "_method=put&card_id=" + card.data("card-id") + "&quantity=" + quantity, function(data, status, jqXHR) {
+            $.post("/collection/quantity", "_method=put&card_list_id=" + card.data("card-list-id") + "&card_id=" + card.data("card-id") + "&quantity=" + quantity, function(data, status, jqXHR) {
                 var results;
 
                 try {
@@ -80,7 +80,7 @@ $(function() {
                 quantity = 0;
             }
 
-            $.post("/collection", "_method=put&card_id=" + card.data("card-id") + "&quantity=" + quantity, function(data, status, jqXHR) {
+            $.post("/collection/quantity", "_method=put&card_list_id=" + card.data("card-list-id") + "&card_id=" + card.data("card-id") + "&quantity=" + quantity, function(data, status, jqXHR) {
                 var results;
 
                 try {
@@ -192,7 +192,7 @@ $(function() {
                     quantity = 0;
                 }
 
-                $.post("/collection", "_method=put&card_id=" + card.data("card-id") + "&quantity=" + quantity, function(data, status, jqXHR) {
+                $.post("/collection/quantity", "_method=put&card_list_id=" + card.data("card-list-id") + "&card_id=" + card.data("card-id") + "&quantity=" + quantity, function(data, status, jqXHR) {
                     var results;
 
                     try {
@@ -254,6 +254,120 @@ $(function() {
 
         if (enterUsername !== username && enterUsernameConfirmation !== username) {
             event.preventDefault();
+        }
+    });
+
+    $("body").on("click", ".toggle-move-collection-modal", function (event) {
+        var modalToggle, card;
+
+        modalToggle = $(this);
+
+        card = modalToggle.closest(".card");
+
+        if (parseInt(card.data("quantity"))  > 0) {
+            $("#move-collection-quantity").val(card.data("quantity"));
+
+            $("#move-collection-quantity").attr("max", card.data("quantity"));
+
+            $("#move-collection-quantity").numeric({
+                allowPlus    : false,
+                allowMinus   : false,
+                allowThouSep : false,
+                allowDecSep  : false,
+                min          : 0,
+                max          : card.data("quantity")
+            });
+
+            $("#move-collection-modal-maximum-quantity").text(card.data("quantity"));
+
+            $("#move-collection-card-id").val(card.data("card-id"));
+        } else {
+            event.preventDefault();
+        }
+    });
+
+    $("body").on("submit", "#move-collection-form", function(event) {
+        var card;
+
+        event.preventDefault();
+
+        card = $("#card-" + $("#move-collection-card-id").val());
+
+        $.post("/collection/card_list", $(this).serialize(), function(data, status, jqXHR) {
+            var results;
+
+            try {
+                results = $.parseJSON(jqXHR.responseText);
+
+                if (jqXHR.status === 200) {
+                    card.data("quantity", results["new_quantity"]);
+
+                    card.find(".card-quantity").text(results["new_quantity"]);
+                } else {
+                    card.error(results["status_message"], results["errors"]);
+                }
+            } catch(exception) {
+                card.error(ErrorMessages.title, ErrorMessages.invalidServerResponse);
+            }
+
+            $("#move-collection-modal").modal("hide");
+        }, "json");
+    });
+
+    $("body").on("click", ".remove-all-from-list", function(event) {
+        var options, card, quantity;
+
+        event.preventDefault();
+
+        options = $(this).closest(".options");
+
+        card = $(this).closest(".card");
+
+        quantity = parseInt(card.data("quantity"));
+
+        if (quantity !== 0) {
+            $.post("/collection/quantity", "_method=put&card_list_id=" + card.data("card-list-id") + "&card_id=" + card.data("card-id") + "&quantity=0", function(data, status, jqXHR) {
+                var results;
+
+                try {
+                    results = $.parseJSON(jqXHR.responseText);
+
+                    if (jqXHR.status === 200) {
+                        card.data("quantity", results["new_quantity"]);
+
+                        card.find(".card-quantity").text(results["new_quantity"]);
+                    } else {
+                        options.error(results["status_message"], results["errors"]);
+                    }
+                } catch(exception) {
+                    options.error(ErrorMessages.title, ErrorMessages.invalidServerResponse);
+                }
+            }, "json");
+        }
+    });
+
+    $("#card-lists").sortable({
+        //handle: ".card-list-name",
+        update: function() {
+            var cardListOrder = {};
+
+            $(".card-list", $(this)).each(function(index, element) {
+                cardListOrder[$(element).data("card-list-id")] = index;
+            });
+
+            $.post("/lists/order", "_method=put&card_list_order=" + JSON.stringify(cardListOrder), function(data, status, jqXHR) {
+                var results;
+
+                try {
+                    results = $.parseJSON(jqXHR.responseText);
+
+                    if (jqXHR.status !== 200) {
+                        $("#card-lists").error(results["status_message"], results["errors"]);
+                    }
+                } catch(exception) {
+                    $("#card-lists").error(ErrorMessages.title, ErrorMessages.invalidServerResponse);
+                }
+            }, "json");
         }
     });
 });

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140330174319) do
+ActiveRecord::Schema.define(:version => 20140430001028) do
 
   create_table "card_block_types", :force => true do |t|
     t.string   "name",       :default => "", :null => false
@@ -33,6 +33,26 @@ ActiveRecord::Schema.define(:version => 20140330174319) do
   add_index "card_blocks", ["created_at"], :name => "index_card_blocks_on_created_at"
   add_index "card_blocks", ["name"], :name => "index_card_blocks_on_name", :unique => true
   add_index "card_blocks", ["updated_at"], :name => "index_card_blocks_on_updated_at"
+
+  create_table "card_lists", :force => true do |t|
+    t.integer  "user_id",                       :null => false
+    t.string   "name",       :default => "",    :null => false
+    t.string   "slug",       :default => "",    :null => false
+    t.boolean  "have",       :default => true,  :null => false
+    t.integer  "order",      :default => 0,     :null => false
+    t.boolean  "default",    :default => false, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "card_lists", ["created_at"], :name => "index_card_lists_on_created_at"
+  add_index "card_lists", ["default"], :name => "index_card_lists_on_default"
+  add_index "card_lists", ["have"], :name => "index_card_lists_on_have"
+  add_index "card_lists", ["name"], :name => "index_card_lists_on_name"
+  add_index "card_lists", ["order"], :name => "index_card_lists_on_order"
+  add_index "card_lists", ["slug"], :name => "index_card_lists_on_slug"
+  add_index "card_lists", ["updated_at"], :name => "index_card_lists_on_updated_at"
+  add_index "card_lists", ["user_id"], :name => "index_card_lists_on_user_id"
 
   create_table "card_parts", :force => true do |t|
     t.string   "multiverse_id",       :default => "", :null => false
@@ -144,14 +164,16 @@ ActiveRecord::Schema.define(:version => 20140330174319) do
   add_index "cards", ["updated_at"], :name => "index_cards_on_updated_at"
 
   create_table "collections", :force => true do |t|
-    t.integer  "card_id",                   :null => false
-    t.integer  "user_id",                   :null => false
-    t.integer  "quantity",   :default => 0, :null => false
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.integer  "card_id",                     :null => false
+    t.integer  "user_id",                     :null => false
+    t.integer  "card_list_id"
+    t.integer  "quantity",     :default => 0, :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   add_index "collections", ["card_id"], :name => "index_collections_on_card_id"
+  add_index "collections", ["card_list_id"], :name => "index_collections_on_card_list_id"
   add_index "collections", ["created_at"], :name => "index_collections_on_created_at"
   add_index "collections", ["quantity"], :name => "index_collections_on_quantity"
   add_index "collections", ["updated_at"], :name => "index_collections_on_updated_at"
@@ -199,6 +221,7 @@ ActiveRecord::Schema.define(:version => 20140330174319) do
     t.boolean  "receive_newsletters"
     t.boolean  "receive_sign_up_alerts"
     t.boolean  "receive_contact_alerts"
+    t.text     "api_privacy_settings"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
   end

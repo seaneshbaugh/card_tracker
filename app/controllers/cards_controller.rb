@@ -2,11 +2,15 @@ class CardsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    if params[:set_id].to_i.to_s == params[:set_id]
-      @card_set = CardSet.where(:id => params[:set_id]).first
-    else
-      @card_set = CardSet.where(:slug => params[:set_id]).first
+    @card_list = CardList.where('`card_lists`.`user_id` = ? AND `card_lists`.`slug` = ?', current_user.id, params[:list_id]).first
+
+    if @card_list.nil?
+      flash[:error] = t('messages.card_lists.could_not_find')
+
+      redirect_to root_url and return
     end
+
+    @card_set = CardSet.where(:slug => params[:set_id]).first
 
     if @card_set.nil?
       flash[:error] = t('messages.card_sets.could_not_find')
@@ -20,11 +24,15 @@ class CardsController < ApplicationController
   end
 
   def show
-    if params[:set_id].to_i.to_s == params[:set_id]
-      @card_set = CardSet.where(:id => params[:set_id]).first
-    else
-      @card_set = CardSet.where(:slug => params[:set_id]).first
+    @card_list = CardList.where('`card_lists`.`user_id` = ? AND `card_lists`.`slug` = ?', current_user.id, params[:list_id]).first
+
+    if @card_list.nil?
+      flash[:error] = t('messages.card_lists.could_not_find')
+
+      redirect_to root_url and return
     end
+
+    @card_set = CardSet.where(:slug => params[:set_id]).first
 
     if @card_set.nil?
       flash[:error] = t('messages.card_sets.could_not_find')

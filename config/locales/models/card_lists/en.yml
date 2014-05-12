@@ -1,0 +1,26 @@
+en:
+  activerecord:
+    models:
+      card_list: "Card List"
+    attributes:
+      card_list:
+        user_id: "User"
+        name: "Name"
+        slug: "Slug"
+        have: "Type"
+        order: "Order"
+        default: "Default"
+        created_at: "Created At"
+        updated_at: "Updated At"
+    errors:
+      models:
+        card_list:
+          attributes:
+            user_id: "User"
+            name: "Name"
+            slug: "Slug"
+            have: "Type"
+            order: "Order"
+            default: "Default"
+            created_at: "Created At"
+            updated_at: "Updated At"

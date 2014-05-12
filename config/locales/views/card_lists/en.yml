@@ -1,0 +1,35 @@
+en:
+  navigation:
+    card_lists: "Card Lists"
+  helpers:
+    submit:
+      card_list:
+        create: "Add Card List"
+        update: "Update Card List"
+        redirect_to_new: "Create and Add Another"
+    button:
+      card_list:
+  messages:
+    card_lists:
+      could_not_find: "Could not find the specified card list."
+      created: "Card List has been created."
+      updated: "Card List has been updated."
+      deleted: "Card List has been deleted."
+      none: "There are no card sets yet. Click 'New Card List' to get started."
+  card_lists:
+    links:
+      back_to_index: "Back to Card Lists"
+      deactivate: "Deactivate Card List"
+      activate: "Activate Card List"
+    sections:
+      information: "Card List Information"
+    index:
+      title: "Card Lists"
+    new:
+      title: "New Card List"
+    edit:
+      title: "Edit Card List"
+    delete:
+      title: "Delete Card List"
+    show:
+      title: "Card List"

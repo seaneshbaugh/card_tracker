@@ -1,11 +1,14 @@
 <% content_for :body_class, 'sets' %>
+<div class="page-header">
+  <h1>Select a Set</h1>
+</div>
 <div id="sets" class="page row">
   <% @card_sets.in_groups(4, false) do |card_set_column| %>
     <div class="col-md-3 visible-md visible-lg">
       <% card_set_column.each do |card_set| %>
         <% present card_set do |card_set_presenter| %>
           <div id="set-<%= card_set.id %>" class="set">
-            <%= link_to card_set_presenter.symbol(:size => 'small'), set_cards_path(card_set) %> <%= link_to card_set_presenter.name, set_cards_path(card_set.slug) %>
+            <%= link_to card_set_presenter.symbol(:size => 'small'), list_set_cards_path(@card_list.slug, card_set) %> <%= link_to card_set_presenter.name, list_set_cards_path(@card_list.slug, card_set.slug) %>
           </div>
         <% end %>
       <% end %>
@@ -16,7 +19,7 @@
       <% card_set_column.each do |card_set| %>
         <% present card_set do |card_set_presenter| %>
           <div id="set-<%= card_set.id %>" class="set">
-            <%= link_to card_set_presenter.symbol(:size => 'small'), set_cards_path(card_set) %> <%= link_to card_set_presenter.name, set_cards_path(card_set.slug) %>
+            <%= link_to card_set_presenter.symbol(:size => 'small'), list_set_cards_path(@card_list.slug, card_set) %> <%= link_to card_set_presenter.name, list_set_cards_path(@card_list.slug, card_set.slug) %>
           </div>
         <% end %>
       <% end %>
@@ -26,7 +29,7 @@
     <% @card_sets.each do |card_set| %>
       <% present card_set do |card_set_presenter| %>
         <div id="set-<%= card_set.id %>" class="set">
-          <%= link_to card_set_presenter.symbol(:size => 'small'), set_cards_path(card_set) %> <%= link_to card_set_presenter.name, set_cards_path(card_set.slug) %>
+          <%= link_to card_set_presenter.symbol(:size => 'small'), list_set_cards_path(@card_list.slug, card_set) %> <%= link_to card_set_presenter.name, list_set_cards_path(@card_list.slug, card_set.slug) %>
         </div>
       <% end %>
     <% end %>

@@ -1,0 +1,42 @@
+<% content_for :body_class, 'card-lists' %>
+<div class="page-header">
+  <h1>Your Lists</h1>
+</div>
+<div id="card-lists" class="page">
+  <!--<div class="well col-xs-12">
+    <%= search_form_for @search, :url => root_path, :html => { :method => :get, :id => 'search-form', :class => 'form-inline' } do |f| %>
+      <div class="form-group">
+        <%= f.text_field :name_cont, :class => 'form-control', :placeholder => t('activerecord.attributes.card_list.name') %>
+      </div>
+      <div class="form-group">
+        <%= f.button "<span class=\"glyphicon glyphicon-search\"></span> #{t('search')}".html_safe, :type => :submit, :class => 'btn btn-primary' %>
+        <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, root_path, :class => 'btn btn-default', :rel => 'tooltip', :title => t('clear_search') %>
+      </div>
+    <% end %>
+  </div>-->
+  <% if @card_lists.present? %>
+    <% @card_lists.each do |card_list| %>
+      <% present card_list do |card_list_presenter| %>
+        <div id="list-<%= card_list.id %>" class="card-list row" data-card-list-id="<%= card_list.id %>">
+          <div class="col-xs-9 col-sm-11">
+            <%= link_to card_list_presenter.name, list_path(card_list_presenter.slug), :class => 'card-list-name' %><br>
+            <span> <%= card_list_presenter.total_cards %> cards (<%= card_list_presenter.unique_cards %> unique)</span>
+          </div>
+          <div class="col-xs-3 col-sm-1">
+            <div class="btn-group center-block">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu pull-right" role="menu">
+                <li><%= link_to 'Edit', edit_list_path(card_list_presenter.slug) %></li>
+                <li><%= link_to 'Delete', list_path(card_list_presenter.slug), :method => :delete, :data => { :confirm => t('confirm_delete') } %></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% else %>
+    <p class="lead">You don't seem to have any card lists. Why not <%= link_to 'create one', new_list_path %>?</p>
+  <% end %>
+</div>

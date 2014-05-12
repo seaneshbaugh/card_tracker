@@ -27,11 +27,21 @@ CardTracker::Application.routes.draw do
 
   post '/contact' => 'contact#create'
 
-  resource :collection
+  resources :card_lists, :path => 'lists', :as => :lists do
+    collection do
+      put 'order' => 'card_lists#reorder', :as => :reorder
+    end
 
-  resources :card_sets, :path => :sets, :as => :sets, :only => [:index] do
-    resources :cards, :only => [:index, :show]
+    resources :card_sets, :path => :sets, :as => :sets, :only => [:index] do
+      resources :cards, :only => [:index, :show]
+    end
   end
+
+  #resource :collection
+
+  put '/collection/quantity' => 'collections#update_quantity'
+
+  put '/collection/card_list' => 'collections#move_card_list'
 
   get '/cards/search' => 'cards#search', :as => 'card_search'
 
@@ -60,7 +70,7 @@ CardTracker::Application.routes.draw do
   end
 
   authenticated do
-    root :to => 'collections#show'
+    root :to => 'card_lists#index'
   end
 
   root :to => 'pages#index'

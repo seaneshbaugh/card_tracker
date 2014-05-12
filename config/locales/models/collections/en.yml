@@ -1,0 +1,22 @@
+en:
+  activerecord:
+    models:
+      collection: "Collection"
+    attributes:
+      collection:
+        card_id: "Card"
+        user_id: "User"
+        card_list_id: "Card List"
+        quantity: "Quantity"
+        created_at: "Created At"
+        updated_at: "Updated At"
+    errors:
+      models:
+        collection:
+          attributes:
+            card_id: "Card"
+            user_id: "User"
+            card_list_id: "Card List"
+            quantity: "Quantity"
+            created_at: "Created At"
+            updated_at: "Updated At"

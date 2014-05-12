@@ -1,0 +1,19 @@
+<% present @card_list do |card_list_presenter| %>
+  <h1><%= card_list_presenter.form_title %></h1>
+  <%= simple_form_for @card_list, :url => @card_list.new_record? ? '/lists' : "/lists/#{@card_list.slug}", :html => { :method => @card_list.persisted? ? :put : :post, :class => 'form-horizontal' } do |f| %>
+    <%= f.input :name %>
+    <%= f.input :have, :as => :radio_buttons, :collection => [[true, 'Have List'], [false, 'Want List']], :label_method => :last, :value_method => :first %>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <p>Have lists are for cards you actually own. Want lists are for cards you don't yet own.</p>
+      </div>
+    </div>
+    <%= f.input :default, :as => :boolean %>
+    <div class="form-group">
+      <div class="col-lg-offset-2 col-lg-10">
+        <%= f.button :submit, 'Submit', :class => 'btn btn-primary' %>
+        <%= link_to t('cancel'), root_path, :class => 'btn btn-default' %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

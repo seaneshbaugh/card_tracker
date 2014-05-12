@@ -33,12 +33,12 @@ CardTracker::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = false
+  config.assets.debug = true
 
   # Send mail through mailcatcher
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { :address => 'localhost', :port => 1025 }
 
-  # Set mailer host to 127.0.0.1:3000 for in email links
-  config.action_mailer.default_url_options = { :host => '127.0.0.1:3000' }
+  # Set mailer host to localhost:3000 for in email links
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 end

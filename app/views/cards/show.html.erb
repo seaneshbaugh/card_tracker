@@ -3,7 +3,7 @@
   <% present @card do |card_presenter| %>
     <% present @collection, CollectionPresenter do |collection_presenter| %>
       <div class="page-header">
-        <h1 class="card-name"><%= link_to card_set_presenter.symbol(:rarity => card_presenter.rarity.downcase.to_sym, :size => 'hidden-sm hidden-md hidden-lg'), set_cards_path(card_set_presenter.slug) %><%= link_to card_set_presenter.symbol(:rarity => card_presenter.rarity.downcase.to_sym, :size => 'large hidden-xs'), set_cards_path(card_set_presenter.slug) %> <%= card_presenter.name %></h1>
+        <h1 class="card-name"><%= link_to card_set_presenter.symbol(:rarity => card_presenter.rarity.downcase.to_sym, :size => 'hidden-sm hidden-md hidden-lg'), list_set_cards_path(@card_list.slug, card_set_presenter.slug) %><%= link_to card_set_presenter.symbol(:rarity => card_presenter.rarity.downcase.to_sym, :size => 'large hidden-xs'), list_set_cards_path(@card_list.slug, card_set_presenter.slug) %> <%= card_presenter.name %></h1>
       </div>
       <div id="card-<%= card_presenter.multiverse_id %>" class="card" data-card-id="<%= @card.id %>" data-quantity="<%= collection_presenter.quantity_as_integer %>">
         <%= render :partial => "cards/show/#{card_presenter.partial_name}", :locals => { :card_presenter => card_presenter } %>
@@ -13,7 +13,7 @@
           </div>
           <div class="card-attribute other-versions col-xs-12 col-sm-10">
             <% card_presenter.other_versions.each do |other_version| %>
-              <%= link_to card_set_symbol(other_version.card_set, :rarity => other_version.rarity.downcase.to_sym, :size => 'small'), set_card_path(other_version.card_set.slug, other_version) %>
+              <%= link_to card_set_symbol(other_version.card_set, :rarity => other_version.rarity.downcase.to_sym, :size => 'small'), list_set_card_path(@card_list.slug, other_version.card_set.slug, other_version) %>
             <% end %>
           </div>
         </div>

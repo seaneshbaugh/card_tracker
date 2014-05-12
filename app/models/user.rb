@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :username, :email, :password, :password_confirmation, :role, :first_name, :last_name, :remember_me, :receive_newsletters, :receive_sign_up_alerts, :receive_contact_alerts
 
+  has_many :card_lists, :autosave => true
   has_many :collections
   has_many :cards, :through => :collections
 
@@ -32,15 +33,15 @@ class User < ActiveRecord::Base
       self.last_name ||= ''
 
       if self.receive_newsletters.nil?
-        self.receive_newsletters ||= true
+        self.receive_newsletters = true
       end
 
       if self.receive_contact_alerts.nil?
-        self.receive_contact_alerts ||= false
+        self.receive_contact_alerts = false
       end
 
       if self.receive_sign_up_alerts.nil?
-        self.receive_sign_up_alerts ||= false
+        self.receive_sign_up_alerts = false
       end
 
       self.sign_in_count ||= 0
@@ -60,6 +61,8 @@ class User < ActiveRecord::Base
   end
 
   after_create do
+    self.create_default_lists
+
     @alert_recipients = User.where('`users`.`role` != ? AND `users`.`receive_sign_up_alerts` = ?', Ability::ROLES[:read_only], true)
 
     @alert_recipients.each do |alert_recipient|
@@ -95,6 +98,10 @@ class User < ActiveRecord::Base
     @ability ||= Ability.new(self)
   end
 
+  def default_list
+    self.card_lists.where(:default => true).first
+  end
+
   protected
 
   def password_required?
@@ -106,6 +113,18 @@ class User < ActiveRecord::Base
       self.role = self.role.downcase
     else
       self.role = Ability::ROLES[:read_only]
+    end
+  end
+
+  def create_default_lists
+    if self.card_lists.length == 0
+      self.card_lists << CardList.new({ :name => 'Have', :have => true, :order => 0, :default => true })
+
+      self.card_lists << CardList.new({ :name => 'Want', :have => false, :order => 1, :default => false })
+
+      self.card_lists << CardList.new({ :name => 'Have (foil)', :have => true, :order => 2, :default => false })
+
+      self.card_lists << CardList.new({ :name => 'Want (foil)', :have => false, :order => 3, :default => false })
     end
   end
 end
