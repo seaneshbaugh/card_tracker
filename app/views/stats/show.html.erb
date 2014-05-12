@@ -9,11 +9,30 @@
     <div id="unique-cards-in-collections" class="stat">
       You have <span class="stat-value"><%= @unique_cards_in_collections %></span> unique cards.
     </div>
-    <% %w(white blue black red green colorless multi land).each do |color| %>
+    <div>
+      <% @card_sets.each do |card_set| %>
+        <% present card_set do |card_set_presenter| %>
+          <div id="set-<%= card_set.id %>" class="set">
+            <% unique = Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ?', current_user.id, card_set.id).select('distinct `collections`.`card_id`').count %>
+            <% max = card_set.cards.count %>
+            <%= card_set_presenter.symbol(:rarity => unique == max ? :rare : :common) %><br>
+            <%= card_set_presenter.name %><br>
+            <%= Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ?', current_user.id, card_set.id).sum(:quantity) %> total<br>
+            <%= unique %> / <%= max %><% if max > 0 %> (<%= ((unique.to_f / max.to_f) * 100.0).to_i %>%)<% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+
+
+
+
+    <!--<%# %w(white blue black red green colorless multi land).each do |color| %>
       <div class="stat">
-        <strong><%= color.capitalize %>:</strong> <span class="stat-value"><%= instance_variable_get("@number_of_#{color}") %></span>
+        <strong><%#= color.capitalize %>:</strong> <span class="stat-value"><%#= instance_variable_get("@number_of_#{color}") %></span>
       </div>
-    <% end %>
+    <%# end %>-->
     <!--<%# @card_sets.each do |card_set| %>
       <div class="stat">
         <%# card_set_collections = @collections.select { |collection| collection.card.card_set_id == card_set.id } %>
