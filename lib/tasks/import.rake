@@ -349,7 +349,7 @@ namespace :import do
         card
       end
 
-      imported_cards.select { |imported_card| %w(normal plane scheme phenomenon).include? imported_card['layout'] }.each do |imported_card|
+      imported_cards.select { |imported_card| %w(normal leveler plane scheme phenomenon).include? imported_card['layout'] }.each do |imported_card|
         card = cards.select { |card| card.multiverse_id == imported_card['multiverseid'].to_s }.first
 
         create_or_update_card(imported_card, card, card_set)

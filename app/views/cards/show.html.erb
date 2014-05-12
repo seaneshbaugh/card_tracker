@@ -8,6 +8,11 @@
       <div id="card-<%= card_presenter.multiverse_id %>" class="card" data-card-id="<%= @card.id %>" data-quantity="<%= collection_presenter.quantity_as_integer %>">
         <%= render :partial => "cards/show/#{card_presenter.partial_name}", :locals => { :card_presenter => card_presenter } %>
         <div class="row">
+          <div class="card-image col-xs-12">
+            <img src="http://mtgimage.com/multiverseid/<%= card_presenter.multiverse_id %>.jpg">
+          </div>
+        </div>
+        <div class="row">
           <div class="card-attribute-label col-xs-12 col-sm-2">
             Other Versions:
           </div>
