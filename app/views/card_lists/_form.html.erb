@@ -5,7 +5,7 @@
     <%= f.input :have, :as => :radio_buttons, :collection => [[true, 'Have List'], [false, 'Want List']], :label_method => :last, :value_method => :first %>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <p>Have lists are for cards you actually own. Want lists are for cards you don't yet own.</p>
+        <p>Have lists are for cards you actually own. Want lists are for cards you don't yet own. Cards that belong to a have list will count toward your <%= link_to 'collection stats', stats_path, :target => '_blank' %>.</p>
       </div>
     </div>
     <%= f.input :default, :as => :boolean %>
