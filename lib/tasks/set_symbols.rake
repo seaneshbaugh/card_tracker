@@ -106,19 +106,31 @@ namespace :set_symbols do
 
   desc 'Make card set divider image sheets.'
   task :make_card_set_dividers => :environment do
-    card_width_inches = 2.49
+    card_width_inches = 3.48
 
-    card_height_inches = 3.48
+    card_height_inches = 2.49
 
     resolution = 300.0
 
-    card_width_pixels = card_width_inches * resolution
+    card_width_pixels = (card_width_inches * resolution).to_i
 
-    card_height_pixels = card_height_inches * resolution
+    card_height_pixels = (card_height_inches * resolution).to_i
 
     symbol_width = (card_width_pixels * 0.50).to_i
 
     symbol_height = (card_height_pixels * 0.50).to_i
+
+    border_width_inches = 0.05
+
+    border_width_pixels = (border_width_inches * resolution).to_i
+
+    text_offset_x_inches = 0.20
+
+    text_offset_x_pixels = (text_offset_x_inches * resolution).to_i
+
+    text_offset_y_inches = 0.20
+
+    text_offset_y_pixels = (text_offset_y_inches * resolution).to_i
 
     card_sets = CardSet.order('`card_sets`.`release_date` ASC')
 
@@ -129,13 +141,100 @@ namespace :set_symbols do
     card_sets.each do |card_set|
       set_code = card_set.code.downcase
 
-      file = Rails.root.join('app', 'assets', 'images', 'sets', "#{set_code}-c.svg")
+      file = Rails.root.join('app', 'assets', 'images', 'sets', "#{set_code}-c.svg").to_s
 
-      new_file = File.join(temporary_directory, "#{set_code}.png")
+      new_file = File.join(temporary_directory, "#{set_code}.png").to_s
 
-      system("inkscape --export-png=#{Shellwords.escape(new_file)} --export-background-opacity=0 --export-width=#{symbol_width} --without-gui #{Shellwords.escape(file)} > /dev/null 2>&1")
+      divider_file = File.join(temporary_directory, "#{set_code}-divider.png").to_s
 
-      system("convert #{Shellwords.escape(new_file)} -resize #{symbol_width}#{symbol_height}\> #{Shellwords.escape(new_file)}")
+      if File.exist?(new_file)
+        width, height = %x(identify #{Shellwords.escape(new_file)}).split(' ')[2].split('x').map { |d| d.to_i }
+
+        if width > symbol_width || height > symbol_height || (width < symbol_width && height != symbol_height) || (height < symbol_height && width != symbol_width)
+          convert = true
+        else
+          convert = false
+        end
+      else
+        convert = true
+      end
+
+      if convert
+        system("inkscape --export-png=#{Shellwords.escape(new_file)} --export-background-opacity=0 --export-width=#{symbol_width} --without-gui #{Shellwords.escape(file)} > /dev/null 2>&1")
+
+        system("convert #{Shellwords.escape(new_file)} -resize #{symbol_width}x#{symbol_height}\\> #{Shellwords.escape(new_file)}")
+      end
+
+      if File.exist?(divider_file)
+        FileUtils.rm_rf(divider_file)
+      end
+
+      system("convert #{Shellwords.escape(new_file)} -gravity center -extent #{card_width_pixels}x#{card_height_pixels} -background none #{Shellwords.escape(divider_file)}")
+
+      system("convert #{Shellwords.escape(divider_file)} -stroke black -strokewidth #{border_width_pixels} -fill none -draw \"rectangle 0,0 #{card_width_pixels - 1},#{card_height_pixels - 1}\" #{Shellwords.escape(divider_file)}")
+
+      name_x = text_offset_x_pixels
+
+      name_y = (text_offset_y_pixels * 1.5).to_i
+
+      release_date_x = text_offset_x_pixels
+
+      if card_set.name.length > 32
+        release_date_y = name_y + 50
+
+        name_font_size = 45
+      else
+        release_date_y = name_y + 60
+
+        name_font_size = 60
+      end
+
+      release_date_font_size = 40
+
+      system("convert #{Shellwords.escape(divider_file)} -font /System/Library/Fonts/Avenir.ttc -fill black -pointsize #{name_font_size} -annotate +#{name_x}+#{name_y} \"#{Shellwords.escape(card_set.name)}\" #{Shellwords.escape(divider_file)}")
+
+      system("convert #{Shellwords.escape(divider_file)} -font /System/Library/Fonts/Avenir.ttc -fill black -pointsize #{release_date_font_size} -annotate +#{release_date_x}+#{release_date_y} \"#{Shellwords.escape(card_set.release_date.strftime('%B %e, %Y'))}\" #{Shellwords.escape(divider_file)}")
+    end
+  end
+
+  desc 'Make printable sheets from card set dividers.'
+  task :make_card_set_divider_sheets => :environment do
+    divider_files = Dir.glob(Rails.root.join('tmp', 'card_set_dividers', '*-divider.png'))
+
+    card_width_inches = 3.48
+
+    card_height_inches = 2.49
+
+    resolution = 300.0
+
+    card_width_pixels = (card_width_inches * resolution).to_i
+
+    card_height_pixels = (card_height_inches * resolution).to_i
+
+    sheet_width = (card_width_pixels * 3).to_i
+
+    sheet_height = (card_height_pixels * 3).to_i
+
+    guide_line_width = (resolution * 0.015625).to_i
+
+    margin = 50
+
+    divider_files.each_slice(9).with_index do |files, index|
+      divider_sheet_file = Rails.root.join('tmp', 'card_set_dividers', "dividers-#{'%02i' % index}.png").to_s
+
+      system("montage #{files.map { |file| Shellwords.escape(file) }.join(' ')} -background none -mode Concatenate -tile 3x #{Shellwords.escape(divider_sheet_file)} > /dev/null 2>&1")
+
+      system("convert #{Shellwords.escape(divider_sheet_file)} -gravity center -background none -extent #{sheet_width + (margin * 2)}x#{sheet_height + (margin * 2)} #{Shellwords.escape(divider_sheet_file)}")
+
+      system("convert #{Shellwords.escape(divider_sheet_file)} -stroke black -strokewidth #{guide_line_width} -draw \"line #{card_width_pixels + margin},0 #{card_width_pixels + margin},#{sheet_height + (margin * 2)}\" #{Shellwords.escape(divider_sheet_file)}")
+
+      system("convert #{Shellwords.escape(divider_sheet_file)} -stroke black -strokewidth #{guide_line_width} -draw \"line #{(card_width_pixels * 2) + margin},0 #{(card_width_pixels * 2) + margin},#{sheet_height + (margin * 2)}\" #{Shellwords.escape(divider_sheet_file)}")
+
+      system("convert #{Shellwords.escape(divider_sheet_file)} -stroke black -strokewidth #{guide_line_width} -draw \"line 0,#{card_height_pixels + margin} #{sheet_width + (margin * 2)},#{card_height_pixels + margin}\" #{Shellwords.escape(divider_sheet_file)}")
+
+      system("convert #{Shellwords.escape(divider_sheet_file)} -stroke black -strokewidth #{guide_line_width} -draw \"line 0,#{(card_height_pixels * 2) + margin} #{sheet_width + (margin * 2)},#{(card_height_pixels * 2) + margin}\" #{Shellwords.escape(divider_sheet_file)}")
+
+      system("convert -units PixelsPerInch #{Shellwords.escape(divider_sheet_file)} -density #{resolution.to_i} #{Shellwords.escape(divider_sheet_file)}")
     end
   end
 end
