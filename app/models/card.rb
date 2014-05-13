@@ -66,11 +66,11 @@ class Card < ActiveRecord::Base
     self.card_types.split(';').include?('Land')
   end
 
-  def collection_for(user)
+  def collection_for(user, card_list)
     if self.collections.loaded?
-      self.collections.select { |collection| collection.user_id == user.id }.first
+      self.collections.select { |collection| collection.user_id == user.id && collection.card_list_id == card_list.id }.first
     else
-      self.collections.where(:user_id => user.id).first
+      self.collections.where(:user_id => user.id, :card_list_id => card_list.id).first
     end
   end
 

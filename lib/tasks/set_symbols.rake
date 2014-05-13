@@ -103,4 +103,39 @@ namespace :set_symbols do
 
     less_file.close
   end
+
+  desc 'Make card set divider image sheets.'
+  task :make_card_set_dividers => :environment do
+    card_width_inches = 2.49
+
+    card_height_inches = 3.48
+
+    resolution = 300.0
+
+    card_width_pixels = card_width_inches * resolution
+
+    card_height_pixels = card_height_inches * resolution
+
+    symbol_width = (card_width_pixels * 0.50).to_i
+
+    symbol_height = (card_height_pixels * 0.50).to_i
+
+    card_sets = CardSet.order('`card_sets`.`release_date` ASC')
+
+    temporary_directory = Rails.root.join('tmp', 'card_set_dividers')
+
+    FileUtils.mkdir_p(temporary_directory)
+
+    card_sets.each do |card_set|
+      set_code = card_set.code.downcase
+
+      file = Rails.root.join('app', 'assets', 'images', 'sets', "#{set_code}-c.svg")
+
+      new_file = File.join(temporary_directory, "#{set_code}.png")
+
+      system("inkscape --export-png=#{Shellwords.escape(new_file)} --export-background-opacity=0 --export-width=#{symbol_width} --without-gui #{Shellwords.escape(file)} > /dev/null 2>&1")
+
+      system("convert #{Shellwords.escape(new_file)} -resize #{symbol_width}#{symbol_height}\> #{Shellwords.escape(new_file)}")
+    end
+  end
 end

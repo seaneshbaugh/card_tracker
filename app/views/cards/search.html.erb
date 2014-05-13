@@ -23,7 +23,7 @@
         <h2><%= set.name %></h2>
         <% cards.sort_by { |card| card.card_number.to_i }.each do |card| %>
           <% present card do |card_presenter| %>
-            <% present card.collection_for(current_user), CollectionPresenter do |collection_presenter| %>
+            <% present card.collection_for(current_user, @card_list), CollectionPresenter do |collection_presenter| %>
               <div id="card-<%= card_presenter.multiverse_id %>" class="row card <%= card_presenter.color_class %>" data-card-id="<%= card.id %>" data-quantity="<%= collection_presenter.quantity_as_integer %>">
                 <div class="card-name col-xs-12 col-sm-8">
                   <%= link_to card_presenter.name, set_card_path(set.slug, card), :rel => 'tooltip', :title => card_tooltip_text(card).gsub('"', "'"), :data => { :html => 'true' } %>

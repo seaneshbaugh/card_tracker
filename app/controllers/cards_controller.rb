@@ -42,7 +42,7 @@ class CardsController < ApplicationController
 
     @card = Card.includes(:collections).where(:id => params[:id]).first
 
-    @collection = @card.collection_for(current_user)
+    @collection = @card.collection_for(current_user, @card_list)
 
     if @card.nil?
       flash[:error] = t('messages.cards.could_not_find')
