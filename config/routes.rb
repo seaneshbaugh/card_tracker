@@ -43,7 +43,7 @@ CardTracker::Application.routes.draw do
 
   get '/cards/search' => 'cards#search', :as => 'card_search'
 
-  resource :stats, :only => [:show]
+  resources :stats, :only => [:index, :show]
 
   resource :account, :only => [:show, :edit, :update, :destroy] do
     member do
