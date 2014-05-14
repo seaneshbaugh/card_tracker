@@ -12,19 +12,11 @@ class Collection < ActiveRecord::Base
   validates_presence_of :card_list_id
 
   validates_presence_of     :quantity
-  validates_numericality_of :quantity, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 2147483647
+  validates_numericality_of :quantity, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 2_147_483_647
 
   after_initialize do
     if self.new_record?
       self.quantity ||= 0
     end
-  end
-
-  def update_quantity(quantity)
-
-  end
-
-  def move_to_card_list(new_card_list_id, quantity)
-
   end
 end

@@ -16,7 +16,7 @@ class CardList < ActiveRecord::Base
 
   validates_inclusion_of :have, :in => [true, false]
 
-  validates_numericality_of :order, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 2147483647
+  validates_numericality_of :order, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 2_147_483_647
   validates_presence_of     :order
 
   validates_inclusion_of :default, :in => [true, false]

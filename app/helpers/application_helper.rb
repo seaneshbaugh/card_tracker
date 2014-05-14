@@ -13,24 +13,24 @@ module ApplicationHelper
 
   def flash_message_alert_class(name)
     case name
-      when :success, :notice
-        'alert-success'
-      when :info
-        'alert-info'
-      when :warning
-        'alert-warning'
-      when :danger, :alert, :error
-        'alert-danger'
-      else
-        'alert-info'
+    when :success, :notice
+      'alert-success'
+    when :info
+      'alert-info'
+    when :warning
+      'alert-warning'
+    when :danger, :alert, :error
+      'alert-danger'
+    else
+      'alert-info'
     end
   end
 
-  def is_active_controller?(controller_name)
+  def active_controller?(controller_name)
     'active' if params[:controller] == controller_name
   end
 
-  def is_active_action?(action_name)
+  def active_action?(action_name)
     'active' if params[:action] == action_name
   end
 

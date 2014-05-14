@@ -15,7 +15,7 @@
   <div id="gems" class="visible-lg">
     <h2><%= t('admin.sections.gems') %></h2>
     <ul>
-      <% get_gem_dependencies.each do |gem| %>
+      <% gem_dependencies.each do |gem| %>
         <li>
           <%= gem[:name] %> (<%= gem[:version] %>)
           <% if gem[:dependencies].present? %>

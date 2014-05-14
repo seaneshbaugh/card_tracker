@@ -54,15 +54,15 @@ class Card < ActiveRecord::Base
     end
   end
 
-  def is_multi?
+  def multi?
     self.colors.split(';').length > 0
   end
 
-  def is_colorless?
+  def colorless?
     self.colors.blank?
   end
 
-  def is_land?
+  def land?
     self.card_types.split(';').include?('Land')
   end
 

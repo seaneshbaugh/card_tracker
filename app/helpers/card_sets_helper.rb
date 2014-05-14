@@ -3,16 +3,16 @@ module CardSetsHelper
     options[:rarity] ||= :common
 
     case options[:rarity].to_sym
-      when :common
-        rarity = 'c'
-      when :uncommon
-        rarity = 'u'
-      when :rare
-        rarity = 'r'
-      when :mythic
-        rarity = 'm'
-      else
-        rarity = 'c'
+    when :common
+      rarity = 'c'
+    when :uncommon
+      rarity = 'u'
+    when :rare
+      rarity = 'r'
+    when :mythic
+      rarity = 'm'
+    else
+      rarity = 'c'
     end
 
     options[:class] ||= ''

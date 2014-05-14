@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   validates_length_of       :password, :within => 8..255, :if => :password_required?
   validates_presence_of     :password, :if => :password_required?
 
-  validates_inclusion_of :role, :in => Ability::ROLES.map { |key, value| value }
+  validates_inclusion_of :role, :in => Ability::ROLES.map { |_, role| role }
   validates_presence_of  :role
 
   after_initialize do
@@ -72,8 +72,8 @@ class User < ActiveRecord::Base
     RegistrationMailer.delay(:run_at => 45.minutes.from_now).welcome_message(self)
   end
 
-  Ability::ROLES.each do |k, _|
-    class_eval %Q"scope :#{k.to_s.pluralize}, where(:role => Ability::ROLES[:#{k.to_s}].downcase)"
+  Ability::ROLES.each do |role, _|
+    class_eval %Q"scope :#{role.to_s.pluralize}, where(:role => Ability::ROLES[:#{role}].downcase)"
   end
 
   def full_name
@@ -84,13 +84,13 @@ class User < ActiveRecord::Base
     "#{self.first_name.first.upcase}. #{self.last_name}"
   end
 
-  Ability::ROLES.each do |k, _|
-    define_method("#{k.to_s}?") do
-      self.role == k.to_s
+  Ability::ROLES.each do |role, _|
+    define_method("#{role}?") do
+      self.role == role.to_s
     end
 
-    define_method("#{k.to_s}!") do
-      self.role = k.to_s
+    define_method("#{role}!") do
+      self.role = role.to_s
     end
   end
 
@@ -104,13 +104,13 @@ class User < ActiveRecord::Base
 
   def create_default_lists
     if self.card_lists.length == 0
-      self.card_lists << CardList.new({ :name => 'Have', :have => true, :order => 0, :default => true })
+      self.card_lists << CardList.new(:name => 'Have', :have => true, :order => 0, :default => true)
 
-      self.card_lists << CardList.new({ :name => 'Want', :have => false, :order => 1, :default => false })
+      self.card_lists << CardList.new(:name => 'Want', :have => false, :order => 1, :default => false)
 
-      self.card_lists << CardList.new({ :name => 'Have (foil)', :have => true, :order => 2, :default => false })
+      self.card_lists << CardList.new(:name => 'Have (foil)', :have => true, :order => 2, :default => false)
 
-      self.card_lists << CardList.new({ :name => 'Want (foil)', :have => false, :order => 3, :default => false })
+      self.card_lists << CardList.new(:name => 'Want (foil)', :have => false, :order => 3, :default => false)
     end
   end
 

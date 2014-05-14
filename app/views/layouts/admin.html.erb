@@ -33,11 +33,11 @@
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <% if can? :read, CardBlock %><li class="card-block-nav-link"><%= link_to t('navigation.card_blocks'), admin_card_blocks_path, :class => is_active_controller?('admin/card_blocks') %></li><% end %>
-          <% if can? :read, CardSet %><li class="card-set-nav-link"><%= link_to t('navigation.card_sets'), admin_card_sets_path, :class => is_active_controller?('admin/card_sets') %></li><% end %>
-          <% if can? :read, Card %><li class="card-nav-link"><%= link_to t('navigation.cards'), admin_cards_path, :class => is_active_controller?('admin/cards') %></li><% end %>
-          <% if can? :read, CardBlockType %><li class="card-block-type-nav-link"><%= link_to t('navigation.card_block_types'), admin_card_block_types_path, :class => is_active_controller?('admin/card_block_types') %></li><% end %>
-          <% if can? :read, User %><li class="user-nav-link"><%= link_to t('navigation.users'), admin_users_path, :class => is_active_controller?('admin/users') %></li><% end %>
+          <% if can? :read, CardBlock %><li class="card-block-nav-link"><%= link_to t('navigation.card_blocks'), admin_card_blocks_path, :class => active_controller?('admin/card_blocks') %></li><% end %>
+          <% if can? :read, CardSet %><li class="card-set-nav-link"><%= link_to t('navigation.card_sets'), admin_card_sets_path, :class => active_controller?('admin/card_sets') %></li><% end %>
+          <% if can? :read, Card %><li class="card-nav-link"><%= link_to t('navigation.cards'), admin_cards_path, :class => active_controller?('admin/cards') %></li><% end %>
+          <% if can? :read, CardBlockType %><li class="card-block-type-nav-link"><%= link_to t('navigation.card_block_types'), admin_card_block_types_path, :class => active_controller?('admin/card_block_types') %></li><% end %>
+          <% if can? :read, User %><li class="user-nav-link"><%= link_to t('navigation.users'), admin_users_path, :class => active_controller?('admin/users') %></li><% end %>
           <li class="site-home-nav-link"><%= link_to t('navigation.site_home'), root_path %></li>
           <li class="logout-nav-link visible-xs"><%= link_to ('<span class="glyphicon glyphicon-log-out"></span> ' + t('navigation.sign_out')).html_safe, destroy_user_session_path, :method => :delete %></li>
         </ul>
