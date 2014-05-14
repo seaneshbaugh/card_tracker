@@ -1,53 +1,93 @@
 class CardSetStat
-  attr_accessor :card_set, :user, :cards_in_set, :unique_cards, :total_cards, :percent_collected, :rarity, :common_cards_in_set, :unique_common_cards, :total_common_cards, :uncommon_cards_in_set, :unique_uncommon_cards, :total_uncommon_cards, :rare_cards_in_set, :unique_rare_cards, :total_rare_cards, :mythic_rare_cards_in_set, :unique_mythic_rare_cards, :total_mythic_rare_cards
+  extend Memoist
+
+  attr_accessor :card_set, :user, :cards_in_set
 
   def initialize(card_set, user)
     self.card_set = card_set
 
     self.user = user
-
-    self.cards_in_set = card_set.cards.count
-
-    self.unique_cards = Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ?', user.id, card_set.id).select('distinct `collections`.`card_id`').count
-
-    self.total_cards = Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ?', user.id, card_set.id).sum(:quantity)
-
-    if self.cards_in_set > 0
-      self.percent_collected = ((self.unique_cards.to_f / self.cards_in_set.to_f) * 100.0).to_i
-    else
-      self.percent_collected = 0
-    end
-
-    if self.unique_cards == self.cards_in_set
-      self.rarity = :rare
-    else
-      self.rarity = :common
-    end
   end
 
-  def get_rarity_stats
-    self.common_cards_in_set = Card.where(:card_set_id => card_set.id, :rarity => 'Common').count
+  def cards_in_set
+    card_set.cards.count
+  end
+  memoize :cards_in_set
 
-    self.unique_common_cards = Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ? AND `cards`.`rarity` = ?', self.user.id, self.card_set.id, 'Common').select('distinct `collections`.`card_id`').count
+  def unique_cards
+    Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ?', user.id, card_set.id).select('distinct `collections`.`card_id`').count
+  end
+  memoize :unique_cards
 
-    self.total_common_cards = Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ? AND `cards`.`rarity` = ?', self.user.id, self.card_set.id, 'Common').sum(:quantity)
+  def unique_cards_in_list(card_list)
+    Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`id` = ? AND card_lists`.`have` = 1 AND `cards`.`card_set_id` = ?', user.id, card_list.id, card_set.id).select('distinct `collections`.`card_id`').count
+  end
+  memoize :unique_cards_in_list
 
-    self.uncommon_cards_in_set = Card.where(:card_set_id => card_set.id, :rarity => 'Uncommon').count
+  def total_cards
+    Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ?', user.id, card_set.id).sum(:quantity)
+  end
+  memoize :total_cards
 
-    self.unique_uncommon_cards = Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ? AND `cards`.`rarity` = ?', self.user.id, self.card_set.id, 'Uncommon').select('distinct `collections`.`card_id`').count
+  def total_cards_in_list(card_list)
+    Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`id` = ? AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ?', user.id, card_list.id, card_set.id).sum(:quantity)
+  end
+  memoize :total_cards_in_list
 
-    self.total_uncommon_cards = Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ? AND `cards`.`rarity` = ?', self.user.id, self.card_set.id, 'Uncommon').sum(:quantity)
+  def percent_collected
+    if self.cards_in_set > 0
+      ((self.unique_cards.to_f / self.cards_in_set.to_f) * 100.0).to_i
+    else
+      0
+    end
+  end
+  memoize :percent_collected
 
-    self.rare_cards_in_set = Card.where(:card_set_id => card_set.id, :rarity => 'Rare').count
+  def rarity
+    if self.unique_cards == self.cards_in_set
+      :rare
+    else
+      :common
+    end
+  end
+  memoize :rarity
 
-    self.unique_rare_cards = Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ? AND `cards`.`rarity` = ?', self.user.id, self.card_set.id, 'Rare').select('distinct `collections`.`card_id`').count
+  ['Common', 'Uncommon', 'Rare', 'Mythic Rare'].each do |rarity|
+    rarity_underscored = rarity.parameterize.underscore
 
-    self.total_rare_cards = Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ? AND `cards`.`rarity` = ?', self.user.id, self.card_set.id, 'Rare').sum(:quantity)
+    cards_in_set_method_name = "#{rarity_underscored}_cards_in_set".to_sym
 
-    self.mythic_rare_cards_in_set = Card.where(:card_set_id => card_set.id, :rarity => 'Mythic Rare').count
+    define_method cards_in_set_method_name do
+      Card.where(:card_set_id => card_set.id, :rarity => rarity).count
+    end
+    memoize cards_in_set_method_name
 
-    self.unique_mythic_rare_cards = Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ? AND `cards`.`rarity` = ?', self.user.id, self.card_set.id, 'Mythic Rare').select('distinct `collections`.`card_id`').count
+    unique_cards_method_name = "unique_#{rarity_underscored}_cards".to_sym
 
-    self.total_mythic_rare_cards = Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ? AND `cards`.`rarity` = ?', self.user.id, self.card_set.id, 'Mythic Rare').sum(:quantity)
+    define_method unique_cards_method_name do
+      Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ? AND `cards`.`rarity` = ?', self.user.id, self.card_set.id, rarity).select('distinct `collections`.`card_id`').count
+    end
+    memoize unique_cards_method_name
+
+    unique_cards_in_list_method_name = "unique_#{rarity_underscored}_cards_in_list".to_sym
+
+    define_method unique_cards_in_list_method_name do |card_list|
+      Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`id` = ? AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ? AND `cards`.`rarity` = ?', self.user.id, card_list.id, self.card_set.id, rarity).select('distinct `collections`.`card_id`').count
+    end
+    memoize unique_cards_in_list_method_name
+
+    total_cards_method_name = "total_#{rarity_underscored}_cards".to_sym
+
+    define_method total_cards_method_name do
+      Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ? AND `cards`.`rarity` = ?', self.user.id, self.card_set.id, rarity).sum(:quantity)
+    end
+    memoize total_cards_method_name
+
+    total_cards_in_list_method_name = "total_#{rarity_underscored}_cards_in_list".to_sym
+
+    define_method total_cards_in_list_method_name do |card_list|
+      Collection.joins(:card_list, :card).where('`collections`.`user_id` = ? AND `collections`.`quantity` <> 0 AND `card_lists`.`id` = ? AND `card_lists`.`have` = 1 AND `cards`.`card_set_id` = ? AND `cards`.`rarity` = ?', self.user.id, card_list.id, self.card_set.id, rarity).sum(:quantity)
+    end
+    memoize total_cards_in_list_method_name
   end
 end

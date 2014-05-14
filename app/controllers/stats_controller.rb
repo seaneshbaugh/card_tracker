@@ -16,6 +16,6 @@ class StatsController < ApplicationController
 
     @card_set_stat = CardSetStat.new(@card_set, current_user)
 
-    @card_set_stat.get_rarity_stats
+    @card_lists = CardList.where(:user_id => current_user.id, :have => true).order('`card_lists`.`order` ASC')
   end
 end
