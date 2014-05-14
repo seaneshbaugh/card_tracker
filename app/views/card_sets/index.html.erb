@@ -8,7 +8,11 @@
       <% card_set_column.each do |card_set| %>
         <% present card_set do |card_set_presenter| %>
           <div id="set-<%= card_set.id %>" class="set">
-            <%= link_to card_set_presenter.symbol(:size => 'small'), list_set_cards_path(@card_list.slug, card_set) %> <%= link_to card_set_presenter.name, list_set_cards_path(@card_list.slug, card_set.slug) %>
+            <% if @card_list.present? %>
+              <%= link_to card_set_presenter.symbol(:size => 'small'), list_set_cards_path(@card_list.slug, card_set.slug) %> <%= link_to card_set_presenter.name, list_set_cards_path(@card_list.slug, card_set.slug) %>
+            <% else %>
+              <%= link_to card_set_presenter.symbol(:size => 'small'), set_cards_path(card_set.slug) %> <%= link_to card_set_presenter.name, set_cards_path(card_set.slug) %>
+            <% end %>
           </div>
         <% end %>
       <% end %>
@@ -19,7 +23,11 @@
       <% card_set_column.each do |card_set| %>
         <% present card_set do |card_set_presenter| %>
           <div id="set-<%= card_set.id %>" class="set">
-            <%= link_to card_set_presenter.symbol(:size => 'small'), list_set_cards_path(@card_list.slug, card_set) %> <%= link_to card_set_presenter.name, list_set_cards_path(@card_list.slug, card_set.slug) %>
+            <% if @card_list.present? %>
+              <%= link_to card_set_presenter.symbol(:size => 'small'), list_set_cards_path(@card_list.slug, card_set.slug) %> <%= link_to card_set_presenter.name, list_set_cards_path(@card_list.slug, card_set.slug) %>
+            <% else %>
+              <%= link_to card_set_presenter.symbol(:size => 'small'), set_cards_path(card_set.slug) %> <%= link_to card_set_presenter.name, set_cards_path(card_set.slug) %>
+            <% end %>
           </div>
         <% end %>
       <% end %>
@@ -29,7 +37,11 @@
     <% @card_sets.each do |card_set| %>
       <% present card_set do |card_set_presenter| %>
         <div id="set-<%= card_set.id %>" class="set">
-          <%= link_to card_set_presenter.symbol(:size => 'small'), list_set_cards_path(@card_list.slug, card_set) %> <%= link_to card_set_presenter.name, list_set_cards_path(@card_list.slug, card_set.slug) %>
+          <% if @card_list.present? %>
+            <%= link_to card_set_presenter.symbol(:size => 'small'), list_set_cards_path(@card_list.slug, card_set.slug) %> <%= link_to card_set_presenter.name, list_set_cards_path(@card_list.slug, card_set.slug) %>
+          <% else %>
+            <%= link_to card_set_presenter.symbol(:size => 'small'), set_cards_path(card_set.slug) %> <%= link_to card_set_presenter.name, set_cards_path(card_set.slug) %>
+          <% end %>
         </div>
       <% end %>
     <% end %>

@@ -1,14 +1,6 @@
 class CollectionsController < ApplicationController
   before_filter :authenticate_user!
 
-  def show
-    @search = Collection.search(params[:q])
-
-    @collections = @search.result.includes(:card => { :card_set => { :card_block => :card_block_type } }).where(:user_id => current_user.id).where('`collections`.`quantity` > ?', 0).order('`card_block_types`.`id`, `card_blocks`.`id`, `card_sets`.`release_date` ASC, cast(`cards`.`card_number` as unsigned) ASC, `cards`.`name` ASC').page(params[:page])
-
-    @sets = @collections.group_by { |collection| collection.card.card_set }.sort_by { |card_set, _| card_set.release_date }
-  end
-
   def update_quantity
     respond_to do |format|
       format.json do

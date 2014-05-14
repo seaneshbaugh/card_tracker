@@ -37,6 +37,10 @@ CardTracker::Application.routes.draw do
     end
   end
 
+  resources :card_sets, :path => :sets, :as => :sets, :only => [:index] do
+    resources :cards, :only => [:index, :show]
+  end
+
   put '/collection/quantity' => 'collections#update_quantity'
 
   put '/collection/card_list' => 'collections#move_card_list'

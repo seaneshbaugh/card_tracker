@@ -3,7 +3,6 @@
   <div class="page-header">
     <h1><%= card_list_presenter.name %></h1>
   </div>
-  <%= link_to 'Browse Sets', list_sets_path(@card_list.slug), :class => 'btn btn-primary' %>
   <div id="card-list-<%= @card_list.id %>" class="card-list-cards page row">
     <% if @collections.present? %>
       <% @sets.each do |set, collections| %>

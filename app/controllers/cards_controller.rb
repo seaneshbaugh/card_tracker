@@ -2,12 +2,16 @@ class CardsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @card_list = CardList.where('`card_lists`.`user_id` = ? AND `card_lists`.`slug` = ?', current_user.id, params[:list_id]).first
+    if params[:list_id].present?
+      @card_list = CardList.where('`card_lists`.`user_id` = ? AND `card_lists`.`slug` = ?', current_user.id, params[:list_id]).first
 
-    if @card_list.nil?
-      flash[:error] = t('messages.card_lists.could_not_find')
+      if @card_list.nil?
+        flash[:error] = t('messages.card_lists.could_not_find')
 
-      redirect_to root_url and return
+        redirect_to root_url and return
+      end
+    else
+      @card_list = nil
     end
 
     @card_set = CardSet.where(:slug => params[:set_id]).first
@@ -21,15 +25,25 @@ class CardsController < ApplicationController
     @search = Card.search(params[:q])
 
     @cards = @search.result.includes(:card_set, :card_parts, :collections).where(:card_set_id => @card_set.id).order('cast(`cards`.`card_number` as unsigned) ASC, `cards`.`id` ASC')
+
+    if @card_list.present?
+      render 'index_with_card_list'
+    else
+      render 'index_without_card_list'
+    end
   end
 
   def show
-    @card_list = CardList.where('`card_lists`.`user_id` = ? AND `card_lists`.`slug` = ?', current_user.id, params[:list_id]).first
+    if params[:list_id].present?
+      @card_list = CardList.where('`card_lists`.`user_id` = ? AND `card_lists`.`slug` = ?', current_user.id, params[:list_id]).first
 
-    if @card_list.nil?
-      flash[:error] = t('messages.card_lists.could_not_find')
+      if @card_list.nil?
+        flash[:error] = t('messages.card_lists.could_not_find')
 
-      redirect_to root_url and return
+        redirect_to root_url and return
+      end
+    else
+      @card_list = nil
     end
 
     @card_set = CardSet.where(:slug => params[:set_id]).first
@@ -42,12 +56,18 @@ class CardsController < ApplicationController
 
     @card = Card.includes(:collections).where(:id => params[:id]).first
 
-    @collection = @card.collection_for(current_user, @card_list)
-
     if @card.nil?
       flash[:error] = t('messages.cards.could_not_find')
 
       redirect_to set_cards_url(@card_set)
+    end
+
+    if @card_list.present?
+      @collection = @card.collection_for(current_user, @card_list)
+
+      render 'show_with_card_list'
+    else
+      render 'show_without_card_list'
     end
   end
 

@@ -5,7 +5,7 @@
       <div class="page-header">
         <h1 class="card-name"><%= link_to card_set_presenter.symbol(:rarity => card_presenter.rarity.downcase.to_sym, :size => 'hidden-sm hidden-md hidden-lg'), list_set_cards_path(@card_list.slug, card_set_presenter.slug) %><%= link_to card_set_presenter.symbol(:rarity => card_presenter.rarity.downcase.to_sym, :size => 'large hidden-xs'), list_set_cards_path(@card_list.slug, card_set_presenter.slug) %> <%= card_presenter.name %></h1>
       </div>
-      <div id="card-<%= card_presenter.multiverse_id %>" class="card" data-card-id="<%= @card.id %>" data-quantity="<%= collection_presenter.quantity_as_integer %>">
+      <div id="card-<%= card_presenter.multiverse_id %>" class="card" data-card-list-id="<%= @card_list.id %>" data-card-id="<%= @card.id %>" data-quantity="<%= collection_presenter.quantity_as_integer %>">
         <div class="card-image-and-info row">
           <div class="card-image hidden-xs col-sm-3">
             <img src="http://mtgimage.com/multiverseid/<%= card_presenter.multiverse_id %>.jpg" style="max-width: 100%;">

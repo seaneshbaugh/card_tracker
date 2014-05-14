@@ -1,0 +1,34 @@
+<% content_for :body_class, 'card' %>
+<% present @card_set do |card_set_presenter| %>
+  <% present @card do |card_presenter| %>
+    <div class="page-header">
+      <h1 class="card-name"><%= link_to card_set_presenter.symbol(:rarity => card_presenter.rarity.downcase.to_sym, :size => 'hidden-sm hidden-md hidden-lg'), set_cards_path(card_set_presenter.slug) %><%= link_to card_set_presenter.symbol(:rarity => card_presenter.rarity.downcase.to_sym, :size => 'large hidden-xs'), set_cards_path(card_set_presenter.slug) %> <%= card_presenter.name %></h1>
+    </div>
+    <div id="card-<%= card_presenter.multiverse_id %>" class="card" data-card-id="<%= @card.id %>">
+      <div class="card-image-and-info row">
+        <div class="card-image hidden-xs col-sm-3">
+          <img src="http://mtgimage.com/multiverseid/<%= card_presenter.multiverse_id %>.jpg" style="max-width: 100%;">
+        </div>
+        <%= render :partial => "cards/show/#{card_presenter.partial_name}", :locals => { :card_presenter => card_presenter } %>
+        <div class="card-image visible-xs col-xs-12">
+          <img src="http://mtgimage.com/multiverseid/<%= card_presenter.multiverse_id %>.jpg" style="max-width: 100%;">
+        </div>
+      </div>
+      <div class="row">
+        <div class="card-attribute-label col-xs-12 col-sm-2">
+          Other Versions:
+        </div>
+        <div class="card-attribute other-versions col-xs-12 col-sm-10">
+          <% card_presenter.other_versions.each do |other_version| %>
+            <%= link_to card_set_symbol(other_version.card_set, :rarity => other_version.rarity.downcase.to_sym, :size => 'small'), set_card_path(other_version.card_set.slug, other_version) %>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="show-on-gatherer col-xs-12">
+          <%= link_to 'Show on Gatherer', "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=#{card_presenter.multiverse_id}", :target => '_blank' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
