@@ -71,6 +71,10 @@ class CardPresenter < BasePresenter
     @card.card_set.name
   end
 
+  def card_set_slug
+    @card.card_set.slug
+  end
+
   def card_block_name
     @card.card_set.card_block.name
   end

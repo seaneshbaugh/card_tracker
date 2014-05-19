@@ -67,15 +67,15 @@ class Card < ActiveRecord::Base
   end
 
   def collection_for(user, card_list)
-    if self.collections.loaded?
-      self.collections.select { |collection| collection.user_id == user.id && collection.card_list_id == card_list.id }.first
+    if collections.loaded?
+      collections.select { |collection| collection.user_id == user.id && collection.card_list_id == card_list.id }.first
     else
-      self.collections.where(:user_id => user.id, :card_list_id => card_list.id).first
+      collections.where(:user_id => user.id, :card_list_id => card_list.id).first
     end
   end
 
   def other_versions
-    Card.includes(:card_set).where('`cards`.`name` = ? AND `cards`.`id` <> ?', self.name, self.id)
+    Card.includes(:card_set).where('`cards`.`name` = ? AND `cards`.`id` <> ?', name, id)
   end
 
   def <=>(other)

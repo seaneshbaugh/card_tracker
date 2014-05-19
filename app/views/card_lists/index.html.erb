@@ -3,17 +3,6 @@
   <h1>Your Lists</h1>
 </div>
 <div id="card-lists" class="page">
-  <!--<div class="well col-xs-12">
-    <%= search_form_for @search, :url => root_path, :html => { :method => :get, :id => 'search-form', :class => 'form-inline' } do |f| %>
-      <div class="form-group">
-        <%= f.text_field :name_cont, :class => 'form-control', :placeholder => t('activerecord.attributes.card_list.name') %>
-      </div>
-      <div class="form-group">
-        <%= f.button "<span class=\"glyphicon glyphicon-search\"></span> #{t('search')}".html_safe, :type => :submit, :class => 'btn btn-primary' %>
-        <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, root_path, :class => 'btn btn-default', :rel => 'tooltip', :title => t('clear_search') %>
-      </div>
-    <% end %>
-  </div>-->
   <% if @card_lists.present? %>
     <% @card_lists.each do |card_list| %>
       <% present card_list do |card_list_presenter| %>

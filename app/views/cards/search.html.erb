@@ -1,20 +1,20 @@
 <% content_for :body_class, 'card-search' %>
 <div class="page-header">
   <h1>Card Search</h1>
-  <div class="well col-xs-12">
-    <%= search_form_for @search, :url => card_search_path, :html => { :method => :get, :id => 'search-form', :class => 'form-inline' } do |f| %>
-      <div class="form-group">
-        <%= f.text_field :name_or_card_text_or_card_type_cont, :class => 'form-control', :placeholder => 'Name, text, or type' %>
-      </div>
-      <div class="form-group">
-        <%= f.select :card_set_id_eq, CardSet.all.map{ |card_set| [card_set.name, card_set.id] }, { :include_blank => t('activerecord.models.card_set'), :selected => params[:q].present? ? params[:q][:card_set_id_eq] : '' }, { :class => 'form-control' } %>
-      </div>
-      <div class="form-group">
-        <%= f.button "<span class=\"glyphicon glyphicon-search\"></span> #{t('search')}".html_safe, :type => :submit, :class => 'btn btn-primary' %>
-        <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, root_path, :class => 'btn btn-default', :rel => 'tooltip', :title => t('clear_search') %>
-      </div>
-    <% end %>
-  </div>
+</div>
+<div class="well col-xs-12">
+  <%= search_form_for @search, :url => card_search_path, :html => { :method => :get, :id => 'search-form', :class => 'form-inline' } do |f| %>
+    <div class="form-group">
+      <%= f.text_field :name_or_card_text_or_card_type_cont, :class => 'form-control', :placeholder => 'Name, text, or type' %>
+    </div>
+    <div class="form-group">
+      <%= f.select :card_set_id_eq, CardSet.all.map{ |card_set| [card_set.name, card_set.id] }, { :include_blank => t('activerecord.models.card_set'), :selected => params[:q].present? ? params[:q][:card_set_id_eq] : '' }, { :class => 'form-control' } %>
+    </div>
+    <div class="form-group">
+      <%= f.button "<span class=\"glyphicon glyphicon-search\"></span> #{t('search')}".html_safe, :type => :submit, :class => 'btn btn-primary' %>
+      <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, root_path, :class => 'btn btn-default', :rel => 'tooltip', :title => t('clear_search') %>
+    </div>
+  <% end %>
 </div>
 <div id="card-search" class="page row">
   <% if @cards.present? %>
@@ -23,25 +23,14 @@
         <h2><%= set.name %></h2>
         <% cards.sort_by { |card| card.card_number.to_i }.each do |card| %>
           <% present card do |card_presenter| %>
-            <% present card.collection_for(current_user, @card_list), CollectionPresenter do |collection_presenter| %>
-              <div id="card-<%= card_presenter.multiverse_id %>" class="row card <%= card_presenter.color_class %>" data-card-id="<%= card.id %>" data-quantity="<%= collection_presenter.quantity_as_integer %>">
-                <div class="card-name col-xs-12 col-sm-8">
-                  <%= link_to card_presenter.name, set_card_path(set.slug, card), :rel => 'tooltip', :title => card_tooltip_text(card).gsub('"', "'"), :data => { :html => 'true' } %>
-                </div>
-                <div class="card-rarity col-xs-1">
-                  <%= card_presenter.rarity.first %>
-                </div>
-                <div class="card-quantity col-xs-1">
-                  <%= collection_presenter.quantity_as_string %>
-                </div>
-                <div class="col-xs-2 col-xs-offset-5 col-sm-1 col-sm-offset-0">
-                  <button class="increment btn btn-default center-block"><span class="glyphicon glyphicon-chevron-up"></span></button>
-                </div>
-                <div class="col-xs-2 col-sm-1">
-                  <button class="decrement btn btn-default center-block"><span class="glyphicon glyphicon-chevron-down"></span></button>
-                </div>
+            <div id="card-<%= card.id %>" class="row card <%= card_presenter.color_class %>" data-card-id="<%= card.id %>">
+              <div class="card-name col-xs-12 col-sm-7">
+                <%= link_to card_presenter.name, set_card_path(card_presenter.card_set_slug, card), :rel => 'tooltip', :title => card_tooltip_text(card).gsub("\"", "'"), :data => { :html => 'true' } %>
               </div>
-            <% end %>
+              <div class="card-rarity col-xs-1">
+                <%= card_presenter.rarity.first %>
+              </div>
+            </div>
           <% end %>
         <% end %>
       </div>
