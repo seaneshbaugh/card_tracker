@@ -55,7 +55,7 @@
           <% end %>
         </div>
       <% end %>
-      <%= paginate @collections, :route => :root_path %>
+      <%= paginate @collections %>
     <% elsif params[:q].present? %>
       <div class="no-cards col-xs-12">
         <p class="lead">No matching cards found in this list.</p>
