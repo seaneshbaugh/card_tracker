@@ -3,8 +3,8 @@
     <h1><%= t('users.show.title') %> <small><%= user_presenter.full_name %></small></h1>
     <div class="object-actions">
       <%= link_to t('users.links.back_to_index'), admin_users_path, :class => 'btn btn-default' %>
-      <% if can? :edit, User %><%= link_to t('users.edit.title'), edit_admin_user_path(@user), :class => 'btn btn-primary' %><% end %>
-      <% if can? :destroy, User %><%= link_to t('users.delete.title'), admin_user_path(@user), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') } %><% end %>
+      <% if can? :edit, @user %><%= link_to t('users.edit.title'), edit_admin_user_path(@user), :class => 'btn btn-primary' %><% end %>
+      <% if can? :destroy, @user %><%= link_to t('users.delete.title'), admin_user_path(@user), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') } %><% end %>
     </div>
     <div class="table-responsive">
       <table class="table table-striped table-condensed">
@@ -74,8 +74,8 @@
     </div>
     <div class="object-actions">
       <%= link_to t('users.links.back_to_index'), admin_users_path, :class => 'btn btn-default' %>
-      <% if can? :edit, User %><%= link_to t('users.edit.title'), edit_admin_user_path(@user), :class => 'btn btn-primary' %><% end %>
-      <% if can? :destroy, User %><%= link_to t('users.delete.title'), admin_user_path(@user), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') } %><% end %>
+      <% if can? :edit, @user %><%= link_to t('users.edit.title'), edit_admin_user_path(@user), :class => 'btn btn-primary' %><% end %>
+      <% if can? :destroy, @user %><%= link_to t('users.delete.title'), admin_user_path(@user), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') } %><% end %>
     </div>
   </div>
 <% end %>

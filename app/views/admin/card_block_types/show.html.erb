@@ -1,6 +1,6 @@
 <% present @card_block_type do |card_block_type_presenter| %>
   <div id="card-block-type-<%= @card_block_type.id %>" class="admin-content">
-    <h1><%= t('card_block_types.show.title') %> <small><%= @card_block_type.name %></small></h1>
+    <h1><%= t('card_block_types.show.title') %> <small><%= card_block_type_presenter.name %></small></h1>
     <div class="object-actions">
       <%= link_to t('card_block_types.links.back_to_index'), admin_card_block_types_path, :class => 'btn btn-default' %>
       <% if can? :edit, CardBlockType %><%= link_to t('card_block_types.edit.title'), edit_admin_card_block_type_path(@card_block_type), :class => 'btn btn-primary' %><% end %>
