@@ -1,20 +1,21 @@
 /* TEAM */
   Developer: Sean Eshbaugh
-  Site: http://seaneshbaugh.com/
-  Twitter: http://twitter.com/bungoman
+  Site: https://seaneshbaugh.com/
+  GitHub: https://github.com/seaneshbaugh
   Contact: sean (at) seaneshbaugh.com
 
 /* THANKS */
   Richard Garfield
   Aaron "Tenderlove" Patterson
   Robert Schultz
+  Zach Halpern
 
 /* SITE */
   Created On: 2012/12/30
-  Last Updated: 2014/04/30
+  Last Updated: 2019/04/11
   Language: English
   Doctype: HTML5
-  Lovingly Made In: RubyMine 5.4.3.2.1
-  Lovingly Made On: OSX 10.9.2 Mavericks
-  Lovingly Made With: Ruby, Ruby on Rails, ERB, HTML5, CSS3, LESS, JavaScript, jQuery
+  Lovingly Made In: Emacs
+  Lovingly Made On: macOS
+  Lovingly Made With: Ruby on Rails
   Source Available At: https://github.com/seaneshbaugh/card_tracker
