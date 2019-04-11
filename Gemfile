@@ -33,6 +33,7 @@ group :development do
   gem 'haml_lint', '0.28.0', require: false
   gem 'listen', '3.1.5'
   gem 'rubocop', '0.67.2', require: false
+  gem 'rubocop-performance', '1.1.0', require: false
   gem 'rubycritic', '4.0.2', require: false
   gem 'web-console', '3.7.0'
 end
