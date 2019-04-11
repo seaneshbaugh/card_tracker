@@ -1,11 +1,51 @@
-DotPosition:
+AllCops:
+  Exclude:
+    - bin/bundle
+    - bin/rails
+    - bin/rake
+    - bin/setup
+    - bin/update
+    - bin/webpack
+    - bin/webpack-dev-server
+    - bin/yarn
+    - db/schema.rb
+    - node_modules/**/*
+
+AbcSize:
   Enabled: false
 
-HashSyntax:
-  EnforcedStyle: hash_rockets
+ClassLength:
+  Enabled: false
 
-LineLength:
-  Max: 150
+CyclomaticComplexity:
+  Enabled: false
 
 Documentation:
+  Enabled: false
+
+MethodLength:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - config/environments/*
+    - config/routes.rb
+
+Metrics/LineLength:
+  Enabled: false
+
+NumericLiterals:
+  MinDigits: 6
+
+PerceivedComplexity:
+  Enabled: true
+
+Style/SymbolProc:
+  Exclude:
+    - config/initializers/rolify.rb
+
+Rails:
+  Enabled: true
+
+Rails/HasAndBelongsToMany:
   Enabled: false
