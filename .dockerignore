@@ -1,0 +1,7 @@
+.git/
+log/
+tmp/
+.byebug_history
+.pry_history
+docker-compose.yml
+yarn-error.log
