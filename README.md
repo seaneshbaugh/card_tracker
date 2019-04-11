@@ -1,41 +1,18 @@
 # Card Tracker
 
+A Magic: The Gathering inventory/collection tracker.
+
 ## Ruby Version
 
-This application is intended to be run on Ruby 1.8.7-p173. Due to limitations of my current host Ruby 1.9+ is not directly supported.
+2.6.2
 
 ## Rails Version
 
-This application uses Rails 3.2.17
+5.2.3
 
-## Required Gems
+## Dependencies
 
-The following gems are required to run this application:
-
-* rails (3.2.17)
-* mysql2
-* cancan
-* daemons
-* delayed_job
-* delayed_job_active_record
-* devise (3.1.2)
-* exception_notification (~> 3.0.1)
-* honeypot-captcha
-* kaminari (0.14.1)
-* ransack
-* sanitize (2.0.3)
-* simple_form
-* yaml_db
-* jquery-rails
-* jquery-ui-rails
-* less-rails
-* less-rails-bootstrap
-* therubyracer
-* uglifier
-* capistrano (~> 2.15.5)
-* capistrano-ext
-* mailcatcher
-* quiet_assets
+* [vips](https://jcupitt.github.io/libvips/)
 
 ## Local Development Installation
 
@@ -43,26 +20,56 @@ Clone the repository.
 
     $ git clone git@github.com:seaneshbaugh/card_tracker.git card_tracker
 
-cd into the project directory. If you don't have ruby-1.8.7-p173 already you will want to install it before doing this.
+cd into the project directory.
 
-    $ cd portfolio
+    $ cd card_tracker
 
-Install the necessary gems.
+Start the Docker containers.
 
-    $ bundle install
+    $ docker-compose up -d --build
 
-Create the databases.
+Create the development and test databases.
 
-    $ rake db:create
+    $ docker-compose run web rails db:create
 
-Add the database tables.
+Load the database schema.
 
-    $ rake db:migrate
-    $ RAILS_ENV=test rake db:migrate
+    $ docker-compose run web rails db:schema:load
 
 Seed the database.
 
-    $ rake db:seed
+    $ docker-compose run web rails db:seed
+
+## Troubleshooting
+
+#### `Node Sass could not find a binding for your current environment: Linux 64-bit with Node.js 11.x`
+
+If you update `/package.json` and run `yarn install` on the host machine it will overwrite the contents of `/node_modules` and in the process will rebuild Node Sass for the host machine. If the host machine is not the same OS as the Docker container you will see this error. This can be fixed by running `docker-compose run -rm web yarn install --force` and then restarting the `web` container.
+
+#### `no space left on device`
+
+This happens from time to time. Dead containers and unused images can be cleaned up with:
+
+    $ docker ps --filter status=dead --filter status=exited -aq | xargs docker rm -v
+    $ docker images --no-trunc | grep '<none>' | awk '{ print $3 }' | xargs docker rmi
+
+## Deploying
+
+More on this later!
+
+## Linting
+
+### Ruby
+
+    $ rubocop
+
+### HAML
+
+    $ haml-lint
+
+### SCSS
+
+    $ yarn run sass-lint --verbose --no-exit --config .sass-lint.yml
 
 ## Contacts
 
