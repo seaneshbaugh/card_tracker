@@ -1,14 +1,14 @@
-class User < ActiveRecord::Base
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable, :timeoutable
+# frozen_string_literal: true
 
-  attr_accessible :username, :email, :password, :password_confirmation, :role, :first_name, :last_name, :remember_me, :receive_newsletters, :receive_sign_up_alerts, :receive_contact_alerts
+class User < ApplicationRecord
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable, :timeoutable
 
   has_many :card_lists, :autosave => true
   has_many :collections
   has_many :cards, :through => :collections
 
-  validates_format_of     :username, :with => /^[a-z]([a-z0-9_]){4,31}$/
-  validates_length_of     :username, :within => 5..32
+  validates_format_of     :username, with: /\A[a-z]([a-z0-9_]){4,31}\z/
+  validates_length_of     :username, within: 5..32
   validates_presence_of   :username
   validates_uniqueness_of :username
 
@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   validates_length_of       :password, :within => 8..255, :if => :password_required?
   validates_presence_of     :password, :if => :password_required?
 
-  validates_inclusion_of :role, :in => Ability::ROLES.map { |_, role| role }
+#  validates_inclusion_of :role, :in => Ability::ROLES.map { |_, role| role }
   validates_presence_of  :role
 
   after_initialize do
@@ -72,9 +72,9 @@ class User < ActiveRecord::Base
     RegistrationMailer.delay(:run_at => 45.minutes.from_now).welcome_message(self)
   end
 
-  Ability::ROLES.each do |role, _|
-    class_eval %Q"scope :#{role.to_s.pluralize}, where(:role => Ability::ROLES[:#{role}].downcase)"
-  end
+  # Ability::ROLES.each do |role, _|
+  #   class_eval %Q"scope :#{role.to_s.pluralize}, where(:role => Ability::ROLES[:#{role}].downcase)"
+  # end
 
   def full_name
     "#{self.first_name} #{self.last_name}"
@@ -84,19 +84,19 @@ class User < ActiveRecord::Base
     "#{self.first_name.first.upcase}. #{self.last_name}"
   end
 
-  Ability::ROLES.each do |role, _|
-    define_method("#{role}?") do
-      self.role == role.to_s
-    end
+  # Ability::ROLES.each do |role, _|
+  #   define_method("#{role}?") do
+  #     self.role == role.to_s
+  #   end
 
-    define_method("#{role}!") do
-      self.role = role.to_s
-    end
-  end
+  #   define_method("#{role}!") do
+  #     self.role = role.to_s
+  #   end
+  # end
 
-  def ability
-    @ability ||= Ability.new(self)
-  end
+  # def ability
+  #   @ability ||= Ability.new(self)
+  # end
 
   def default_list
     self.card_lists.where(:default => true).first

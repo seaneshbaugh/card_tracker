@@ -1,5 +1,5 @@
 class Card < ActiveRecord::Base
-  attr_accessible :multiverse_id, :name, :card_set_id, :layout, :mana_cost, :converted_mana_cost, :colors, :card_type, :card_supertypes, :card_types, :card_subtypes, :card_text, :flavor_text, :power, :toughness, :loyalty, :rarity, :card_number, :artist
+#  attr_accessible :multiverse_id, :name, :card_set_id, :layout, :mana_cost, :converted_mana_cost, :colors, :card_type, :card_supertypes, :card_types, :card_subtypes, :card_text, :flavor_text, :power, :toughness, :loyalty, :rarity, :card_number, :artist
 
   belongs_to :card_set
 

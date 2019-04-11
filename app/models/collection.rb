@@ -1,5 +1,5 @@
 class Collection < ActiveRecord::Base
-  attr_accessible :card_id, :user_id, :card_list_id, :quantity
+#  attr_accessible :card_id, :user_id, :card_list_id, :quantity
 
   belongs_to :card
   belongs_to :user

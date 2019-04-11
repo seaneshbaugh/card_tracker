@@ -1,5 +1,5 @@
 class CardBlock < ActiveRecord::Base
-  attr_accessible :name, :card_block_type_id
+#  attr_accessible :name, :card_block_type_id
 
   belongs_to :card_block_type
 

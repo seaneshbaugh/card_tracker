@@ -1,5 +1,5 @@
 class CardList < ActiveRecord::Base
-  attr_accessible :user_id, :name, :slug, :have, :order, :default
+#  attr_accessible :user_id, :name, :slug, :have, :order, :default
 
   belongs_to :user
 

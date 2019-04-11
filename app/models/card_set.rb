@@ -1,5 +1,5 @@
 class CardSet < ActiveRecord::Base
-  attr_accessible :name, :slug, :card_block_id, :code, :release_date, :prerelease_date, :show_card_numbers
+#  attr_accessible :name, :slug, :card_block_id, :code, :release_date, :prerelease_date, :show_card_numbers
 
   belongs_to :card_block
 
