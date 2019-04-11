@@ -1,0 +1,6 @@
+en:
+  accounts:
+    update:
+      success: "Your account has been updated."
+    destroy:
+      success: "Your account and all associated data has successfully been deleted. We're sorry to see you go."

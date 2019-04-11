@@ -1,0 +1,9 @@
+en:
+  layouts:
+    application:
+      navigation:
+        sign_in: "Sign In"
+        sign_out: "Sign Out"
+        register: "Register"
+        admin_panel: "Admin Panel"
+      credit_html: 'Created with <a href="https://rubyonrails.org/">Ruby on Rails</a> by <a href="https://seaneshbaugh.com/">Sean Eshbaugh</a>. Fork me on <a href="https://github.com/seaneshbaugh/card_tracker">GitHub</a>!'
