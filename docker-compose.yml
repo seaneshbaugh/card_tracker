@@ -1,0 +1,40 @@
+version: "3"
+services:
+  db:
+    image: "postgres"
+    env_file:
+      - ".env"
+    volumes:
+      - "./tmp/db:/var/lib/postgresql/data"
+  mail:
+    image: "schickling/mailcatcher"
+    ports:
+      - "1080:1080"
+  web:
+    build:
+      context: "."
+      dockerfile: "Dockerfile"
+    env_file:
+      - ".env"
+    command: "bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - ".:/card_tracker"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - "db"
+    environment:
+      - "WEBPACKER_DEV_SERVER_HOST=webpacker"
+  webpacker:
+    build:
+      context: "."
+      dockerfile: "Dockerfile"
+    env_file:
+      - ".env"
+    command: "./bin/webpack-dev-server"
+    volumes:
+      - ".:/card_tracker"
+    ports:
+      - "3035:3035"
+    environment:
+      - "WEBPACKER_DEV_SERVER_HOST=0.0.0.0"
