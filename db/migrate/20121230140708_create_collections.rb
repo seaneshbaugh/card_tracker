@@ -1,9 +1,11 @@
-class CreateCollections < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class CreateCollections < ActiveRecord::Migration[4.2]
   def change
     create_table :collections do |t|
-      t.integer :card_id,  :null => false
-      t.integer :user_id,  :null => false
-      t.integer :quantity, :null => false, :default => ''
+      t.integer :card_id,  null: false
+      t.integer :user_id,  null: false
+      t.integer :quantity, null: false, default: ''
       t.timestamps
     end
 

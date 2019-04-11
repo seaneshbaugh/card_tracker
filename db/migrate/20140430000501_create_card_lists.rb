@@ -1,12 +1,14 @@
-class CreateCardLists < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class CreateCardLists < ActiveRecord::Migration[4.2]
   def change
     create_table :card_lists do |t|
-      t.integer :user_id,  :null => false
-      t.string :name, :null => false, :default => ''
-      t.string :slug, :null => false, :default => ''
-      t.boolean :have, :null => false, :default => true
-      t.integer :order, :null => false, :default => 0
-      t.boolean :default, :null => false, :default => false
+      t.integer :user_id, null: false
+      t.string :name, null: false, default: ''
+      t.string :slug, null: false, default: ''
+      t.boolean :have, null: false, default: true
+      t.integer :order, null: false, default: 0
+      t.boolean :default, null: false, default: false
       t.timestamps
     end
 

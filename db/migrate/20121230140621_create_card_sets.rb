@@ -1,9 +1,11 @@
-class CreateCardSets < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class CreateCardSets < ActiveRecord::Migration[4.2]
   def change
     create_table :card_sets do |t|
-      t.string :name,          :null => false, :default => ''
+      t.string :name, null: false, default: ''
       t.integer :card_block_id
-      t.string :code,          :null => false, :default => ''
+      t.string :code, null: false, default: ''
       t.date :release_date
       t.date :prerelease_date
       t.timestamps

@@ -1,20 +1,22 @@
-class CreateCards < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class CreateCards < ActiveRecord::Migration[4.2]
   def change
     create_table :cards do |t|
-      t.string :multiverse_id,       :null => false, :default => ''
-      t.string :name,                :null => false, :default => ''
+      t.string :multiverse_id,       null: false, default: ''
+      t.string :name,                null: false, default: ''
       t.integer :card_set_id
-      t.string :mana_cost,           :null => false, :default => ''
-      t.string :converted_mana_cost, :null => false, :default => ''
-      t.string :card_type,           :null => false, :default => ''
-      t.text :card_text,             :null => false
-      t.text :flavor_text,           :null => false
-      t.string :power,               :null => false, :default => ''
-      t.string :toughness,           :null => false, :default => ''
-      t.string :loyalty,             :null => false, :default => ''
-      t.string :rarity,              :null => false, :default => ''
-      t.string :card_number,         :null => false, :default => ''
-      t.string :artist,              :null => false, :default => ''
+      t.string :mana_cost,           null: false, default: ''
+      t.string :converted_mana_cost, null: false, default: ''
+      t.string :card_type,           null: false, default: ''
+      t.text :card_text,             null: false
+      t.text :flavor_text,           null: false
+      t.string :power,               null: false, default: ''
+      t.string :toughness,           null: false, default: ''
+      t.string :loyalty,             null: false, default: ''
+      t.string :rarity,              null: false, default: ''
+      t.string :card_number,         null: false, default: ''
+      t.string :artist,              null: false, default: ''
       t.timestamps
     end
 

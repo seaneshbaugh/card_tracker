@@ -1,13 +1,15 @@
-class DeviseCreateUsers < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class DeviseCreateUsers < ActiveRecord::Migration[4.2]
   def change
     create_table :users do |t|
       ## Database authenticatable
-      t.string :username,           :null => false, :default => ''
-      t.string :email,              :null => false, :default => ''
-      t.string :encrypted_password, :null => false, :default => ''
-      t.string :role,               :null => false, :default => ''
-      t.string :first_name,         :null => false, :default => ''
-      t.string :last_name,          :null => false, :default => ''
+      t.string :username,           null: false, default: ''
+      t.string :email,              null: false, default: ''
+      t.string :encrypted_password, null: false, default: ''
+      t.string :role,               null: false, default: ''
+      t.string :first_name,         null: false, default: ''
+      t.string :last_name,          null: false, default: ''
 
       ## Recoverable
       t.string   :reset_password_token
@@ -17,7 +19,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.datetime :remember_created_at
 
       ## Trackable
-      t.integer  :sign_in_count, :default => 0
+      t.integer  :sign_in_count, default: 0
       t.datetime :current_sign_in_at
       t.datetime :last_sign_in_at
       t.string   :current_sign_in_ip
@@ -30,7 +32,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string   :unconfirmed_email # Only if using reconfirmable
 
       ## Lockable
-      t.integer  :failed_attempts, :default => 0 # Only if lock strategy is :failed_attempts
+      t.integer  :failed_attempts, default: 0 # Only if lock strategy is :failed_attempts
       t.string   :unlock_token # Only if unlock strategy is :email or :both
       t.datetime :locked_at
 
@@ -45,8 +47,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
     end
 
     change_table :users do |t|
-      t.index :username,              :unique => true
-      t.index :email,                 :unique => true
+      t.index :username, unique: true
+      t.index :email, unique: true
       t.index :encrypted_password
       t.index :role
       t.index :first_name

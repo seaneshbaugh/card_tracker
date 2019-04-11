@@ -1,7 +1,9 @@
-class CreateCardBlockTypes < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class CreateCardBlockTypes < ActiveRecord::Migration[4.2]
   def change
     create_table :card_block_types do |t|
-      t.string :name, :null => false, :default => ''
+      t.string :name, null: false, default: ''
       t.timestamps
     end
 
