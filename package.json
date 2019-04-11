@@ -1,0 +1,25 @@
+{
+  "name": "card_tracker",
+  "private": true,
+  "dependencies": {
+    "@babel/core": "7.4.3",
+    "@babel/preset-env": "7.4.3",
+    "@rails/webpacker": "4.0.2",
+    "activestorage": "5.2.3",
+    "animate.css": "3.7.0",
+    "caniuse-lite": "1.0.30000957",
+    "classnames": "2.2.6",
+    "materialize-css": "1.0.0",
+    "moment": "2.24.0",
+    "normalize.css": "8.0.1",
+    "rails-ujs": "5.2.3",
+    "resolve-url-loader": "3.1.0",
+    "webpack": "4.29.6",
+    "webpack-cli": "3.3.0"
+  },
+  "devDependencies": {
+    "eslint": "5.16.0",
+    "sass-lint": "1.12.1",
+    "webpack-dev-server": "3.3.1"
+  }
+}
