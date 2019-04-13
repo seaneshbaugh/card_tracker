@@ -1,0 +1,7 @@
+en:
+  devise:
+    registrations:
+      new:
+        title: "Register"
+        submit: "Register"
+        accept_terms_of_service_html: 'I acknowledge that I have read and accept the <a href="/terms-of-service" target="_blank">terms of service</a>.'

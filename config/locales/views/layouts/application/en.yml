@@ -1,6 +1,9 @@
 en:
   layouts:
     application:
+      title: "The Caves of Koilos"
+      meta_description: "The Caves of Koilos, a place to keep track of your Magic: The Gathering card collection."
+      author: "Sean Eshbaugh"
       navigation:
         sign_in: "Sign In"
         sign_out: "Sign Out"

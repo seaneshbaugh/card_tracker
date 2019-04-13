@@ -1,0 +1,6 @@
+en:
+  devise:
+    passwords:
+      new:
+        title: "Reset Password"
+        submit: "Reset Password"

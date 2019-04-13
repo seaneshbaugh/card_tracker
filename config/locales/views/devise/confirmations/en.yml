@@ -1,0 +1,6 @@
+en:
+  devise:
+    confirmations:
+      new:
+        title: "Confirm Your Account"
+        submit: "Confirm"

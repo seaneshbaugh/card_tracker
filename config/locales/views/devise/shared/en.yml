@@ -1,0 +1,9 @@
+en:
+  devise:
+    shared:
+      links:
+        new_session: "Sign In"
+        new_registration: "Register"
+        new_password: "Forgot your password?"
+        new_unlock: "Didn't receive unlock instructions?"
+        new_confirmation: "Didn't receive confirmation instructions?"
