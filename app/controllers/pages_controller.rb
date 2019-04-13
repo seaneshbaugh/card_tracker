@@ -6,10 +6,8 @@ class PagesController < ApplicationController
   end
 
   def show
-    begin
-      render params[:id]
-    rescue
-      raise ActionController::RoutingError.new('Not Found')
-    end
+    render params[:id]
+  rescue
+    raise ActionController::RoutingError.new('Not Found')
   end
 end
