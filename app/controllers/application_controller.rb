@@ -1,9 +1,13 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
+  include Pundit
+
   protect_from_forgery
 
-  rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = exception.message
+  private
 
-    redirect_to root_url
+  def after_sign_out_path_for(_resource_or_scope)
+    root_url
   end
 end
