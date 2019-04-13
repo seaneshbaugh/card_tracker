@@ -2,9 +2,9 @@
 %html{ dir: 'ltr', lang: 'en-US' }
   %head
     %meta{ charset: 'utf-8' }
-    %title= page_title(yield(:page_title))
+    %title= page_title
     %meta{ content: 'width=device-width, initial-scale=1, shrink-to-fit=no', name: 'viewport' }
-    %meta{ content: page_meta_description(yield(:meta_description)), name: 'description' }
+    %meta{ content: page_meta_description, name: 'description' }
     %meta{ content: t('.author'), name: 'author' }
     %meta{ content: 'telephone=no', name: 'format-detection' }
     = stylesheet_pack_tag 'application', media: 'all'
@@ -20,16 +20,33 @@
     .content-wrap
       %header.main-header{ role: 'banner' }
         .container
+          %h1.center-align
+            The Caves of Koilos
       %main.main-content{ role: 'main' }
         .container
           .row
             .col.s12
               = flash_messages
-          .row
-            .col.s12
-              = yield
+          = yield
       %footer.main-footer{ role: 'contentinfo' }
         .container
+          .row
+            .footer-about.col.s12.l6
+              %h5.white-text= t('.footer.about.title')
+              %p.grey-text.text-lighten-4= t('.footer.about.text_html')
+              %p.grey-text.text-lighten-4= t('.footer.about.credit_html')
+            .footer-links.col.s12.l4.offset-l2
+              %h5.white-text= t('.footer.links.title')
+              %ul
+                %li.grey-text.text-lighten-3= link_to t('.footer.links.about'), '/about'
+                %li.grey-text.text-lighten-3= link_to t('.footer.links.contact'), contact_path
+                %li.grey-text.text-lighten-3= link_to t('.footer.links.privacy_policy'), '/privacy-policy'
+                %li.grey-text.text-lighten-3= link_to t('.footer.links.terms_and_conditions'), '/terms-and-conditions'
+                %li.grey-text.text-lighten-3= link_to t('.footer.links.source'), 'https://github.com/seaneshbaugh/card_tracker'
+          .footer-legal
+            %p.grey-text-text-lighten-4= t('.footer.legal.trademark_html')
+            %p.grey-text-text-lighten-4= t('.footer.legal.copyright_html')
+            %p.grey-text-text-lighten-4= t('.footer.legal.disclaimer')
     -# body_class &gt;
     -# .navbar.navbar-inverse.navbar-fixed-top{:role => "navigation"}
     -#   .container
@@ -98,24 +115,3 @@
     -#         - unless current_user
     -#           %li.register-nav-link= link_to ('<span class="glyphicon glyphicon-star-empty"></span> ' + t('navigation.register')).html_safe, new_user_registration_path
     -# = yield :jumbotron
-    -# .container
-    -#   = flash_messages
-    -#   = yield
-    -# %footer
-    -#   .container
-    -#     %ul.footer-links
-    -#       %li= link_to 'About', '/about'
-    -#       %li.text-muted ·
-    -#       %li= link_to 'Contact', contact_path
-    -#       %li.text-muted ·
-    -#       %li= link_to 'Privacy Policy', '/privacy-policy'
-    -#       %li.text-muted ·
-    -#       %li= link_to 'Terms and Conditions', '/terms-and-conditions'
-    -#       %li.text-muted ·
-    -#       %li= link_to 'Source', 'https://github.com/seaneshbaugh/card_tracker'
-    -#     %p
-    -#       Created with #{link_to 'Ruby on Rails', 'http://rubyonrails.org/'} by #{link_to 'Sean Eshbaugh', 'http://seaneshbaugh.com/'}. No copyright.
-    -#     %p
-    -#       Magic: the Gathering is a registered trademark of #{link_to 'Wizards of the Coast LLC', 'http://company.wizards.com/'}, a subsidiary of #{link_to 'Hasbro, Inc.', 'http://www.hasbro.com/'}
-    -#     %p Magic: the Gathering and all Magic images are copyright © Wizards of the Coast LLC. All Rights Reserved.
-    -#     %p The Caves of Koilos is in no way associated with Wizards of the Coast LLC or Hasbro, Inc.

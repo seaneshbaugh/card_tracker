@@ -29,16 +29,16 @@ module ApplicationHelper
     'btn btn-flat waves-effect waves-light blue darken-3'
   end
 
-  def page_title(title)
-    return t('.title') if title.blank?
+  def page_title
+    return t('.title') unless content_for?(:page_title)
 
-    title.strip
+    content_for(:page_title).strip
   end
 
-  def page_meta_description(meta_description)
-    return t('.meta_description') if meta_description.blank?
+  def page_meta_description
+    return t('.meta_description') unless content_for?(:page_meta_description)
 
-    meta_description.strip
+    content_for(:page_meta_description).strip
   end
 
   def present(object, klass = nil)

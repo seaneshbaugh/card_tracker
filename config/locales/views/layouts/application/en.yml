@@ -9,4 +9,19 @@ en:
         sign_out: "Sign Out"
         register: "Register"
         admin_panel: "Admin Panel"
-      credit_html: 'Created with <a href="https://rubyonrails.org/">Ruby on Rails</a> by <a href="https://seaneshbaugh.com/">Sean Eshbaugh</a>. Fork me on <a href="https://github.com/seaneshbaugh/card_tracker">GitHub</a>!'
+      footer:
+        about:
+          title: "About"
+          text_html: '<a href="https://mtg.gamepedia.com/Caves_of_Koilos">The Caves of Koilos</a> lets you keep track of your Magic: The Gathering card collection.'
+          credit_html: 'Created with <a href="https://rubyonrails.org/">Ruby on Rails</a> by <a href="https://seaneshbaugh.com/">Sean Eshbaugh</a>. Fork me on <a href="https://github.com/seaneshbaugh/card_tracker">GitHub</a>!'
+        links:
+          title: 'Links'
+          about: 'About'
+          contact: 'Contact'
+          privacy_policy: 'Privacy Policy'
+          terms_and_conditions: 'Terms and Conditions'
+          source: 'Source'
+        legal:
+          trademark_html: 'Magic: the Gathering is a registered trademark of <a href="https://company.wizards.com/">Wizards of the Coast LLC</a>.'
+          copyright_html: 'All Magic: the Gathering images and descriptions are copyright &copy; Wizards of the Coast LLC. All Rights Reserved. All other content is covered under the <a href="https://creativecommons.org/publicdomain/zero/1.0/">Creative Commons CC0 license</a>. To the extent possible under law, all copyright and related or neighboring rights to this work are waived.'
+          disclaimer: "The Caves of Koilos is in no way associated with Wizards of the Coast LLC."
