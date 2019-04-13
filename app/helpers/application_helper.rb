@@ -1,37 +1,44 @@
 module ApplicationHelper
-  def body_class
-    if content_for?(:body_class)
-      " class=\"#{content_for(:body_class).strip}\"".html_safe
-    else
-      ''
-    end
-  end
-
-  def flash_messages
-    render :partial => 'shared/flash_messages'
-  end
-
-  def flash_message_alert_class(name)
-    case name
-    when :success, :notice
-      'alert-success'
-    when :info
-      'alert-info'
-    when :warning
-      'alert-warning'
-    when :danger, :alert, :error
-      'alert-danger'
-    else
-      'alert-info'
-    end
-  end
-
   def active_controller?(controller_name)
     'active' if params[:controller] == controller_name
   end
 
   def active_action?(action_name)
     'active' if params[:action] == action_name
+  end
+
+  def body_class
+    return unless content_for?(:body_class)
+
+    content_for(:body_class).strip
+  end
+
+  def caution_button_class
+    'btn btn-flat waves-effect waves-light yellow darken-3'
+  end
+
+  def error_messages_for(object)
+    "#{object.errors.full_messages.uniq.join('. ')}."
+  end
+
+  def flash_messages
+    render partial: 'shared/flash_messages'
+  end
+
+  def info_button_class
+    'btn btn-flat waves-effect waves-light blue darken-3'
+  end
+
+  def page_title(title)
+    return t('.title') if title.blank?
+
+    title.strip
+  end
+
+  def page_meta_description(meta_description)
+    return t('.meta_description') if meta_description.blank?
+
+    meta_description.strip
   end
 
   def present(object, klass = nil)
@@ -42,5 +49,13 @@ module ApplicationHelper
     yield presenter if block_given?
 
     presenter
+  end
+
+  def success_button_class
+    'btn btn-flat waves-effect waves-light green darken-3'
+  end
+
+  def warning_button_class
+    'btn btn-flat waves-effect waves-light red darken-3'
   end
 end
