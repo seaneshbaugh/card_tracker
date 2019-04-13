@@ -1,0 +1,121 @@
+!!!
+%html{ dir: 'ltr', lang: 'en-US' }
+  %head
+    %meta{ charset: 'utf-8' }
+    %title= page_title(yield(:page_title))
+    %meta{ content: 'width=device-width, initial-scale=1, shrink-to-fit=no', name: 'viewport' }
+    %meta{ content: page_meta_description(yield(:meta_description)), name: 'description' }
+    %meta{ content: t('.author'), name: 'author' }
+    %meta{ content: 'telephone=no', name: 'format-detection' }
+    = stylesheet_pack_tag 'application', media: 'all'
+    = javascript_pack_tag 'application'
+    %link{ href: '/favicon.ico', rel: 'shortcut icon' }
+    %link{ href: asset_pack_path('media/shared/images/apple-touch-icon-iphone.png'), rel: 'apple-touch-icon', sizes: '57x57' }
+    %link{ href: asset_pack_path('media/shared/images/apple-touch-icon-ipad.png'), rel: 'apple-touch-icon', sizes: '72x72' }
+    %link{ href: asset_pack_path('media/shared/images/apple-touch-icon-iphone-retina.png'), rel: 'apple-touch-icon', sizes: '114x114' }
+    %link{ href: asset_pack_path('media/shared/images/apple-touch-icon-ipad-retina.png'), rel: 'apple-touch-icon', sizes: '144x144' }
+    %link{ href: '/humans.txt', rel: 'author' }
+    = csrf_meta_tags
+  %body{ class: body_class }
+    .content-wrap
+      %header.main-header{ role: 'banner' }
+        .container
+      %main.main-content{ role: 'main' }
+        .container
+          .row
+            .col.s12
+              = flash_messages
+          .row
+            .col.s12
+              = yield
+      %footer.main-footer{ role: 'contentinfo' }
+        .container
+    -# body_class &gt;
+    -# .navbar.navbar-inverse.navbar-fixed-top{:role => "navigation"}
+    -#   .container
+    -#     .navbar-header
+    -#       %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+    -#         %span.sr-only Toggle navigation
+    -#         %span.icon-bar
+    -#         %span.icon-bar
+    -#         %span.icon-bar
+    -#       = link_to t('application.title'), root_path, :class => 'navbar-brand'
+    -#     .collapse.navbar-collapse
+    -#       %ul.nav.navbar-nav
+    -#         - if current_user
+    -#           %li{:class => "dropdown #{active_controller?('card_lists')}"}
+    -#             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+    -#               Your Lists
+    -#               %b.caret
+    -#             %ul.dropdown-menu
+    -#               - current_user.card_lists.first(5).each do |card_list|
+    -#                 %li.card-list-nav-link= link_to card_list.name, list_path(card_list.slug)
+    -#               %li.divider
+    -#               %li.new-card-lists-nav-link= link_to 'New List', new_list_path
+    -#         - if current_user
+    -#           - if @card_list.present? && @card_list.persisted?
+    -#             %li.sets-nav-link= link_to '<span class="glyphicon glyphicon-align-justify"></span> Sets'.html_safe, list_sets_path(@card_list.slug)
+    -#           - else
+    -#             %li.sets-nav-link= link_to '<span class="glyphicon glyphicon-align-justify"></span> Sets'.html_safe, sets_path
+    -#         - if can? :read, :admin
+    -#           %li.admin-nav-link.visible-xs= link_to ('<span class="glyphicon glyphicon-wrench"></span> ' + t('navigation.admin_home')).html_safe, admin_root_path
+    -#         - if current_user
+    -#           %li.show-account-nav-link.visible-xs= link_to ('<span class="glyphicon glyphicon-user"></span> ' + t('accounts.show.title')).html_safe, account_path, :class => active_controller?('accounts')
+    -#         - if current_user
+    -#           %li.edit-account-nav-link.visible-xs= link_to ('<span class="glyphicon glyphicon-cog"></span> ' + t('accounts.edit.title')).html_safe, edit_account_path, :class => active_controller?('accounts')
+    -#         - if current_user
+    -#           %li.stats-nav-link.visible-xs= link_to ('<span class="glyphicon glyphicon-stats"></span> ' + 'Stats').html_safe, stats_path, :class => active_controller?('stats')
+    -#         - if current_user
+    -#           %li.logout-nav-link.visible-xs= link_to ('<span class="glyphicon glyphicon-log-out"></span> ' + t('navigation.sign_out')).html_safe, destroy_user_session_path, :method => :delete
+    -#         - if current_user
+    -#           %li.card-search
+    -#             = form_tag card_search_path, :method => :get, :id => 'navbar-card-search', :class => 'navbar-form', :role => 'form' do
+    -#               .form-group
+    -#                 %input.form-control{:name => "q[name_or_card_text_or_card_type_cont]", :placeholder => "Search Cards", :type => "text"}/
+    -#               %button.btn.btn-success{:type => "submit"}
+    -#                 %span.glyphicon.glyphicon-search
+    -#         - unless current_user
+    -#           %li.login-nav-link.visible-xs= link_to ('<span class="glyphicon glyphicon-log-in"></span> ' + t('navigation.sign_in')).html_safe, new_user_session_path
+    -#         - unless current_user
+    -#           %li.register-nav-link.visible-xs= link_to ('<span class="glyphicon glyphicon-star-empty"></span> ' + t('navigation.register')).html_safe, new_user_registration_path
+    -#       %ul.nav.navbar-nav.navbar-right.hidden-xs
+    -#         - if current_user
+    -#           %li{:class => "dropdown #{active_controller?('accounts')}"}
+    -#             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+    -#               Your Account
+    -#               %b.caret
+    -#             %ul.dropdown-menu
+    -#               %li.show-account-nav-link= link_to ('<span class="glyphicon glyphicon-user"></span> ' + t('accounts.show.title')).html_safe, account_path, :class => active_controller?('accounts')
+    -#               %li.edit-account-nav-link= link_to ('<span class="glyphicon glyphicon-cog"></span> ' + t('accounts.edit.title')).html_safe, edit_account_path, :class => active_controller?('accounts')
+    -#               %li.stats-nav-link= link_to ('<span class="glyphicon glyphicon-stats"></span> ' + 'Stats').html_safe, stats_path, :class => active_controller?('stats')
+    -#               %li.divider
+    -#               - if can? :read, :admin
+    -#                 %li.admin-nav-link= link_to ('<span class="glyphicon glyphicon-wrench"></span> ' + t('navigation.admin_home')).html_safe, admin_root_path
+    -#         - if current_user
+    -#           %li.logout-nav-lin= link_to ('<span class="glyphicon glyphicon-log-out"></span> ' + t('navigation.sign_out')).html_safe, destroy_user_session_path, :method => :delete
+    -#         - unless current_user
+    -#           %li.login-nav-link= link_to ('<span class="glyphicon glyphicon-log-in"></span> ' + t('navigation.sign_in')).html_safe, new_user_session_path
+    -#         - unless current_user
+    -#           %li.register-nav-link= link_to ('<span class="glyphicon glyphicon-star-empty"></span> ' + t('navigation.register')).html_safe, new_user_registration_path
+    -# = yield :jumbotron
+    -# .container
+    -#   = flash_messages
+    -#   = yield
+    -# %footer
+    -#   .container
+    -#     %ul.footer-links
+    -#       %li= link_to 'About', '/about'
+    -#       %li.text-muted ·
+    -#       %li= link_to 'Contact', contact_path
+    -#       %li.text-muted ·
+    -#       %li= link_to 'Privacy Policy', '/privacy-policy'
+    -#       %li.text-muted ·
+    -#       %li= link_to 'Terms and Conditions', '/terms-and-conditions'
+    -#       %li.text-muted ·
+    -#       %li= link_to 'Source', 'https://github.com/seaneshbaugh/card_tracker'
+    -#     %p
+    -#       Created with #{link_to 'Ruby on Rails', 'http://rubyonrails.org/'} by #{link_to 'Sean Eshbaugh', 'http://seaneshbaugh.com/'}. No copyright.
+    -#     %p
+    -#       Magic: the Gathering is a registered trademark of #{link_to 'Wizards of the Coast LLC', 'http://company.wizards.com/'}, a subsidiary of #{link_to 'Hasbro, Inc.', 'http://www.hasbro.com/'}
+    -#     %p Magic: the Gathering and all Magic images are copyright © Wizards of the Coast LLC. All Rights Reserved.
+    -#     %p The Caves of Koilos is in no way associated with Wizards of the Coast LLC or Hasbro, Inc.
