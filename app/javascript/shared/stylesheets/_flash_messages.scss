@@ -1,0 +1,21 @@
+@import "~materialize-css/sass/components/color-variables";
+
+.flash-messages {
+    .flash-message {
+        &.flash-message-success {
+            background: color("green", "lighten-4");
+        }
+
+        &.flash-message-error {
+            background: color("red", "lighten-4");
+        }
+
+        &.flash-message-debug {
+            background: color("blue", "lighten-4");
+
+            pre {
+                white-space: pre-wrap;
+            }
+        }
+    }
+}
