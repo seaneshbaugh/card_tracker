@@ -1,0 +1,40 @@
+- content_for :body_class, 'home'
+- content_for :jumbotron do
+  .jumbotron
+    .container
+      %h1 The Caves of Koilos
+      %p.lead
+        Keep track of your Magic: The Gathering
+        %br.visible-xs/
+        = succeed "card" do
+          %span.hidden-xs
+.row
+  .col.s12.m6.offset-m3
+    %h2= t('layouts.application.navigation.sign_in')
+    = form_for @new_user, as: :user, url: session_path(:user) do |f|
+      .input-field
+        = f.text_field :username
+        = f.label :username
+      .input-field
+        = f.password_field :password
+        = f.label :password
+      %p
+        = f.label :remember_me do
+          = f.check_box :remember_me
+          %span= 'Remember Me (TODO: I18nize this)'
+      .input-field
+        = f.submit t('layouts.application.navigation.sign_in'), class: success_button_class
+  .col.s12.m6.offset-m3
+    %span{:style => "text-decoration: line-through;"}
+    or
+    %span{:style => "text-decoration: line-through;"}
+  .col.s12.m6.offset-m3
+    %h2= t('layouts.application.navigation.register')
+    = form_for @new_user, as: :user, url: registration_path(:user), :html => { :autocomplete => 'off', :honeypot => true } do |f|
+      = f.text_field :username, :required => true
+      = f.email_field :email, :required => true
+      = f.password_field :password, :required => true
+      = f.password_field :password_confirmation, :label => 'Repeat Password', :required => true
+      .form-group
+        .col-sm-offset-2.col-sm-10
+          = f.submit t('layouts.application.navigation.register')
