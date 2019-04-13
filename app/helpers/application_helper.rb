@@ -32,7 +32,7 @@ module ApplicationHelper
   def page_title
     return t('.title') unless content_for?(:page_title)
 
-    content_for(:page_title).strip
+    "#{content_for(:page_title).strip} - #{t('.title')}"
   end
 
   def page_meta_description
