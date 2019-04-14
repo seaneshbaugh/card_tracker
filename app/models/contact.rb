@@ -1,57 +1,33 @@
-require 'active_record/validations'
-require 'active_model/errors'
+# frozen_string_literal: true
 
 class Contact
-  include ActiveModel::Conversion
-  include ActiveRecord::Validations
+  include ActiveModel::Model
+  include ActiveModel::Validations
 
   attr_accessor :name
   attr_accessor :email
   attr_accessor :subject
   attr_accessor :body
 
-  attr_reader :errors
+  validates :name, presence: true, length: { maximum: 128 }
+  validates :email, presence: true, email: { allow_blank: true }
+  validates :subject, presence: true, length: { minimum: 4, maximum: 128, allow_blank: true }
+  validates :body, presence: true, length: { minimum: 8, maximum: 2048, allow_blank: true }
 
-  validates_presence_of :name
-
-  validates_presence_of :email
-  validates_format_of   :email, :with => RFC822::EmailAddress
-
-  validates_presence_of :subject
-  validates_length_of   :subject, :minimum => 4, :maximum => 128
-
-  validates_presence_of :body
-  validates_length_of   :body, :minimum => 8, :maximum => 2048
-
-  def initialize(args = nil)
-    @errors = ActiveModel::Errors.new(self)
-
-    self.name = ''
-    self.email = ''
-    self.subject = ''
-    self.body = ''
-
-    if args
-      args.each do |key, value|
-        instance_variable_set("@#{key}", value) unless value.nil?
-      end
-    end
+  # TODO: Remove this method when Rails 6 is released.
+  def as_json(options = nil)
+    super({ except: %w[errors validation_context] }.deep_merge(options || {}))
   end
 
-  def save
-  end
+  def sanitize!
+    @name = name.strip
 
-  def save!
-  end
+    @email = email.downcase.strip
 
-  def new_record?
-    false
-  end
+    @subject = Sanitize.clean(subject).gsub(/\n|\r|\t/, '').strip
 
-  def update_attribute
-  end
+    @body = Sanitize.clean(body).gsub(/\r|\t/, '').split("\n").reject(&:empty?).join("\n").strip
 
-  def persisted?
-    false
+    self
   end
 end

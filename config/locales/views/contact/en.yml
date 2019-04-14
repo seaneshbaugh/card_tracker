@@ -1,0 +1,10 @@
+en:
+  contact:
+    new:
+      title: "Contact"
+      message: "Got a question about The Caves of Koilos? Send us a message! We love feedback."
+      submit: "Send Message"
+    thanks:
+      page_title: "Contact Message Sent"
+      title: "Thanks!"
+      message: "Your message has been sent! We will get back to you soon."

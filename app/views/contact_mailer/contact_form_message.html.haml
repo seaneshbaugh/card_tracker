@@ -1,0 +1,14 @@
+!!!
+%html
+  %head
+    %meta{ 'content' => 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type' }
+  %body{ 'style' => "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen;".html_safe }
+    %h1= t('.title')
+    %h2{ 'style' => 'border-bottom: 1px solid #333;' }= Contact.human_attribute_name(:name)
+    %p= @contact.name
+    %h2{ 'style' => 'border-bottom: 1px solid #333;' }= Contact.human_attribute_name(:email)
+    %p= @contact.email
+    %h2{ 'style' => 'border-bottom: 1px solid #333;' }= Contact.human_attribute_name(:subject)
+    %p= @contact.subject
+    %h2{ 'style' => 'border-bottom: 1px solid #333;' }= Contact.human_attribute_name(:body)
+    %p= @contact.body.gsub("\n", content_tag(:br)).html_safe

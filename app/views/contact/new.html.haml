@@ -1,0 +1,22 @@
+- content_for :page_title, t('.title')
+- content_for :body_class, 'contact'
+.page-contact.page
+  %header.page-header
+    %h1= t('.title')
+  .page-body
+    %p.message= t('.message')
+    = form_for @contact, url: contact_path, html: { honeypot: true } do |f|
+      .input-field
+        = f.text_field :name, autofocus: true, required: true
+        = f.label :name
+      .input-field
+        = f.email_field :email, required: true
+        = f.label :email
+      .input-field
+        = f.text_field :subject, required: true
+        = f.label :subject
+      .input-field
+        = f.text_area :body, class: 'materialize-textarea', required: true
+        = f.label :body
+      .input-field
+        = f.submit t('.submit'), class: success_button_class

@@ -1,0 +1,9 @@
+en:
+  contact_mailer:
+    contact_form_confirmation_message:
+      greeting: "Hi there! Sean from The Caves of Koilos here."
+      greeting_html: 'Hi there! Sean from <a href="%{root_url}">The Caves of Koilos</a> here.'
+      message: "Just wanted to let you know that I got your message and I will get back to you as soon as possible!"
+      reference: "Here's what you sent for reference:"
+    contact_form_message:
+      title: "New Contact Form Message"
