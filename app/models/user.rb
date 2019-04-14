@@ -17,8 +17,6 @@ class User < ApplicationRecord
 
   rolify
 
-  resourcify :other_users
-
   def full_name
     "#{first_name} #{last_name}"
   end
