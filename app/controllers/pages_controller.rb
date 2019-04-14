@@ -7,7 +7,7 @@ class PagesController < ApplicationController
 
   def show
     render params[:id]
-  rescue
-    raise ActionController::RoutingError.new('Not Found')
+  rescue ActionView::MissingTemplate
+    raise ActionController::RoutingError, 'Not Found'
   end
 end
