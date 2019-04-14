@@ -8,6 +8,7 @@ class User < ApplicationRecord
   validates :username, format: { with: /\A[a-z]([a-z0-9_]){4,31}\z/ }, length: { within: 5..32 }, presence: true, uniqueness: true
   validates :email, email: { allow_blank: true }, presence: true, uniqueness: { case_sensitive: false }
 
+  after_initialize :set_default_attribute_values, if: :new_record?
   after_create :assign_default_role
   after_create :create_default_lists
   after_commit :send_registration_notifications, on: :create
@@ -46,5 +47,16 @@ class User < ApplicationRecord
 
   def send_registration_notifications
     RegistrationNotificationJob.perform_later(self)
+  end
+
+  def set_default_attribute_values
+    self.username ||= ''
+    self.email ||= ''
+    self.first_name ||= ''
+    self.last_name ||= ''
+    self.receive_newsletters = true if receive_newsletters.nil?
+    self.receive_contact_alerts = false if receive_contact_alerts.nil?
+    self.receive_sign_up_alerts = false if receive_sign_up_alerts.nil?
+    self.sign_in_count ||= 0
   end
 end
