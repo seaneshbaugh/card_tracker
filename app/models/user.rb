@@ -1,130 +1,50 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  has_many :card_lists, autosave: true, dependent: :destroy
+  has_many :collections, dependent: :destroy
+  has_many :cards, through: :collections
+
+  validates :username, format: { with: /\A[a-z]([a-z0-9_]){4,31}\z/ }, length: { within: 5..32 }, presence: true, uniqueness: true
+  validates :email, email: { allow_blank: true }, presence: true, uniqueness: { case_sensitive: false }
+
+  after_create :assign_default_role
+  after_create :create_default_lists
+  after_commit :send_registration_notifications, on: :create
+
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable, :timeoutable
 
-  has_many :card_lists, :autosave => true
-  has_many :collections
-  has_many :cards, :through => :collections
+  rolify
 
-  validates_format_of     :username, with: /\A[a-z]([a-z0-9_]){4,31}\z/
-  validates_length_of     :username, within: 5..32
-  validates_presence_of   :username
-  validates_uniqueness_of :username
-
-  validates_format_of     :email, :with => Devise.email_regexp, :allow_blank => true
-  validates_presence_of   :email
-  validates_uniqueness_of :email, :case_sensitive => false
-
-  validates_confirmation_of :password
-  validates_length_of       :password, :within => 8..255, :if => :password_required?
-  validates_presence_of     :password, :if => :password_required?
-
-#  validates_inclusion_of :role, :in => Ability::ROLES.map { |_, role| role }
-  validates_presence_of  :role
-
-  after_initialize do
-    if self.new_record?
-      self.username ||= ''
-      self.email ||= ''
-      self.encrypted_password ||= ''
-      self.role ||= ''
-      self.first_name ||= ''
-      self.last_name ||= ''
-
-      if self.receive_newsletters.nil?
-        self.receive_newsletters = true
-      end
-
-      if self.receive_contact_alerts.nil?
-        self.receive_contact_alerts = false
-      end
-
-      if self.receive_sign_up_alerts.nil?
-        self.receive_sign_up_alerts = false
-      end
-
-      self.sign_in_count ||= 0
-    end
-  end
-
-  before_validation :define_role
-
-  before_save do
-    if self.authentication_token.blank?
-      self.authentication_token = loop do
-        token = Devise.friendly_token
-
-        break token unless User.where(:authentication_token => token).first
-      end
-    end
-  end
-
-  after_create do
-    self.create_default_lists
-
-    @alert_recipients = User.where('`users`.`role` != ? AND `users`.`receive_sign_up_alerts` = ?', Ability::ROLES[:read_only], true)
-
-    @alert_recipients.each do |alert_recipient|
-      RegistrationMailer.new_sign_up_message(alert_recipient, self).deliver
-    end
-
-    RegistrationMailer.delay(:run_at => 45.minutes.from_now).welcome_message(self)
-  end
-
-  # Ability::ROLES.each do |role, _|
-  #   class_eval %Q"scope :#{role.to_s.pluralize}, where(:role => Ability::ROLES[:#{role}].downcase)"
-  # end
+  resourcify :other_users
 
   def full_name
-    "#{self.first_name} #{self.last_name}"
+    "#{first_name} #{last_name}"
   end
-
-  def short_name
-    "#{self.first_name.first.upcase}. #{self.last_name}"
-  end
-
-  # Ability::ROLES.each do |role, _|
-  #   define_method("#{role}?") do
-  #     self.role == role.to_s
-  #   end
-
-  #   define_method("#{role}!") do
-  #     self.role = role.to_s
-  #   end
-  # end
-
-  # def ability
-  #   @ability ||= Ability.new(self)
-  # end
 
   def default_list
-    self.card_lists.where(:default => true).first
+    card_lists.find_by(default: true)
+  end
+
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
+  end
+
+  private
+
+  def assign_default_role
+    add_role(:user) if roles.blank?
   end
 
   def create_default_lists
-    if self.card_lists.length == 0
-      self.card_lists << CardList.new(:name => 'Have', :have => true, :order => 0, :default => true)
+    return unless card_lists.empty?
 
-      self.card_lists << CardList.new(:name => 'Want', :have => false, :order => 1, :default => false)
-
-      self.card_lists << CardList.new(:name => 'Have (foil)', :have => true, :order => 2, :default => false)
-
-      self.card_lists << CardList.new(:name => 'Want (foil)', :have => false, :order => 3, :default => false)
+    CardList::DEFAULT_LISTS.each do |default_list|
+      card_lists << CardList.new(default_list)
     end
   end
 
-  protected
-
-  def password_required?
-    !self.persisted? || !self.password.blank? || !self.password_confirmation.blank?
-  end
-
-  def define_role
-    if self.role.present? && Ability::ROLES.include?(role.downcase.to_sym)
-      self.role = self.role.downcase
-    else
-      self.role = Ability::ROLES[:read_only]
-    end
+  def send_registration_notifications
+    RegistrationNotificationJob.perform_later(self)
   end
 end
