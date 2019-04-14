@@ -1,0 +1,30 @@
+- content_for :body_class, 'card-lists'
+.page-card-lists.page
+  %header.page-header
+    %h1= t('.title')
+  .page-body
+    - if @card_lists.present?
+      - @card_lists.each do |card_list|
+        - present card_list do |card_list_presenter|
+          %div.card-list.row{ id: "list-#{card_list.id}", 'data-card-list-id' => card_list.id }
+            .col.s11
+              = link_to card_list_presenter.name, list_path(card_list_presenter.slug), class: 'card-list-name'
+              %br
+              %span.card-list-info= "#{card_list_presenter.total_cards} cards (#{card_list_presenter.unique_cards} unique)"
+            .col.s1
+              %a.dropdown-trigger.btn{ href: '#', 'data-target' => "list-#{card_list.id}-actions" }
+                %i.material-icons settings
+              %ul.dropdown-content{ id: "list-#{card_list.id}-actions" }
+                %li
+                  = link_to 'Browse Sets', list_sets_path(card_list_presenter.slug)
+                %li.divider{ tabindex: '-1' }
+                %li
+                  = link_to 'Edit', edit_list_path(card_list_presenter.slug)
+                %li
+                  = link_to 'Delete', list_path(card_list_presenter.slug), method: :delete, data: { confirm: t('confirm_delete') }
+    -  elsif params[:q].present?
+      %p No matching card lists found.
+    - else
+      %p
+        You don't seem to have any card lists. Why not
+        #{ link_to 'create one', new_list_path }?
