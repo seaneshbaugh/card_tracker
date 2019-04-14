@@ -1,0 +1,9 @@
+.flash-messages
+  - flash.each do |name, message|
+    %div{ class: "flash-message flash-message-#{name} card" }
+      .flash-message-content.card-content
+        %span.flash-message-title.card-title= name.to_s.capitalize
+        - if name == 'debug'
+          %pre= message.inspect
+        - else
+          %p= message
