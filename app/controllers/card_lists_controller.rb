@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class CardListsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def index
     @search = CardList.search(params[:q])
 
-    @card_lists = @search.result.where(:user_id => current_user.id).order('`card_lists`.`order` ASC').page(params[:page])
+    @card_lists = @search.result.where(user_id: current_user.id).order(order: :asc).page(params[:page])
   end
 
   def show

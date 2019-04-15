@@ -1,18 +1,18 @@
-class CardBlock < ActiveRecord::Base
-#  attr_accessible :name, :card_block_type_id
+# frozen_string_literal: true
 
+class CardBlock < ApplicationRecord
   belongs_to :card_block_type
 
-  has_many :card_sets, :order => '`card_sets`.`release_date` ASC'
+  has_many :card_sets, -> {order(release_date: :asc) }, dependent: :destroy
 
-  validates_presence_of   :name
-  validates_uniqueness_of :name
+  validates :name, presence: true, uniqueness: true
+  validates :card_block_type_id, presence: true
 
-  validates_presence_of :card_block_type_id
+  after_initialize :set_default_attribute_values, if: :new_record?
 
-  after_initialize do
-    if self.new_record?
-      self.name ||= ''
-    end
+  private
+
+  def set_default_attribute_values
+    self.name ||= ''
   end
 end
