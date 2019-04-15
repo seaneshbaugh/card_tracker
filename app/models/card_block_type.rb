@@ -1,14 +1,15 @@
-class CardBlockType < ActiveRecord::Base
-#  attr_accessible :name
+# frozen_string_literal: true
 
-  has_many :card_blocks
+class CardBlockType < ApplicationRecord
+  has_many :card_blocks, dependent: :restrict_with_exception
 
-  validates_presence_of   :name
-  validates_uniqueness_of :name
+  validates :name, presence: true, uniqueness: true
 
-  after_initialize do
-    if self.new_record?
-      self.name ||= ''
-    end
+  after_initialize :set_default_attribute_values, if: :new_record?
+
+  private
+
+  def set_default_attribute_values
+    self.name ||= ''
   end
 end
