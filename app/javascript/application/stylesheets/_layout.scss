@@ -1,3 +1,5 @@
+@import "~materialize-css/sass/components/variables";
+
 body {
     display: flex;
     min-height: 100vh;
@@ -6,4 +8,48 @@ body {
 
 main {
     flex: 1 0 auto;
+}
+
+@media #{$large-and-up} {
+    nav {
+        .brand-logo {
+            padding-left: 10px;
+        }
+
+        .header-search-wrapper {
+            backface-visibility: hidden;
+            position: relative;
+            display: inline-block;
+            width: calc(100% - 800px);
+            height: 40px;
+            margin: 10px auto 0 285px;
+            transition: .3s ease all;
+
+            i {
+                font-size: 24px;
+                line-height: 32px !important;
+                position: absolute;
+                top: 6px;
+                left: 24px;
+                transition: color 200ms ease;
+            }
+
+            input.header-search-input {
+                font-size: 16px;
+                font-weight: 400;
+                display: block;
+                width: 87%;
+                height: 24px;
+                padding: 8px 8px 8px 72px;
+                transition: all 200ms ease;
+                border: none;
+                border-radius: 3px;
+                outline: none;
+                background: rgba(255, 255, 255, .3);
+                -webkit-appearance: textfield;
+                -moz-appearance: textfield;
+                appearance: textfield;
+            }
+        }
+    }
 }
