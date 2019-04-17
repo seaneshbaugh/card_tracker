@@ -1,0 +1,2 @@
+%p{ 'style' => 'font-size: 20px; line-height: 24px' }= t('.greeting', username: @resource.username)
+%p{ 'style' => 'font-size: 16px; line-height: 18px' }= t('.text', email: @resource.try(:unconfirmed_email?) ? @resource.unconfirmed_email : @resource.email)
