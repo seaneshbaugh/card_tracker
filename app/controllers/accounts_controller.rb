@@ -1,13 +1,19 @@
+# frozen_string_literal
+
 class AccountsController < ApplicationController
-  before_action :set_account, only: %i[show edit update confirm_destroy destroy]
+  before_action :authenticate_user!
 
-  before_filter :authenticate_user!
+  def show
+    @account = current_user
+  end
 
-  def show; end
-
-  def edit; end
+  def edit
+    @account = current_user
+  end
 
   def update
+    @account = current_user
+
     if @account.update(account_params)
       bypass_sign_in(@account)
 
@@ -21,9 +27,13 @@ class AccountsController < ApplicationController
     end
   end
 
-  def confirm_destroy; end
+  def confirm_destroy
+    @account = current_user
+  end
 
   def destroy
+    @account = current_user
+
     @account.destroy
 
     flash[:success] = t('.success')
@@ -32,10 +42,6 @@ class AccountsController < ApplicationController
   end
 
   private
-
-  def set_account
-    @account = current_user
-  end
 
   def account_params
     params.require(:account).permit(:username, :email, :password, :password_confirmation, :first_name, :last_name)
