@@ -4,3 +4,7 @@ en:
       new:
         title: "Reset Password"
         submit: "Reset Password"
+      edit:
+        title: "Change Password"
+        minimum_password_length: "(%{minimum_password_length} characters minimum)"
+        submit: "Change Password"
