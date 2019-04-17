@@ -19,83 +19,9 @@
   %body{ class: body_class }
     .content-wrap
       %header.main-header{ role: 'banner' }
-        .navbar.navbar-fixed
-          %nav
-            .nav-wrapper
-              = link_to t('.title'), root_path, class: 'brand-logo'
-              %a.sidenav-trigger{ href: '#', 'data-target' => 'main-nav-sidebar' }
-                %i.material-icons menu
-              .header-search-wrapper.hide-on-med-and-down
-                %i.material-icons search
-                %input.header-search-input{ type: 'text', name: 'search', placeholder: t('.header.search.placeholder') }
-              %ul.navbar-list.right
-                - if current_user
-                  %li.hide-on-med-and-down
-                    %a.waves-effect.waves-block.waves-light.dropdown-trigger{ href: 'javascript:void(0);', 'data-target' => 'card-lists-dropdown' }= t('.header.navigation.lists.top')
-                    %ul#card-lists-dropdown.dropdown-content
-                      - current_user.card_lists.first(4).each do |card_list|
-                        %li
-                          = link_to card_list.name, list_path(card_list.slug), class: 'grey-text text-darken-1'
-                      - if current_user.card_lists.length > 4
-                        %li
-                          = link_to t('.header.navigation.lists.more'), lists_path, class: 'grey-text text-darken-1'
-                      %li.divider
-                      %li
-                        = link_to new_list_path do
-                          %i.material-icons playlist_add
-                          = t('.header.navigation.lists.new')
-                  - if @card_list.present? && @card_list.persisted? # TODO: Figure out a better way to handle this.
-                    %li.hide-on-med-and-down
-                      = link_to t('.header.navigation.sets'), list_sets_path(@card_list.slug)
-                  - else
-                    %li.hide-on-med-and-down
-                      = link_to t('.header.navigation.sets'), sets_path
-                  %li.hide-on-med-and-down
-                    %a.waves-effect.waves-block.waves-light.dropdown-trigger{ href: 'javascript:void(0);', 'data-target' => 'account-dropdown' }= t('.header.navigation.account.top')
-                    %ul#account-dropdown.dropdown-content
-                      %li
-                        = link_to account_path do
-                          %i.material-icons person
-                          = t('.header.navigation.account.show')
-                      %li
-                        = link_to edit_account_path do
-                          %i.material-icons edit
-                          = t('.header.navigation.account.edit')
-                  - if current_user.has_role?(:admin)
-                    %li.hide-on-med-and-down
-                      = link_to t('.header.navigation.admin_panel'), admin_root_path
-                  %li.hide-on-med-and-down
-                    = link_to t('.header.navigation.sign_out'), destroy_user_session_path, method: :delete
-                - else
-                  %li.hide-on-med-and-down
-                    = link_to t('.header.navigation.sign_in'), new_user_session_path
-                  %li.hide-on-med-and-down
-                    = link_to t('.header.navigation.register'), new_user_registration_path
+        = render 'layouts/application/header_navigation'
         .container
           %h1.center-align= t('.title')
-      %ul#main-nav-sidebar.sidenav.collapsible
-        - if current_user
-          %li.bold.open
-            .collapsible-header.waves-effect.waves-cyan
-              %i.material-icons list
-              %span.menu-title Your Lists
-            .collapsible-body
-              %ul.collapsible.collapsible-sub{ 'data-collapsible' => 'accordion' }
-                - current_user.card_lists.first(4).each do |card_list|
-                  %li
-                    = link_to list_path(card_list.slug), class: 'grey-text text-darken-1' do
-                      %i.material-icons radio_button_unchecked
-                      %span= card_list.name
-                - if current_user.card_lists.length > 4
-                  %li
-                    = link_to lists_path, class: 'grey-text text-darken-1' do
-                      %i.material-icons radio_button_unchecked
-                      %span= 'More...'
-            %li
-              = link_to 'Sign Out', destroy_user_session_path, method: :delete
-        - else
-          %li
-            = link_to 'Sign In', new_user_session_path
       %main.main-content{ role: 'main' }
         .container
           .row
@@ -121,23 +47,3 @@
             %p.grey-text-text-lighten-4= t('.footer.legal.trademark_html')
             %p.grey-text-text-lighten-4= t('.footer.legal.copyright_html')
             %p.grey-text-text-lighten-4= t('.footer.legal.disclaimer')
-    -#         - if current_user
-    -#           %li.card-search
-    -#             = form_tag card_search_path, :method => :get, :id => 'navbar-card-search', :class => 'navbar-form', :role => 'form' do
-    -#               .form-group
-    -#                 %input.form-control{:name => "q[name_or_card_text_or_card_type_cont]", :placeholder => "Search Cards", :type => "text"}/
-    -#               %button.btn.btn-success{:type => "submit"}
-    -#                 %span.glyphicon.glyphicon-search
-    -#       %ul.nav.navbar-nav.navbar-right.hidden-xs
-    -#         - if current_user
-    -#           %li{:class => "dropdown #{active_controller?('accounts')}"}
-    -#             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-    -#               Your Account
-    -#               %b.caret
-    -#             %ul.dropdown-menu
-    -#               %li.show-account-nav-link= link_to ('<span class="glyphicon glyphicon-user"></span> ' + t('accounts.show.title')).html_safe, account_path, :class => active_controller?('accounts')
-    -#               %li.edit-account-nav-link= link_to ('<span class="glyphicon glyphicon-cog"></span> ' + t('accounts.edit.title')).html_safe, edit_account_path, :class => active_controller?('accounts')
-    -#               %li.stats-nav-link= link_to ('<span class="glyphicon glyphicon-stats"></span> ' + 'Stats').html_safe, stats_path, :class => active_controller?('stats')
-    -#               %li.divider
-    -#               - if can? :read, :admin
-    -#                 %li.admin-nav-link= link_to ('<span class="glyphicon glyphicon-wrench"></span> ' + t('navigation.admin_home')).html_safe, admin_root_path

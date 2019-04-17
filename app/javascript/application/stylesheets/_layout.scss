@@ -10,6 +10,53 @@ main {
     flex: 1 0 auto;
 }
 
+.sidenav {
+    li {
+        a {
+            padding: 0 16px !important;
+        }
+
+        .collapsible-header {
+            i.material-icons {
+                margin: 0 32px 0 0;
+                width: 24px;
+            }
+        }
+
+        .collapsible-body {
+            .collapsible-sub {
+                margin: 0 0 0 16px;
+            }
+        }
+
+        form {
+            i.material-icons {
+                font-size: 24px;
+                left: 4px;
+                position: absolute;
+                top: 8px;
+                transition: color 200ms ease;
+            }
+
+            input.sidenav-search-input {
+                -webkit-appearance: textfield;
+                -moz-appearance: textfield;
+                appearance: textfield;
+                background: rgba(255, 255, 255, 0.3);
+                display: block;
+                font-size: 16px;
+                font-weight: 400;
+                height: 24px;
+                margin-bottom: 0;
+                outline: none;
+                padding: 8px 8px 8px 30px;
+                transition: all 200ms ease;
+                width: 87%;
+            }
+        }
+    }
+}
+
 @media #{$large-and-up} {
     nav {
         .brand-logo {
@@ -18,37 +65,37 @@ main {
 
         .header-search-wrapper {
             backface-visibility: hidden;
-            position: relative;
             display: inline-block;
-            width: calc(100% - 800px);
             height: 40px;
             margin: 10px auto 0 285px;
-            transition: .3s ease all;
+            position: relative;
+            transition: 0.3s ease all;
+            width: calc(100% - 800px);
 
             i {
                 font-size: 24px;
+                left: 24px;
                 line-height: 32px !important;
                 position: absolute;
                 top: 6px;
-                left: 24px;
                 transition: color 200ms ease;
             }
 
             input.header-search-input {
-                font-size: 16px;
-                font-weight: 400;
-                display: block;
-                width: 87%;
-                height: 24px;
-                padding: 8px 8px 8px 72px;
-                transition: all 200ms ease;
-                border: none;
-                border-radius: 3px;
-                outline: none;
-                background: rgba(255, 255, 255, .3);
                 -webkit-appearance: textfield;
                 -moz-appearance: textfield;
                 appearance: textfield;
+                background: rgba(255, 255, 255, 0.3);
+                border: none;
+                border-radius: 3px;
+                display: block;
+                font-size: 16px;
+                font-weight: 400;
+                height: 24px;
+                outline: none;
+                padding: 8px 8px 8px 72px;
+                transition: all 200ms ease;
+                width: 87%;
             }
         }
     }

@@ -1,0 +1,119 @@
+.navbar.navbar-fixed
+  %nav
+    .nav-wrapper
+      = link_to t('layouts.application.title'), root_path, class: 'brand-logo'
+      %a.sidenav-trigger{ href: '#', 'data-target' => 'main-nav-sidebar' }
+        %i.material-icons menu
+      .header-search-wrapper.hide-on-med-and-down
+        = form_tag card_search_path, method: :get do
+          %i.material-icons search
+          %input.header-search-input{ type: 'text', name: 'q[name_or_card_text_or_card_type_cont]', placeholder: t('.search.placeholder') }
+      %ul.navbar-list.right
+        - if current_user
+          %li.hide-on-med-and-down
+            %a.waves-effect.waves-block.waves-light.dropdown-trigger{ href: 'javascript:void(0);', 'data-target' => 'card-lists-dropdown' }= t('.navigation.lists.top')
+            %ul#card-lists-dropdown.dropdown-content
+              - current_user.card_lists.first(4).each do |card_list|
+                %li
+                  = link_to card_list.name, list_path(card_list.slug), class: 'grey-text text-darken-1'
+              - if current_user.card_lists.length > 4
+                %li
+                  = link_to t('.navigation.lists.more'), lists_path, class: 'grey-text text-darken-1'
+              %li.divider
+              %li
+                = link_to new_list_path do
+                  %i.material-icons playlist_add
+                  = t('.navigation.lists.new')
+          - if @card_list.present? && @card_list.persisted? # TODO: Figure out a better way to handle this.
+            %li.hide-on-med-and-down
+              = link_to t('.navigation.sets'), list_sets_path(@card_list.slug)
+          - else
+            %li.hide-on-med-and-down
+              = link_to t('.navigation.sets'), sets_path
+          %li.hide-on-med-and-down
+            %a.waves-effect.waves-block.waves-light.dropdown-trigger{ href: 'javascript:void(0);', 'data-target' => 'account-dropdown' }= t('.navigation.account.top')
+            %ul#account-dropdown.dropdown-content
+              %li
+                = link_to account_path do
+                  %i.material-icons account_circle
+                  = t('.navigation.account.show')
+              %li
+                = link_to edit_account_path do
+                  %i.material-icons edit
+                  = t('.navigation.account.edit')
+          - if current_user.has_role?(:admin)
+            %li.hide-on-med-and-down
+              = link_to t('.navigation.admin_panel'), admin_root_path
+          %li.hide-on-med-and-down
+            = link_to t('.navigation.sign_out'), destroy_user_session_path, method: :delete
+        - else
+          %li.hide-on-med-and-down
+            = link_to t('.navigation.sign_in'), new_user_session_path
+          %li.hide-on-med-and-down
+            = link_to t('.navigation.register'), new_user_registration_path
+%ul#main-nav-sidebar.sidenav.collapsible
+  - if current_user
+    %li
+      = form_tag card_search_path, method: :get do
+        %i.material-icons search
+        %input.sidenav-search-input{ type: 'text', name: 'q[name_or_card_text_or_card_type_cont]', placeholder: t('.search.placeholder') }
+    %li
+      .collapsible-header.waves-effect.waves-cyan
+        %i.material-icons list
+        %span.menu-title= t('.navigation.lists.top')
+      .collapsible-body
+        %ul.collapsible.collapsible-sub{ 'data-collapsible' => 'accordion' }
+          - current_user.card_lists.first(4).each do |card_list|
+            %li
+              = link_to list_path(card_list.slug), class: 'grey-text text-darken-1' do
+                %i.material-icons radio_button_unchecked
+                %span= card_list.name
+          - if current_user.card_lists.length > 4
+            %li
+              = link_to lists_path, class: 'grey-text text-darken-1' do
+                %i.material-icons radio_button_unchecked
+                %span= t('.navigation.lists.more')
+          %li.divider
+          %li
+            = link_to new_list_path do
+              %i.material-icons playlist_add
+              = t('.navigation.lists.new')
+    %li
+      .collapsible-header.waves-effect.waves-cyan
+        %i.material-icons account_circle
+        %span.menu-title= t('.navigation.account.top')
+      .collapsible-body
+        %ul.collapsible.collapsible-sub{ 'data-collapsible' => 'accordion' }
+
+          %li
+            = link_to account_path, class: 'grey-text text-darken-1' do
+              %i.material-icons account_circle
+              = t('.navigation.account.show')
+          %li
+            = link_to edit_account_path, class: 'grey-text text-darken-1' do
+              %i.material-icons edit
+              = t('.navigation.account.edit')
+    %li
+      = link_to stats_path, class: 'grey-text text-darken-1' do
+        %i.material-icons insert_chart_outlined
+        = t('.navigation.stats')
+    - if current_user.has_role?(:admin)
+      %li
+        = link_to admin_root_path, class: 'grey-text text-darken-1' do
+          %i.material-icons settings_power
+          = t('.navigation.admin_panel')
+    %li
+      = link_to destroy_user_session_path, method: :delete, class: 'grey-text text-darken-1' do
+        %i.material-icons.flip-icon exit_to_app
+        = t('.navigation.sign_out')
+  - else
+    %li
+      = link_to new_user_session_path, class: 'grey-text text-darken-1' do
+        %i.material-icons exit_to_app
+        = t('.navigation.sign_in')
+    %li
+      = link_to t('.navigation.register'), new_user_registration_path, class: 'grey-text text-darken-1'
+  %li
+    = link_to page_path('about'), class: 'grey-text text-darken-1' do
+      %i.material-icons help_outline
+      = t('.navigation.about')
