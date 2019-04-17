@@ -6,10 +6,10 @@
   .page-body
     = form_for resource, as: resource_name, url: session_path(resource_name) do |f|
       .input-field
-        = f.text_field :username, autofocus: true, required: true
+        = f.text_field :username, autocomplete: 'username', autofocus: true, required: true
         = f.label :username
       .input-field
-        = f.password_field :password, required: true
+        = f.password_field :password, autocomplete: 'current-password', required: true
         = f.label :password
       - if devise_mapping.rememberable?
         %p
