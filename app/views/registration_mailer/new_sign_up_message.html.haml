@@ -1,0 +1,12 @@
+!!!
+%html
+  %head
+    %meta{ 'content' => 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type' }
+  %body{ 'style' => "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen;".html_safe }
+    %h1= t('.title')
+    %h2{ 'style' => 'border-bottom: 1px solid #333333;' }= User.human_attribute_name(:username)
+    %p= @new_user.username
+    %h2{ 'style' => 'border-bottom: 1px solid #333333;' }= User.human_attribute_name(:email)
+    %p= @new_user.email
+    %h2{ 'style' => 'border-bottom: 1px solid #333333;' }= User.human_attribute_name(:created_at)
+    %p= @new_user.created_at.to_s(:normal)

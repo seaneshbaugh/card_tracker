@@ -1,0 +1,14 @@
+= t('.title')
+\========================
+\
+= User.human_attribute_name(:username)
+\------------------------
+= @new_user.username
+\
+= User.human_attribute_name(:email)
+\------------------------
+= @new_user.email
+\
+= User.human_attribute_name(:created_at)
+\------------------------
+= @new_user.created_at.to_s(:normal)

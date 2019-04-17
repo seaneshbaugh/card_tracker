@@ -1,0 +1,8 @@
+!!!
+%html
+  %head
+    %meta{ 'content' => 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type' }
+  %body{ 'style' => "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen;".html_safe }
+    %p{ 'style' => 'font-size: 20px; line-height: 24px' }= t('.greeting_html', root_url: root_url)
+    %p{ 'style' => 'font-size: 16px; line-height: 18px' }= t('.origin')
+    %p{ 'style' => 'font-size: 16px; line-height: 18px' }= t('.plans_html', contact_url: contact_url)
