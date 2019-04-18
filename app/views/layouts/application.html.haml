@@ -19,8 +19,8 @@
   %body{ class: body_class }
     %header.main-header{ role: 'banner' }
       = render 'layouts/application/header_navigation'
-      = yield(:jumbotron) if content_for?(:jumbotron)
     %main.main-content{ role: 'main' }
+      = yield(:jumbotron) if content_for?(:jumbotron)
       .container
         .row
           .col.s12

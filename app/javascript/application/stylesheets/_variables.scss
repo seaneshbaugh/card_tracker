@@ -1,0 +1,7 @@
+@import "~materialize-css/sass/components/color-variables";
+
+$primary-color: $nord0 !default;
+$primary-color-light: lighten($primary-color, 15%) !default;
+$primary-color-dark: darken($primary-color, 15%) !default;
+
+$link-color: $nord14 !default;
