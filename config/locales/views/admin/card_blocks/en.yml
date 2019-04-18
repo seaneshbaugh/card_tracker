@@ -1,0 +1,10 @@
+en:
+  admin:
+    card_blocks:
+      index:
+        title: "Card Blocks"
+        new_card_block: "New Card Block"
+        delete_confirmation: "Are you sure you want to delete this card block?"
+        no_card_blocks: "There are no Card Blocks yet. Click 'New Card Block' to get started."
+      new:
+        title: "New Card Block"

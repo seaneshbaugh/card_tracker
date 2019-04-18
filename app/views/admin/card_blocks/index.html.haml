@@ -1,0 +1,40 @@
+.page-admin-card-block-index.page
+  %header.page-header
+    %h1= t('.title')
+  .page-body
+    = search_form_for @search, url: admin_card_blocks_path, html: { method: :get } do |f|
+      .row
+        .input-field.col.s3
+          = f.text_field :name_cont, placeholder: CardBlock.human_attribute_name(:name)
+        .input-field.col.s3
+          = f.select :card_block_type_id_eq, CardBlockType.all.map{ |card_block_type| [card_block_type.name, card_block_type.id] }, { include_blank: t('show_only'), selected: params[:q].present? ? params[:q][:card_block_type_id_eq] : '' }
+        .input-field.col.s3
+          = f.button type: :submit, class: success_button_class do
+            %i.material-icons search
+          &nbsp;
+          = link_to admin_card_blocks_path, class: "#{caution_button_class} tooltipped", 'data-tooltip' => t('clear_search') do
+            %i.material-icons clear
+      - if policy([:admin, CardBlock]).create?
+        .row
+          .col.s12
+            = link_to t('.new_card_block'), new_admin_card_block_path, class: success_button_class
+      - if @card_blocks.present?
+        .row
+          .col.s12
+            %table.card-blocks
+              %thead
+                %th.card-block-name= sort_link @search, :name
+                %th.card-block-type-name= sort_link @search, :card_block_type_name, CardBlockType.model_name.human
+                %th.edit
+                %th.delete
+              %tbody
+                - @card_blocks.each do |card_block|
+                  - present card_block do |card_block_presenter|
+                    %tr
+                      %td= link_to card_block_presenter.name, admin_card_block_path(card_block)
+                      %td= link_to card_block_presenter.card_block_type_name, admin_card_block_type_path(card_block.card_block_type)
+                      %td
+                      %td
+            = paginate @card_blocks
+      - else
+        %p= t('.no_card_blocks')
