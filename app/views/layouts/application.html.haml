@@ -17,33 +17,31 @@
     %link{ href: '/humans.txt', rel: 'author' }
     = csrf_meta_tags
   %body{ class: body_class }
-    .content-wrap
-      %header.main-header{ role: 'banner' }
-        = render 'layouts/application/header_navigation'
-        .container
-          %h1.center-align= t('.title')
-      %main.main-content{ role: 'main' }
-        .container
-          .row
-            .col.s12
-              = flash_messages
-          = yield
-      %footer.main-footer{ role: 'contentinfo' }
-        .container
-          .row
-            .footer-about.col.s12.l6
-              %h5.white-text= t('.footer.about.title')
-              %p.grey-text.text-lighten-4= t('.footer.about.text_html')
-              %p.grey-text.text-lighten-4= t('.footer.about.credit_html')
-            .footer-links.col.s12.l4.offset-l2
-              %h5.white-text= t('.footer.links.title')
-              %ul
-                %li.grey-text.text-lighten-3= link_to t('.footer.links.about'), '/about'
-                %li.grey-text.text-lighten-3= link_to t('.footer.links.contact'), contact_path
-                %li.grey-text.text-lighten-3= link_to t('.footer.links.privacy_policy'), '/privacy-policy'
-                %li.grey-text.text-lighten-3= link_to t('.footer.links.terms_and_conditions'), '/terms-and-conditions'
-                %li.grey-text.text-lighten-3= link_to t('.footer.links.source'), 'https://github.com/seaneshbaugh/card_tracker'
-          .footer-legal
-            %p.grey-text-text-lighten-4= t('.footer.legal.trademark_html')
-            %p.grey-text-text-lighten-4= t('.footer.legal.copyright_html')
-            %p.grey-text-text-lighten-4= t('.footer.legal.disclaimer')
+    %header.main-header{ role: 'banner' }
+      = render 'layouts/application/header_navigation'
+      = yield(:jumbotron) if content_for?(:jumbotron)
+    %main.main-content{ role: 'main' }
+      .container
+        .row
+          .col.s12
+            = flash_messages
+        = yield
+    %footer.page-footer.footer.footer-static.footer-dark{ role: 'contentinfo' }
+      .container
+        .row
+          .footer-about.col.s12.l6
+            %h5.white-text= t('.footer.about.title')
+            %p.grey-text.text-lighten-4= t('.footer.about.text_html')
+            %p.grey-text.text-lighten-4= t('.footer.about.credit_html')
+          .footer-links.col.s12.l4.offset-l2
+            %h5.white-text= t('.footer.links.title')
+            %ul
+              %li.grey-text.text-lighten-3= link_to t('.footer.links.about'), '/about'
+              %li.grey-text.text-lighten-3= link_to t('.footer.links.contact'), contact_path
+              %li.grey-text.text-lighten-3= link_to t('.footer.links.privacy_policy'), '/privacy-policy'
+              %li.grey-text.text-lighten-3= link_to t('.footer.links.terms_and_conditions'), '/terms-and-conditions'
+              %li.grey-text.text-lighten-3= link_to t('.footer.links.source'), 'https://github.com/seaneshbaugh/card_tracker'
+        .footer-legal
+          %p.grey-text-text-lighten-4= t('.footer.legal.trademark_html')
+          %p.grey-text-text-lighten-4= t('.footer.legal.copyright_html')
+          %p.grey-text-text-lighten-4= t('.footer.legal.disclaimer')
