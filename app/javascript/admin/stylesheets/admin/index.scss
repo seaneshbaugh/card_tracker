@@ -1,0 +1,18 @@
+section.gems {
+    ul {
+        margin-left: 24px;
+
+        li {
+            list-style-type: square;
+
+            ul {
+                margin-left: 0px;
+                padding-left: 24px;
+
+                li {
+                    list-style-type: disc;
+                }
+            }
+        }
+    }
+}

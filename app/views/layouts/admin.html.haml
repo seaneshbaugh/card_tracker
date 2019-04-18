@@ -1,0 +1,32 @@
+!!!
+%html{ dir: 'ltr', lang: 'en-US' }
+  %head
+    %meta{ charset: 'utf-8' }
+    %title= page_title
+    %meta{ content: 'width=device-width, initial-scale=1, shrink-to-fit=no', name: 'viewport' }
+    %meta{ content: page_meta_description, name: 'description' }
+    %meta{ content: t('.author'), name: 'author' }
+    %meta{ content: 'telephone=no', name: 'format-detection' }
+    = stylesheet_pack_tag 'admin', media: 'all'
+    = javascript_pack_tag 'admin'
+    %link{ href: '/favicon.ico', rel: 'shortcut icon' }
+    %link{ href: asset_pack_path('media/shared/images/apple-touch-icon-iphone.png'), rel: 'apple-touch-icon', sizes: '57x57' }
+    %link{ href: asset_pack_path('media/shared/images/apple-touch-icon-ipad.png'), rel: 'apple-touch-icon', sizes: '72x72' }
+    %link{ href: asset_pack_path('media/shared/images/apple-touch-icon-iphone-retina.png'), rel: 'apple-touch-icon', sizes: '114x114' }
+    %link{ href: asset_pack_path('media/shared/images/apple-touch-icon-ipad-retina.png'), rel: 'apple-touch-icon', sizes: '144x144' }
+    %link{ href: '/humans.txt', rel: 'author' }
+    = csrf_meta_tags
+  %body
+    %header.main-header{ role: 'banner' }
+      = render 'layouts/admin/header_navigation'
+    %main.main-content{ role: 'main' }
+      .container
+        .row
+          .col.s12
+            = flash_messages
+        = yield
+    %footer.page-footer.footer.footer-static.footer-dark{ role: 'contentinfo' }
+      .container
+        .row
+          .col.s12
+            = t('.footer_html')

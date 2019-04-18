@@ -1,0 +1,67 @@
+@import "~materialize-css/sass/components/variables";
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.sidenav {
+    li {
+        a {
+            padding: 0 16px !important;
+        }
+
+        .collapsible-header {
+            i.material-icons {
+                margin: 0 32px 0 0;
+                width: 24px;
+            }
+        }
+
+        .collapsible-body {
+            .collapsible-sub {
+                margin: 0 0 0 16px;
+            }
+        }
+
+        form {
+            i.material-icons {
+                font-size: 24px;
+                left: 4px;
+                position: absolute;
+                top: 8px;
+                transition: color 200ms ease;
+            }
+
+            input.sidenav-search-input {
+                -webkit-appearance: textfield;
+                -moz-appearance: textfield;
+                appearance: textfield;
+                background: rgba(255, 255, 255, 0.3);
+                display: block;
+                font-size: 16px;
+                font-weight: 400;
+                height: 24px;
+                margin-bottom: 0;
+                outline: none;
+                padding: 8px 8px 8px 30px;
+                transition: all 200ms ease;
+                width: 87%;
+            }
+        }
+    }
+}
+
+@media #{$large-and-up} {
+    nav {
+        .brand-logo {
+            padding-left: 10px;
+        }
+
+    }
+}
