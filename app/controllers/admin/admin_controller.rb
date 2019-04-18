@@ -1,12 +1,19 @@
-require 'rails/application/route_inspector'
+# frozen_string_literal: true
 
-class Admin::AdminController < ApplicationController
-  before_filter :authenticate_user!
+module Admin
+  class AdminController < ApplicationController
+    before_action :authenticate_user!
 
-  layout 'admin'
+    layout 'admin'
 
-  authorize_resource
+    def index; end
 
-  def index
+    def authorize(record, query = nil)
+      super([:admin, record], query)
+    end
+
+    def policy_scope(scope)
+      super([:admin, scope])
+    end
   end
 end
