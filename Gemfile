@@ -22,6 +22,7 @@ gem 'pundit', '2.0.1'
 gem 'ransack', '2.1.1'
 gem 'rolify', '5.2.0'
 gem 'sanitize', '5.0.0'
+gem 'seed-fu', '2.3.9'
 gem 'webpacker', '4.0.2'
 
 group :development, :test do
