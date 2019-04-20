@@ -23,7 +23,13 @@ mean_time_reporter_options = {
 Minitest::Reporters.use! Minitest::Reporters::MeanTimeReporter.new(mean_time_reporter_options)
 
 module ActiveSupport
+  self.test_order = :random
+
   class TestCase
+    class << self
+      alias context describe
+    end
+
     # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
     #
     # Note: You'll currently still have to declare fixtures explicitly in integration tests

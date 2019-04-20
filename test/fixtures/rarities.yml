@@ -1,0 +1,19 @@
+basic:
+  rarity_code: "B"
+  name: "Basic"
+
+common:
+  rarity_code: "C"
+  name: "Common"
+
+uncommon:
+  rarity_code: "U"
+  name: "Uncommon"
+
+rare:
+  rarity_code: "R"
+  name: "Rare"
+
+mythic:
+  rarity_code: "M"
+  name: "Mythic"

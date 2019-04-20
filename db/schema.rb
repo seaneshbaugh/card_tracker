@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_13_234027) do
+ActiveRecord::Schema.define(version: 2019_04_20_052158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 2019_04_13_234027) do
     t.string "power", default: "", null: false
     t.string "toughness", default: "", null: false
     t.string "loyalty", default: "", null: false
-    t.string "rarity", default: "", null: false
+    t.string "rarity_code", default: "", null: false
     t.string "card_number", default: "", null: false
     t.string "artist", default: "", null: false
     t.datetime "created_at", null: false
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(version: 2019_04_13_234027) do
     t.index ["multiverse_id"], name: "index_cards_on_multiverse_id"
     t.index ["name"], name: "index_cards_on_name"
     t.index ["power"], name: "index_cards_on_power"
-    t.index ["rarity"], name: "index_cards_on_rarity"
+    t.index ["rarity_code"], name: "index_cards_on_rarity_code"
     t.index ["toughness"], name: "index_cards_on_toughness"
     t.index ["updated_at"], name: "index_cards_on_updated_at"
   end
@@ -173,6 +173,12 @@ ActiveRecord::Schema.define(version: 2019_04_13_234027) do
     t.index ["quantity"], name: "index_collections_on_quantity"
     t.index ["updated_at"], name: "index_collections_on_updated_at"
     t.index ["user_id"], name: "index_collections_on_user_id"
+  end
+
+  create_table "rarities", primary_key: "rarity_code", id: :string, force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "roles", force: :cascade do |t|
@@ -232,4 +238,5 @@ ActiveRecord::Schema.define(version: 2019_04_13_234027) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "cards", "rarities", column: "rarity_code", primary_key: "rarity_code"
 end
