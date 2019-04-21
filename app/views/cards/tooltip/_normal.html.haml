@@ -1,0 +1,16 @@
+- present card do |card_presenter|
+  .card-tooltip.normal
+    .card-name
+      = card_presenter.name
+    .mana-cost
+      = card_presenter.mana_cost(:size => 'small')
+    .card-type
+      = card_presenter.card_type
+    .card-text
+      = card_presenter.card_text(:size => 'small')
+    .flavor-text
+      = card_presenter.flavor_text
+    .artist
+      Artist: #{card_presenter.artist}
+    .card-number
+      = card_presenter.card_number

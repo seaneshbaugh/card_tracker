@@ -1,30 +1,11 @@
 # frozen_string_literal:
 
-# TODO: Remove show_card_numbers since MTGJSON returns card numbers for old sets.
 class CardSet < ActiveRecord::Base
-  belongs_to :card_block
+  belongs_to :card_block, optional: true
+  has_many :cards, dependent: :restrict_with_exception, inverse_of: :card_set
 
-  has_many :cards
-
-  validates_presence_of   :name
-  validates_uniqueness_of :name
-
-  validates_presence_of   :slug
-  validates_uniqueness_of :slug
-
-  validates_presence_of :card_block_id
-
-  after_initialize do
-    if self.new_record?
-      self.name ||= ''
-      self.slug ||= ''
-      self.code ||= ''
-
-      if self.show_card_numbers.nil?
-        self.show_card_numbers = true
-      end
-    end
-  end
+  validates :name, presence: true, uniqueness: true
+  validates :code, presence: true, uniqueness: true
 
   before_validation :generate_slug
 

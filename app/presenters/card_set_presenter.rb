@@ -29,14 +29,6 @@ class CardSetPresenter < BasePresenter
     end
   end
 
-  def show_card_numbers
-    if @card_set.show_card_numbers
-      @template.t('yes')
-    else
-      @template.t('no')
-    end
-  end
-
   def card_block_name
     @card_set.card_block.name
   end

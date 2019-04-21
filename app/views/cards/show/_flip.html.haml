@@ -1,0 +1,57 @@
+.col-xs-12.col-sm-9
+  - @card.card_parts.each_slice(2) do |card_parts|
+    .row
+      - card_parts.sort_by(&:card_number).each do |card_part|
+        - present card_part, CardPresenter do |card_part_presenter|
+          .card-part.col-xs-12.col-sm-6
+            %h2.card-name= card_part_presenter.name
+            .row
+              .card-attribute-label.col-xs-12.col-sm-4
+                Mana Cost:
+              .card-attribute.mana-cost.col-xs-12.col-sm-8
+                = card_part_presenter.mana_cost(:size => 'small')
+            .row
+              .card-attribute-label.col-xs-12.col-sm-4
+                Converted Mana Cost:
+              .card-attribute.converted-mana-cost.col-xs-12.col-sm-8
+                = card_part_presenter.converted_mana_cost
+            .row
+              .card-attribute-label.col-xs-12.col-sm-4
+                Colors:
+              .card-attribute.colors.col-xs-12.col-sm-8
+                = card_part_presenter.colors
+            .row
+              .card-attribute-label.col-xs-12.col-sm-4
+                Type:
+              .card-attribute.card-type.col-xs-12.col-sm-8
+                = card_part_presenter.card_type
+            .row
+              .card-attribute-label.col-xs-12.col-sm-4
+                Card Text:
+              .card-attribute.card-text.col-xs-12.col-sm-8
+                = card_part_presenter.card_text(:size => 'small')
+            .row
+              .card-attribute-label.col-xs-12.col-sm-4
+                Flavor Text:
+              .card-attribute.flavor-text.col-xs-12.col-sm-8
+                = card_part_presenter.flavor_text
+            .row
+              .card-attribute-label.col-xs-12.col-sm-4
+                P/T:
+              .card-attribute.power-toughness.col-xs-12.col-sm-8
+                = card_part_presenter.power_toughness
+            .row
+              .card-attribute-label.col-xs-12.col-sm-4
+                Rarity:
+              .card-attribute.rarity.col-xs-12.col-sm-8
+                = card_part_presenter.rarity
+            .row
+              .card-attribute-label.col-xs-12.col-sm-4
+                Card Number:
+              .card-attribute.card-number.col-xs-12.col-sm-8
+                = card_part_presenter.card_number
+            .row
+              .card-attribute-label.col-xs-12.col-sm-4
+                Artist:
+              .card-attribute.artist.col-xs-12.col-sm-8
+                = card_part_presenter.artist

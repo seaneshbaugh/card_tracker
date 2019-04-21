@@ -59,14 +59,6 @@ class CardPresenter < BasePresenter
     pt.html_safe
   end
 
-  def card_number
-    if @card.card_set.show_card_numbers? && @card.card_number.present?
-      @card.card_number
-    else
-      ''
-    end
-  end
-
   def card_set_name
     @card.card_set.name
   end

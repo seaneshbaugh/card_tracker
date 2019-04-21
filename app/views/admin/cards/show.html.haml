@@ -1,0 +1,89 @@
+- present @card do |card_presenter|
+  .admin-content{id: "card-#{@card.id}"}
+    %h1
+      = t('cards.show.title')
+      %small= card_presenter.name
+    .object-actions
+      = link_to t('cards.links.back_to_index'), admin_cards_path, :class => 'btn btn-default'
+      - if can? :edit, Card
+        = link_to t('cards.edit.title'), edit_admin_card_path(@card), :class => 'btn btn-primary'
+      - if can? :destroy, Card
+        = link_to t('cards.delete.title'), admin_card_path(@card), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') }
+    .table-responsive
+      %table.table.table-condensed.table-striped
+        %tbody
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.multiverse_id')
+            %td.col-xs-8.col-sm-10= link_to card_presenter.multiverse_id, "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=#{card_presenter.multiverse_id}", :target => '_blank'
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.name')
+            %td.col-xs-8.col-sm-10= card_presenter.name
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.card_set_id')
+            %td.col-xs-8.col-sm-10= link_to card_presenter.card_set_name, admin_card_set_path(@card.card_set)
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card_set.card_block_id')
+            %td.col-xs-8.col-sm-10= link_to card_presenter.card_block_name, admin_card_block_path(@card.card_set.card_block)
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card_block.card_block_type_id')
+            %td.col-xs-8.col-sm-10= link_to card_presenter.card_block_type_name, admin_card_block_type_path(@card.card_set.card_block.card_block_type)
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.layout')
+            %td.col-xs-8.col-sm-10= card_presenter.layout
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.mana_cost')
+            %td.col-xs-8.col-sm-10= card_presenter.mana_cost(:size => 'small')
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.converted_mana_cost')
+            %td.col-xs-8.col-sm-10= card_presenter.converted_mana_cost
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.colors')
+            %td.col-xs-8.col-sm-10= card_presenter.colors
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.card_type')
+            %td.col-xs-8.col-sm-10= card_presenter.card_type
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.card_supertypes')
+            %td.col-xs-8.col-sm-10= card_presenter.card_supertypes
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.card_types')
+            %td.col-xs-8.col-sm-10= card_presenter.card_types
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.card_subtypes')
+            %td.col-xs-8.col-sm-10= card_presenter.card_subtypes
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.card_text')
+            %td.col-xs-8.col-sm-10= card_presenter.card_text(:size => 'small')
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.flavor_text')
+            %td.col-xs-8.col-sm-10= card_presenter.flavor_text
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.power')
+            %td.col-xs-8.col-sm-10= card_presenter.power
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.toughness')
+            %td.col-xs-8.col-sm-10= card_presenter.toughness
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.loyalty')
+            %td.col-xs-8.col-sm-10= card_presenter.loyalty
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.rarity')
+            %td.col-xs-8.col-sm-10= card_presenter.rarity
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.card_number')
+            %td.col-xs-8.col-sm-10= card_presenter.card_number
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.artist')
+            %td.col-xs-8.col-sm-10= card_presenter.artist
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.created_at')
+            %td.col-xs-8.col-sm-10= card_presenter.created_at
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card.updated_at')
+            %td.col-xs-8.col-sm-10= card_presenter.updated_at
+    .object-actions
+      = link_to t('cards.links.back_to_index'), admin_cards_path, :class => 'btn btn-default'
+      - if can? :edit, Card
+        = link_to t('cards.edit.title'), edit_admin_card_path(@card), :class => 'btn btn-primary'
+      - if can? :destroy, Card
+        = link_to t('cards.delete.title'), admin_card_path(@card), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') }

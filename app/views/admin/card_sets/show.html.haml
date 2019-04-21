@@ -1,0 +1,54 @@
+- present @card_set do |card_set_presenter|
+  .admin-content{id: "card-set-#{@card_set.id}"}
+    %h1
+      = t('card_sets.show.title')
+      %small= card_set_presenter.name
+    .object-actions
+      = link_to t('card_sets.links.back_to_index'), admin_card_sets_path, :class => 'btn btn-default'
+      - if can? :edit, CardSet
+        = link_to t('card_sets.edit.title'), edit_admin_card_set_path(@card_set), :class => 'btn btn-primary'
+      - if can? :destroy, CardSet
+        = link_to t('card_sets.delete.title'), admin_card_set_path(@card_set), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') }
+    .table-responsive
+      %table.table.table-striped.table-condensed
+        %tbody
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card_set.name')
+            %td.col-xs-8.col-sm-10= card_set_presenter.name
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card_set.slug')
+            %td.col-xs-8.col-sm-10= card_set_presenter.slug
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card_set.card_block_id')
+            %td.col-xs-8.col-sm-10= link_to card_set_presenter.card_block_name, admin_card_block_path(@card_set.card_block)
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card_block.card_block_type_id')
+            %td.col-xs-8.col-sm-10= link_to card_set_presenter.card_block_type_name, admin_card_block_type_path(@card_set.card_block.card_block_type)
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card_set.code')
+            %td.col-xs-8.col-sm-10= card_set_presenter.code
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card_set.symbol')
+            %td.col-xs-8.col-sm-10
+              = card_set_presenter.symbol(:rarity => :common, :size => 'large')
+              = card_set_presenter.symbol(:rarity => :uncommon, :size => 'large')
+              = card_set_presenter.symbol(:rarity => :rare, :size => 'large')
+              = card_set_presenter.symbol(:rarity => :mythic, :size => 'large')
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card_set.release_date')
+            %td.col-xs-8.col-sm-10= card_set_presenter.release_date
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card_set.prerelease_date')
+            %td.col-xs-8.col-sm-10= card_set_presenter.prerelease_date
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card_set.created_at')
+            %td.col-xs-8.col-sm-10= card_set_presenter.created_at
+          %tr
+            %th.col-xs-4.col-sm-2= t('activerecord.attributes.card_set.updated_at')
+            %td.col-xs-8.col-sm-10= card_set_presenter.updated_at
+    .object-actions
+      = link_to t('card_sets.links.back_to_index'), admin_card_sets_path, :class => 'btn btn-default'
+      - if can? :edit, CardSet
+        = link_to t('card_sets.edit.title'), edit_admin_card_set_path(@card_set), :class => 'btn btn-primary'
+      - if can? :destroy, CardSet
+        = link_to t('card_sets.delete.title'), admin_card_set_path(@card_set), :method => 'delete', :class => 'btn btn-danger', :data => { :confirm => t('confirm_delete') }
