@@ -1,0 +1,16 @@
+abyssal_specter:
+  multiverse_id: 2437
+  name: "Abyssal Specter"
+  card_set: ice_age
+  layout: "normal"
+  mana_cost: "{2}{B}{B}"
+  converted_mana_cost: "4"
+  colors: "B"
+  type_text: "Creature — Specter"
+  card_text: "Flying\nWhenever Abyssal Specter deals damage to a player, that player discards a card."
+  flavor_text: "\"Open the gates, and bid them enter.\" —Lim-Dûl, the Necromancer"
+  power: "2"
+  toughness: "3"
+  rarity_code: "U"
+  card_number: "113"
+  artist: "Ruth Thompson"

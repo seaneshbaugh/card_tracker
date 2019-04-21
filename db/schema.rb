@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_20_052158) do
+ActiveRecord::Schema.define(version: 2019_04_21_045140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,51 @@ ActiveRecord::Schema.define(version: 2019_04_20_052158) do
     t.index ["updated_at"], name: "index_card_sets_on_updated_at"
   end
 
+  create_table "card_sub_types", primary_key: "card_sub_type_code", id: :string, force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "card_sub_typings", force: :cascade do |t|
+    t.integer "card_id", null: false
+    t.string "card_sub_type_code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id", "card_sub_type_code"], name: "index_card_sub_typings_on_card_id_and_card_sub_type_code"
+    t.index ["card_sub_type_code", "card_id"], name: "index_card_sub_typings_on_card_sub_type_code_and_card_id"
+  end
+
+  create_table "card_super_types", primary_key: "card_super_type_code", id: :string, force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "card_super_typings", force: :cascade do |t|
+    t.integer "card_id", null: false
+    t.string "card_super_type_code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id", "card_super_type_code"], name: "index_card_super_typings_on_card_id_and_card_super_type_code"
+    t.index ["card_super_type_code", "card_id"], name: "index_card_super_typings_on_card_super_type_code_and_card_id"
+  end
+
+  create_table "card_types", primary_key: "card_type_code", id: :string, force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "card_typings", force: :cascade do |t|
+    t.integer "card_id", null: false
+    t.string "card_type_code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id", "card_type_code"], name: "index_card_typings_on_card_id_and_card_type_code"
+    t.index ["card_type_code", "card_id"], name: "index_card_typings_on_card_type_code_and_card_id"
+  end
+
   create_table "cards", force: :cascade do |t|
     t.string "multiverse_id", default: "", null: false
     t.string "name", default: "", null: false
@@ -125,10 +170,7 @@ ActiveRecord::Schema.define(version: 2019_04_20_052158) do
     t.string "mana_cost", default: "", null: false
     t.string "converted_mana_cost", default: "", null: false
     t.string "colors", default: "", null: false
-    t.string "card_type", default: "", null: false
-    t.string "card_supertypes", default: "", null: false
-    t.string "card_types", default: "", null: false
-    t.string "card_subtypes", default: "", null: false
+    t.string "type_text", default: "", null: false
     t.text "card_text", null: false
     t.text "flavor_text", null: false
     t.string "power", default: "", null: false
@@ -142,13 +184,8 @@ ActiveRecord::Schema.define(version: 2019_04_20_052158) do
     t.index ["artist"], name: "index_cards_on_artist"
     t.index ["card_number"], name: "index_cards_on_card_number"
     t.index ["card_set_id"], name: "index_cards_on_card_set_id"
-    t.index ["card_subtypes"], name: "index_cards_on_card_subtypes"
-    t.index ["card_supertypes"], name: "index_cards_on_card_supertypes"
-    t.index ["card_type"], name: "index_cards_on_card_type"
-    t.index ["card_types"], name: "index_cards_on_card_types"
     t.index ["colors"], name: "index_cards_on_colors"
     t.index ["converted_mana_cost"], name: "index_cards_on_converted_mana_cost"
-    t.index ["created_at"], name: "index_cards_on_created_at"
     t.index ["layout"], name: "index_cards_on_layout"
     t.index ["loyalty"], name: "index_cards_on_loyalty"
     t.index ["mana_cost"], name: "index_cards_on_mana_cost"
@@ -157,7 +194,6 @@ ActiveRecord::Schema.define(version: 2019_04_20_052158) do
     t.index ["power"], name: "index_cards_on_power"
     t.index ["rarity_code"], name: "index_cards_on_rarity_code"
     t.index ["toughness"], name: "index_cards_on_toughness"
-    t.index ["updated_at"], name: "index_cards_on_updated_at"
   end
 
   create_table "collections", force: :cascade do |t|
@@ -238,5 +274,11 @@ ActiveRecord::Schema.define(version: 2019_04_20_052158) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "card_sub_typings", "card_sub_types", column: "card_sub_type_code", primary_key: "card_sub_type_code"
+  add_foreign_key "card_sub_typings", "cards"
+  add_foreign_key "card_super_typings", "card_super_types", column: "card_super_type_code", primary_key: "card_super_type_code"
+  add_foreign_key "card_super_typings", "cards"
+  add_foreign_key "card_typings", "card_types", column: "card_type_code", primary_key: "card_type_code"
+  add_foreign_key "card_typings", "cards"
   add_foreign_key "cards", "rarities", column: "rarity_code", primary_key: "rarity_code"
 end

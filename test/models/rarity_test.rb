@@ -10,7 +10,7 @@ class RarityTest < ActiveSupport::TestCase
 
         rarity.validate
 
-        rarity.errors[:name].must_include("can't be blank")
+        rarity.errors[:rarity_code].must_include("can't be blank")
       end
     end
 

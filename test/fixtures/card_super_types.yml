@@ -1,0 +1,27 @@
+basic:
+  card_super_type_code: "BASIC"
+  name: "Basic"
+
+elite:
+  card_super_type_code: "ELITE"
+  name: "Elite"
+
+host:
+  card_super_type_code: "HOST"
+  name: "Host"
+
+legendary:
+  card_super_type_code: "LEGENDARY"
+  name: "Legendary"
+
+ongoing:
+  card_super_type_code: "ONGOING"
+  name: "Ongoing"
+
+snow:
+  card_super_type_code: "SNOW"
+  name: "Snow"
+
+world:
+  card_super_type_code: "WORLD"
+  name: "World"

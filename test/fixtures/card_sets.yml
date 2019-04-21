@@ -1,0 +1,6 @@
+ice_age:
+  card_block: ice_age
+  name: "Ice Age"
+  code: "ICE"
+  release_date: "1995-06-01"
+  show_card_numbers: true

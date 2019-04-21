@@ -1,0 +1,51 @@
+artifact:
+  card_type_code: "ARTIFACT"
+  name: "Artifact"
+
+conspiracy:
+  card_type_code: "CONSPIRACY"
+  name: "Conspiracy"
+
+creature:
+  card_type_code: "CREATURE"
+  name: "Creature"
+
+enchantment:
+  card_type_code: "ENCHANTMENT"
+  name: "Enchantment"
+
+instant:
+  card_type_code: "INSTANT"
+  name: "Instant"
+
+land:
+  card_type_code: "LAND"
+  name: "Land"
+
+phenomenon:
+  card_type_code: "PHENOMENON"
+  name: "Phenomenon"
+
+plane:
+  card_type_code: "PLANE"
+  name: "Plane"
+
+planeswalker:
+  card_type_code: "PLANESWALKER"
+  name: "Planeswalker"
+
+scheme:
+  card_type_code: "SCHEME"
+  name: "Scheme"
+
+sorcery:
+  card_type_code: "SORCERY"
+  name: "Sorcery"
+
+tribal:
+  card_type_code: "TRIBAL"
+  name: "Tribal"
+
+vanguard:
+  card_type_code: "VANGUARD"
+  name: "Vanguard"

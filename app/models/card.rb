@@ -2,6 +2,12 @@
 
 class Card < ApplicationRecord
   belongs_to :rarity, foreign_key: :rarity_code, inverse_of: :cards, primary_key: :rarity_code
+  has_many :card_super_typings
+  has_many :card_typings
+  has_many :card_sub_typings
+  has_many :card_super_types, through: :card_super_typings, foreign_key: :card_super_type_code
+  has_many :card_types, through: :card_typings, foreign_key: :card_type_code
+  has_many :card_sub_types, through: :card_sub_typings, foreign_key: :card_sub_type_code
   belongs_to :card_set
   has_many :card_parts, dependent: :restrict_with_exception
   has_many :collections, dependent: :restrict_with_exception
@@ -9,18 +15,6 @@ class Card < ApplicationRecord
 
   validates :multiverse_id, presence: true
   validates :name, presence: true
-
-  def self.card_supertypes
-    uniq.pluck(:card_supertypes).map { |card_supertype| card_supertype.split(';') }.flatten.uniq.reject(&:blank?).sort
-  end
-
-  def self.card_types
-    uniq.pluck(:card_types).map { |card_type| card_type.split(';') }.flatten.uniq.reject(&:blank?).sort
-  end
-
-  def self.card_subtypes
-    uniq.pluck(:card_subtypes).map { |card_subtype| card_subtype.split(';') }.flatten.uniq.reject(&:blank?).sort
-  end
 
   %w[White Blue Black Red Green].each do |color|
     define_method("is_#{color.downcase}?") do

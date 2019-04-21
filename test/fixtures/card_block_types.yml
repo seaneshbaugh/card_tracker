@@ -1,0 +1,59 @@
+archenemy:
+  name: "Archenemy"
+
+box:
+  name: "Box"
+
+commander:
+  name: "Commander"
+
+core:
+  name: "Core"
+
+draft_innovation:
+  name: "Draft Innovation"
+
+duel_deck:
+  name: "Duel Deck"
+
+expansion:
+  name: "Expansion"
+
+from_the_vault:
+  name: "From the Vault"
+
+funny:
+  name: "Funny"
+
+masterpiece:
+  name: "Masterpiece"
+
+masters:
+  name: "Masters"
+
+memorabilia:
+  name: "Memorabilia"
+
+planechase:
+  name: "Planechase"
+
+premium_deck:
+  name: "Premium Deck"
+
+promo:
+  name: "Promo"
+
+spellbook:
+  name: "Spellbook"
+
+starter:
+  name: "Starter"
+
+token:
+  name: "Token"
+
+treasure_chest:
+  name: "Treasure Chest"
+
+vanguard:
+  name: "Vanguard"

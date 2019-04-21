@@ -1,0 +1,1435 @@
+advisor:
+  card_sub_type_code: "ADVISOR"
+  name: "Advisor"
+
+aetherborn:
+  card_sub_type_code: "AETHERBORN"
+  name: "Aetherborn"
+
+ajani:
+  card_sub_type_code: "AJANI"
+  name: "Ajani"
+
+alara:
+  card_sub_type_code: "ALARA"
+  name: "Alara"
+
+ally:
+  card_sub_type_code: "ALLY"
+  name: "Ally"
+
+aminatou:
+  card_sub_type_code: "AMINATOU"
+  name: "Aminatou"
+
+angel:
+  card_sub_type_code: "ANGEL"
+  name: "Angel"
+
+angrath:
+  card_sub_type_code: "ANGRATH"
+  name: "Angrath"
+
+antelope:
+  card_sub_type_code: "ANTELOPE"
+  name: "Antelope"
+
+ape:
+  card_sub_type_code: "APE"
+  name: "Ape"
+
+arcane:
+  card_sub_type_code: "ARCANE"
+  name: "Arcane"
+
+arcane:
+  card_sub_type_code: "ARCANE"
+  name: "Arcane"
+
+archer:
+  card_sub_type_code: "ARCHER"
+  name: "Archer"
+
+archon:
+  card_sub_type_code: "ARCHON"
+  name: "Archon"
+
+arkhos:
+  card_sub_type_code: "ARKHOS"
+  name: "Arkhos"
+
+arlinn:
+  card_sub_type_code: "ARLINN"
+  name: "Arlinn"
+
+artificer:
+  card_sub_type_code: "ARTIFICER"
+  name: "Artificer"
+
+ashiok:
+  card_sub_type_code: "ASHIOK"
+  name: "Ashiok"
+
+assassin:
+  card_sub_type_code: "ASSASSIN"
+  name: "Assassin"
+
+assembly-worker:
+  card_sub_type_code: "ASSEMBLY-WORKER"
+  name: "Assembly-worker"
+
+atog:
+  card_sub_type_code: "ATOG"
+  name: "Atog"
+
+aura:
+  card_sub_type_code: "AURA"
+  name: "Aura"
+
+aurochs:
+  card_sub_type_code: "AUROCHS"
+  name: "Aurochs"
+
+avatar:
+  card_sub_type_code: "AVATAR"
+  name: "Avatar"
+
+azgol:
+  card_sub_type_code: "AZGOL"
+  name: "Azgol"
+
+azra:
+  card_sub_type_code: "AZRA"
+  name: "Azra"
+
+badger:
+  card_sub_type_code: "BADGER"
+  name: "Badger"
+
+barbarian:
+  card_sub_type_code: "BARBARIAN"
+  name: "Barbarian"
+
+basilisk:
+  card_sub_type_code: "BASILISK"
+  name: "Basilisk"
+
+bat:
+  card_sub_type_code: "BAT"
+  name: "Bat"
+
+bear:
+  card_sub_type_code: "BEAR"
+  name: "Bear"
+
+beast:
+  card_sub_type_code: "BEAST"
+  name: "Beast"
+
+beeble:
+  card_sub_type_code: "BEEBLE"
+  name: "Beeble"
+
+belenon:
+  card_sub_type_code: "BELENON"
+  name: "Belenon"
+
+berserker:
+  card_sub_type_code: "BERSERKER"
+  name: "Berserker"
+
+bird:
+  card_sub_type_code: "BIRD"
+  name: "Bird"
+
+blinkmoth:
+  card_sub_type_code: "BLINKMOTH"
+  name: "Blinkmoth"
+
+boar:
+  card_sub_type_code: "BOAR"
+  name: "Boar"
+
+bolas:
+  card_sub_type_code: "BOLAS"
+  name: "Bolas"
+
+bolass_meditation_realm:
+  card_sub_type_code: "BOLAS_S_MEDITATION_REALM"
+  name: "Bolas's Meditation Realm"
+
+bringer:
+  card_sub_type_code: "BRINGER"
+  name: "Bringer"
+
+brushwagg:
+  card_sub_type_code: "BRUSHWAGG"
+  name: "Brushwagg"
+
+camarid:
+  card_sub_type_code: "CAMARID"
+  name: "Camarid"
+
+camel:
+  card_sub_type_code: "CAMEL"
+  name: "Camel"
+
+caribou:
+  card_sub_type_code: "CARIBOU"
+  name: "Caribou"
+
+carrier:
+  card_sub_type_code: "CARRIER"
+  name: "Carrier"
+
+cartouche:
+  card_sub_type_code: "CARTOUCHE"
+  name: "Cartouche"
+
+cat:
+  card_sub_type_code: "CAT"
+  name: "Cat"
+
+centaur:
+  card_sub_type_code: "CENTAUR"
+  name: "Centaur"
+
+cephalid:
+  card_sub_type_code: "CEPHALID"
+  name: "Cephalid"
+
+chandra:
+  card_sub_type_code: "CHANDRA"
+  name: "Chandra"
+
+chimera:
+  card_sub_type_code: "CHIMERA"
+  name: "Chimera"
+
+citizen:
+  card_sub_type_code: "CITIZEN"
+  name: "Citizen"
+
+cleric:
+  card_sub_type_code: "CLERIC"
+  name: "Cleric"
+
+clue:
+  card_sub_type_code: "CLUE"
+  name: "Clue"
+
+cockatrice:
+  card_sub_type_code: "COCKATRICE"
+  name: "Cockatrice"
+
+construct:
+  card_sub_type_code: "CONSTRUCT"
+  name: "Construct"
+
+contraption:
+  card_sub_type_code: "CONTRAPTION"
+  name: "Contraption"
+
+coward:
+  card_sub_type_code: "COWARD"
+  name: "Coward"
+
+crab:
+  card_sub_type_code: "CRAB"
+  name: "Crab"
+
+crocodile:
+  card_sub_type_code: "CROCODILE"
+  name: "Crocodile"
+
+curse:
+  card_sub_type_code: "CURSE"
+  name: "Curse"
+
+cyclops:
+  card_sub_type_code: "CYCLOPS"
+  name: "Cyclops"
+
+dack:
+  card_sub_type_code: "DACK"
+  name: "Dack"
+
+daretti:
+  card_sub_type_code: "DARETTI"
+  name: "Daretti"
+
+dauthi:
+  card_sub_type_code: "DAUTHI"
+  name: "Dauthi"
+
+demon:
+  card_sub_type_code: "DEMON"
+  name: "Demon"
+
+desert:
+  card_sub_type_code: "DESERT"
+  name: "Desert"
+
+deserter:
+  card_sub_type_code: "DESERTER"
+  name: "Deserter"
+
+devil:
+  card_sub_type_code: "DEVIL"
+  name: "Devil"
+
+dinosaur:
+  card_sub_type_code: "DINOSAUR"
+  name: "Dinosaur"
+
+djinn:
+  card_sub_type_code: "DJINN"
+  name: "Djinn"
+
+dominaria:
+  card_sub_type_code: "DOMINARIA"
+  name: "Dominaria"
+
+domri:
+  card_sub_type_code: "DOMRI"
+  name: "Domri"
+
+dovin:
+  card_sub_type_code: "DOVIN"
+  name: "Dovin"
+
+dragon:
+  card_sub_type_code: "DRAGON"
+  name: "Dragon"
+
+drake:
+  card_sub_type_code: "DRAKE"
+  name: "Drake"
+
+dreadnought:
+  card_sub_type_code: "DREADNOUGHT"
+  name: "Dreadnought"
+
+drone:
+  card_sub_type_code: "DRONE"
+  name: "Drone"
+
+druid:
+  card_sub_type_code: "DRUID"
+  name: "Druid"
+
+dryad:
+  card_sub_type_code: "DRYAD"
+  name: "Dryad"
+
+dwarf:
+  card_sub_type_code: "DWARF"
+  name: "Dwarf"
+
+efreet:
+  card_sub_type_code: "EFREET"
+  name: "Efreet"
+
+egg:
+  card_sub_type_code: "EGG"
+  name: "Egg"
+
+elder:
+  card_sub_type_code: "ELDER"
+  name: "Elder"
+
+eldrazi:
+  card_sub_type_code: "ELDRAZI"
+  name: "Eldrazi"
+
+elemental:
+  card_sub_type_code: "ELEMENTAL"
+  name: "Elemental"
+
+elephant:
+  card_sub_type_code: "ELEPHANT"
+  name: "Elephant"
+
+elf:
+  card_sub_type_code: "ELF"
+  name: "Elf"
+
+elk:
+  card_sub_type_code: "ELK"
+  name: "Elk"
+
+elspeth:
+  card_sub_type_code: "ELSPETH"
+  name: "Elspeth"
+
+equilor:
+  card_sub_type_code: "EQUILOR"
+  name: "Equilor"
+
+equipment:
+  card_sub_type_code: "EQUIPMENT"
+  name: "Equipment"
+
+ergamon:
+  card_sub_type_code: "ERGAMON"
+  name: "Ergamon"
+
+estrid:
+  card_sub_type_code: "ESTRID"
+  name: "Estrid"
+
+eye:
+  card_sub_type_code: "EYE"
+  name: "Eye"
+
+fabacin:
+  card_sub_type_code: "FABACIN"
+  name: "Fabacin"
+
+faerie:
+  card_sub_type_code: "FAERIE"
+  name: "Faerie"
+
+ferret:
+  card_sub_type_code: "FERRET"
+  name: "Ferret"
+
+fish:
+  card_sub_type_code: "FISH"
+  name: "Fish"
+
+flagbearer:
+  card_sub_type_code: "FLAGBEARER"
+  name: "Flagbearer"
+
+forest:
+  card_sub_type_code: "FOREST"
+  name: "Forest"
+
+fortification:
+  card_sub_type_code: "FORTIFICATION"
+  name: "Fortification"
+
+fox:
+  card_sub_type_code: "FOX"
+  name: "Fox"
+
+freyalise:
+  card_sub_type_code: "FREYALISE"
+  name: "Freyalise"
+
+frog:
+  card_sub_type_code: "FROG"
+  name: "Frog"
+
+fungus:
+  card_sub_type_code: "FUNGUS"
+  name: "Fungus"
+
+gargoyle:
+  card_sub_type_code: "GARGOYLE"
+  name: "Gargoyle"
+
+garruk:
+  card_sub_type_code: "GARRUK"
+  name: "Garruk"
+
+gate:
+  card_sub_type_code: "GATE"
+  name: "Gate"
+
+germ:
+  card_sub_type_code: "GERM"
+  name: "Germ"
+
+giant:
+  card_sub_type_code: "GIANT"
+  name: "Giant"
+
+gideon:
+  card_sub_type_code: "GIDEON"
+  name: "Gideon"
+
+gnome:
+  card_sub_type_code: "GNOME"
+  name: "Gnome"
+
+goat:
+  card_sub_type_code: "GOAT"
+  name: "Goat"
+
+goblin:
+  card_sub_type_code: "GOBLIN"
+  name: "Goblin"
+
+god:
+  card_sub_type_code: "GOD"
+  name: "God"
+
+golem:
+  card_sub_type_code: "GOLEM"
+  name: "Golem"
+
+gorgon:
+  card_sub_type_code: "GORGON"
+  name: "Gorgon"
+
+graveborn:
+  card_sub_type_code: "GRAVEBORN"
+  name: "Graveborn"
+
+gremlin:
+  card_sub_type_code: "GREMLIN"
+  name: "Gremlin"
+
+griffin:
+  card_sub_type_code: "GRIFFIN"
+  name: "Griffin"
+
+hag:
+  card_sub_type_code: "HAG"
+  name: "Hag"
+
+harpy:
+  card_sub_type_code: "HARPY"
+  name: "Harpy"
+
+hellion:
+  card_sub_type_code: "HELLION"
+  name: "Hellion"
+
+hippo:
+  card_sub_type_code: "HIPPO"
+  name: "Hippo"
+
+hippogriff:
+  card_sub_type_code: "HIPPOGRIFF"
+  name: "Hippogriff"
+
+homarid:
+  card_sub_type_code: "HOMARID"
+  name: "Homarid"
+
+homunculus:
+  card_sub_type_code: "HOMUNCULUS"
+  name: "Homunculus"
+
+horror:
+  card_sub_type_code: "HORROR"
+  name: "Horror"
+
+horse:
+  card_sub_type_code: "HORSE"
+  name: "Horse"
+
+hound:
+  card_sub_type_code: "HOUND"
+  name: "Hound"
+
+huatli:
+  card_sub_type_code: "HUATLI"
+  name: "Huatli"
+
+human:
+  card_sub_type_code: "HUMAN"
+  name: "Human"
+
+hydra:
+  card_sub_type_code: "HYDRA"
+  name: "Hydra"
+
+hyena:
+  card_sub_type_code: "HYENA"
+  name: "Hyena"
+
+illusion:
+  card_sub_type_code: "ILLUSION"
+  name: "Illusion"
+
+imp:
+  card_sub_type_code: "IMP"
+  name: "Imp"
+
+incarnation:
+  card_sub_type_code: "INCARNATION"
+  name: "Incarnation"
+
+innistrad:
+  card_sub_type_code: "INNISTRAD"
+  name: "Innistrad"
+
+insect:
+  card_sub_type_code: "INSECT"
+  name: "Insect"
+
+iquatana:
+  card_sub_type_code: "IQUATANA"
+  name: "Iquatana"
+
+ir:
+  card_sub_type_code: "IR"
+  name: "Ir"
+
+island:
+  card_sub_type_code: "ISLAND"
+  name: "Island"
+
+jace:
+  card_sub_type_code: "JACE"
+  name: "Jace"
+
+jackal:
+  card_sub_type_code: "JACKAL"
+  name: "Jackal"
+
+jaya:
+  card_sub_type_code: "JAYA"
+  name: "Jaya"
+
+jellyfish:
+  card_sub_type_code: "JELLYFISH"
+  name: "Jellyfish"
+
+juggernaut:
+  card_sub_type_code: "JUGGERNAUT"
+  name: "Juggernaut"
+
+kaldheim:
+  card_sub_type_code: "KALDHEIM"
+  name: "Kaldheim"
+
+kamigawa:
+  card_sub_type_code: "KAMIGAWA"
+  name: "Kamigawa"
+
+karn:
+  card_sub_type_code: "KARN"
+  name: "Karn"
+
+karsus:
+  card_sub_type_code: "KARSUS"
+  name: "Karsus"
+
+kavu:
+  card_sub_type_code: "KAVU"
+  name: "Kavu"
+
+kaya:
+  card_sub_type_code: "KAYA"
+  name: "Kaya"
+
+kephalai:
+  card_sub_type_code: "KEPHALAI"
+  name: "Kephalai"
+
+kinshala:
+  card_sub_type_code: "KINSHALA"
+  name: "Kinshala"
+
+kiora:
+  card_sub_type_code: "KIORA"
+  name: "Kiora"
+
+kirin:
+  card_sub_type_code: "KIRIN"
+  name: "Kirin"
+
+kithkin:
+  card_sub_type_code: "KITHKIN"
+  name: "Kithkin"
+
+knight:
+  card_sub_type_code: "KNIGHT"
+  name: "Knight"
+
+kobold:
+  card_sub_type_code: "KOBOLD"
+  name: "Kobold"
+
+kolbahan:
+  card_sub_type_code: "KOLBAHAN"
+  name: "Kolbahan"
+
+kor:
+  card_sub_type_code: "KOR"
+  name: "Kor"
+
+koth:
+  card_sub_type_code: "KOTH"
+  name: "Koth"
+
+kraken:
+  card_sub_type_code: "KRAKEN"
+  name: "Kraken"
+
+kyneth:
+  card_sub_type_code: "KYNETH"
+  name: "Kyneth"
+
+lair:
+  card_sub_type_code: "LAIR"
+  name: "Lair"
+
+lamia:
+  card_sub_type_code: "LAMIA"
+  name: "Lamia"
+
+lammasu:
+  card_sub_type_code: "LAMMASU"
+  name: "Lammasu"
+
+leech:
+  card_sub_type_code: "LEECH"
+  name: "Leech"
+
+leviathan:
+  card_sub_type_code: "LEVIATHAN"
+  name: "Leviathan"
+
+lhurgoyf:
+  card_sub_type_code: "LHURGOYF"
+  name: "Lhurgoyf"
+
+licid:
+  card_sub_type_code: "LICID"
+  name: "Licid"
+
+liliana:
+  card_sub_type_code: "LILIANA"
+  name: "Liliana"
+
+lizard:
+  card_sub_type_code: "LIZARD"
+  name: "Lizard"
+
+locus:
+  card_sub_type_code: "LOCUS"
+  name: "Locus"
+
+lorwyn:
+  card_sub_type_code: "LORWYN"
+  name: "Lorwyn"
+
+luvion:
+  card_sub_type_code: "LUVION"
+  name: "Luvion"
+
+manticore:
+  card_sub_type_code: "MANTICORE"
+  name: "Manticore"
+
+masticore:
+  card_sub_type_code: "MASTICORE"
+  name: "Masticore"
+
+mercadia:
+  card_sub_type_code: "MERCADIA"
+  name: "Mercadia"
+
+mercenary:
+  card_sub_type_code: "MERCENARY"
+  name: "Mercenary"
+
+merfolk:
+  card_sub_type_code: "MERFOLK"
+  name: "Merfolk"
+
+metathran:
+  card_sub_type_code: "METATHRAN"
+  name: "Metathran"
+
+mine:
+  card_sub_type_code: "MINE"
+  name: "Mine"
+
+minion:
+  card_sub_type_code: "MINION"
+  name: "Minion"
+
+minotaur:
+  card_sub_type_code: "MINOTAUR"
+  name: "Minotaur"
+
+mirrodin:
+  card_sub_type_code: "MIRRODIN"
+  name: "Mirrodin"
+
+moag:
+  card_sub_type_code: "MOAG"
+  name: "Moag"
+
+mole:
+  card_sub_type_code: "MOLE"
+  name: "Mole"
+
+monger:
+  card_sub_type_code: "MONGER"
+  name: "Monger"
+
+mongoose:
+  card_sub_type_code: "MONGOOSE"
+  name: "Mongoose"
+
+mongseng:
+  card_sub_type_code: "MONGSENG"
+  name: "Mongseng"
+
+monk:
+  card_sub_type_code: "MONK"
+  name: "Monk"
+
+monkey:
+  card_sub_type_code: "MONKEY"
+  name: "Monkey"
+
+moonfolk:
+  card_sub_type_code: "MOONFOLK"
+  name: "Moonfolk"
+
+mountain:
+  card_sub_type_code: "MOUNTAIN"
+  name: "Mountain"
+
+muraganda:
+  card_sub_type_code: "MURAGANDA"
+  name: "Muraganda"
+
+mutant:
+  card_sub_type_code: "MUTANT"
+  name: "Mutant"
+
+myr:
+  card_sub_type_code: "MYR"
+  name: "Myr"
+
+mystic:
+  card_sub_type_code: "MYSTIC"
+  name: "Mystic"
+
+naga:
+  card_sub_type_code: "NAGA"
+  name: "Naga"
+
+nahiri:
+  card_sub_type_code: "NAHIRI"
+  name: "Nahiri"
+
+narset:
+  card_sub_type_code: "NARSET"
+  name: "Narset"
+
+nautilus:
+  card_sub_type_code: "NAUTILUS"
+  name: "Nautilus"
+
+nephilim:
+  card_sub_type_code: "NEPHILIM"
+  name: "Nephilim"
+
+new phyrexia:
+  card_sub_type_code: "NEW_PHYREXIA"
+  name: "New Phyrexia"
+
+nightmare:
+  card_sub_type_code: "NIGHTMARE"
+  name: "Nightmare"
+
+nightstalker:
+  card_sub_type_code: "NIGHTSTALKER"
+  name: "Nightstalker"
+
+ninja:
+  card_sub_type_code: "NINJA"
+  name: "Ninja"
+
+nissa:
+  card_sub_type_code: "NISSA"
+  name: "Nissa"
+
+nixilis:
+  card_sub_type_code: "NIXILIS"
+  name: "Nixilis"
+
+noggle:
+  card_sub_type_code: "NOGGLE"
+  name: "Noggle"
+
+nomad:
+  card_sub_type_code: "NOMAD"
+  name: "Nomad"
+
+nymph:
+  card_sub_type_code: "NYMPH"
+  name: "Nymph"
+
+octopus:
+  card_sub_type_code: "OCTOPUS"
+  name: "Octopus"
+
+ogre:
+  card_sub_type_code: "OGRE"
+  name: "Ogre"
+
+ooze:
+  card_sub_type_code: "OOZE"
+  name: "Ooze"
+
+orb:
+  card_sub_type_code: "ORB"
+  name: "Orb"
+
+orc:
+  card_sub_type_code: "ORC"
+  name: "Orc"
+
+orgg:
+  card_sub_type_code: "ORGG"
+  name: "Orgg"
+
+ouphe:
+  card_sub_type_code: "OUPHE"
+  name: "Ouphe"
+
+ox:
+  card_sub_type_code: "OX"
+  name: "Ox"
+
+oyster:
+  card_sub_type_code: "OYSTER"
+  name: "Oyster"
+
+pangolin:
+  card_sub_type_code: "PANGOLIN"
+  name: "Pangolin"
+
+pegasus:
+  card_sub_type_code: "PEGASUS"
+  name: "Pegasus"
+
+pentavite:
+  card_sub_type_code: "PENTAVITE"
+  name: "Pentavite"
+
+pest:
+  card_sub_type_code: "PEST"
+  name: "Pest"
+
+phelddagrif:
+  card_sub_type_code: "PHELDDAGRIF"
+  name: "Phelddagrif"
+
+phoenix:
+  card_sub_type_code: "PHOENIX"
+  name: "Phoenix"
+
+phyrexia:
+  card_sub_type_code: "PHYREXIA"
+  name: "Phyrexia"
+
+pilot:
+  card_sub_type_code: "PILOT"
+  name: "Pilot"
+
+pincher:
+  card_sub_type_code: "PINCHER"
+  name: "Pincher"
+
+pirate:
+  card_sub_type_code: "PIRATE"
+  name: "Pirate"
+
+plains:
+  card_sub_type_code: "PLAINS"
+  name: "Plains"
+
+plant:
+  card_sub_type_code: "PLANT"
+  name: "Plant"
+
+power-plant:
+  card_sub_type_code: "POWER-PLANT"
+  name: "Power-plant"
+
+praetor:
+  card_sub_type_code: "PRAETOR"
+  name: "Praetor"
+
+prism:
+  card_sub_type_code: "PRISM"
+  name: "Prism"
+
+processor:
+  card_sub_type_code: "PROCESSOR"
+  name: "Processor"
+
+pyrulea:
+  card_sub_type_code: "PYRULEA"
+  name: "Pyrulea"
+
+rabbit:
+  card_sub_type_code: "RABBIT"
+  name: "Rabbit"
+
+rabiah:
+  card_sub_type_code: "RABIAH"
+  name: "Rabiah"
+
+ral:
+  card_sub_type_code: "RAL"
+  name: "Ral"
+
+rat:
+  card_sub_type_code: "RAT"
+  name: "Rat"
+
+rath:
+  card_sub_type_code: "RATH"
+  name: "Rath"
+
+ravnica:
+  card_sub_type_code: "RAVNICA"
+  name: "Ravnica"
+
+rebel:
+  card_sub_type_code: "REBEL"
+  name: "Rebel"
+
+reflection:
+  card_sub_type_code: "REFLECTION"
+  name: "Reflection"
+
+regatha:
+  card_sub_type_code: "REGATHA"
+  name: "Regatha"
+
+rhino:
+  card_sub_type_code: "RHINO"
+  name: "Rhino"
+
+rigger:
+  card_sub_type_code: "RIGGER"
+  name: "Rigger"
+
+rogue:
+  card_sub_type_code: "ROGUE"
+  name: "Rogue"
+
+rowan:
+  card_sub_type_code: "ROWAN"
+  name: "Rowan"
+
+sable:
+  card_sub_type_code: "SABLE"
+  name: "Sable"
+
+saga:
+  card_sub_type_code: "SAGA"
+  name: "Saga"
+
+saheeli:
+  card_sub_type_code: "SAHEELI"
+  name: "Saheeli"
+
+salamander:
+  card_sub_type_code: "SALAMANDER"
+  name: "Salamander"
+
+samurai:
+  card_sub_type_code: "SAMURAI"
+  name: "Samurai"
+
+samut:
+  card_sub_type_code: "SAMUT"
+  name: "Samut"
+
+sand:
+  card_sub_type_code: "SAND"
+  name: "Sand"
+
+saproling:
+  card_sub_type_code: "SAPROLING"
+  name: "Saproling"
+
+sarkhan:
+  card_sub_type_code: "SARKHAN"
+  name: "Sarkhan"
+
+satyr:
+  card_sub_type_code: "SATYR"
+  name: "Satyr"
+
+scarecrow:
+  card_sub_type_code: "SCARECROW"
+  name: "Scarecrow"
+
+scion:
+  card_sub_type_code: "SCION"
+  name: "Scion"
+
+scorpion:
+  card_sub_type_code: "SCORPION"
+  name: "Scorpion"
+
+scout:
+  card_sub_type_code: "SCOUT"
+  name: "Scout"
+
+segovia:
+  card_sub_type_code: "SEGOVIA"
+  name: "Segovia"
+
+serf:
+  card_sub_type_code: "SERF"
+  name: "Serf"
+
+serpent:
+  card_sub_type_code: "SERPENT"
+  name: "Serpent"
+
+serras_realm:
+  card_sub_type_code: "SERRAS_REALM"
+  name: "Serra's Realm"
+
+servo:
+  card_sub_type_code: "SERVO"
+  name: "Servo"
+
+shade:
+  card_sub_type_code: "SHADE"
+  name: "Shade"
+
+shadowmoor:
+  card_sub_type_code: "SHADOWMOOR"
+  name: "Shadowmoor"
+
+shaman:
+  card_sub_type_code: "SHAMAN"
+  name: "Shaman"
+
+shandalar:
+  card_sub_type_code: "SHANDALAR"
+  name: "Shandalar"
+
+shapeshifter:
+  card_sub_type_code: "SHAPESHIFTER"
+  name: "Shapeshifter"
+
+sheep:
+  card_sub_type_code: "SHEEP"
+  name: "Sheep"
+
+shrine:
+  card_sub_type_code: "SHRINE"
+  name: "Shrine"
+
+siren:
+  card_sub_type_code: "SIREN"
+  name: "Siren"
+
+skeleton:
+  card_sub_type_code: "SKELETON"
+  name: "Skeleton"
+
+slith:
+  card_sub_type_code: "SLITH"
+  name: "Slith"
+
+sliver:
+  card_sub_type_code: "SLIVER"
+  name: "Sliver"
+
+slug:
+  card_sub_type_code: "SLUG"
+  name: "Slug"
+
+snake:
+  card_sub_type_code: "SNAKE"
+  name: "Snake"
+
+soldier:
+  card_sub_type_code: "SOLDIER"
+  name: "Soldier"
+
+soltari:
+  card_sub_type_code: "SOLTARI"
+  name: "Soltari"
+
+sorin:
+  card_sub_type_code: "SORIN"
+  name: "Sorin"
+
+spawn:
+  card_sub_type_code: "SPAWN"
+  name: "Spawn"
+
+specter:
+  card_sub_type_code: "SPECTER"
+  name: "Specter"
+
+spellshaper:
+  card_sub_type_code: "SPELLSHAPER"
+  name: "Spellshaper"
+
+sphinx:
+  card_sub_type_code: "SPHINX"
+  name: "Sphinx"
+
+spider:
+  card_sub_type_code: "SPIDER"
+  name: "Spider"
+
+spike:
+  card_sub_type_code: "SPIKE"
+  name: "Spike"
+
+spirit:
+  card_sub_type_code: "SPIRIT"
+  name: "Spirit"
+
+splinter:
+  card_sub_type_code: "SPLINTER"
+  name: "Splinter"
+
+sponge:
+  card_sub_type_code: "SPONGE"
+  name: "Sponge"
+
+squid:
+  card_sub_type_code: "SQUID"
+  name: "Squid"
+
+squirrel:
+  card_sub_type_code: "SQUIRREL"
+  name: "Squirrel"
+
+starfish:
+  card_sub_type_code: "STARFISH"
+  name: "Starfish"
+
+surrakar:
+  card_sub_type_code: "SURRAKAR"
+  name: "Surrakar"
+
+survivor:
+  card_sub_type_code: "SURVIVOR"
+  name: "Survivor"
+
+swamp:
+  card_sub_type_code: "SWAMP"
+  name: "Swamp"
+
+tamiyo:
+  card_sub_type_code: "TAMIYO"
+  name: "Tamiyo"
+
+teferi:
+  card_sub_type_code: "TEFERI"
+  name: "Teferi"
+
+tetravite:
+  card_sub_type_code: "TETRAVITE"
+  name: "Tetravite"
+
+tezzeret:
+  card_sub_type_code: "TEZZERET"
+  name: "Tezzeret"
+
+thalakos:
+  card_sub_type_code: "THALAKOS"
+  name: "Thalakos"
+
+thopter:
+  card_sub_type_code: "THOPTER"
+  name: "Thopter"
+
+thrull:
+  card_sub_type_code: "THRULL"
+  name: "Thrull"
+
+tibalt:
+  card_sub_type_code: "TIBALT"
+  name: "Tibalt"
+
+tower:
+  card_sub_type_code: "TOWER"
+  name: "Tower"
+
+trap:
+  card_sub_type_code: "TRAP"
+  name: "Trap"
+
+trap:
+  card_sub_type_code: "TRAP"
+  name: "Trap"
+
+treasure:
+  card_sub_type_code: "TREASURE"
+  name: "Treasure"
+
+treefolk:
+  card_sub_type_code: "TREEFOLK"
+  name: "Treefolk"
+
+trilobite:
+  card_sub_type_code: "TRILOBITE"
+  name: "Trilobite"
+
+triskelavite:
+  card_sub_type_code: "TRISKELAVITE"
+  name: "Triskelavite"
+
+troll:
+  card_sub_type_code: "TROLL"
+  name: "Troll"
+
+turtle:
+  card_sub_type_code: "TURTLE"
+  name: "Turtle"
+
+ugin:
+  card_sub_type_code: "UGIN"
+  name: "Ugin"
+
+ulgrotha:
+  card_sub_type_code: "ULGROTHA"
+  name: "Ulgrotha"
+
+unicorn:
+  card_sub_type_code: "UNICORN"
+  name: "Unicorn"
+
+urza's:
+  card_sub_type_code: "URZAS"
+  name: "Urza's"
+
+valla:
+  card_sub_type_code: "VALLA"
+  name: "Valla"
+
+vampire:
+  card_sub_type_code: "VAMPIRE"
+  name: "Vampire"
+
+vedalken:
+  card_sub_type_code: "VEDALKEN"
+  name: "Vedalken"
+
+vehicle:
+  card_sub_type_code: "VEHICLE"
+  name: "Vehicle"
+
+venser:
+  card_sub_type_code: "VENSER"
+  name: "Venser"
+
+viashino:
+  card_sub_type_code: "VIASHINO"
+  name: "Viashino"
+
+vivien:
+  card_sub_type_code: "VIVIEN"
+  name: "Vivien"
+
+volver:
+  card_sub_type_code: "VOLVER"
+  name: "Volver"
+
+vraska:
+  card_sub_type_code: "VRASKA"
+  name: "Vraska"
+
+vryn:
+  card_sub_type_code: "VRYN"
+  name: "Vryn"
+
+wall:
+  card_sub_type_code: "WALL"
+  name: "Wall"
+
+warrior:
+  card_sub_type_code: "WARRIOR"
+  name: "Warrior"
+
+weird:
+  card_sub_type_code: "WEIRD"
+  name: "Weird"
+
+werewolf:
+  card_sub_type_code: "WEREWOLF"
+  name: "Werewolf"
+
+whale:
+  card_sub_type_code: "WHALE"
+  name: "Whale"
+
+wildfire:
+  card_sub_type_code: "WILDFIRE"
+  name: "Wildfire"
+
+will:
+  card_sub_type_code: "WILL"
+  name: "Will"
+
+windgrace:
+  card_sub_type_code: "WINDGRACE"
+  name: "Windgrace"
+
+wizard:
+  card_sub_type_code: "WIZARD"
+  name: "Wizard"
+
+wolf:
+  card_sub_type_code: "WOLF"
+  name: "Wolf"
+
+wolverine:
+  card_sub_type_code: "WOLVERINE"
+  name: "Wolverine"
+
+wombat:
+  card_sub_type_code: "WOMBAT"
+  name: "Wombat"
+
+worm:
+  card_sub_type_code: "WORM"
+  name: "Worm"
+
+wraith:
+  card_sub_type_code: "WRAITH"
+  name: "Wraith"
+
+wurm:
+  card_sub_type_code: "WURM"
+  name: "Wurm"
+
+xenagos:
+  card_sub_type_code: "XENAGOS"
+  name: "Xenagos"
+
+xerex:
+  card_sub_type_code: "XEREX"
+  name: "Xerex"
+
+yanggu:
+  card_sub_type_code: "YANGGU"
+  name: "Yanggu"
+
+yanling:
+  card_sub_type_code: "YANLING"
+  name: "Yanling"
+
+yeti:
+  card_sub_type_code: "YETI"
+  name: "Yeti"
+
+zendikar:
+  card_sub_type_code: "ZENDIKAR"
+  name: "Zendikar"
+
+zombie:
+  card_sub_type_code: "ZOMBIE"
+  name: "Zombie"
+
+zubera:
+  card_sub_type_code: "ZUBERA"
+  name: "Zubera"

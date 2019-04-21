@@ -1,6 +1,7 @@
-class CardSet < ActiveRecord::Base
-#  attr_accessible :name, :slug, :card_block_id, :code, :release_date, :prerelease_date, :show_card_numbers
+# frozen_string_literal:
 
+# TODO: Remove show_card_numbers since MTGJSON returns card numbers for old sets.
+class CardSet < ActiveRecord::Base
   belongs_to :card_block
 
   has_many :cards

@@ -1,0 +1,104 @@
+# TODO: Remove CardBlockType from this. See note in CardBlockType class file.
+ice_age:
+  card_block_type: expansion
+  name: "Ice Age"
+
+mirage:
+  card_block_type: expansion
+  name: "Mirage"
+
+rath:
+  card_block_type: expansion
+  name: "Rath"
+
+arifacts:
+  card_block_type: expansion
+  name: "Artifacts"
+
+masquerade:
+  card_block_type: expansion
+  name: "Masquerade"
+
+invasion:
+  card_block_type: expansion
+  name: "Invasion"
+
+odyssey:
+  card_block_type: expansion
+  name: "Odyssey"
+
+onslaught:
+  card_block_type: expansion
+  name: "Onslaught"
+
+mirrodin:
+  card_block_type: expansion
+  name: "Mirrodin"
+
+kamigawa:
+  card_block_type: expansion
+  name: "Kamigawa"
+
+ravnica:
+  card_block_type: expansion
+  name: "Ravnica"
+
+time_spiral:
+  card_block_type: expansion
+  name: "Time Spiral"
+
+lorwyn:
+  card_block_type: expansion
+  name: "Lorwyn"
+
+shadowmoor:
+  card_block_type: expansion
+  name: "Shadowmoor"
+
+alara:
+  card_block_type: expansion
+  name: "Alara"
+
+zendikar:
+  card_block_type: expansion
+  name: "Zendikar"
+
+scars_of_mirrodin:
+  card_block_type: expansion
+  name: "Scars of Mirrodin"
+
+innistrad:
+  card_block_type: expansion
+  name: "Innistrad"
+
+return_to_ravnica:
+  card_block_type: expansion
+  name: "Return to Ravnica"
+
+theros:
+  card_block_type: expansion
+  name: "Theros"
+
+khans_of_tarkir:
+  card_block_type: expansion
+  name: "Khans of Tarkir"
+
+battle_of_zendikar:
+  card_block_type: expansion
+  name: "Battle of Zendikar"
+
+shadows_over_innistrad:
+  card_block_type: expansion
+  name: "Shadows over Innistrad"
+
+kaladesh:
+  card_block_type: expansion
+  name: "Kaladesh"
+
+amonkhet:
+  card_block_type: expansion
+  name: "Amonkhet"
+
+ixalan:
+  card_block_type: expansion
+  name: "Ixalan"
