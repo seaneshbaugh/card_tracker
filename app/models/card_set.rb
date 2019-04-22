@@ -7,16 +7,7 @@ class CardSet < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :code, presence: true, uniqueness: true
+  validates :slug, presence: true, uniqueness: true
 
-  before_validation :generate_slug
-
-  protected
-
-  def generate_slug
-    if self.name.blank?
-      self.slug = self.id.to_s
-    else
-      self.slug = CGI.unescapeHTML(Sanitize.clean(self.name)).gsub(/'|"/, '').gsub('&', 'and').squeeze(' ').parameterize
-    end
-  end
+  friendly_id :code
 end

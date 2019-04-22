@@ -20,18 +20,9 @@ class CardList < ActiveRecord::Base
   validates :default, inclusion: { in: [true, false] }
 
   after_initialize :set_default_attribute_values, if: :new_record?
-  before_validation :generate_slug
   before_save :ensure_only_one_default
 
-  protected
-
-  def generate_slug
-    if self.name.blank?
-      self.slug = self.id.to_s
-    else
-      self.slug = CGI.unescapeHTML(Sanitize.clean(self.name)).gsub(/'|"/, '').gsub('&', 'and').squeeze(' ').parameterize
-    end
-  end
+  friendly_id :name
 
   private
 

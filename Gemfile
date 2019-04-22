@@ -11,6 +11,7 @@ gem 'rails', '5.2.3'
 gem 'bootsnap', '1.4.3', require: false
 gem 'devise', '4.6.2'
 gem 'exception_notification', '4.3.0'
+gem 'friendly_id', '5.2.5'
 gem 'haml', '5.0.4'
 gem 'honeypot-captcha', '1.0.1'
 gem 'image_processing', '1.9.0'
