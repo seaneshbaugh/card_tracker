@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CardList < ActiveRecord::Base
+class CardList < ApplicationRecord
   extend FriendlyId
 
   DEFAULT_LISTS = [
