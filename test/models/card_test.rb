@@ -4,7 +4,7 @@ require 'test_helper'
 
 class CardTest < ActiveSupport::TestCase
   let(:card_set) { card_sets(:ice_age) }
-  
+
   describe 'associations' do
     describe 'rarity' do
       let(:rarity) { rarities(:rare) }

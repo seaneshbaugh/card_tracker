@@ -10,26 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_21_193712) do
+ActiveRecord::Schema.define(version: 2019_04_21_214509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "card_block_types", force: :cascade do |t|
-    t.string "name", default: "", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["created_at"], name: "index_card_block_types_on_created_at"
-    t.index ["name"], name: "index_card_block_types_on_name"
-    t.index ["updated_at"], name: "index_card_block_types_on_updated_at"
-  end
-
   create_table "card_blocks", force: :cascade do |t|
     t.string "name", default: "", null: false
-    t.integer "card_block_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["card_block_type_id"], name: "index_card_blocks_on_card_block_type_id"
     t.index ["created_at"], name: "index_card_blocks_on_created_at"
     t.index ["name"], name: "index_card_blocks_on_name", unique: true
     t.index ["updated_at"], name: "index_card_blocks_on_updated_at"
@@ -97,6 +86,15 @@ ActiveRecord::Schema.define(version: 2019_04_21_193712) do
     t.index ["updated_at"], name: "index_card_parts_on_updated_at"
   end
 
+  create_table "card_set_types", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_card_set_types_on_created_at"
+    t.index ["name"], name: "index_card_set_types_on_name"
+    t.index ["updated_at"], name: "index_card_set_types_on_updated_at"
+  end
+
   create_table "card_sets", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "slug", default: "", null: false
@@ -106,6 +104,8 @@ ActiveRecord::Schema.define(version: 2019_04_21_193712) do
     t.date "prerelease_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "card_set_type_id", null: false
+    t.index ["card_set_type_id"], name: "index_card_sets_on_card_set_type_id"
     t.index ["code"], name: "index_card_sets_on_code"
     t.index ["created_at"], name: "index_card_sets_on_created_at"
     t.index ["name"], name: "index_card_sets_on_name"
@@ -272,6 +272,7 @@ ActiveRecord::Schema.define(version: 2019_04_21_193712) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "card_sets", "card_set_types"
   add_foreign_key "card_sub_typings", "card_sub_types", column: "card_sub_type_code", primary_key: "card_sub_type_code"
   add_foreign_key "card_sub_typings", "cards"
   add_foreign_key "card_super_typings", "card_super_types", column: "card_super_type_code", primary_key: "card_super_type_code"

@@ -42,8 +42,6 @@ class CardList < ActiveRecord::Base
   end
 
   def set_default_attribute_values
-    self.name ||= ''
-    self.slug ||= ''
     self.have = true if have.nil?
     self.order ||= 0
   end

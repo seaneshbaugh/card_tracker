@@ -1,134 +1,105 @@
 # frozen_string_literal: true
 
-# TODO: Remove CardBlockType from this. See note in CardBlockType class file.
-expansion = CardBlockType.find_by!(name: 'Expansion')
-
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Ice Age"
+  s.name = 'Ice Age'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Mirage"
+  s.name = 'Mirage'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Rath"
+  s.name = 'Tempest'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Artifacts"
+  s.name = 'Urza'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Masquerade"
+  s.name = 'Masques'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Invasion"
+  s.name = 'Invasion'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Odyssey"
+  s.name = 'Odyssey'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Onslaught"
+  s.name = 'Onslaught'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Mirrodin"
+  s.name = 'Mirrodin'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Kamigawa"
+  s.name = 'Kamigawa'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Ravnica"
+  s.name = 'Ravnica'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Time Spiral"
+  s.name = 'Time Spiral'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Lorwyn"
+  s.name = 'Lorwyn'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Shadowmoor"
+  s.name = 'Shadowmoor'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Alara"
+  s.name = 'Alara'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Zendikar"
+  s.name = 'Zendikar'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Scars of Mirrodin"
+  s.name = 'Scars of Mirrodin'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Innistrad"
+  s.name = 'Innistrad'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Return to Ravnica"
+  s.name = 'Return to Ravnica'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Theros"
+  s.name = 'Theros'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Khans of Tarkir"
+  s.name = 'Khans of Tarkir'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Battle of Zendikar"
+  s.name = 'Battle of Zendikar'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Shadows over Innistrad"
+  s.name = 'Shadows over Innistrad'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Kaladesh"
+  s.name = 'Kaladesh'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Amonkhet"
+  s.name = 'Amonkhet'
 end
 
 CardBlock.seed(:id) do |s|
-  s.card_block_type = expansion
-  s.name = "Ixalan"
+  s.name = 'Ixalan'
 end
