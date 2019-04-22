@@ -24,7 +24,7 @@ class Card < ApplicationRecord
     end
   end
 
-  Color.all.each do |color|
+  Color.find_each do |color|
     define_method("#{color.name.downcase}?") do
       colors.include(Color.find_by(color_code: color.color_code))
     end
