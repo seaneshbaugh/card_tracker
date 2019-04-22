@@ -31,7 +31,9 @@ class CardList < ActiveRecord::Base
   def ensure_only_one_default
     return unless default && default_changed?
 
-    CardList.where(user_id: user_id).where.not(id: id).update_all(default: false)
+    CardList.where(user_id: user_id).where.not(id: id).find_each do |card_list|
+      card_list.update_attributes(default: false)
+    end
   end
 
   def set_default_attribute_values
