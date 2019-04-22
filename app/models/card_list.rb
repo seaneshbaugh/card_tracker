@@ -32,7 +32,7 @@ class CardList < ApplicationRecord
     return unless default && default_changed?
 
     CardList.where(user_id: user_id).where.not(id: id).find_each do |card_list|
-      card_list.update_attributes(default: false)
+      card_list.update(default: false)
     end
   end
 
