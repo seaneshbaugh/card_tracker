@@ -1,0 +1,19 @@
+white:
+  color_code: "W"
+  name: "White"
+
+blue:
+  color_code: "U"
+  name: "Blue"
+
+black:
+  color_code: "B"
+  name: "Black"
+
+red:
+  color_code: "R"
+  name: "Red"
+
+green:
+  color_code: "G"
+  name: "Green"

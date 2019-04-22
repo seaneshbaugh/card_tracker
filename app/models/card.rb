@@ -3,11 +3,13 @@
 class Card < ApplicationRecord
   belongs_to :rarity, foreign_key: :rarity_code, inverse_of: :cards, primary_key: :rarity_code
   belongs_to :card_set
+  has_many :card_colorings, dependent: :restrict_with_exception
   has_many :card_super_typings, dependent: :restrict_with_exception
   has_many :card_typings, dependent: :restrict_with_exception
   has_many :card_sub_typings, dependent: :restrict_with_exception
   has_many :card_parts, dependent: :restrict_with_exception
   has_many :collections, dependent: :restrict_with_exception
+  has_many :colors, through: :card_colorings, foreign_key: :color_code
   has_many :card_super_types, through: :card_super_typings, foreign_key: :card_super_type_code
   has_many :card_types, through: :card_typings, foreign_key: :card_type_code
   has_many :card_sub_types, through: :card_sub_typings, foreign_key: :card_sub_type_code
@@ -22,12 +24,18 @@ class Card < ApplicationRecord
     end
   end
 
-  def multi?
-    colors.split(';').positive?
+  Color.all.each do |color|
+    define_method("#{color.name.downcase}?") do
+      colors.include(Color.find_by(color_code: color.color_code))
+    end
+  end
+
+  def multicolored?
+    colors.count > 1
   end
 
   def colorless?
-    colors.blank?
+    colors.count.zero?
   end
 
   def land?

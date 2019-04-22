@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_22_153604) do
+ActiveRecord::Schema.define(version: 2019_04_22_171642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 2019_04_22_153604) do
     t.index ["created_at"], name: "index_card_blocks_on_created_at"
     t.index ["name"], name: "index_card_blocks_on_name", unique: true
     t.index ["updated_at"], name: "index_card_blocks_on_updated_at"
+  end
+
+  create_table "card_colorings", force: :cascade do |t|
+    t.integer "card_id", null: false
+    t.string "color_code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id", "color_code"], name: "index_card_colorings_on_card_id_and_color_code"
+    t.index ["color_code", "card_id"], name: "index_card_colorings_on_color_code_and_card_id"
   end
 
   create_table "card_lists", force: :cascade do |t|
@@ -209,6 +218,12 @@ ActiveRecord::Schema.define(version: 2019_04_22_153604) do
     t.index ["user_id"], name: "index_collections_on_user_id"
   end
 
+  create_table "colors", primary_key: "color_code", id: :string, force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -283,6 +298,8 @@ ActiveRecord::Schema.define(version: 2019_04_22_153604) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "card_colorings", "cards"
+  add_foreign_key "card_colorings", "colors", column: "color_code", primary_key: "color_code"
   add_foreign_key "card_sets", "card_set_types"
   add_foreign_key "card_sub_typings", "card_sub_types", column: "card_sub_type_code", primary_key: "card_sub_type_code"
   add_foreign_key "card_sub_typings", "cards"

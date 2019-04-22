@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CardList < ActiveRecord::Base
+  extend FriendlyId
+
   DEFAULT_LISTS = [
     { name: 'Have', have: true, order: 0, default: true },
     { name: 'Want', have: false, order: 1, default: false },
