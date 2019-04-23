@@ -12,7 +12,7 @@ class CardSetsController < ApplicationController
   private
 
   def find_card_list
-    return nil unless params[:list_id].present?
+    return nil if params[:list_id].blank?
 
     CardList.find_by!(user_id: current_user.id, slug: params[:list_id])
   end

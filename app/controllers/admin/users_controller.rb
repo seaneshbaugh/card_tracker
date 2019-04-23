@@ -1,97 +1,95 @@
-class Admin::UsersController < Admin::AdminController
-  before_filter :find_user, :only => [:show, :edit, :update, :destroy]
+# frozen_string_literal: true
 
-  authorize_resource
+module Admin
+  class UsersController < AdminController
+    before_action :find_user, only: %i[show edit update destroy]
 
-  def index
-    @search = User.search(params[:q])
+    authorize_resource
 
-    @users = @search.result.order('`users`.`created_at` ASC').page(params[:page])
-  end
+    def index
+      @search = User.search(params[:q])
 
-  def show
-    if @user.nil?
-      flash[:error] = t('messages.users.could_not_find')
-
-      redirect_to admin_users_url
-    end
-  end
-
-  def new
-    @user = User.new
-  end
-
-  def create
-    @user = User.new(params[:user])
-
-    @user.confirmed_at = Time.now
-
-    if current_user.role != Ability::ROLES[:sysadmin] && @user.role == Ability::ROLES[:sysadmin]
-      @user.role = Ability::ROLES[:read_only]
+      @users = @search.result.order('`users`.`created_at` ASC').page(params[:page])
     end
 
-    if @user.save
-      flash[:success] = t('messages.users.created')
+    def show
+      if @user.nil?
+        flash[:error] = t('messages.users.could_not_find')
 
-      redirect_to admin_users_url
-    else
-      flash.now[:error] = @user.errors.full_messages.uniq.join('. ') + '.'
-
-      render 'new'
-    end
-  end
-
-  def edit
-    if @user.nil?
-      flash[:error] = t('messages.users.could_not_find')
-
-      redirect_to admin_users_url
-    end
-  end
-
-  def update
-    if @user.nil?
-      flash[:error] = t('messages.users.could_not_find')
-
-      redirect_to admin_users_url and return
+        redirect_to admin_users_url
+      end
     end
 
-    if params[:user] && current_user.role != Ability::ROLES[:sysadmin] && params[:user][:role] == Ability::ROLES[:sysadmin]
-      params[:user][:role] = Ability::ROLES[:read_only]
+    def new
+      @user = User.new
     end
 
-    if @user.update_attributes(params[:user])
-      if @user.unconfirmed_email.present?
-        @user.confirm!
+    def create
+      @user = User.new(params[:user])
+
+      @user.confirmed_at = Time.now.in_time_zone
+
+      @user.role = Ability::ROLES[:read_only] if current_user.role != Ability::ROLES[:sysadmin] && @user.role == Ability::ROLES[:sysadmin]
+
+      if @user.save
+        flash[:success] = t('messages.users.created')
+
+        redirect_to admin_users_url
+      else
+        flash.now[:error] = @user.errors.full_messages.uniq.join('. ') + '.'
+
+        render 'new'
+      end
+    end
+
+    def edit
+      if @user.nil?
+        flash[:error] = t('messages.users.could_not_find')
+
+        redirect_to admin_users_url
+      end
+    end
+
+    def update
+      if @user.nil?
+        flash[:error] = t('messages.users.could_not_find')
+
+        redirect_to(admin_users_url) && return
       end
 
-      flash[:success] = t('messages.users.updated')
+      params[:user][:role] = Ability::ROLES[:read_only] if params[:user] && current_user.role != Ability::ROLES[:sysadmin] && params[:user][:role] == Ability::ROLES[:sysadmin]
 
-      redirect_to edit_admin_user_url(@user)
-    else
-      flash.now[:error] = @user.errors.full_messages.uniq.join('. ') + '.'
+      if @user.update(params[:user])
+        @user.confirm! if @user.unconfirmed_email.present?
 
-      render 'edit'
-    end
-  end
+        flash[:success] = t('messages.users.updated')
 
-  def destroy
-    if @user.nil?
-      flash[:error] = t('messages.users.could_not_find')
+        redirect_to edit_admin_user_url(@user)
+      else
+        flash.now[:error] = @user.errors.full_messages.uniq.join('. ') + '.'
 
-      redirect_to admin_users_url and return
+        render 'edit'
+      end
     end
 
-    @user.destroy
+    def destroy
+      if @user.nil?
+        flash[:error] = t('messages.users.could_not_find')
 
-    flash[:success] = t('messages.users.deleted')
+        redirect_to(admin_users_url) && return
+      end
 
-    redirect_to admin_users_url
-  end
+      @user.destroy
 
-  protected
+      flash[:success] = t('messages.users.deleted')
 
-  def find_user
-    @user = User.where(:id => params[:id]).first
+      redirect_to admin_users_url
+    end
+
+    protected
+
+    def find_user
+      @user = User.where(id: params[:id]).first
+    end
   end
 end
