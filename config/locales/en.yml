@@ -25,3 +25,4 @@ en:
   gteq: ">="
   eq: "="
   show_only: "Show Only..."
+  send_email: "Send Email"

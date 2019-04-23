@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CollectionPresenter < BasePresenter
   def initialize(collection, template)
     super
@@ -6,7 +8,7 @@ class CollectionPresenter < BasePresenter
   end
 
   def quantity_as_integer
-    if @collection.present? && @collection.quantity > 0
+    if @collection.present? && @collection.quantity.positive?
       @collection.quantity
     else
       0
@@ -14,7 +16,7 @@ class CollectionPresenter < BasePresenter
   end
 
   def quantity_as_string
-    if @collection.present? && @collection.quantity > 0
+    if @collection.present? && @collection.quantity.positive?
       @collection.quantity.to_s
     else
       '-'

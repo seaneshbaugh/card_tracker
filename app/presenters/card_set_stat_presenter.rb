@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CardSetStatPresenter < BasePresenter
   def initialize(card_set_stat, template)
     super
@@ -8,15 +10,11 @@ class CardSetStatPresenter < BasePresenter
   end
 
   def card_set_id
-    if @card_set_stat.card_set
-      @card_set_stat.card_set.id
-    end
+    @card_set_stat.card_set&.id
   end
 
   def card_set_slug
-    if @card_set_stat.card_set
-      @card_set_stat.card_set.slug
-    end
+    @card_set_stat.card_set&.slug
   end
 
   def symbol(options = {})
@@ -26,24 +24,17 @@ class CardSetStatPresenter < BasePresenter
   end
 
   def name
-    if @card_set_stat.card_set
-      @card_set_stat.card_set.name
-    end
+    @card_set_stat.card_set&.name
   end
 
   def percent_collected_tooltip_text
-    result = []
+    rarities = [
+      "#{@card_set_stat.unique_common_cards} / #{@card_set_stat.common_cards_in_set} Common",
+      "#{@card_set_stat.unique_uncommon_cards} / #{@card_set_stat.uncommon_cards_in_set} Uncommon",
+      "#{@card_set_stat.unique_rare_cards} / #{@card_set_stat.rare_cards_in_set} Rare",
+      ("#{@card_set_stat.unique_mythic_rare_cards} / #{@card_set_stat.mythic_rare_cards_in_set} Mythic Rare" if @card_set_stat.mythic_rare_cards_in_set.positive?)
+    ].compact
 
-    result << "#{@card_set_stat.unique_common_cards} / #{@card_set_stat.common_cards_in_set} Common"
-
-    result << "#{@card_set_stat.unique_uncommon_cards} / #{@card_set_stat.uncommon_cards_in_set} Uncommon"
-
-    result << "#{@card_set_stat.unique_rare_cards} / #{@card_set_stat.rare_cards_in_set} Rare"
-
-    if @card_set_stat.mythic_rare_cards_in_set > 0
-      result << "#{@card_set_stat.unique_mythic_rare_cards} / #{@card_set_stat.mythic_rare_cards_in_set} Mythic Rare"
-    end
-
-    result.join('<br>').html_safe
+    safe_join(rarities, content_tag('br'))
   end
 end

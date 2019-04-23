@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CardSetPresenter < BasePresenter
   def initialize(card_set, template)
     super
@@ -15,17 +17,17 @@ class CardSetPresenter < BasePresenter
 
   def release_date
     if @card_set.release_date.present?
-      @card_set.release_date.strftime('%Y-%m-%d')
+      @card_set.release_date.strftime(date_format)
     else
-      @template.t('na')
+      t('na')
     end
   end
 
   def prerelease_date
     if @card_set.prerelease_date.present?
-      @card_set.prerelease_date.strftime('%Y-%m-%d')
+      @card_set.prerelease_date.strftime(date_format)
     else
-      @template.t('na')
+      t('na')
     end
   end
 
@@ -37,6 +39,7 @@ class CardSetPresenter < BasePresenter
     @card_set.card_block.card_block_type.name
   end
 
+  # TODO: Use https://github.com/andrewgioia/Keyrune.
   def symbol(options = {})
     options[:rarity] ||= :common
 

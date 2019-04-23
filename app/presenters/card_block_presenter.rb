@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CardBlockPresenter < BasePresenter
   def initialize(card_block, template)
     super

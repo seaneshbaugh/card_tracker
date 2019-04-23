@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CardListPresenter < BasePresenter
   def initialize(card_list, template)
     super
@@ -10,6 +12,6 @@ class CardListPresenter < BasePresenter
   end
 
   def unique_cards
-    @card_list.collections.select { |collection| collection.quantity > 0 }.length
+    @card_list.collections.select(&:has_cards?).length
   end
 end

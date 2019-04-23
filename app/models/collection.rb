@@ -12,6 +12,10 @@ class Collection < ApplicationRecord
 
   after_initialize :set_default_attribute_values, if: :new_record?
 
+  def has_cards?
+    quantity.positive?
+  end
+
   private
 
   def set_default_attribute_values
