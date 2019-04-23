@@ -3,24 +3,32 @@
 require 'test_helper'
 
 class RarityTest < ActiveSupport::TestCase
+  let(:rarity) { Rarity.new }
+
+  describe 'associations' do
+    it 'has many cards' do
+      rarity.must have_many(:cards).dependent(:restrict_with_exception).with_foreign_key(:rarity_code).inverse_of(:rarity)
+    end
+  end
+
   describe 'validations' do
     describe 'rarity_code' do
       it 'validates presence of rarity_code' do
-        rarity = Rarity.new
+        rarity.must validate_presence_of(:rarity_code)
+      end
 
-        rarity.validate
-
-        rarity.errors[:rarity_code].must_include("can't be blank")
+      it 'validates uniqueness of rarity_code' do
+        rarity.must validate_uniqueness_of(:rarity_code)
       end
     end
 
     describe 'name' do
       it 'validates presence of name' do
-        rarity = Rarity.new
+        rarity.must validate_presence_of(:name)
+      end
 
-        rarity.validate
-
-        rarity.errors[:name].must_include("can't be blank")
+      it 'validates uniqueness of name' do
+        rarity.must validate_uniqueness_of(:name)
       end
     end
   end
