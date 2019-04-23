@@ -42,7 +42,9 @@ end
 
 group :test do
   gem 'minitest', '5.11.3'
+  gem 'minitest-matchers', '1.4.1'
   gem 'minitest-reporters', '1.3.6'
   gem 'minitest-spec-rails', '5.5.0'
+  gem 'shoulda-matchers', '4.0.1'
   gem 'simplecov', '0.16.1', require: false
 end
