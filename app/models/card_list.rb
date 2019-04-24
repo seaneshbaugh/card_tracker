@@ -10,13 +10,13 @@ class CardList < ApplicationRecord
     { name: 'Want (foil)', have: false, order: 3, default: false }
   ].freeze
 
-  belongs_to :user
-  has_many :collections, dependent: :destroy
+  belongs_to :user, inverse_of: :card_lists
+  has_many :collections, dependent: :destroy, inverse_of: :card_list
   has_many :cards, through: :collections
 
   validates :user_id, presence: true
   validates :name, presence: true, uniqueness: { scope: :user_id }
-  validates :slug, presence: true, uniqueness: { scope: :user_id }
+  # validates :slug, presence: true, uniqueness: { scope: :user_id }
   validates :have, inclusion: { in: [true, false] }
   validates :order, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 2_147_483_647 }, presence: true
   validates :default, inclusion: { in: [true, false] }
@@ -24,7 +24,7 @@ class CardList < ApplicationRecord
   after_initialize :set_default_attribute_values, if: :new_record?
   before_save :ensure_only_one_default
 
-  friendly_id :name
+  friendly_id :name, use: :scoped, scope: :user_id
 
   private
 
