@@ -1,3 +1,5 @@
+require_relative '../importers/base'
+
 namespace :import do
   # This task imports set symbol SVG files from BaconCatBug's symbol pack, found here:
   # http://www.mediafire.com/folder/92vnddvuu7ian/BaconCatBug's_SVG_Expansion_Symbol_Pack
@@ -242,6 +244,11 @@ namespace :import do
         end
       end
     end
+  end
+
+  desc 'Import card sets data.'
+  task :sets, [:base_url] => [:environment] do |_, args|
+    Importers::CardSetsImporter.new(args).import!
   end
 
   desc 'Import card data.'
