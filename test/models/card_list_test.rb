@@ -37,16 +37,6 @@ class CardListTest < ActiveSupport::TestCase
       end
     end
 
-    # describe 'slug' do
-    #   it 'validates presence of slug' do
-    #     card_list.must validate_presence_of(:slug)
-    #   end
-
-    #   it 'validates uniqueness of slug scopped to the user' do
-    #     card_list.must validate_uniqueness_of(:slug).scoped_to(:user_id)
-    #   end
-    # end
-
     describe 'order' do
       it 'validates numericality of order' do
         card_list.must validate_numericality_of(:order).is_greater_than_or_equal_to(0).is_less_than_or_equal_to(2_147_483_647)
