@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  has_many :card_lists, autosave: true, dependent: :destroy
-  has_many :collections, dependent: :destroy
+  USERNAME_FORMAT = /\A[a-zA-Z]([a-zA-Z0-9_]){4,31}\z/.freeze
+
+  has_many :card_lists, autosave: true, dependent: :destroy, inverse_of: :user
+  has_many :collections, dependent: :destroy, inverse_of: :user
   has_many :cards, through: :collections
 
-  validates :username, format: { with: /\A[a-z]([a-z0-9_]){4,31}\z/ }, length: { within: 5..32 }, presence: true, uniqueness: true
+  validates :username, format: { with: USERNAME_FORMAT }, length: { within: 5..32 }, presence: true, uniqueness: true
   validates :email, email: { allow_blank: true }, presence: true, uniqueness: { case_sensitive: false }
 
   after_initialize :set_default_attribute_values, if: :new_record?
