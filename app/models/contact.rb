@@ -9,10 +9,10 @@ class Contact
   attr_accessor :subject
   attr_accessor :body
 
-  validates :name, presence: true, length: { maximum: 128 }
-  validates :email, presence: true, email: { allow_blank: true }
-  validates :subject, presence: true, length: { minimum: 4, maximum: 128, allow_blank: true }
-  validates :body, presence: true, length: { minimum: 8, maximum: 2048, allow_blank: true }
+  validates :name, length: { maximum: 128 }, presence: true
+  validates :email, email: { allow_blank: true }, presence: true
+  validates :subject, length: { minimum: 4, maximum: 128, allow_blank: true }, presence: true
+  validates :body, length: { minimum: 8, maximum: 2048, allow_blank: true }, presence: true
 
   # TODO: Remove this method when Rails 6 is released.
   def as_json(options = nil)
