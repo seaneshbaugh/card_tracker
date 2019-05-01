@@ -6,7 +6,7 @@ class CollectionTest < ActiveSupport::TestCase
   let(:card) { cards(:abyssal_specter)}
   let(:user) { users(:user1) }
   let(:card_list) { CardList.create(user: user, name: 'Test', have: true, order: 0, default: true) }
-  let(:collection) { Collection.create(card: card, user: user, card_list: card_list) }
+  let(:collection) { Collection.create(card: card, user: user, card_list: card_list, quantity: 1) }
 
   describe 'associations' do
     it 'belongs to card' do
