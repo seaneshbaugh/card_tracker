@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_22_171642) do
+ActiveRecord::Schema.define(version: 2019_05_01_201847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,13 +95,10 @@ ActiveRecord::Schema.define(version: 2019_04_22_171642) do
     t.index ["updated_at"], name: "index_card_parts_on_updated_at"
   end
 
-  create_table "card_set_types", force: :cascade do |t|
-    t.string "name", default: "", null: false
+  create_table "card_set_types", primary_key: "card_set_type_code", id: :string, force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_at"], name: "index_card_set_types_on_created_at"
-    t.index ["name"], name: "index_card_set_types_on_name"
-    t.index ["updated_at"], name: "index_card_set_types_on_updated_at"
   end
 
   create_table "card_sets", force: :cascade do |t|
@@ -113,8 +110,8 @@ ActiveRecord::Schema.define(version: 2019_04_22_171642) do
     t.date "prerelease_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "card_set_type_id", null: false
-    t.index ["card_set_type_id"], name: "index_card_sets_on_card_set_type_id"
+    t.string "card_set_type_code", null: false
+    t.index ["card_set_type_code"], name: "index_card_sets_on_card_set_type_code"
     t.index ["code"], name: "index_card_sets_on_code"
     t.index ["created_at"], name: "index_card_sets_on_created_at"
     t.index ["name"], name: "index_card_sets_on_name"
@@ -300,7 +297,7 @@ ActiveRecord::Schema.define(version: 2019_04_22_171642) do
 
   add_foreign_key "card_colorings", "cards"
   add_foreign_key "card_colorings", "colors", column: "color_code", primary_key: "color_code"
-  add_foreign_key "card_sets", "card_set_types"
+  add_foreign_key "card_sets", "card_set_types", column: "card_set_type_code", primary_key: "card_set_type_code"
   add_foreign_key "card_sub_typings", "card_sub_types", column: "card_sub_type_code", primary_key: "card_sub_type_code"
   add_foreign_key "card_sub_typings", "cards"
   add_foreign_key "card_super_typings", "card_super_types", column: "card_super_type_code", primary_key: "card_super_type_code"
