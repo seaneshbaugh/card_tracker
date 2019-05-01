@@ -1794,4 +1794,3 @@ CardSubType.seed(:card_sub_type_code) do |s|
   s.card_sub_type_code = 'ZUBERA'
   s.name = 'Zubera'
 end
-  
