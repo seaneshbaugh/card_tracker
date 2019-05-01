@@ -2,6 +2,8 @@
 
 module Importers
   class Base
+    extend Memoist
+
     DEFAULT_BASE_URL = 'https://mtgjson.com/json/'
 
     attr_reader :agent
@@ -31,11 +33,9 @@ module Importers
     end
 
     def cache_file_path(file_name)
-      @cache_file_paths ||= Hash.new do |h, k|
-        h[k] = Rails.root.join('tmp', 'import_data', Time.current.strftime('%Y-%m'), file_name)
-      end
-      @cache_file_paths[file_name]
+      Rails.root.join('tmp', 'import_data', Time.current.strftime('%Y-%m'), file_name)
     end
+    memoize :cache_file_path
 
     def download_file(file_name)
       cache_file_contents = read_cache_file(file_name)
