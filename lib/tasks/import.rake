@@ -247,7 +247,7 @@ namespace :import do
   end
 
   desc 'Import card sets data.'
-  task :sets, [:base_url] => [:environment] do |_, args|
+  task :sets, %i[base_url] => %i[environment] do |_, args|
     Importers::CardSetsImporter.new(args).import!
   end
 
