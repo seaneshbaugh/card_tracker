@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_01_201847) do
+ActiveRecord::Schema.define(version: 2019_05_02_195858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -173,7 +173,6 @@ ActiveRecord::Schema.define(version: 2019_05_01_201847) do
     t.string "layout", default: "", null: false
     t.string "mana_cost", default: "", null: false
     t.string "converted_mana_cost", default: "", null: false
-    t.string "colors", default: "", null: false
     t.string "type_text", default: "", null: false
     t.text "card_text", null: false
     t.text "flavor_text", null: false
@@ -185,10 +184,11 @@ ActiveRecord::Schema.define(version: 2019_05_01_201847) do
     t.string "artist", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "original_card_text"
+    t.string "original_type_text"
     t.index ["artist"], name: "index_cards_on_artist"
     t.index ["card_number"], name: "index_cards_on_card_number"
     t.index ["card_set_id"], name: "index_cards_on_card_set_id"
-    t.index ["colors"], name: "index_cards_on_colors"
     t.index ["converted_mana_cost"], name: "index_cards_on_converted_mana_cost"
     t.index ["layout"], name: "index_cards_on_layout"
     t.index ["loyalty"], name: "index_cards_on_loyalty"
