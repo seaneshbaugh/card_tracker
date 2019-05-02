@@ -1,59 +1,79 @@
 archenemy:
+  card_set_type_code: "ARCHENEMY"
   name: "Archenemy"
 
 box:
+  card_set_type_code: "BOX"
   name: "Box"
 
 commander:
+  card_set_type_code: "COMMANDER"
   name: "Commander"
 
 core:
+  card_set_type_code: "CORE"
   name: "Core"
 
 draft_innovation:
+  card_set_type_code: "DRAFT_INNOVATION"
   name: "Draft Innovation"
 
 duel_deck:
+  card_set_type_code: "DUEL_DECK"
   name: "Duel Deck"
 
 expansion:
+  card_set_type_code: "EXPANSION"
   name: "Expansion"
 
 from_the_vault:
+  card_set_type_code: "FROM_THE_VAULT"
   name: "From the Vault"
 
 funny:
+  card_set_type_code: "FUNNY"
   name: "Funny"
 
 masterpiece:
+  card_set_type_code: "MASTERPIECE"
   name: "Masterpiece"
 
 masters:
+  card_set_type_code: "MASTERS"
   name: "Masters"
 
 memorabilia:
+  card_set_type_code: "MEMORABILIA"
   name: "Memorabilia"
 
 planechase:
+  card_set_type_code: "PLANECHASE"
   name: "Planechase"
 
 premium_deck:
+  card_set_type_code: "PREMIUM_DECK"
   name: "Premium Deck"
 
 promo:
+  card_set_type_code: "PROMO"
   name: "Promo"
 
 spellbook:
+  card_set_type_code: "SPELLBOOK"
   name: "Spellbook"
 
 starter:
+  card_set_type_code: "STARTER"
   name: "Starter"
 
 token:
+  card_set_type_code: "TOKEN"
   name: "Token"
 
 treasure_chest:
+  card_set_type_code: "TREASURE_CHEST"
   name: "Treasure Chest"
 
 vanguard:
+  card_set_type_code: "VANGUARD"
   name: "Vanguard"
