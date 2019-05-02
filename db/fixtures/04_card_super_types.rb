@@ -1,4 +1,4 @@
-# frozen_string_literal = true
+# frozen_string_literal: true
 
 CardSuperType.seed(:card_super_type_code) do |s|
   s.card_super_type_code = 'BASIC'
