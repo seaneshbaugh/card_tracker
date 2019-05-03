@@ -3,11 +3,11 @@
 module Admin
   module AdminHelper
     def icon_edit_link(url_or_path)
-      render :partial => 'shared/icon_edit_link', :locals => { :url_or_path => build_url_or_path_for(url_or_path) }
+      render partial: 'shared/icon_edit_link', locals: { url_or_path: build_url_or_path_for(url_or_path) }
     end
 
     def icon_delete_link(url_or_path)
-      render :partial => 'shared/icon_delete_link', :locals => { :url_or_path => build_url_or_path_for(url_or_path) }
+      render partial: 'shared/icon_delete_link', locals: { url_or_path: build_url_or_path_for(url_or_path) }
     end
 
     def build_url_or_path_for(url_or_path = '')
@@ -19,13 +19,9 @@ module Admin
     def edit_and_delete_header_columns(klass)
       result = ''
 
-      if can? :update, klass
-        result += '<th>&nbsp;</th>'
-      end
+      result += '<th>&nbsp;</th>' if can? :update, klass
 
-      if can? :destroy, klass
-        result += '<th>&nbsp;</th>'
-      end
+      result += '<th>&nbsp;</th>' if can? :destroy, klass
 
       result.html_safe
     end
@@ -36,13 +32,13 @@ module Admin
       result = ''
 
       if can? :update, object
-        result += "<td>#{link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, send("edit_admin_#{object_base_class_name}_path", object), :class => 'btn btn-mini', :rel => 'tooltip', :title => t('edit')}</td>"
+        result += "<td>#{link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, send("edit_admin_#{object_base_class_name}_path", object), class: 'btn btn-mini', rel: 'tooltip', title: t('edit')}</td>"
       elsif can? :update, object.class
         result += '<td>&nbsp;</td>'
       end
 
       if can? :destroy, object
-        result += "<td>#{link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, send("admin_#{object_base_class_name}_path", object), :method => :delete, :data => { :confirm => t('confirm_delete') }, :class => 'btn btn-mini', :rel => 'tooltip', :title => t('delete')}</td>"
+        result += "<td>#{link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, send("admin_#{object_base_class_name}_path", object), method: :delete, data: { confirm: t('confirm_delete') }, class: 'btn btn-mini', rel: 'tooltip', title: t('delete')}</td>"
       elsif can? :destroy, object.class
         result += '<td>&nbsp;</td>'
       end
@@ -53,7 +49,7 @@ module Admin
     def gem_dependencies
       lockfile = Bundler::LockfileParser.new(Bundler.read_file(Rails.root.join('Gemfile.lock')))
 
-      lockfile.specs.map { |spec| { :name => spec.name, :version => spec.version.version, :dependencies => spec.dependencies.map { |dependency| { :name => dependency.name, :requirement => dependency.requirement } } } }
+      lockfile.specs.map { |spec| { name: spec.name, version: spec.version.version, dependencies: spec.dependencies.map { |dependency| { name: dependency.name, requirement: dependency.requirement } } } }
     end
   end
 end

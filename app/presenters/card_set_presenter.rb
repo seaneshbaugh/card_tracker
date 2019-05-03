@@ -43,18 +43,18 @@ class CardSetPresenter < BasePresenter
   def symbol(options = {})
     options[:rarity] ||= :common
 
-    case options[:rarity].to_sym
-    when :common
-      rarity = 'c'
-    when :uncommon
-      rarity = 'u'
-    when :rare
-      rarity = 'r'
-    when :mythic
-      rarity = 'm'
-    else
-      rarity = 'c'
-    end
+    rarity = case options[:rarity].to_sym
+             when :common
+               'c'
+             when :uncommon
+               'u'
+             when :rare
+               'r'
+             when :mythic
+               'm'
+             else
+               'c'
+             end
 
     options[:class] ||= ''
 

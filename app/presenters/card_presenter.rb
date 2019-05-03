@@ -39,8 +39,8 @@ class CardPresenter < BasePresenter
   def card_text(options = {})
     options[:class] ||= ''
 
-    @card.card_text.gsub(/(\{[A-Z|\d|\/]+\})/) do |match|
-      mana_symbol = match.delete(/\{|\}|\//).downcase
+    @card.card_text.gsub(%r{(\{[A-Z|\d|/]+\})}) do |match|
+      mana_symbol = match.delete(%r{\{|\}|/}).downcase
 
       klass = options[:class].split(' ').push('mana-symbol').push(options[:size]).push("symbol-#{mana_symbol}").join(' ').squeeze(' ')
 
