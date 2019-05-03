@@ -1,5 +1,7 @@
 # frozen_string_literal: ture
 
+require_relative '../attribute_mapper'
+
 module Importers
   class Base
     extend Memoist
@@ -37,14 +39,24 @@ module Importers
     end
     memoize :cache_file_path
 
+    def download_and_parse_file(file_name)
+      JSON.parse(download_file(file_name))
+    end
+
     def download_file(file_name)
       cache_file_contents = read_cache_file(file_name)
 
+      puts "Using cached copy of #{file_name.inspect}." if cache_file_contents
+
       return cache_file_contents if cache_file_contents
+
+      puts "Downloading #{file_name.inspect}."
 
       response = agent.get(file_url(file_name))
 
       response.body.force_encoding(Encoding.find('UTF-8'))
+
+      puts "Downloaded #{file_name.inspect}."
 
       cache_file(file_name, response.body)
     end

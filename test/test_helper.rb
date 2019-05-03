@@ -7,6 +7,7 @@ SimpleCov.start 'rails' do
   add_group 'Presenters', 'app/presenters'
   add_group 'Serializers', 'app/serializers'
   add_group 'Validators', 'app/validators'
+  add_group 'Lib', 'lib'
 end
 
 ENV['RAILS_ENV'] = 'test'
