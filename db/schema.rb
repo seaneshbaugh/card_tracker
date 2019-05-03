@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_03_155207) do
+ActiveRecord::Schema.define(version: 2019_05_03_175127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,7 +107,6 @@ ActiveRecord::Schema.define(version: 2019_05_03_155207) do
     t.integer "card_block_id"
     t.string "code", null: false
     t.date "release_date"
-    t.date "prerelease_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "card_set_type_code", null: false
@@ -115,7 +114,6 @@ ActiveRecord::Schema.define(version: 2019_05_03_155207) do
     t.index ["code"], name: "index_card_sets_on_code"
     t.index ["created_at"], name: "index_card_sets_on_created_at"
     t.index ["name"], name: "index_card_sets_on_name"
-    t.index ["prerelease_date"], name: "index_card_sets_on_prerelease_date"
     t.index ["release_date"], name: "index_card_sets_on_release_date"
     t.index ["slug"], name: "index_card_sets_on_slug"
     t.index ["updated_at"], name: "index_card_sets_on_updated_at"
