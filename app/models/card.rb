@@ -15,14 +15,7 @@ class Card < ApplicationRecord
   has_many :card_sub_types, through: :card_sub_typings, foreign_key: :card_sub_type_code
   has_many :users, through: :collections
 
-  validates :multiverse_id, presence: true
   validates :name, presence: true
-
-  %w[White Blue Black Red Green].each do |color|
-    define_method("is_#{color.downcase}?") do
-      colors.split(';').include? color
-    end
-  end
 
   Color.find_each do |color|
     define_method("#{color.name.downcase}?") do
