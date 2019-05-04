@@ -12,17 +12,21 @@ RUN curl -sL https://deb.nodesource.com/setup_11.x | bash - && \
     apt-get clean autoclean && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt /var/lib/dpkg /var/lib/cache /var/lib/log
+
 RUN mkdir $APP_HOME
+
 WORKDIR $APP_HOME
+
 COPY Gemfile $APP_HOME/Gemfile
 COPY Gemfile.lock $APP_HOME/Gemfile.lock
+RUN gem install bundler -v $BUNDLER_VERSION && bundle install
+
 COPY package.json $APP_HOME/package.json
 COPY yarn.lock $APP_HOME/yarn.lock
 RUN yarn --pure-lockfile --network-timeout 3600000
-RUN gem install bundler -v $BUNDLER_VERSION && \
-    bundle install && \
-    yarn install
+RUN yarn install
 RUN npm rebuild node-sass
+
 COPY . $APP_HOME
 
 EXPOSE $APP_PORT
