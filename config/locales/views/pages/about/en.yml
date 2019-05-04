@@ -4,3 +4,7 @@ en:
       page_title: "About"
       title: "About The Caves of Koilos"
       message_html: "<strong>The Caves of Koilos</strong> let's you keep track of your Magic: The Gathering card collection."
+      credit:
+        mtgjson_html: 'Card data provided by <a href="https://mtgjson.com/" target="_blank">MTGJSON</a>.'
+        keyrune_html: 'Set icons provided by <a href="https://andrewgioia.github.io/Keyrune/" target="_blank">Keyrune</a>.'
+        mana_html: 'Mana icons provided by <a href="https://andrewgioia.github.io/Mana/" target="_blank">Mana</a>.'

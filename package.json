@@ -9,6 +9,8 @@
     "animate.css": "3.7.0",
     "caniuse-lite": "1.0.30000957",
     "classnames": "2.2.6",
+    "keyrune": "3.4.1",
+    "mana-font": "1.4.1",
     "material-design-icons": "3.0.1",
     "materialize-css": "1.0.0",
     "moment": "2.24.0",
@@ -19,6 +21,12 @@
     "webpack-cli": "3.3.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "7.4.4",
+    "@babel/plugin-proposal-object-rest-spread": "7.4.4",
+    "@babel/plugin-syntax-dynamic-import": "7.2.0",
+    "@babel/plugin-transform-destructuring": "7.4.4",
+    "@babel/plugin-transform-regenerator": "7.4.4",
+    "@babel/plugin-transform-runtime": "7.4.4",
     "eslint": "5.16.0",
     "sass-lint": "1.12.1",
     "webpack-dev-server": "3.3.1"
