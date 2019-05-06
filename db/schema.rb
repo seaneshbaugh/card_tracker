@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_06_031934) do
+ActiveRecord::Schema.define(version: 2019_05_06_175028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -170,7 +170,7 @@ ActiveRecord::Schema.define(version: 2019_05_06_031934) do
     t.string "multiverse_id"
     t.string "name", null: false
     t.integer "card_set_id"
-    t.string "layout", null: false
+    t.string "layout_code", null: false
     t.string "mana_cost"
     t.string "converted_mana_cost"
     t.string "type_text", null: false
@@ -190,7 +190,7 @@ ActiveRecord::Schema.define(version: 2019_05_06_031934) do
     t.index ["card_number"], name: "index_cards_on_card_number"
     t.index ["card_set_id"], name: "index_cards_on_card_set_id"
     t.index ["converted_mana_cost"], name: "index_cards_on_converted_mana_cost"
-    t.index ["layout"], name: "index_cards_on_layout"
+    t.index ["layout_code"], name: "index_cards_on_layout_code"
     t.index ["loyalty"], name: "index_cards_on_loyalty"
     t.index ["mana_cost"], name: "index_cards_on_mana_cost"
     t.index ["multiverse_id"], name: "index_cards_on_multiverse_id"
@@ -230,6 +230,12 @@ ActiveRecord::Schema.define(version: 2019_05_06_031934) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "layouts", primary_key: "layout_code", id: :string, force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "rarities", primary_key: "rarity_code", id: :string, force: :cascade do |t|
@@ -305,5 +311,6 @@ ActiveRecord::Schema.define(version: 2019_05_06_031934) do
   add_foreign_key "card_super_typings", "cards"
   add_foreign_key "card_typings", "card_types", column: "card_type_code", primary_key: "card_type_code"
   add_foreign_key "card_typings", "cards"
+  add_foreign_key "cards", "layouts", column: "layout_code", primary_key: "layout_code"
   add_foreign_key "cards", "rarities", column: "rarity_code", primary_key: "rarity_code"
 end

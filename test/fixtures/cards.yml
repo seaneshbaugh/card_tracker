@@ -2,7 +2,7 @@ abyssal_specter:
   multiverse_id: 2437
   name: "Abyssal Specter"
   card_set: ice_age
-  layout: "normal"
+  layout_code: "NORMAL"
   mana_cost: "{2}{B}{B}"
   converted_mana_cost: "4"
   type_text: "Creature — Specter"

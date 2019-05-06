@@ -10,7 +10,10 @@ module Importers
       },
       'convertedManaCost' => :converted_mana_cost,
       'flavorText' => :flavor_text,
-      'layout' => :layout,
+      'layout' => {
+        name: :layout_code,
+        transformation: -> (layout_code) { layout_code.upcase }
+      },
       'loyalty' => :loyalty,
       'manaCost' => :mana_cost,
       'multiverseId' => :multiverse_id,
@@ -61,7 +64,11 @@ module Importers
 
         card.update(attribute_mapper.map_attributes(card_data))
 
-        puts "Card #{card.name} created."
+        if card.persisted?
+          puts "Card #{card.name} created."
+        else
+          puts "Failed to safe Card #{card.name}: #{card.errors.full_messages.inspect}."
+        end
       end
     end
 

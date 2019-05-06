@@ -1,0 +1,63 @@
+aftermath:
+  layout_code: "AFTERMATH"
+  name: "Aftermath"
+
+augment:
+  layout_code: "AUGMENT"
+  name: "Augment"
+
+double_faced_token:
+  layout_code: "DOUBLE_FACED_TOKEN"
+  name: "Double Faced Token"
+
+emblem:
+  layout_code: "EMBLEM"
+  name: "Emblem"
+
+flip:
+  layout_code: "FLIP"
+  name: "Flip"
+
+host:
+  layout_code: "HOST"
+  name: "Host"
+
+leveler:
+  layout_code: "LEVELER"
+  name: "Leveler"
+
+meld:
+  layout_code: "MELD"
+  name: "Meld"
+
+normal:
+  layout_code: "NORMAL"
+  name: "Normal"
+
+planar:
+  layout_code: "PLANAR"
+  name: "Planar"
+
+saga:
+  layout_code: "SAGA"
+  name: "Saga"
+
+scheme:
+  layout_code: "SCHEME"
+  name: "Scheme"
+
+split:
+  layout_code: "SPLIT"
+  name: "Split"
+
+token:
+  layout_code: "TOKEN"
+  name: "Token"
+
+transform:
+  layout_code: "TRANSFORM"
+  name: "Transform"
+
+vanguard:
+  layout_code: "VANGUARD"
+  name: "Vanguard"

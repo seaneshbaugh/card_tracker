@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class Card < ApplicationRecord
-  belongs_to :rarity, foreign_key: :rarity_code, inverse_of: :cards, primary_key: :rarity_code
   belongs_to :card_set
+  belongs_to :layout, foreign_key: :layout_code, inverse_of: :cards, primary_key: :layout_code
+  belongs_to :rarity, foreign_key: :rarity_code, inverse_of: :cards, primary_key: :rarity_code
   has_many :card_colorings, dependent: :restrict_with_exception
   has_many :card_super_typings, dependent: :restrict_with_exception
   has_many :card_typings, dependent: :restrict_with_exception
