@@ -11,6 +11,10 @@ module Importers
     attr_reader :agent
     attr_reader :base_url
 
+    def self.cache_directory_path
+      @cache_directory_path ||= Rails.root.join('tmp', 'import_data')
+    end
+
     def initialize(options = {})
       @agent = Mechanize.new
       @base_url = options.delete(:base_url) || DEFAULT_BASE_URL
@@ -35,7 +39,7 @@ module Importers
     end
 
     def cache_file_path(file_name)
-      Rails.root.join('tmp', 'import_data', Time.current.strftime('%Y-%m'), file_name)
+      self.class.cache_directory_path.join(Time.current.strftime('%Y-%m'), file_name)
     end
     memoize :cache_file_path
 

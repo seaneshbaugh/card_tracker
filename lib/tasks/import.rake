@@ -260,6 +260,6 @@ namespace :import do
 
   desc 'Clear the set data cache.'
   task clear_cache: :environment do
-    FileUtils.rm_rf(Rails.root.join('tmp', 'set_data'))
+    FileUtils.rm_rf(Importers::Base.cache_directory_path)
   end
 end
