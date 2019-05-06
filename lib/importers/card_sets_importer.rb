@@ -8,6 +8,7 @@ module Importers
         transformation: -> (card_block_name) { CardBlock.find_or_create_by(name: card_block_name) }
       },
       'code' => :code,
+      'keyruneCode' => :keyrune_code,
       'name' => :name,
       'releaseDate' => :release_date,
       'type' => {
@@ -33,7 +34,11 @@ module Importers
 
         card_set.update(attribute_mapper.map_attributes(full_card_set_data))
 
-        puts "CardSet #{card_set.code} (#{card_set.name}) created."
+        if card_set.persisted?
+          puts "CardSet #{card_set.code} (#{card_set.name}) created."
+        else
+          puts "Failed to save CardSet #{card_set.code} (#{card_set.name}): #{card_set.errors.full_messages.inspect}."
+        end
 
         full_card_set_data
       end

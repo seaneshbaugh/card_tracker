@@ -47,5 +47,11 @@ class CardSetTest < ActiveSupport::TestCase
         card_set.must validate_uniqueness_of(:code)
       end
     end
+
+    describe 'keyrune_code' do
+      it 'validates presence of keyrune_code' do
+        card_set.must validate_presence_of(:keyrune_code)
+      end
+    end
   end
 end

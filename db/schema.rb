@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_06_175028) do
+ActiveRecord::Schema.define(version: 2019_05_06_194005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 2019_05_06_175028) do
     t.datetime "updated_at", null: false
     t.string "card_set_type_code", null: false
     t.bigint "parent_id"
+    t.string "keyrune_code", null: false
     t.index ["card_set_type_code"], name: "index_card_sets_on_card_set_type_code"
     t.index ["code"], name: "index_card_sets_on_code"
     t.index ["created_at"], name: "index_card_sets_on_created_at"

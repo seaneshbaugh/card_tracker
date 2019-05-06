@@ -4,5 +4,6 @@ ice_age:
   name: "Ice Age"
   code: "ICE"
   slug: "ice"
+  keyrune_code: "ICE"
   release_date: "1995-06-01"
 

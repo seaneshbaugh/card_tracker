@@ -11,6 +11,7 @@ class CardSet < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :code, presence: true, uniqueness: true
+  validates :keyrune_code, presence: true
 
   friendly_id :code, use: :slugged
 end

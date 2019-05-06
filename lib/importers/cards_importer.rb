@@ -67,7 +67,7 @@ module Importers
         if card.persisted?
           puts "Card #{card.name} created."
         else
-          puts "Failed to safe Card #{card.name}: #{card.errors.full_messages.inspect}."
+          puts "Failed to save Card #{card.name}: #{card.errors.full_messages.inspect}."
         end
       end
     end
