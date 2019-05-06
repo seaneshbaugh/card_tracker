@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_04_044356) do
+ActiveRecord::Schema.define(version: 2019_05_06_031934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -167,21 +167,21 @@ ActiveRecord::Schema.define(version: 2019_05_04_044356) do
   end
 
   create_table "cards", force: :cascade do |t|
-    t.string "multiverse_id", default: "", null: false
-    t.string "name", default: "", null: false
+    t.string "multiverse_id"
+    t.string "name", null: false
     t.integer "card_set_id"
-    t.string "layout", default: "", null: false
-    t.string "mana_cost", default: "", null: false
-    t.string "converted_mana_cost", default: "", null: false
-    t.string "type_text", default: "", null: false
-    t.text "card_text", null: false
-    t.text "flavor_text", null: false
-    t.string "power", default: "", null: false
-    t.string "toughness", default: "", null: false
-    t.string "loyalty", default: "", null: false
-    t.string "rarity_code", default: "", null: false
-    t.string "card_number", default: "", null: false
-    t.string "artist", default: "", null: false
+    t.string "layout", null: false
+    t.string "mana_cost"
+    t.string "converted_mana_cost"
+    t.string "type_text", null: false
+    t.text "card_text"
+    t.text "flavor_text"
+    t.string "power"
+    t.string "toughness"
+    t.string "loyalty"
+    t.string "rarity_code", null: false
+    t.string "card_number", null: false
+    t.string "artist", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "original_card_text"

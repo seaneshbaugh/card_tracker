@@ -56,6 +56,7 @@ Rails/BulkChangeTable:
     - db/migrate/20140329235639_add_additional_card_type_fields_to_cards.rb
     - db/migrate/20190421040736_remove_card_type_fields_from_cards.rb
     - db/migrate/20190503155207_remove_defaults_from_card_sets_columns.rb
+    - db/migrate/20190506031934_remove_defaults_and_null_constraints_from_cards.rb
 
 Rails/CreateTableWithTimestamps:
   Exclude:
