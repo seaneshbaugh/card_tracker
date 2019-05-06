@@ -34,12 +34,12 @@ class CollectionTest < ActiveSupport::TestCase
     end
   end
 
-  describe '#has_cards?' do
+  describe '#cards?' do
     context 'when quantity is 0' do
       it 'returns false' do
         collection.quantity = 0
 
-        collection.has_cards?.must_equal false
+        collection.cards?.must_equal false
       end
     end
 
@@ -47,7 +47,7 @@ class CollectionTest < ActiveSupport::TestCase
       it 'returns true' do
         collection.quantity = 4
 
-        collection.has_cards?.must_equal true
+        collection.cards?.must_equal true
       end
     end
   end

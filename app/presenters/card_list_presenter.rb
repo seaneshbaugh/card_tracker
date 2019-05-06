@@ -12,6 +12,6 @@ class CardListPresenter < BasePresenter
   end
 
   def unique_cards
-    @card_list.collections.select(&:has_cards?).length
+    @card_list.collections.select(&:cards?).length
   end
 end
