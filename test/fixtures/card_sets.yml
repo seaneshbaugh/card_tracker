@@ -3,5 +3,6 @@ ice_age:
   card_set_type: expansion
   name: "Ice Age"
   code: "ICE"
+  slug: "ice"
   release_date: "1995-06-01"
 

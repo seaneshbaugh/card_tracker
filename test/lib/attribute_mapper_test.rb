@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-require_relative '../../lib/importers/attribute_mapper'
+require_relative '../../lib/attribute_mapper'
 
 class AttributeMapperTest < ActiveSupport::TestCase
   describe '#map_attributes' do

@@ -21,7 +21,8 @@ module Importers
 
       card_sets_data = JSON.parse(card_sets_file_contents)
 
-      card_sets_data.each do |card_set_data|
+      # TODO: Refactor this.
+      full_card_sets_data = card_sets_data.map do |card_set_data|
         card_set = CardSet.find_or_create_by(code: card_set_data['code'])
 
         card_set_file_contents = download_file("#{card_set.code}.json")
@@ -33,6 +34,19 @@ module Importers
         card_set.update(attribute_mapper.map_attributes(full_card_set_data))
 
         puts "CardSet #{card_set.code} (#{card_set.name}) created."
+
+        full_card_set_data
+      end
+
+      # This has to be done as a second pass unfortunately.
+      full_card_sets_data.select { |full_card_set_data| full_card_set_data['parentCode'].present? }.each do |full_card_set_data|
+        child_card_set = CardSet.find_by!(code: full_card_set_data['code'])
+
+        parent_card_set = CardSet.find_by!(code: full_card_set_data['parentCode'])
+
+        child_card_set.parent = parent_card_set
+
+        child_card_set.save
       end
     end
 

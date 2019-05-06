@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_03_175127) do
+ActiveRecord::Schema.define(version: 2019_05_04_044356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,10 +110,12 @@ ActiveRecord::Schema.define(version: 2019_05_03_175127) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "card_set_type_code", null: false
+    t.bigint "parent_id"
     t.index ["card_set_type_code"], name: "index_card_sets_on_card_set_type_code"
     t.index ["code"], name: "index_card_sets_on_code"
     t.index ["created_at"], name: "index_card_sets_on_created_at"
     t.index ["name"], name: "index_card_sets_on_name"
+    t.index ["parent_id"], name: "index_card_sets_on_parent_id"
     t.index ["release_date"], name: "index_card_sets_on_release_date"
     t.index ["slug"], name: "index_card_sets_on_slug"
     t.index ["updated_at"], name: "index_card_sets_on_updated_at"
@@ -296,6 +298,7 @@ ActiveRecord::Schema.define(version: 2019_05_03_175127) do
   add_foreign_key "card_colorings", "cards"
   add_foreign_key "card_colorings", "colors", column: "color_code", primary_key: "color_code"
   add_foreign_key "card_sets", "card_set_types", column: "card_set_type_code", primary_key: "card_set_type_code"
+  add_foreign_key "card_sets", "card_sets", column: "parent_id"
   add_foreign_key "card_sub_typings", "card_sub_types", column: "card_sub_type_code", primary_key: "card_sub_type_code"
   add_foreign_key "card_sub_typings", "cards"
   add_foreign_key "card_super_typings", "card_super_types", column: "card_super_type_code", primary_key: "card_super_type_code"
