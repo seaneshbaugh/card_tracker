@@ -17,19 +17,19 @@ module Importers
       'number' => :card_number,
       'name' => :name,
       'originalText' => :original_card_text,
-      'originalType' => :original_card_type,
+      'originalType' => :original_type_text,
       'power' => :power,
       'rarity' => {
         name: :rarity_code,
-        transformation: -> (rarity_code) { rarity_code.upcase }
+        transformation: -> (rarity_code) { rarity_code.first.upcase }
       },
       'subtypes' => {
-        name: :card_subtypes,
+        name: :card_sub_types,
         # TODO: Fix this! This will silently drop unknown subtypes.
         transformation: -> (card_subtype_names) { CardSubType.where(name: card_subtype_names) }
       },
       'supertypes' => {
-        name: :card_supertypes,
+        name: :card_super_types,
         # TODO: Fix this! This will silently drop unknown supertypes.
         transformation: -> (card_supertype_names) { CardSuperType.where(name: card_supertype_names) }
       },
@@ -56,10 +56,12 @@ module Importers
 
       card_set_data = JSON.parse(card_set_file_contents)
 
-      card_sets_data['cards'].each do |card_data|
+      card_set_data['cards'].each do |card_data|
         card = Card.find_or_create_by(card_set_id: card_set.id, name: card_data['name'])
 
         card.update(attribute_mapper.map_attributes(card_data))
+
+        puts "Card #{card.name} created."
       end
     end
 
