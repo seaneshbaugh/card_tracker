@@ -7,63 +7,27 @@ class CardSetPresenter < BasePresenter
     @card_set = card_set
   end
 
-  def code
-    if @card_set.code.present?
-      @card_set.code.upcase
-    else
-      ''
-    end
-  end
-
   def release_date
-    if @card_set.release_date.present?
-      @card_set.release_date.strftime(date_format)
-    else
-      t('na')
-    end
-  end
-
-  def prerelease_date
-    if @card_set.prerelease_date.present?
-      @card_set.prerelease_date.strftime(date_format)
-    else
-      t('na')
-    end
+    @card_set.release_date.strftime(date_format)
   end
 
   def card_block_name
     @card_set.card_block.name
   end
 
-  def card_block_type_name
-    @card_set.card_block.card_block_type.name
+  def card_set_type_name
+    @card_set.card_set_type.name
   end
 
-  # TODO: Use https://github.com/andrewgioia/Keyrune.
   def symbol(options = {})
-    options[:rarity] ||= :common
+    size = options[:size]
+    fixed_width = 'fw' if options[:fixed_width]
+    rarity = options[:rarity] || 'common'
+    gradient = 'grad' if options[:gradient]
+    foil = 'foil' if options[:foil]
 
-    rarity = case options[:rarity].to_sym
-             when :common
-               'c'
-             when :uncommon
-               'u'
-             when :rare
-               'r'
-             when :mythic
-               'm'
-             else
-               'c'
-             end
+    ss_classes = [@card_set.code.downcase, size, fixed_width, rarity, gradient, foil].compact.map { |option| "ss-#{option}" }.unshift('ss')
 
-    options[:class] ||= ''
-
-    options[:class] = options[:class].split(' ').push('set-symbol').push(rarity).push("set-#{@card_set.code.downcase}").push(options[:size]).join(' ')
-
-    options[:alt] ||= @card_set.name
-
-    options[:title] ||= @card_set.name
-
-    "<i class=\"#{options[:class]}\" title=\"#{options[:title]}\" rel=\"tooltip\"></i>".html_safe
+    content_tag(:i, '', class: ss_classes, alt: @card_set.name, title: @card_set.name)
   end
 end

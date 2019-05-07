@@ -1,0 +1,17 @@
+@import "~materialize-css/sass/components/variables";
+
+.sets {
+    column-count: 3;
+}
+
+@media #{$medium-and-down} {
+    .sets {
+        column-count: 2;
+    }
+}
+
+@media #{$small-and-down} {
+    .sets {
+        column-count: 1;
+    }
+}
