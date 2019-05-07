@@ -4368,6 +4368,11 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+keyrune@3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/keyrune/-/keyrune-3.4.1.tgz#5b6941c6c725a370f6aa291d02ead6111cce11aa"
+  integrity sha512-VIircT/bkX1adfP5Cauyixa71SLexhZq4/ZXYPe4fcvKN9FAJ7ZAEpYKu0Odt9dhGsRiDy4O5cMoopeQMztChA==
+
 killable@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/killable/-/killable-1.0.1.tgz#4c8ce441187a061c7474fb87ca08e2a638194892"
@@ -4587,6 +4592,11 @@ mamacro@^0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/mamacro/-/mamacro-0.0.3.tgz#ad2c9576197c9f1abf308d0787865bd975a3f3e4"
   integrity sha512-qMEwh+UujcQ+kbz3T6V+wAmO2U8veoq2w+3wY8MquqwVA3jChfwY+Tk52GZKDfACEPjuZ7r2oJLejwpt8jtwTA==
+
+mana-font@1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/mana-font/-/mana-font-1.4.1.tgz#39bfe8368bcddb3f7874e05f6580c13265589f02"
+  integrity sha512-1Taj0AOaszqA3VoEKaPH73NIH5kT7sZBJMt455UGAquan80UVh2Nu3ZNkSDqpj+ZgR6pIKtyhlyT6ntVGzKQlw==
 
 map-age-cleaner@^0.1.1:
   version "0.1.3"
