@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   has_many :card_lists, autosave: true, dependent: :destroy, inverse_of: :user
   has_many :collections, dependent: :destroy, inverse_of: :user
-  has_many :cards, through: :collections
+  has_many :cards, through: :collections, inverse_of: :users
 
   validates :username, format: { with: USERNAME_FORMAT }, length: { within: 5..32 }, presence: true, uniqueness: true
   validates :email, email: { allow_blank: true }, presence: true, uniqueness: { case_sensitive: false }

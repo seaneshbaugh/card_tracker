@@ -6,9 +6,8 @@ class CardSetStat
   attr_accessor :card_set, :user
 
   def initialize(card_set, user)
-    self.card_set = card_set
-
-    self.user = user
+    @card_set = card_set
+    @user = user
   end
 
   def cards_in_set

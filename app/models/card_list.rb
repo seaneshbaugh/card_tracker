@@ -12,7 +12,9 @@ class CardList < ApplicationRecord
 
   belongs_to :user, inverse_of: :card_lists
   has_many :collections, dependent: :destroy, inverse_of: :card_list
-  has_many :cards, through: :collections
+  has_many :cards, through: :collections, inverse_of: :card_list
+
+  scope :display_order, -> { order(order: :asc) }
 
   validates :user_id, presence: true
   validates :name, presence: true, uniqueness: { scope: :user_id }
@@ -38,5 +40,6 @@ class CardList < ApplicationRecord
   def set_default_attribute_values
     self.have = true if have.nil?
     self.order ||= 0
+    self.default = false if default.nil?
   end
 end

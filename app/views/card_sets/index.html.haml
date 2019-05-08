@@ -1,0 +1,16 @@
+- content_for :page_title, t('.page_title')
+- content_for :body_class, 'sets'
+.page-sets.page
+  %header.page-header
+    %h1= t('.title')
+  .page-body
+    .sets
+      - @card_sets.each do |card_set|
+        - present card_set do |card_set_presenter|
+          .set{ id: "set-#{card_set_presenter.slug}" }
+            - if @card_list.present?
+              = link_to card_set_presenter.symbol(fixed_width: true), list_set_cards_path(@card_list.slug, card_set.slug)
+              = link_to card_set_presenter.name, list_set_cards_path(@card_list.slug, card_set.slug)
+            - else
+              = link_to card_set_presenter.symbol(fixed_width: true), set_cards_path(card_set.slug)
+              = link_to card_set_presenter.name, set_cards_path(card_set.slug)
