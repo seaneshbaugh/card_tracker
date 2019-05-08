@@ -28,6 +28,8 @@ class CardSetPresenter < BasePresenter
 
     ss_classes = [@card_set.code.downcase, size, fixed_width, rarity, gradient, foil].compact.map { |option| "ss-#{option}" }.unshift('ss')
 
-    content_tag(:i, '', class: ss_classes, alt: @card_set.name, title: @card_set.name)
+    other_classes = Array(options[:class])
+
+    content_tag(:i, '', class: ss_classes.concat(other_classes), alt: @card_set.name, title: @card_set.name)
   end
 end

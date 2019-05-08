@@ -9,13 +9,15 @@ class Card < ApplicationRecord
   has_many :card_typings, dependent: :restrict_with_exception, inverse_of: :card
   has_many :card_sub_typings, dependent: :restrict_with_exception, inverse_of: :card
   has_many :card_parts, dependent: :restrict_with_exception, inverse_of: :card
-  has_many :collections, dependent: :restrict_with_exception, inverse_of: :cards
+  has_many :collections, dependent: :restrict_with_exception, inverse_of: :card
   has_many :colors, through: :card_colorings, foreign_key: :color_code, inverse_of: :cards
   has_many :card_super_types, through: :card_super_typings, foreign_key: :card_super_type_code
   has_many :card_types, through: :card_typings, foreign_key: :card_type_code
   has_many :card_sub_types, through: :card_sub_typings, foreign_key: :card_sub_type_code
   has_many :card_lists, through: :collections, inverse_of: :cards
   has_many :users, through: :collections, inverse_of: :cards
+
+  scope :display_order, -> { order(card_number: :asc) }
 
   validates :name, presence: true
 

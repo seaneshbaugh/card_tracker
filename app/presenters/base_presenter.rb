@@ -6,6 +6,7 @@ class BasePresenter
   delegate :content_tag, to: :@template
   delegate :link_to, to: :@template
   delegate :params, to: :@template
+  delegate :safe_join, to: :@template
   delegate :t, to: :@template
 
   def initialize(object, template)

@@ -11,17 +11,22 @@ class CardPresenter < BasePresenter
     @card.colors.map(&:name).join(', ')
   end
 
-  # TODO: Use https://github.com/andrewgioia/Mana.
   def mana_cost(options = {})
-    options[:class] ||= ''
+    return unless @card.mana_cost
 
-    @card.mana_cost.delete('{').split('}').map do |mana|
+    size = options[:size]
+
+    other_classes = Array(options[:class])
+
+    mana_symbols = @card.mana_cost.delete('{').split('}').map do |mana|
       mana_symbol = mana.delete('/').downcase
 
-      klass = options[:class].split(' ').push('mana-symbol').push(options[:size]).push("symbol-#{mana_symbol}").join(' ').squeeze(' ')
+      ms_classes = [mana_symbol, size, 'fw', 'cost'].compact.map { |option| "ms-#{option}" }.unshift('ms')
 
-      "<i class=\"#{klass}\"></i>"
-    end.join.html_safe
+      content_tag(:i, '', class: ms_classes.concat(other_classes), alt: mana_symbol, title: mana_symbol)
+    end
+
+    safe_join(mana_symbols, '')
   end
 
   def card_supertypes
@@ -37,10 +42,12 @@ class CardPresenter < BasePresenter
   end
 
   def card_text(options = {})
+    return unless @card.card_text
+
     options[:class] ||= ''
 
     @card.card_text.gsub(%r{(\{[A-Z|\d|/]+\})}) do |match|
-      mana_symbol = match.delete(%r{\{|\}|/}).downcase
+      mana_symbol = match.gsub(/\{|\}|\//, '').downcase
 
       klass = options[:class].split(' ').push('mana-symbol').push(options[:size]).push("symbol-#{mana_symbol}").join(' ').squeeze(' ')
 
@@ -49,7 +56,7 @@ class CardPresenter < BasePresenter
   end
 
   def flavor_text
-    @card.flavor_text.html_safe
+    @card.flavor_text&.html_safe
   end
 
   def power_toughness
@@ -87,7 +94,7 @@ class CardPresenter < BasePresenter
     elsif colors.length == 1
       colors.first.downcase
     else
-      colored_mana = @card.mana_cost.delete('{').split('}').uniq.select { |mana| mana.match(/W|U|B|R|G/) }
+      colored_mana = (@card.mana_cost || '').delete('{').split('}').uniq.select { |mana| mana.match(/W|U|B|R|G/) }
 
       if colored_mana.empty? || colored_mana.length > 1
         if @card.layout == 'double-faced'
