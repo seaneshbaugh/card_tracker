@@ -4,7 +4,7 @@ class Card < ApplicationRecord
   belongs_to :card_set, inverse_of: :cards
   belongs_to :layout, foreign_key: :layout_code, inverse_of: :cards, primary_key: :layout_code
   belongs_to :rarity, foreign_key: :rarity_code, inverse_of: :cards, primary_key: :rarity_code
-  has_many :card_colorings, dependent: :restrict_with_exception, inverde_of: :card
+  has_many :card_colorings, dependent: :restrict_with_exception, inverse_of: :card
   has_many :card_super_typings, dependent: :restrict_with_exception, inverse_of: :card
   has_many :card_typings, dependent: :restrict_with_exception, inverse_of: :card
   has_many :card_sub_typings, dependent: :restrict_with_exception, inverse_of: :card
