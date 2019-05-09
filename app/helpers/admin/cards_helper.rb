@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-module Admin::CardsHelper
+module Admin
+  module CardsHelper
+  end
 end

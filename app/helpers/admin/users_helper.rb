@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-module Admin::UsersHelper
+module Admin
+  module UsersHelper
+  end
 end
