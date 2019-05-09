@@ -44,14 +44,12 @@ class CardPresenter < BasePresenter
   def card_text(options = {})
     return unless @card.card_text
 
-    options[:class] ||= ''
-
     @card.card_text.gsub(%r{(\{[A-Z|\d|/]+\})}) do |match|
-      mana_symbol = match.gsub(/\{|\}|\//, '').downcase
+      mana_symbol = translate_mana_symbol(match.gsub(/\{|\}|\//, '').downcase)
 
-      klass = options[:class].split(' ').push('mana-symbol').push(options[:size]).push("symbol-#{mana_symbol}").join(' ').squeeze(' ')
+      ms_classes = [mana_symbol, 'cost'].compact.map { |option| "ms-#{option}" }.unshift('ms')
 
-      "<i class=\"#{klass}\"></i>"
+      content_tag(:i, '', class: ms_classes, alt: mana_symbol, title: mana_symbol)
     end.html_safe
   end
 
@@ -120,6 +118,17 @@ class CardPresenter < BasePresenter
   end
 
   def partial_name
-    @card.layout.underscore
+    @card.layout_code.underscore
+  end
+
+  private
+
+  def translate_mana_symbol(mana_symbol)
+    case mana_symbol
+    when 't'
+      'tap'
+    else
+      mana_symbol
+    end
   end
 end
