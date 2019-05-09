@@ -48,7 +48,7 @@ class Card < ApplicationRecord
   end
 
   def other_versions
-    self.class.includes(:card_set).where(card: name).where.not(id: id)
+    self.class.includes(:card_set).where(name: name).where.not(id: id)
   end
 
   def <=>(other)
