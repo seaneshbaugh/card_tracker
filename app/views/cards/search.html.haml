@@ -1,0 +1,35 @@
+- content_for :page_title, t('.title')
+- content_for :body_class, 'card-search'
+.page-card-search.page
+  %header.page-header
+    %h1= t('.title')
+  .page-body
+    = search_form_for @search, url: card_search_path, html: { method: :get } do |f|
+      .row
+        .input-field.col.s3
+          = f.text_field :name_or_card_text_or_type_text_cont, placeholder: t('.form.name_or_card_text_or_type_text_cont')
+        .input-field.col.s3
+          = f.select :card_set_id_eq, card_set_select_options, include_blank: t('.form.card_set_id_eq'), selected: params.dig(:q, :card_set_id_eq)
+        .input-field.col.s3
+          = f.button type: :submit, class: success_button_class do
+            %i.material-icons search
+          &nbsp;
+          = link_to card_search_path, class: "#{caution_button_class} tooltipped", 'data-tooltip' => t('clear_search') do
+            %i.material-icons clear
+    .results
+      - if @cards.present?
+        - @sets.each do |set, cards|
+          - present set do |set_presenter|
+            .set{ id: "set-#{set.slug}" }
+              %h2= set_presenter.name
+              - cards.each do |card|
+                - present card do |card_presenter|
+                  %div{ class: "row card #{card_presenter.color_class}", 'data-card-id' => card.id, id: "card-#{card.id}" }
+                    .card-name.col.s11.m7
+                      - cache card do
+                        = link_to card_presenter.name, set_card_path(card_presenter.card_set_slug, card), class: 'tooltipped', 'data-tooltip' => card_tooltip_text(card)
+                    .card-rarity.col.s1.m5
+                      = card_presenter.rarity_code
+          = paginate @cards
+      - else
+        %p.no-results= t('.no_results')

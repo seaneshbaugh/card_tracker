@@ -1,9 +1,11 @@
 @import "animate.css";
 @import "~keyrune/css/keyrune.min";
 @import "~mana-font/css/mana.min";
+@import "./color-variables";
 @import "./material_icons";
 @import "./flash_messages";
 @import "./card_sets";
+@import "./cards";
 
 pre {
     white-space: pre-wrap;

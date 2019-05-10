@@ -89,8 +89,8 @@ class CardPresenter < BasePresenter
       else
         'colorless'
       end
-    elsif colors.length == 1
-      colors.first.downcase
+    elsif monocolored?
+      @card.colors.first.name.downcase
     else
       colored_mana = (@card.mana_cost || '').delete('{').split('}').uniq.select { |mana| mana.match(/W|U|B|R|G/) }
 

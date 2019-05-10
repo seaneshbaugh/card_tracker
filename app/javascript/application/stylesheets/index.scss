@@ -5,3 +5,7 @@
 @import "~materialize-css/sass/materialize";
 @import "./layout";
 @import "./pages";
+
+.material-tooltip {
+    max-width: 400px;
+}

@@ -7,7 +7,7 @@ class CardsController < ApplicationController
     @card_list = find_card_list
     @card_set = find_card_set
     @search = Card.search(params[:q])
-    @cards = @search.result.includes(:card_set, :card_parts, :collections).where(card_set_id: @card_set.id).display_order
+    @cards = @search.result.includes(:card_parts, :card_set, :card_types, :collections, :colors).where(card_set_id: @card_set.id).display_order
 
     if @card_list.present?
       render 'index_with_card_list'
@@ -19,7 +19,7 @@ class CardsController < ApplicationController
   def show
     @card_list = find_card_list
     @card_set = find_card_set
-    @card = Card.includes(:collections).find_by!(id: params[:id])
+    @card = Card.includes(:card_parts, { card_set: :card_block }, :card_sub_types, :card_super_types, :card_types, :collections, :colors).find_by!(id: params[:id])
 
     if @card_list.present?
       @collection = @card.collection_for(current_user, @card_list)
@@ -32,7 +32,7 @@ class CardsController < ApplicationController
 
   def search
     @search = Card.search(params[:q])
-    @cards = @search.result.includes(:collections, card_set: { card_block: :card_block_type }).order('`card_block_types`.`id`, `card_blocks`.`id`, `card_sets`.`release_date` ASC, cast(`cards`.`card_number` as unsigned) ASC, `cards`.`name` ASC').page(params[:page]).per(200)
+    @cards = @search.result.includes(:card_parts, { card_set: :card_block }, :card_types, :collections, :colors).display_order.page(params[:page]).per(200)
     @sets = @cards.group_by(&:card_set).sort_by { |card_set, _| card_set.release_date }
   end
 

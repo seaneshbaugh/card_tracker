@@ -1,0 +1,361 @@
+$whiteMana:          rgb(255, 255, 209);
+$blueMana:           rgb(45, 117, 191);
+$blackMana:          rgb(37, 37, 37);
+$redMana:            rgb(155, 20, 19);
+$greenMana:          rgb(85, 205, 107);
+$colorless:          rgb(188, 188, 188);
+$land:               rgb(204, 185, 136);
+$multi:              rgb(218, 218, 0);
+$phyrexianWhiteMana: darken($whiteMana, 30%);
+$phyrexianBlueMana:  darken($blueMana, 30%);
+$phyrexianBlackMana: darken($blackMana, 30%);
+$phyrexianRedMana:   darken($redMana, 30%);
+$phyrexianGreenMana: darken($greenMana, 30%);
+
+@mixin manaGradient($color: $colorless, $start: $colorless, $stop: lighten($colorless, 10%)) {
+  background: $color;
+  background: -moz-linear-gradient(-45deg, $start 0%, $stop 100%);
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, $start), color-stop(100%, $stop));
+  background: -webkit-linear-gradient(-45deg, $start 0%, $stop 100%);
+  background: -o-linear-gradient(-45deg, $start 0%, $stop 100%);
+  background: -ms-linear-gradient(-45deg, $start 0%, $stop 100%);
+  background: linear-gradient(135deg, $start 0%, $stop 100%);
+}
+
+@mixin doubleFacedManaGradient($color: $colorless, $start: $colorless, $stop: darken($colorless, 25%)) {
+  background: $color;
+  background: -moz-linear-gradient(left, $start 45%, $stop 55%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(45%, $start), color-stop(55%, $stop));
+  background: -webkit-linear-gradient(left, $start 45%, $stop 55%);
+  background: -o-linear-gradient(left, $start 45%, $stop 55%);
+  background: -ms-linear-gradient(left, $start 45%, $stop 55%);
+  background: linear-gradient(to right, $start 45%, $stop 55%);
+}
+
+.set {
+  .card {
+    &.white:nth-child(odd) {
+      @include manaGradient(lighten($whiteMana, 5%), lighten($whiteMana, 5%), lighten($whiteMana, 10%));
+    }
+
+    &.white:nth-child(even) {
+      @include manaGradient(lighten($whiteMana, 2.5%), lighten($whiteMana, 2.5%), lighten($whiteMana, 5%))
+    }
+
+    &.blue:nth-child(odd) {
+      @include manaGradient(lighten($blueMana, 40%), lighten($blueMana, 40%), lighten($blueMana, 50%));
+    }
+
+    &.blue:nth-child(even) {
+      @include manaGradient(lighten($blueMana, 35%), lighten($blueMana, 35%), lighten($blueMana, 40%))
+    }
+
+    &.black:nth-child(odd) {
+      @include manaGradient(lighten($blackMana, 70%), lighten($blackMana, 70%), lighten($blackMana, 80%));
+    }
+
+    &.black:nth-child(even) {
+      @include manaGradient(lighten($blackMana, 60%), lighten($blackMana, 60%), lighten($blackMana, 65%))
+    }
+
+    &.red:nth-child(odd) {
+      @include manaGradient(lighten($redMana, 50%), lighten($redMana, 50%), lighten($redMana, 60%));
+    }
+
+    &.red:nth-child(even) {
+      @include manaGradient(lighten($redMana, 45%), lighten($redMana, 45%), lighten($redMana, 55%));
+    }
+
+    &.green:nth-child(odd) {
+      @include manaGradient(lighten($greenMana, 30%), lighten($greenMana, 30%), lighten($greenMana, 40%));
+    }
+
+    &.green:nth-child(even) {
+      @include manaGradient(lighten($greenMana, 20%), lighten($greenMana, 20%), lighten($greenMana, 30%));
+    }
+
+    &.white-or-blue:nth-child(odd) {
+      @include manaGradient(lighten($whiteMana, 5%), lighten($whiteMana, 5%), lighten($blueMana, 50%));
+    }
+
+    &.white-or-blue:nth-child(even) {
+      @include manaGradient(lighten($whiteMana, 2.5%), lighten($whiteMana, 2.5%), lighten($blueMana, 40%));
+    }
+
+    &.white-or-black:nth-child(odd) {
+      @include manaGradient(lighten($whiteMana, 5%), lighten($whiteMana, 5%), lighten($blackMana, 80%));
+    }
+
+    &.white-or-black:nth-child(even) {
+      @include manaGradient(lighten($whiteMana, 2.5%), lighten($whiteMana, 2.5%), lighten($blackMana, 65%));
+    }
+
+    &.blue-or-black:nth-child(odd) {
+      @include manaGradient(lighten($blueMana, 40%), lighten($blueMana, 40%), lighten($blackMana, 80%));
+    }
+
+    &.blue-or-black:nth-child(even) {
+      @include manaGradient(lighten($blueMana, 35%), lighten($blueMana, 35%), lighten($blackMana, 65%));
+    }
+
+    &.blue-or-red:nth-child(odd) {
+      @include manaGradient(lighten($blueMana, 40%), lighten($blueMana, 40%), lighten($redMana, 60%));
+    }
+
+    &.blue-or-red:nth-child(even) {
+      @include manaGradient(lighten($blueMana, 35%), lighten($blueMana, 35%), lighten($redMana, 55%));
+    }
+
+    &.black-or-red:nth-child(odd) {
+      @include manaGradient(lighten($blackMana, 70%), lighten($blackMana, 65%), lighten($redMana, 60%));
+    }
+
+    &.black-or-red:nth-child(even) {
+      @include manaGradient(lighten($blackMana, 60%), lighten($blackMana, 80%), lighten($redMana, 55%));
+    }
+
+    &.black-or-green:nth-child(odd) {
+      @include manaGradient(lighten($blackMana, 70%), lighten($blackMana, 65%), lighten($greenMana, 40%));
+    }
+
+    &.black-or-green:nth-child(even) {
+      @include manaGradient(lighten($blackMana, 60%), lighten($blackMana, 80%), lighten($greenMana, 30%));
+    }
+
+    &.red-or-white:nth-child(odd) {
+      @include manaGradient(lighten($redMana, 50%), lighten($redMana, 50%), lighten($whiteMana, 10%));
+    }
+
+    &.red-or-white:nth-child(even) {
+      @include manaGradient(lighten($redMana, 45%), lighten($redMana, 45%), lighten($whiteMana, 5%));
+    }
+
+    &.red-or-green:nth-child(odd) {
+      @include manaGradient(lighten($redMana, 50%), lighten($redMana, 50%), lighten($greenMana, 40%));
+    }
+
+    &.red-or-green:nth-child(even) {
+      @include manaGradient(lighten($redMana, 45%), lighten($redMana, 45%), lighten($greenMana, 30%));
+    }
+
+    &.green-or-white:nth-child(odd) {
+      @include manaGradient(lighten($greenMana, 30%), lighten($greenMana, 30%), lighten($whiteMana, 10%));
+    }
+
+    &.green-or-white:nth-child(even) {
+      @include manaGradient(lighten($greenMana, 20%), lighten($greenMana, 20%), lighten($whiteMana, 5%));
+    }
+
+    &.green-or-blue:nth-child(odd) {
+      @include manaGradient(lighten($greenMana, 30%), lighten($greenMana, 30%), lighten($blueMana, 50%));
+    }
+
+    &.green-or-blue:nth-child(even) {
+      @include manaGradient(lighten($greenMana, 20%), lighten($greenMana, 20%), lighten($blueMana, 40%));
+    }
+
+    &.colorless:nth-child(odd) {
+      @include manaGradient(lighten($colorless, 10%), lighten($colorless, 10%), lighten($colorless, 15%));
+    }
+
+    &.colorless:nth-child(even) {
+      @include manaGradient(lighten($colorless, 5%), lighten($colorless, 5%), lighten($colorless, 10%))
+    }
+
+    &.land:nth-child(odd) {
+      @include manaGradient(lighten($land, 10%), lighten($land, 10%), lighten($land, 15%));
+    }
+
+    &.land:nth-child(even) {
+      @include manaGradient(lighten($land, 5%), lighten($land, 5%), lighten($land, 10%))
+    }
+
+    &.multi:nth-child(odd) {
+      @include manaGradient(lighten($multi, 10%), lighten($multi, 10%), lighten($multi, 15%));
+    }
+
+    &.multi:nth-child(even) {
+      @include manaGradient(lighten($multi, 5%), lighten($multi, 5%), lighten($multi, 10%))
+    }
+
+    &.double-faced-white-to-blue:nth-child(odd) {
+      @include doubleFacedManaGradient(lighten($whiteMana, 5%), lighten($whiteMana, 5%), lighten($blueMana, 40%));
+    }
+
+    &.double-faced-white-to-blue:nth-child(even) {
+      @include doubleFacedManaGradient(lighten($whiteMana, 2.5%), lighten($whiteMana, 2.5%), lighten($blueMana, 35%));
+    }
+
+    &.double-faced-white-to-black:nth-child(odd) {
+      @include doubleFacedManaGradient(lighten($whiteMana, 5%), lighten($whiteMana, 5%), lighten($blackMana, 70%));
+    }
+
+    &.double-faced-white-to-black:nth-child(even) {
+      @include doubleFacedManaGradient(lighten($whiteMana, 2.5%), lighten($whiteMana, 2.5%), lighten($blackMana, 60%));
+    }
+
+    &.double-faced-white-to-red:nth-child(odd) {
+      @include doubleFacedManaGradient(lighten($whiteMana, 5%), lighten($whiteMana, 5%), lighten($redMana, 50%));
+    }
+
+    &.double-faced-white-to-red:nth-child(even) {
+      @include doubleFacedManaGradient(lighten($whiteMana, 2.5%), lighten($whiteMana, 2.5%), lighten($redMana, 45%));
+    }
+
+    &.double-faced-white-to-green:nth-child(odd) {
+      @include doubleFacedManaGradient(lighten($whiteMana, 5%), lighten($whiteMana, 5%), lighten($greenMana, 30%));
+    }
+
+    &.double-faced-white-to-green:nth-child(even) {
+      @include doubleFacedManaGradient(lighten($whiteMana, 2.5%), lighten($whiteMana, 2.5%), lighten($greenMana, 20%));
+    }
+
+    &.double-faced-blue-to-white:nth-child(odd) {
+      @include doubleFacedManaGradient(lighten($blueMana, 40%), lighten($blueMana, 40%), lighten($whiteMana, 5%));
+    }
+
+    &.double-faced-blue-to-white:nth-child(even) {
+      @include doubleFacedManaGradient(lighten($blueMana, 35%), lighten($blueMana, 35%), lighten($whiteMana, 2.5%));
+    }
+
+    &.double-faced-blue-to-black:nth-child(odd) {
+      @include doubleFacedManaGradient(lighten($blueMana, 40%), lighten($blueMana, 40%), lighten($blackMana, 70%));
+    }
+
+    &.double-faced-blue-to-black:nth-child(even) {
+      @include doubleFacedManaGradient(lighten($blueMana, 35%), lighten($blueMana, 35%), lighten($blackMana, 60%));
+    }
+
+    &.double-faced-blue-to-red:nth-child(odd) {
+      @include doubleFacedManaGradient(lighten($blueMana, 40%), lighten($blueMana, 40%), lighten($redMana, 50%));
+    }
+
+    &.double-faced-blue-to-red:nth-child(even) {
+      @include doubleFacedManaGradient(lighten($blueMana, 35%), lighten($blueMana, 35%), lighten($redMana, 45%));
+    }
+
+    &.double-faced-blue-to-green:nth-child(odd) {
+      @include doubleFacedManaGradient(lighten($blueMana, 40%), lighten($blueMana, 40%), lighten($greenMana, 30%));
+    }
+
+    &.double-faced-blue-to-green:nth-child(even) {
+      @include doubleFacedManaGradient(lighten($blueMana, 35%), lighten($blueMana, 35%), lighten($greenMana, 20%));
+    }
+
+    &.double-faced-black-to-white:nth-child(odd) {
+      @include doubleFacedManaGradient(lighten($blackMana, 70%), lighten($blackMana, 70%), lighten($whiteMana, 5%));
+    }
+
+    &.double-faced-black-to-white:nth-child(even) {
+      @include doubleFacedManaGradient(lighten($blackMana, 60%), lighten($blackMana, 60%), lighten($whiteMana, 2.5%));
+    }
+
+    &.double-faced-black-to-blue:nth-child(odd) {
+      @include doubleFacedManaGradient(lighten($blackMana, 70%), lighten($blackMana, 70%), lighten($blueMana, 40%));
+    }
+
+    &.double-faced-black-to-blue:nth-child(even) {
+      @include doubleFacedManaGradient(lighten($blackMana, 60%), lighten($blackMana, 60%), lighten($blueMana, 35%));
+    }
+
+    &.double-faced-black-to-red:nth-child(odd) {
+      @include doubleFacedManaGradient(lighten($blackMana, 70%), lighten($blackMana, 70%), lighten($redMana, 50%));
+    }
+
+    &.double-faced-black-to-red:nth-child(even) {
+      @include doubleFacedManaGradient(lighten($blackMana, 60%), lighten($blackMana, 60%), lighten($redMana, 45%));
+    }
+
+    &.double-faced-black-to-green:nth-child(odd) {
+      @include doubleFacedManaGradient(lighten($blackMana, 70%), lighten($blackMana, 70%), lighten($greenMana, 30%));
+    }
+
+    &.double-faced-black-to-green:nth-child(even) {
+      @include doubleFacedManaGradient(lighten($blackMana, 60%), lighten($blackMana, 60%), lighten($greenMana, 20%));
+    }
+
+    &.double-faced-red-to-white:nth-child(odd) {
+      @include doubleFacedManaGradient(lighten($redMana, 50%), lighten($redMana, 50%), lighten($whiteMana, 5%));
+    }
+
+    &.double-faced-red-to-white:nth-child(even) {
+      @include doubleFacedManaGradient(lighten($redMana, 45%), lighten($redMana, 45%), lighten($whiteMana, 2.5%));
+    }
+
+    &.double-faced-red-to-blue:nth-child(odd) {
+      @include doubleFacedManaGradient(lighten($redMana, 50%), lighten($redMana, 50%), lighten($blueMana, 40%));
+    }
+
+    &.double-faced-red-to-blue:nth-child(even) {
+      @include doubleFacedManaGradient(lighten($redMana, 45%), lighten($redMana, 45%), lighten($blueMana, 35%));
+    }
+
+    &.double-faced-red-to-black:nth-child(odd) {
+      @include doubleFacedManaGradient(lighten($redMana, 50%), lighten($redMana, 50%), lighten($blackMana, 70%));
+    }
+
+    &.double-faced-red-to-black:nth-child(even) {
+      @include doubleFacedManaGradient(lighten($redMana, 45%), lighten($redMana, 45%), lighten($blackMana, 60%));
+    }
+
+    &.double-faced-red-to-green:nth-child(odd) {
+      @include doubleFacedManaGradient(lighten($redMana, 50%), lighten($redMana, 50%), lighten($greenMana, 30%));
+    }
+
+    &.double-faced-red-to-green:nth-child(even) {
+      @include doubleFacedManaGradient(lighten($redMana, 45%), lighten($redMana, 45%), lighten($greenMana, 20%));
+    }
+
+    &.double-faced-green-to-white:nth-child(odd) {
+      @include doubleFacedManaGradient(lighten($greenMana, 30%), lighten($greenMana, 30%), lighten($whiteMana, 5%));
+    }
+
+    &.double-faced-green-to-white:nth-child(even) {
+      @include doubleFacedManaGradient(lighten($greenMana, 20%), lighten($greenMana, 20%), lighten($whiteMana, 2.5%));
+    }
+
+    &.double-faced-green-to-blue:nth-child(odd) {
+      @include doubleFacedManaGradient(lighten($greenMana, 30%), lighten($greenMana, 30%), lighten($blueMana, 40%));
+    }
+
+    &.double-faced-green-to-blue:nth-child(even) {
+      @include doubleFacedManaGradient(lighten($greenMana, 20%), lighten($greenMana, 20%), lighten($blueMana, 35%));
+    }
+
+    &.double-faced-green-to-black:nth-child(odd) {
+      @include doubleFacedManaGradient(lighten($greenMana, 30%), lighten($greenMana, 30%), lighten($blackMana, 70%));
+    }
+
+    &.double-faced-green-to-black:nth-child(even) {
+      @include doubleFacedManaGradient(lighten($greenMana, 20%), lighten($greenMana, 20%), lighten($blackMana, 60%));
+    }
+
+    &.double-faced-green-to-red:nth-child(odd) {
+      @include doubleFacedManaGradient(lighten($greenMana, 30%), lighten($greenMana, 30%), lighten($redMana, 50%));
+    }
+
+    &.double-faced-green-to-red:nth-child(even) {
+      @include doubleFacedManaGradient(lighten($greenMana, 20%), lighten($greenMana, 20%), lighten($redMana, 45%));
+    }
+
+    &.double-faced-green-to-black-green:nth-child(odd) {
+      background: lighten($greenMana, 30%);
+      background: -moz-linear-gradient(left,lighten($greenMana, 30%) 45%, lighten($blackMana, 70%) 55%, lighten($greenMana, 30%) 75%);
+      background: -webkit-gradient(linear, left top, right top, color-stop(45%, lighten($greenMana, 30%)), color-stop(55%, lighten($blackMana, 70%)), color-stop(75%, lighten($greenMana, 30%)));
+      background: -webkit-linear-gradient(left, lighten($greenMana, 30%) 45%, lighten($blackMana, 70%) 55%, lighten($greenMana, 30%) 75%);
+      background: -o-linear-gradient(left, lighten($greenMana, 30%) 45%,lighten($blackMana, 70%) 55%, lighten($greenMana, 30%) 75%);
+      background: -ms-linear-gradient(left, lighten($greenMana, 30%) 45%,lighten($blackMana, 70%) 55%, lighten($greenMana, 30%) 75%);
+      background: linear-gradient(to right, lighten($greenMana, 30%) 45%,lighten($blackMana, 70%) 55%, lighten($greenMana, 30%) 75%);
+    }
+
+    &.double-faced-green-to-black-green:nth-child(even) {
+      background: lighten($greenMana, 20%);
+      background: -moz-linear-gradient(left,lighten($greenMana, 20%) 45%, lighten($blackMana, 60%) 55%, lighten($greenMana, 20%) 75%);
+      background: -webkit-gradient(linear, left top, right top, color-stop(45%, lighten($greenMana, 20%)), color-stop(55%, lighten($blackMana, 60%)), color-stop(75%, lighten($greenMana, 20%)));
+      background: -webkit-linear-gradient(left, lighten($greenMana, 20%) 45%, lighten($blackMana, 60%) 55%, lighten($greenMana, 20%) 75%);
+      background: -o-linear-gradient(left, lighten($greenMana, 20%) 45%,lighten($blackMana, 60%) 55%, lighten($greenMana, 20%) 75%);
+      background: -ms-linear-gradient(left, lighten($greenMana, 20%) 45%,lighten($blackMana, 60%) 55%, lighten($greenMana, 20%) 75%);
+      background: linear-gradient(to right, lighten($greenMana, 20%) 45%,lighten($blackMana, 60%) 55%, lighten($greenMana, 20%) 75%);
+    }
+  }
+}

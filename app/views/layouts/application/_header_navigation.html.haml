@@ -7,7 +7,7 @@
       .header-search-wrapper.hide-on-med-and-down
         = form_tag card_search_path, method: :get do
           %i.material-icons search
-          %input.header-search-input{ type: 'text', name: 'q[name_or_card_text_or_card_type_cont]', placeholder: t('.search.placeholder') }
+          %input.header-search-input{ type: 'text', name: 'q[name_or_card_text_or_type_text_cont]', placeholder: t('.search.placeholder') }
       %ul.navbar-list.right
         - if current_user
           %li.hide-on-med-and-down
