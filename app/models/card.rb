@@ -17,7 +17,7 @@ class Card < ApplicationRecord
   has_many :card_lists, through: :collections, inverse_of: :cards
   has_many :users, through: :collections, inverse_of: :cards
 
-  scope :display_order, -> { order(card_number: :asc) }
+  scope :display_order, -> { order('CAST("cards"."card_number" AS INTEGER) ASC') }
 
   validates :name, presence: true
 
@@ -27,16 +27,20 @@ class Card < ApplicationRecord
     end
   end
 
-  def multicolored?
-    colors.count > 1
+  def colorless?
+    colors.length.zero?
   end
 
-  def colorless?
-    colors.count.zero?
+  def monocolored?
+    colors.length == 1
+  end
+
+  def multicolored?
+    colors.length > 1
   end
 
   def land?
-    card_types.include?(CardType.find_by(card_type_code: 'LAND'))
+    card_types.find { |card_type| card_type.card_type_code == 'LAND' }.present?
   end
 
   def collection_for(user, card_list)
