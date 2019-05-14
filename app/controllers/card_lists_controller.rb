@@ -5,22 +5,13 @@ class CardListsController < ApplicationController
 
   def index
     @search = CardList.search(params[:q])
-
     @card_lists = @search.result.where(user_id: current_user.id).order(order: :asc).page(params[:page])
   end
 
   def show
     @card_list = find_card_list
-
-    @search = Collection.search(params[:q])
-
-    # TODO: Make this a scope.
-    @collections = @search.result.includes(card: { card_set: { card_block: :card_block_type } })
-                          .where(collections: { card_list_id: @card_list.id })
-                          .where(Collection.arel_table[:quantity].gt(0))
-                          .order('"card_block_types"."id", "card_blocks"."id", "card_sets"."release_date" ASC, cast("cards"."card_number" as unsigned) ASC, "cards"."name" ASC')
-                          .page(params[:page])
-
+    @search = Collection.ransack(params[:q])
+    @collections = @search.result.where(collections: { card_list_id: @card_list.id }).quantity_greater_than_zero.display_order.page(params[:page])
     @sets = @collections.group_by { |collection| collection.card.card_set }.sort_by { |card_set, _| card_set.release_date }
   end
 
