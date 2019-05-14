@@ -1,3 +1,5 @@
+import "./collections";
+
 const completed = () => {
   const acceptTermsOfServiceCheckBox = document.querySelector(".accept-terms-of-service");
 
@@ -5,7 +7,7 @@ const completed = () => {
     const submitButton = document.querySelector(".requires-terms-of-service-acceptance input[type=submit]");
 
     if (submitButton) {
-      acceptTermsOfServiceCheckBox.addEventListener("change", (event) => {
+      acceptTermsOfServiceCheckBox.addEventListener("change", (_event) => {
         submitButton.disabled = !acceptTermsOfServiceCheckBox.checked;
       }, false);
     }

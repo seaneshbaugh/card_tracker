@@ -22,14 +22,15 @@
           - present set do |set_presenter|
             .set{ id: "set-#{set.slug}" }
               %h2= set_presenter.name
-              - cards.each do |card|
-                - present card do |card_presenter|
-                  %div{ class: "row card #{card_presenter.color_class}", 'data-card-id' => card.id, id: "card-#{card.id}" }
-                    .card-name.col.s11.m7
-                      - cache card do
-                        = link_to card_presenter.name, set_card_path(card_presenter.card_set_slug, card), class: 'tooltipped', 'data-tooltip' => card_tooltip_text(card)
-                    .card-rarity.col.s1.m5
-                      = card_presenter.rarity_code
+              .cards
+                - cards.each do |card|
+                  - present card do |card_presenter|
+                    %div{ id: "card-#{card.id}", class: "row card #{card_presenter.color_class}", 'data-card-id' => card.id }
+                      .card-name.col.s11
+                        - cache card do
+                          = link_to card_presenter.name, set_card_path(card_presenter.card_set_slug, card), class: 'tooltipped', 'data-tooltip' => card_tooltip_text(card)
+                      .card-rarity.col.s1
+                        = card_presenter.rarity_code
           = paginate @cards
       - else
         %p.no-results= t('.no_results')

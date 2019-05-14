@@ -2,6 +2,8 @@ en:
   cards:
     index_without_card_list:
       title: "%{card_set_name} Cards"
+    index_with_card_list:
+      title: "%{card_set_name} Cards"
     search:
       title: "Search Results"
       form:

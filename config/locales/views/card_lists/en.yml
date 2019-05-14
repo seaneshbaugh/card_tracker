@@ -2,3 +2,5 @@ en:
   card_lists:
     index:
       title: "Your Lists"
+    show:
+      page_title: "Card List: %{card_list_name}"

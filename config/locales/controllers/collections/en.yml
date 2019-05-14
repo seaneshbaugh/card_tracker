@@ -1,0 +1,8 @@
+en:
+  collections:
+    update_quantity:
+      success: "Your collection has been updated."
+      failure: "Failed to update your collection."
+    move_card_list:
+      success: "Your collection has been moved."
+      failure: "Failed to move your collection."

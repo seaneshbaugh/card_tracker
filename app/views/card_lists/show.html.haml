@@ -1,0 +1,54 @@
+- content_for :page_title, t('.page_title', card_list_name: @card_list.name)
+- content_for :body_class, 'show-card-list'
+- present @card_list do |card_list_presenter|
+  .page-card-list.page
+    %header.page-header
+      %h1= card_list_presenter.name
+    .page-body
+      = search_form_for @search, url: list_path(@card_list.slug), html: { method: :get } do |f|
+        .row
+          .input-field.col.s3
+            = f.text_field :card_name_cont, placeholder: Card.human_attribute_name(:name)
+          .input-field.col.s3
+            = f.button type: :submit, class: success_button_class do
+              %i.material-icons search
+            &nbsp;
+            = link_to list_path(@card_list.slug), class: "#{caution_button_class} tooltipped", 'data-tooltip' => t('clear_search') do
+              %i.material-icons clear
+      .card-list-cards{ id: "card-list-#{@card_list.slug}" }
+        - if @collections.present?
+          - @sets.each do |set, collections|
+            .set{ id: "set-#{set.slug}" }
+              %h2= set.name
+              .cards
+                - collections.sort_by { |collection| collection.card.card_number.to_i }.each do |collection|
+                  - present collection.card do |card_presenter|
+                    - present collection do |collection_presenter|
+                      .card{ id: "card-#{collection.card_id}", class: "row card #{card_presenter.color_class}", 'data-card-id' => collection.card_id, 'data-quantity' => collection_presenter.quantity_as_integer, 'data-card-list-id' => @card_list.id }
+                        .card-name.col.s7
+                          = link_to card_presenter.name, list_set_card_path(@card_list.slug, set.slug, collection.card), class: 'tooltipped', 'data-tooltip' => card_tooltip_text(collection.card)
+                        .card-rarity.col.s1
+                          = card_presenter.rarity_code
+                        .card-quantity.col.s1
+                          = collection_presenter.quantity_as_string
+                        .col.s1.center-align
+                          %button.increment.btn.btn-small
+                            %i.material-icons expand_less
+                        .col.s1.center-align
+                          %button.decrement.btn.btn-small
+                            %i.material-icons expand_more
+                        .col.s1.center-align
+                          %a.dropdown-trigger.btn{ href: '#', 'data-target' => "collection-options-#{card_presenter.id}" }
+                            %i.material-icons settings
+                          %ul.dropdown-content{ id: "collection-options-#{card_presenter.id}" }
+                            %li
+                              %a.toggle-move-collection-modal{ href: '#' } Move to Another List
+                            %li
+                              %a.remove-all-from-list{ href: '#' } Remove All from List
+          = paginate @collections
+        - elsif params[:q].present?
+          .no-cards
+            No matching cards found in this list.
+        - else
+          .no-cards
+            You don't seem to have any cards in this list. Why not browse through the Magic card #{link_to 'sets', list_sets_path(@card_list.slug)} and add some?

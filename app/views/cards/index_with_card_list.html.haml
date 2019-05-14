@@ -1,0 +1,49 @@
+- content_for :page_title, t('.title', card_set_name: @card_set.name)
+- content_for :body_class, 'cards'
+- present @card_set do |card_set_presenter|
+  .page-cards.page
+    %header.page-header
+      %h1
+        = card_set_presenter.symbol
+        = card_set_presenter.name
+    .page-body
+      = search_form_for @search, url: list_set_cards_path(@card_list.slug, @card_set.slug), html: { method: :get } do |f|
+        .row
+          .input-field.col.s3
+            = f.text_field :name_cont, placeholder: Card.human_attribute_name(:name)
+          .input-field.col.s3
+            = f.text_field :type_text_cont, placeholder: Card.human_attribute_name(:type_text)
+          .input-field.col.s3
+            = f.text_field :card_text_cont, placeholder: Card.human_attribute_name(:card_text)
+          .input-field.col.s3
+            = f.button type: :submit, class: success_button_class do
+              %i.material-icons search
+            &nbsp;
+            = link_to list_set_cards_path(@card_list.slug, @card_set.slug), class: "#{caution_button_class} tooltipped", 'data-tooltip' => t('clear_search') do
+              %i.material-icons clear
+      .set{ id: "set-#{@card_set.slug}" }
+        .cards
+          - @cards.each do |card|
+            - present card do |card_presenter|
+              - present card.collection_for(current_user, @card_list), CollectionPresenter do |collection_presenter|
+                .card{ id: "card-#{card.id}", class: "row card #{card_presenter.color_class}", 'data-card-id' => card.id, 'data-quantity' => collection_presenter.quantity_as_integer, 'data-card-list-id' => @card_list.id }
+                  .card-name.col.s7
+                    = link_to card_presenter.name, list_set_card_path(@card_list.slug, @card_set.slug, card), class: 'tooltipped', 'data-tooltip' => card_tooltip_text(card)
+                  .card-rarity.col.s1
+                    = card_presenter.rarity_code
+                  .card-quantity.col.s1
+                    = collection_presenter.quantity_as_string
+                  .col.s1.center-align
+                    %button.increment.btn.btn-small
+                      %i.material-icons expand_less
+                  .col.s1.center-align
+                    %button.decrement.btn.btn-small
+                      %i.material-icons expand_more
+                  .col.s1.center-align
+                    %a.dropdown-trigger.btn{ href: '#', 'data-target' => "collection-options-#{card_presenter.id}" }
+                      %i.material-icons settings
+                    %ul.dropdown-content{ id: "collection-options-#{card_presenter.id}" }
+                      %li
+                        %a.toggle-move-collection-modal{ href: '#' } Move to Another List
+                      %li
+                        %a.remove-all-from-list{ href: '#' } Remove All from List
