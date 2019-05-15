@@ -34,7 +34,7 @@ class User < ApplicationRecord
   protected
 
   def password_required?
-    !persisted? || !password.blank? || !password_confirmation.blank?
+    !persisted? || password.present? || password_confirmation.present?
   end
 
   private
