@@ -31,6 +31,12 @@ class User < ApplicationRecord
     devise_mailer.send(notification, self, *args).deliver_later
   end
 
+  protected
+
+  def password_required?
+    !persisted? || !password.blank? || !password_confirmation.blank?
+  end
+
   private
 
   def assign_default_role
