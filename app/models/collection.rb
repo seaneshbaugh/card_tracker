@@ -14,20 +14,21 @@ class Collection < ApplicationRecord
 
   scope :quantity_greater_than_zero, -> { where(Collection.arel_table[:quantity].gt(0)) }
 
-  validates :quantity, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 2_147_483_647 }, presence: true
+  validates :quantity, numericality: true, presence: true
 
   after_initialize :set_default_attribute_values, if: :new_record?
-  before_validation :clamp_quantity
 
   def cards?
     quantity.positive?
   end
 
-  private
+  def quantity=(new_quantity)
+    new_quantity = new_quantity.clamp(0, 2_147_483_647) if new_quantity.is_a?(Integer)
 
-  def clamp_quantity
-    self.quantity = quantity.clamp(0, 2_147_483_647) if quantity.is_a?(Integer)
+    super(new_quantity)
   end
+
+  private
 
   def set_default_attribute_values
     self.quantity ||= 0

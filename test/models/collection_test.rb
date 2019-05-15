@@ -25,7 +25,7 @@ class CollectionTest < ActiveSupport::TestCase
   describe 'validations' do
     describe 'quantity' do
       it 'validates numericality of quantity' do
-        collection.must validate_numericality_of(:quantity).is_greater_than_or_equal_to(0).is_less_than_or_equal_to(2_147_483_647)
+        collection.must validate_numericality_of(:quantity)
       end
 
       it 'validates presence of quantity' do
