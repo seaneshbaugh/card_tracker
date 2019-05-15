@@ -1,0 +1,47 @@
+- content_for :page_title, t('.title')
+- content_for :body_class, 'account'
+.page-show-account.page
+  %header.page-header
+    %h1= t('.title')
+  .page-body
+    - present @account do |user_presenter|
+      %table.responsive-table
+        %tbody
+          %tr
+            %th= User.human_attribute_name(:username)
+            %td= user_presenter.username
+          %tr
+            %th= User.human_attribute_name(:email)
+            %td
+              = user_presenter.email
+              = user_presenter.email_link
+          %tr
+            %th= User.human_attribute_name(:first_name)
+            %td= user_presenter.first_name
+          %tr
+            %th= User.human_attribute_name(:last_name)
+            %td= user_presenter.last_name
+          %tr
+            %th= User.human_attribute_name(:sign_in_count)
+            %td= user_presenter.sign_in_count
+          %tr
+            %th= User.human_attribute_name(:current_sign_in_at)
+            %td= user_presenter.current_sign_in_at
+          %tr
+            %th= User.human_attribute_name(:last_sign_in_at)
+            %td= user_presenter.last_sign_in_at
+          %tr
+            %th= User.human_attribute_name(:current_sign_in_ip)
+            %td= user_presenter.current_sign_in_ip
+          %tr
+            %th= User.human_attribute_name(:last_sign_in_ip)
+            %td= user_presenter.last_sign_in_ip
+          %tr
+            %th= User.human_attribute_name(:receive_newsletters)
+            %td= user_presenter.receive_newsletters
+          %tr
+            %th= User.human_attribute_name(:created_at)
+            %td= user_presenter.created_at
+          %tr
+            %th= User.human_attribute_name(:updated_at)
+            %td= user_presenter.updated_at
