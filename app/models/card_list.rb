@@ -26,6 +26,10 @@ class CardList < ApplicationRecord
 
   friendly_id :name, use: :scoped, scope: :user_id
 
+  def should_generate_new_friendly_id?
+    slug.blank? || name_changed?
+  end
+
   private
 
   def ensure_only_one_default
