@@ -16,3 +16,15 @@
         }
     }
 }
+
+.page-delete-account {
+    .page-body {
+        form {
+            .warning {
+                color: $nord11;
+                font-weight: 900;
+                font-size: 2rem;
+            }
+        }
+    }
+}

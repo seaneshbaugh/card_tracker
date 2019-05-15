@@ -1,6 +1,6 @@
 - content_for :page_title, t('.title')
 - content_for :body_class, 'edit-account'
-.edit-account-page.page
+.page-edit-account.page
   %header.page-header
     %h1= t('.title')
   .page-body
@@ -40,4 +40,4 @@
     .actions
       .delete-account
         %p.warning= t('.delete_account_warning_message')
-        = link_to t('accounts.delete.title'), confirm_delete_account_path, class: warning_button_class
+        = link_to t('.delete'), confirm_delete_account_path, class: warning_button_class

@@ -7,10 +7,12 @@ en:
       title: "Edit Your Account"
       submit: "Update Account"
       delete_account_warning_message: "Warning! This button will take you to a page which will ask you to confirm the deletion of your account! Proceed with caution!"
-    delete:
+      delete: "Delete Account"
+    confirm_delete:
       title: "Delete Your Account"
       danger: "Danger!"
       warning_message_html: "You are about to <strong>permanently</strong> delete your account. This cannot be undone and will erase all data associated with your account forever!"
       instructions_html: "Enter your username, <strong>%{username}</strong>, twice below and then click the big red button."
       enter_username: "Username"
       enter_username_confirmation: "Retype Username"
+      submit: "Delete Account"

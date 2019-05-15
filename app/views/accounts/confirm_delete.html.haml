@@ -1,0 +1,23 @@
+- content_for :page_title, t('.title')
+- content_for :body_class, 'confirm-delete-account'
+.page-delete-account.page
+  %header.page-header
+    %h1= t('.title')
+  .page-body
+    = form_tag account_path, method: :delete do
+      %h2.warning= t('.danger')
+      %p= t('.warning_message_html')
+      %p= t('.instructions_html', username: current_user.username)
+      = hidden_field_tag :username, current_user.username, class: 'username'
+      .row
+        .input-field.col.s12
+          = text_field_tag :enter_username, '', class: 'enter-username'
+          = label_tag :enter_username, t('.enter_username')
+      .row
+        .input-field.col.s12
+          = text_field_tag :enter_username_confirmation, '', class: 'enter-username-confirmation'
+          = label_tag :enter_username_confirmation, t('.enter_username_confirmation')
+      .row
+        .input-field.col.s12
+          = link_to t('cancel'), edit_account_path, class: success_button_class
+          = submit_tag t('.submit'), class: "#{warning_button_class} requires-enter-username", disabled: true
