@@ -19,6 +19,7 @@
       = f.label :default do
         = f.check_box :default
         %span= CardList.human_attribute_name(:default)
-    .input-field
-      = f.submit t(".submit.#{@card_list.persisted? ? 'edit' : 'new'}"), class: success_button_class
-      = link_to t('cancel'), root_path, class: caution_button_class
+    .row
+      .input-field.col.s12
+        = f.submit t(".submit.#{@card_list.persisted? ? 'edit' : 'new'}"), class: success_button_class
+        = link_to t('cancel'), root_path, class: caution_button_class
