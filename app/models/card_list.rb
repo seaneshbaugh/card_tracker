@@ -16,7 +16,6 @@ class CardList < ApplicationRecord
 
   scope :display_order, -> { order(order: :asc) }
 
-  validates :user_id, presence: true
   validates :name, presence: true, uniqueness: { scope: :user_id }
   validates :have, inclusion: { in: [true, false] }
   validates :order, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 2_147_483_647 }, presence: true

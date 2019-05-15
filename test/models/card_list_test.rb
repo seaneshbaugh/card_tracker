@@ -16,17 +16,11 @@ class CardListTest < ActiveSupport::TestCase
     end
 
     it 'has many cards through collections' do
-      card_list.must have_many(:cards).through(:collections)
+      card_list.must have_many(:cards).through(:collections).inverse_of(:card_list)
     end
   end
 
   describe 'validations' do
-    describe 'user_id' do
-      it 'validates presence of user_id' do
-        card_list.must validate_presence_of(:user_id)
-      end
-    end
-
     describe 'name' do
       it 'validates presence of name' do
         card_list.must validate_presence_of(:name)
