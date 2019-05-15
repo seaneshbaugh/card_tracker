@@ -9,3 +9,9 @@
 .material-tooltip {
     max-width: 400px;
 }
+
+.btn-flat {
+    input[type="submit"] {
+        color: $button-flat-color;
+    }
+}
