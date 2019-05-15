@@ -6,7 +6,7 @@ class CardsController < ApplicationController
   def index
     @card_list = find_card_list
     @card_set = find_card_set
-    @search = Card.search(params[:q])
+    @search = Card.ransack(params[:q])
     @cards = @search.result.includes(:card_parts, :card_set, :card_types, :collections, :colors).where(card_set_id: @card_set.id).display_order
 
     if @card_list.present?
@@ -31,7 +31,7 @@ class CardsController < ApplicationController
   end
 
   def search
-    @search = Card.search(params[:q])
+    @search = Card.ransack(params[:q])
     @cards = @search.result.includes(:card_parts, { card_set: :card_block }, :card_types, :collections, :colors).display_order.page(params[:page]).per(200)
     @sets = @cards.group_by(&:card_set).sort_by { |card_set, _| card_set.release_date }
   end
