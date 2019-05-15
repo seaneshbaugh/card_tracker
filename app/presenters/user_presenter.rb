@@ -7,10 +7,6 @@ class UserPresenter < BasePresenter
     @user = user
   end
 
-  def role
-    @user.role.titleize
-  end
-
   def current_sign_in_at
     if @user.current_sign_in_at.present?
       @user.current_sign_in_at.strftime(time_format)
@@ -36,31 +32,23 @@ class UserPresenter < BasePresenter
   end
 
   def receive_newsletters
-    if @user.receive_newsletters
-      t('yes')
-    else
-      t('no')
-    end
+    display_boolean(@user.receive_newsletters)
   end
 
   def receive_sign_up_alerts
-    if @user.receive_sign_up_alerts
-      t('yes')
-    else
-      t('no')
-    end
+    display_boolean(@user.receive_sign_up_alerts)
   end
 
   def receive_contact_alerts
-    if @user.receive_contact_alerts
-      t('yes')
-    else
-      t('no')
-    end
+    display_boolean(@user.receive_contact_alerts)
+  end
+
+  def roles
+    @user.roles.pluck(:name).map(&:titleize).join(', ')
   end
 
   def email_link
-    link_to "mailto:#{@user.email}", rel: 'tooltip', title: 'Send Email' do
+    link_to "mailto:#{@user.email}" do
       content_tag(:i, 'email', class: 'material-icons tooltipped', data: { 'tooltip' => t('send_email') })
     end
   end

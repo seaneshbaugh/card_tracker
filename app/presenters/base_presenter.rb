@@ -47,11 +47,19 @@ class BasePresenter
 
   private
 
-  def time_format
-    '%Y-%m-%d %H:%M:%S'
-  end
-
   def date_format
     '%Y-%m-%d'
+  end
+
+  def display_boolean(boolean)
+    if boolean
+      t('yes')
+    else
+      t('no')
+    end
+  end
+
+  def time_format
+    '%Y-%m-%d %H:%M:%S'
   end
 end
