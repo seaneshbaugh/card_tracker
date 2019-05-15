@@ -2,5 +2,10 @@ en:
   card_lists:
     index:
       title: "Your Lists"
+      card_list_info: "%{total_cards} cards (%{unique_cards} unique)"
+      browse_sets: "Browse Sets"
+      no_results: "No matching card lists found."
+      no_card_lists_html: "You don't seem to have any card lists. Why not <a href=\"%{new_list_path}\">create one</a>?"
+      new_list: "New List"
     show:
       page_title: "Card List: %{card_list_name}"

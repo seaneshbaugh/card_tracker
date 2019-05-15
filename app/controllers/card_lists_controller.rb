@@ -4,8 +4,8 @@ class CardListsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @search = CardList.search(params[:q])
-    @card_lists = @search.result.where(user_id: current_user.id).order(order: :asc).page(params[:page])
+    @search = CardList.ransack(params[:q])
+    @card_lists = @search.result.includes(:collections).where(user_id: current_user.id).display_order.page(params[:page])
   end
 
   def show
@@ -21,9 +21,7 @@ class CardListsController < ApplicationController
 
   def create
     @card_list = CardList.new(card_list_params)
-
     @card_list.user_id = current_user.id
-
     @card_list.order = current_user.card_lists.count + 1
 
     if @card_list.save
