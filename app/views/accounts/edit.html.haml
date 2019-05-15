@@ -1,0 +1,43 @@
+- content_for :page_title, t('.title')
+- content_for :body_class, 'edit-account'
+.edit-account-page.page
+  %header.page-header
+    %h1= t('.title')
+  .page-body
+    = form_for @account, as: :account, url: account_path, html: { autocomplete: 'off' } do |f|
+      .row
+        .input-field.col.s12
+          = f.text_field :username
+          = f.label :username
+      .row
+        .input-field.col.s12
+          = f.password_field :password
+          = f.label :password
+      .row
+        .input-field.col.s12
+          = f.password_field :password_confirmation
+          = f.label :password_confirmation
+      .row
+        .input-field.col.s12
+          = f.email_field :email
+          = f.label :email
+      .row
+        .input-field.col.s12
+          = f.text_field :first_name
+          = f.label :first_name
+      .row
+        .input-field.col.s12
+          = f.text_field :last_name
+          = f.label :last_name
+      %p
+        = f.label :receive_newsletters do
+          = f.check_box :receive_newsletters
+          %span= CardList.human_attribute_name(:receive_newsletters)
+      .row
+        .input-field.col.s12
+          = f.submit t('.submit'), class: success_button_class
+          = link_to t('cancel'), account_path, class: caution_button_class
+    .actions
+      .delete-account
+        %p.warning= t('.delete_account_warning_message')
+        = link_to t('accounts.delete.title'), confirm_delete_account_path, class: warning_button_class

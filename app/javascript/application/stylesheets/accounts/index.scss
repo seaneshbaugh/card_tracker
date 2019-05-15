@@ -5,3 +5,14 @@
         }
     }
 }
+
+.page-edit-account {
+    .actions {
+        .delete-account {
+            .warning {
+                color: $nord11;
+                font-weight: 900;
+            }
+        }
+    }
+}

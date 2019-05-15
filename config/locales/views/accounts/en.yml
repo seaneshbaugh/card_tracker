@@ -1,24 +1,16 @@
 en:
-  navigation:
-    account: "Account Settings"
-  messages:
-    accounts:
-      updated: "Your account has been updated."
-      destroyed: "Your account has been deleted."
   accounts:
-    links:
-      back_to_account: "Back to Account"
-      confirm_delete: "Yes, I really want to delete my account."
-    edit:
-      title: "Edit Account"
-    update:
-      title: "Update Account"
     show:
       title: "Your Account"
+      edit: "Edit Account"
+    edit:
+      title: "Edit Your Account"
+      submit: "Update Account"
+      delete_account_warning_message: "Warning! This button will take you to a page which will ask you to confirm the deletion of your account! Proceed with caution!"
     delete:
-      title: "Delete Account"
+      title: "Delete Your Account"
       danger: "Danger!"
-      warning_message: "You are about to <strong>permanently</strong> delete your account. This cannot be undone and will erase all data associated with your account forever!"
-      instructions: "Enter your username, <strong>%{username}</strong>, twice below and then click the big red button."
+      warning_message_html: "You are about to <strong>permanently</strong> delete your account. This cannot be undone and will erase all data associated with your account forever!"
+      instructions_html: "Enter your username, <strong>%{username}</strong>, twice below and then click the big red button."
       enter_username: "Username"
       enter_username_confirmation: "Retype Username"

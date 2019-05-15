@@ -45,3 +45,5 @@
           %tr
             %th= User.human_attribute_name(:updated_at)
             %td= user_presenter.updated_at
+    .actions
+      = link_to t('.edit'), edit_account_path, class: success_button_class
