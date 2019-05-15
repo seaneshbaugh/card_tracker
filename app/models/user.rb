@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :collections, dependent: :destroy, inverse_of: :user
   has_many :cards, through: :collections, inverse_of: :users
 
-  validates :username, format: { with: USERNAME_FORMAT }, length: { within: 5..32 }, presence: true, uniqueness: true
+  validates :username, format: { with: USERNAME_FORMAT, allow_blank: true }, presence: true, uniqueness: true
   validates :email, email: { allow_blank: true }, presence: true, uniqueness: { case_sensitive: false }
 
   after_initialize :set_default_attribute_values, if: :new_record?
