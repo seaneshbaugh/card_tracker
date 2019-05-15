@@ -1,0 +1,8 @@
+- content_for :page_title, t('.title')
+- content_for :body_class, 'new-card-list'
+.page-new-card-list.page
+  %header.page-header
+    - present @card_list do |card_list_presenter|
+      %h1= card_list_presenter.form_title
+  .page-body
+    = render 'form'

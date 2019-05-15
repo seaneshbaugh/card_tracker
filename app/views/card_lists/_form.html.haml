@@ -1,0 +1,24 @@
+- present @card_list do |card_list_presenter|
+  = form_for @card_list, url: @card_list.new_record? ? lists_path : "/lists/#{@card_list.slug}", html: { method: @card_list.persisted? ? :put : :post } do |f|
+    .row
+      .input-field.col.s12
+        = f.text_field :name
+        = f.label :title
+    %p
+      %label
+        = f.radio_button :have, '1', checked: @card_list.have
+        %span= t('.have_list')
+    %p
+      %label
+        = f.radio_button :have, '0', checked: !@card_list.have
+        %span= t('.want_list')
+    .row
+      .col.s12
+        = t('.have_explanation_html', stats_path: stats_path)
+    %p
+      = f.label :default do
+        = f.check_box :default
+        %span= CardList.human_attribute_name(:default)
+    .input-field
+      = f.submit t(".submit.#{@card_list.persisted? ? 'edit' : 'new'}"), class: success_button_class
+      = link_to t('cancel'), root_path, class: caution_button_class

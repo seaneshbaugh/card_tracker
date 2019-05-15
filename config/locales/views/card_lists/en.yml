@@ -9,3 +9,10 @@ en:
       new_list: "New List"
     show:
       page_title: "Card List: %{card_list_name}"
+    form:
+      have_list: "Have List"
+      want_list: "Want List"
+      have_explanation_html: "Have lists are for cards you actually own. Want lists are for cards you don't yet own. Cards that belong to a have list will count toward your <a target=\"_blank\" href=\"%{stats_path}\">collection stats</a>."
+      submit:
+        new: "Create List"
+        edit: "Edit List"
