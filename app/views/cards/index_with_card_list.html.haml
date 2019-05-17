@@ -23,27 +23,5 @@
               %i.material-icons clear
       .set{ id: "set-#{@card_set.slug}" }
         .cards
-          - @cards.each do |card|
-            - present card do |card_presenter|
-              - present card.collection_for(current_user, @card_list), CollectionPresenter do |collection_presenter|
-                .card{ id: "card-#{card.id}", class: "row card #{card_presenter.color_class}", 'data-card-id' => card.id, 'data-quantity' => collection_presenter.quantity_as_integer, 'data-card-list-id' => @card_list.id }
-                  .card-name.col.s7
-                    = link_to card_presenter.name, list_set_card_path(@card_list.slug, @card_set.slug, card), class: 'tooltipped', 'data-tooltip' => card_tooltip_text(card)
-                  .card-rarity.col.s1
-                    = card_presenter.rarity_code
-                  .card-quantity.col.s1
-                    = collection_presenter.quantity_as_string
-                  .col.s1.center-align
-                    %button.increment.btn.btn-small
-                      %i.material-icons expand_less
-                  .col.s1.center-align
-                    %button.decrement.btn.btn-small
-                      %i.material-icons expand_more
-                  .col.s1.center-align
-                    %a.dropdown-trigger.btn{ href: '#', 'data-target' => "collection-options-#{card_presenter.id}" }
-                      %i.material-icons settings
-                    %ul.dropdown-content{ id: "collection-options-#{card_presenter.id}" }
-                      %li
-                        %a.toggle-move-collection-modal{ href: '#' } Move to Another List
-                      %li
-                        %a.remove-all-from-list{ href: '#' } Remove All from List
+          = render partial: 'card_with_collection', collection: @cards, as: :card, locals: { card_list: @card_list }
+    = render 'move_collection_modal'

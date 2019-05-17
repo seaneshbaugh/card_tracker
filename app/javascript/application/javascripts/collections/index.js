@@ -163,7 +163,7 @@ const insertQuantityInput = (event) => {
   });
 };
 
-const completed = () => {
+const setupIncrementButtons = () => {
   const incrementButtons = document.querySelectorAll("button.increment");
 
   incrementButtons.forEach((incrementButton) => {
@@ -171,7 +171,9 @@ const completed = () => {
       changeQuantity(event, incrementQuantity);
     }, false);
   });
+};
 
+const setupDecrementButtons = () => {
   const decrementButtons = document.querySelectorAll("button.decrement");
 
   decrementButtons.forEach((decrementButton) => {
@@ -179,7 +181,9 @@ const completed = () => {
       changeQuantity(event, decrementQuantity);
     }, false);
   });
+};
 
+const setupQuantityInputs = () => {
   const quantityContainers = document.querySelectorAll(".card-quantity");
 
   quantityContainers.forEach((quantityContainer) => {
@@ -187,6 +191,114 @@ const completed = () => {
       insertQuantityInput(event);
     }, false);
   });
+};
+
+const setupMoveCollectionModal = () => {
+  const moveCollectionModal = document.querySelector(".move-collection-modal");
+
+  if (!moveCollectionModal) {
+    return;
+  }
+
+  const moveCollectionModalTriggers = document.querySelectorAll(".move-collection-modal-trigger");
+
+  moveCollectionModalTriggers.forEach((moveCollectionModalTrigger) => {
+    moveCollectionModalTrigger.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      const modal = M.Modal.init(moveCollectionModal);
+
+      const card = event.target.closest(".card");
+
+      const currentQuantity = parseInt(card.dataset.quantity);
+
+      if (isNaN(currentQuantity)) {
+        console.error("Quantity is non-numeric.");
+
+        return;
+      }
+
+      let form = moveCollectionModal.querySelector("form");
+
+      form.outerHTML = form.outerHTML;
+
+      form = moveCollectionModal.querySelector("form");
+
+      const quantityInput = form.querySelector("input[type='number'][name='quantity']");
+
+      quantityInput.max = currentQuantity;
+
+      form.querySelector("input[type='submit']").disabled = false;
+
+      form.addEventListener("submit", (submitEvent) => {
+        submitEvent.preventDefault();
+
+        const quantityToMove = parseInt(quantityInput.value);
+
+        if (isNaN(quantityToMove)) {
+          console.error("Quantity to move is non-numeric.");
+
+          return;
+        }
+
+        if (quantityToMove <= 0 || quantityToMove > currentQuantity) {
+          form.querySelector("input[type='submit']").disabled = false;
+
+          return;
+        }
+
+        const newCardListInput = form.querySelector("input[type='radio'][name='new_card_list_id']:checked");
+
+        if (!newCardListInput) {
+          return;
+        }
+
+        const params = {
+          "card_list_id": card.dataset.cardListId,
+          "new_card_list_id": newCardListInput.value,
+          "card_id": card.dataset.cardId,
+          "quantity": quantityInput.value
+        };
+
+        params[document.querySelector("meta[name='csrf-param']").content] = document.querySelector("meta[name='csrf-token']").content;
+
+        window.fetch(form.action, {
+          "method": "PUT",
+          "headers": {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+          },
+          "body": JSON.stringify(params)
+        }).then(handleResponseError).then((response) => {
+          return response.json();
+        }).then((json) => {
+          if (json["errors"]) {
+            json["errors"].forEach((error) => {
+              console.error(error);
+            });
+
+            return;
+          }
+
+          card.dataset.quantity = json["new_quantity"];
+          card.querySelector(".card-quantity").innerText = json["new_quantity"];
+
+          modal.close();
+        }).catch((error) => {
+          console.error(error);
+        });
+      });
+
+      modal.open();
+    });
+  });
+};
+
+const completed = () => {
+  setupIncrementButtons();
+  setupDecrementButtons();
+  setupQuantityInputs();
+  setupMoveCollectionModal();
 };
 
 if (document.readyState === "complete") {

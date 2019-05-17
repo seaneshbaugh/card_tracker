@@ -4,9 +4,13 @@ en:
       title: "%{card_set_name} Cards"
     index_with_card_list:
       title: "%{card_set_name} Cards"
+      move: "Move to Another List"
+      remove_all: "Remove All from List"
     search:
       title: "Search Results"
       form:
         name_or_card_text_or_type_text_cont: "Card name, text, or type"
         card_set_id_eq: "Set"
       no_results: "No cards found."
+    move_collection_modal:
+      title: "Move Cards to Another List"

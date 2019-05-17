@@ -1,0 +1,16 @@
+.move-collection-modal.modal
+  = form_tag collection_card_list_path, method: :put do
+    .modal-content
+      %h4= t('.title')
+      .row
+        .input-field.col.s12
+          = number_field_tag :quantity, 0, min: 0, step: 1
+          = label_tag :quantity, Collection.human_attribute_name(:quantity)
+      - current_user.card_lists.display_order.each do |card_list|
+        %p
+          %label
+            = radio_button_tag :new_card_list_id, card_list.id
+            %span= card_list.name
+    .modal-footer
+      = submit_tag 'Move', class: success_button_class
+      = link_to t('cancel'), '#!', class: "modal-close #{caution_button_class}"
