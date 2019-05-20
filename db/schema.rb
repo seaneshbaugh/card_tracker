@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_20_160614) do
+ActiveRecord::Schema.define(version: 2019_05_20_203525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,15 @@ ActiveRecord::Schema.define(version: 2019_05_20_160614) do
     t.index ["slug"], name: "index_card_lists_on_slug"
     t.index ["updated_at"], name: "index_card_lists_on_updated_at"
     t.index ["user_id"], name: "index_card_lists_on_user_id"
+  end
+
+  create_table "card_part_super_typings", force: :cascade do |t|
+    t.integer "card_part_id", null: false
+    t.string "card_super_type_code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_part_id", "card_super_type_code"], name: "index_c_p_s_t_on_card_part_id_and_card_super_type_code"
+    t.index ["card_super_type_code", "card_part_id"], name: "index_c_p_s_t_on_card_super_type_code_and_card_part_id"
   end
 
   create_table "card_parts", force: :cascade do |t|
@@ -296,6 +305,8 @@ ActiveRecord::Schema.define(version: 2019_05_20_160614) do
 
   add_foreign_key "card_colorings", "cards"
   add_foreign_key "card_colorings", "colors", column: "color_code", primary_key: "color_code"
+  add_foreign_key "card_part_super_typings", "card_parts"
+  add_foreign_key "card_part_super_typings", "card_super_types", column: "card_super_type_code", primary_key: "card_super_type_code"
   add_foreign_key "card_parts", "cards"
   add_foreign_key "card_sets", "card_set_types", column: "card_set_type_code", primary_key: "card_set_type_code"
   add_foreign_key "card_sets", "card_sets", column: "parent_id"
