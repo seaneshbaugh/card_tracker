@@ -57,6 +57,7 @@ Rails/BulkChangeTable:
     - db/migrate/20190421040736_remove_card_type_fields_from_cards.rb
     - db/migrate/20190503155207_remove_defaults_from_card_sets_columns.rb
     - db/migrate/20190506031934_remove_defaults_and_null_constraints_from_cards.rb
+    - db/migrate/20190520160614_update_card_parts_columns.rb
 
 Rails/CreateTableWithTimestamps:
   Exclude:
@@ -69,3 +70,4 @@ Rails/NotNullColumn:
   Exclude:
     - db/migrate/20190421214509_rename_card_block_type_to_card_set_type.rb
     - db/migrate/20190501201847_recreate_card_set_types.rb
+    - db/migrate/20190506194005_add_keyrune_code_to_card_sets.rb

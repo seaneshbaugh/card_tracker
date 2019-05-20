@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_07_003445) do
+ActiveRecord::Schema.define(version: 2019_05_20_160614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,45 +53,35 @@ ActiveRecord::Schema.define(version: 2019_05_07_003445) do
   end
 
   create_table "card_parts", force: :cascade do |t|
-    t.string "multiverse_id", default: "", null: false
-    t.string "name", default: "", null: false
+    t.string "multiverse_id"
+    t.string "name", null: false
     t.integer "card_id"
-    t.string "layout", default: "", null: false
-    t.string "mana_cost", default: "", null: false
-    t.string "converted_mana_cost", default: "", null: false
-    t.string "colors", default: "", null: false
-    t.string "card_type", default: "", null: false
-    t.string "card_supertypes", default: "", null: false
-    t.string "card_types", default: "", null: false
-    t.string "card_subtypes", default: "", null: false
-    t.text "card_text", null: false
-    t.text "flavor_text", null: false
-    t.string "power", default: "", null: false
-    t.string "toughness", default: "", null: false
-    t.string "loyalty", default: "", null: false
-    t.string "rarity", default: "", null: false
-    t.string "card_number", default: "", null: false
-    t.string "artist", default: "", null: false
+    t.string "mana_cost"
+    t.string "converted_mana_cost"
+    t.string "type_text", null: false
+    t.text "card_text"
+    t.text "flavor_text"
+    t.string "power"
+    t.string "toughness"
+    t.string "loyalty"
+    t.string "card_number", null: false
+    t.string "artist", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "original_card_text"
+    t.string "original_type_text"
     t.index ["artist"], name: "index_card_parts_on_artist"
     t.index ["card_id"], name: "index_card_parts_on_card_id"
     t.index ["card_number"], name: "index_card_parts_on_card_number"
-    t.index ["card_subtypes"], name: "index_card_parts_on_card_subtypes"
-    t.index ["card_supertypes"], name: "index_card_parts_on_card_supertypes"
-    t.index ["card_type"], name: "index_card_parts_on_card_type"
-    t.index ["card_types"], name: "index_card_parts_on_card_types"
-    t.index ["colors"], name: "index_card_parts_on_colors"
     t.index ["converted_mana_cost"], name: "index_card_parts_on_converted_mana_cost"
     t.index ["created_at"], name: "index_card_parts_on_created_at"
-    t.index ["layout"], name: "index_card_parts_on_layout"
     t.index ["loyalty"], name: "index_card_parts_on_loyalty"
     t.index ["mana_cost"], name: "index_card_parts_on_mana_cost"
     t.index ["multiverse_id"], name: "index_card_parts_on_multiverse_id"
     t.index ["name"], name: "index_card_parts_on_name"
     t.index ["power"], name: "index_card_parts_on_power"
-    t.index ["rarity"], name: "index_card_parts_on_rarity"
     t.index ["toughness"], name: "index_card_parts_on_toughness"
+    t.index ["type_text"], name: "index_card_parts_on_type_text"
     t.index ["updated_at"], name: "index_card_parts_on_updated_at"
   end
 
@@ -306,6 +296,7 @@ ActiveRecord::Schema.define(version: 2019_05_07_003445) do
 
   add_foreign_key "card_colorings", "cards"
   add_foreign_key "card_colorings", "colors", column: "color_code", primary_key: "color_code"
+  add_foreign_key "card_parts", "cards"
   add_foreign_key "card_sets", "card_set_types", column: "card_set_type_code", primary_key: "card_set_type_code"
   add_foreign_key "card_sets", "card_sets", column: "parent_id"
   add_foreign_key "card_sub_typings", "card_sub_types", column: "card_sub_type_code", primary_key: "card_sub_type_code"
