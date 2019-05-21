@@ -3,25 +3,15 @@
 require 'test_helper'
 
 class CardSubTypingTest < ActiveSupport::TestCase
-  describe 'associations' do
-    describe 'card' do
-      it 'should belong to Card' do
-        reflection = CardSubTyping.reflect_on_association(:card)
+  let(:card_sub_typing) { CardSubTyping.new }
 
-        expect(reflection).wont_be_nil
-        expect(reflection.macro).must_equal :belongs_to
-        expect(reflection.klass).must_equal Card
-      end
+  describe 'associations' do
+    it 'should belong to card' do
+      card_sub_typing.must belong_to(:card).inverse_of(:card_sub_typings)
     end
 
-    describe 'card_sub_type' do
-      it 'should belong to CardSubType' do
-        reflection = CardSubTyping.reflect_on_association(:card_sub_type)
-
-        expect(reflection).wont_be_nil
-        expect(reflection.macro).must_equal :belongs_to
-        expect(reflection.klass).must_equal CardSubType
-      end
+    it 'should belong to card_sub_type' do
+      card_sub_typing.must belong_to(:card_sub_type).with_foreign_key(:card_sub_type_code).inverse_of(:card_sub_typings).with_primary_key(:card_sub_type_code)
     end
   end
 end

@@ -8,6 +8,10 @@ class CardTypeTest < ActiveSupport::TestCase
       card_type.must have_many(:card_typings).dependent(:restrict_with_exception).with_foreign_key(:card_type_code).inverse_of(:card_type)
     end
 
+    it 'has many card_part_typings' do
+      card_type.must have_many(:card_part_typings).dependent(:restrict_with_exception).with_foreign_key(:card_type_code).inverse_of(:card_type)
+    end
+
     it 'has many cards through card_typings' do
       card_type.must have_many(:cards).through(:card_typings)
     end
