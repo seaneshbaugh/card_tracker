@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_22_203256) do
+ActiveRecord::Schema.define(version: 2019_05_22_210901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(version: 2019_05_22_203256) do
     t.datetime "updated_at", null: false
     t.string "original_card_text"
     t.string "original_type_text"
+    t.string "side", null: false
     t.index ["artist"], name: "index_card_parts_on_artist"
     t.index ["card_id"], name: "index_card_parts_on_card_id"
     t.index ["card_number"], name: "index_card_parts_on_card_number"
@@ -116,6 +117,7 @@ ActiveRecord::Schema.define(version: 2019_05_22_203256) do
     t.index ["multiverse_id"], name: "index_card_parts_on_multiverse_id"
     t.index ["name"], name: "index_card_parts_on_name"
     t.index ["power"], name: "index_card_parts_on_power"
+    t.index ["side"], name: "index_card_parts_on_side"
     t.index ["toughness"], name: "index_card_parts_on_toughness"
     t.index ["type_text"], name: "index_card_parts_on_type_text"
     t.index ["updated_at"], name: "index_card_parts_on_updated_at"

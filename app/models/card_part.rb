@@ -14,4 +14,5 @@ class CardPart < ApplicationRecord
   delegate :card_set, to: :card, allow_nil: true
 
   validates :name, presence: true
+  validates :side, inclusion: { in: %w[a b c], allow_blank: true }, presence: true
 end

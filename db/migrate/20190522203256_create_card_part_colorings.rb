@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateCardPartColorings < ActiveRecord::Migration[5.2]
   def change
     create_table :card_part_colorings do |t|
