@@ -3,25 +3,15 @@
 require 'test_helper'
 
 class CardColoringTest < ActiveSupport::TestCase
-  describe 'associations' do
-    describe 'card' do
-      it 'should belong to Card' do
-        reflection = CardColoring.reflect_on_association(:card)
+  let(:card_coloring) { CardColoring.new }
 
-        expect(reflection).wont_be_nil
-        expect(reflection.macro).must_equal :belongs_to
-        expect(reflection.klass).must_equal Card
-      end
+  describe 'associations' do
+    it 'belongs to card' do
+      card_coloring.must belong_to(:card).inverse_of(:card_colorings)
     end
 
-    describe 'color' do
-      it 'should belong to Color' do
-        reflection = CardColoring.reflect_on_association(:color)
-
-        expect(reflection).wont_be_nil
-        expect(reflection.macro).must_equal :belongs_to
-        expect(reflection.klass).must_equal Color
-      end
+    it 'belongs to color' do
+      card_coloring.must belong_to(:color).with_foreign_key(:color_code).inverse_of(:card_colorings).with_primary_key(:color_code)
     end
   end
 end

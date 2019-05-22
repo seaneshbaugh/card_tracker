@@ -10,8 +10,16 @@ class ColorTest < ActiveSupport::TestCase
       color.must have_many(:card_colorings).dependent(:restrict_with_exception).with_foreign_key(:color_code).inverse_of(:color)
     end
 
+    it 'has many card_part_colorings' do
+      color.must have_many(:card_part_colorings).dependent(:restrict_with_exception).with_foreign_key(:color_code).inverse_of(:color)
+    end
+
     it 'has many cards through card_colorings' do
-      color.must have_many(:cards).through(:card_colorings)
+      color.must have_many(:cards).through(:card_colorings).inverse_of(:colors)
+    end
+
+    it 'has many cards_parts through card_part_colorings' do
+      color.must have_many(:card_parts).through(:card_part_colorings).inverse_of(:colors)
     end
   end
 
