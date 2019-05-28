@@ -2,34 +2,40 @@
 
 module Admin
   module AdminHelper
-    def edit_and_delete_header_columns(klass)
-      result = ''
-
-      result += '<th>&nbsp;</th>' if can? :update, klass
-
-      result += '<th>&nbsp;</th>' if can? :destroy, klass
-
-      result.html_safe
+    def cancel_icon(options = {})
+      content_tag(:i, 'clear', class: classnames('material-icons', options[:class]))
     end
 
-    def edit_and_delete_columns(object)
-      object_base_class_name = object.class.base_class.to_s.underscore
+    def cancel_icon_link(url_or_path, options = {})
+      link_to(url_or_path, class: warning_button_class) do
+        label = options[:label].to_s if options[:label]
 
-      result = ''
-
-      if can? :update, object
-        result += "<td>#{link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, send("edit_admin_#{object_base_class_name}_path", object), class: 'btn btn-mini', rel: 'tooltip', title: t('edit')}</td>"
-      elsif can? :update, object.class
-        result += '<td>&nbsp;</td>'
+        cancel_icon(class: { 'left' => label }) + label
       end
+    end
 
-      if can? :destroy, object
-        result += "<td>#{link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, send("admin_#{object_base_class_name}_path", object), method: :delete, data: { confirm: t('confirm_delete') }, class: 'btn btn-mini', rel: 'tooltip', title: t('delete')}</td>"
-      elsif can? :destroy, object.class
-        result += '<td>&nbsp;</td>'
+    def delete_icon(options = {})
+      content_tag(:i, 'delete_forever', class: classnames('material-icons', options[:class]))
+    end
+
+    def delete_icon_link(url_or_path, options = {})
+      link_to(url_or_path, class: warning_button_class, rel: 'nofollow', method: :delete, data: { confirm: t('confirm_delete') }) do
+        label = options[:label].to_s if options[:label]
+
+        delete_icon(class: { 'left' => label }) + label
       end
+    end
 
-      result.html_safe
+    def edit_icon(options = {})
+      content_tag(:i, 'edit', class: classnames('material-icons', options[:class]))
+    end
+
+    def edit_icon_link(url_or_path, options = {})
+      link_to(url_or_path, class: success_button_class) do
+        label = options[:label].to_s if options[:label]
+
+        edit_icon(class: { 'left' => label }) + label
+      end
     end
 
     def gem_dependencies
