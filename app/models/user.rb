@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :collections, dependent: :destroy, inverse_of: :user
   has_many :cards, through: :collections, inverse_of: :users
 
+  scope :display_order, -> { order(created_at: :asc) }
+
   validates :username, format: { with: USERNAME_FORMAT, allow_blank: true }, presence: true, uniqueness: true
   validates :email, email: { allow_blank: true }, presence: true, uniqueness: { case_sensitive: false }
 
