@@ -19,11 +19,11 @@ class CardPartTest < ActiveSupport::TestCase
     end
 
     it 'has many card_super_types through card_part_super_typings' do
-      card_part.must have_many(:card_super_types).through(:card_part_super_typings).with_foreign_key(:card_super_type_code).inverse_of(:card_part)
+      card_part.must have_many(:card_super_types).through(:card_part_super_typings).with_foreign_key(:card_super_type_code).inverse_of(:card_parts)
     end
 
     it 'has many card_types through card_part_typings' do
-      card_part.must have_many(:card_types).through(:card_part_typings).with_foreign_key(:card_type_code).inverse_of(:card_part)
+      card_part.must have_many(:card_types).through(:card_part_typings).with_foreign_key(:card_type_code).inverse_of(:card_parts)
     end
   end
 
