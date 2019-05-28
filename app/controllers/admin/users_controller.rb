@@ -2,94 +2,86 @@
 
 module Admin
   class UsersController < AdminController
-    before_action :find_user, only: %i[show edit update destroy]
-
-    authorize_resource
-
     def index
-      @search = User.search(params[:q])
+      authorize User
 
-      @users = @search.result.order('`users`.`created_at` ASC').page(params[:page])
+      @search = User.ransack(params[:q])
+      @users = @search.result.display_order.page(params[:page])
     end
 
     def show
-      if @user.nil?
-        flash[:error] = t('messages.users.could_not_find')
+      @user = find_user
 
-        redirect_to admin_users_url
-      end
+      authorize @user
     end
 
     def new
+      authorize User
+
       @user = User.new
     end
 
     def create
-      @user = User.new(params[:user])
+      authorize User
 
+      @user = User.new(user_params)
       @user.confirmed_at = Time.now.in_time_zone
 
-      @user.role = Ability::ROLES[:read_only] if current_user.role != Ability::ROLES[:sysadmin] && @user.role == Ability::ROLES[:sysadmin]
-
       if @user.save
-        flash[:success] = t('messages.users.created')
+        flash[:success] = t('.success')
 
-        redirect_to admin_users_url
+        redirect_to admin_user_url(@user), status: :see_other
       else
-        flash.now[:error] = @user.errors.full_messages.uniq.join('. ') + '.'
+        flash.now[:error] = helpers.error_messages_for(@user)
 
-        render 'new'
+        render 'new', status: :unprocessable_entity
       end
     end
 
     def edit
-      if @user.nil?
-        flash[:error] = t('messages.users.could_not_find')
+      @user = find_user
 
-        redirect_to admin_users_url
-      end
+      authorize @user
     end
 
     def update
-      if @user.nil?
-        flash[:error] = t('messages.users.could_not_find')
+      @user = find_user
 
-        redirect_to(admin_users_url) && return
-      end
+      authorize @user
 
-      params[:user][:role] = Ability::ROLES[:read_only] if params[:user] && current_user.role != Ability::ROLES[:sysadmin] && params[:user][:role] == Ability::ROLES[:sysadmin]
-
-      if @user.update(params[:user])
+      if @user.update(user_params)
         @user.confirm! if @user.unconfirmed_email.present?
 
-        flash[:success] = t('messages.users.updated')
+        flash[:success] = t('.success')
 
-        redirect_to edit_admin_user_url(@user)
+        redirect_to edit_admin_user_url(@user), status: :see_other
       else
-        flash.now[:error] = @user.errors.full_messages.uniq.join('. ') + '.'
+        flash.now[:error] = helpers.error_messages_for(@user)
 
-        render 'edit'
+        render 'edit', status: :unprocessable_entity
       end
     end
 
     def destroy
-      if @user.nil?
-        flash[:error] = t('messages.users.could_not_find')
+      @user = find_user
 
-        redirect_to(admin_users_url) && return
-      end
+      authorize @user
 
       @user.destroy
 
-      flash[:success] = t('messages.users.deleted')
+      flash[:success] = t('.success')
 
-      redirect_to admin_users_url
+      redirect_to admin_users_url, status: :see_other
     end
 
     protected
 
     def find_user
-      @user = User.where(id: params[:id]).first
+      User.find_by!(id: params[:id])
+    end
+
+    def user_params
+      params.require(:user).permit(:username, :email, :password, :password_confirmation, :first_name, :last_name, :roles)
     end
   end
 end
