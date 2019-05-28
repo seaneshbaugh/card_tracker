@@ -1,0 +1,59 @@
+- content_for :page_title, t('.title')
+- content_for :body_class, 'admin-users'
+.page-users.admin-page.page
+  %header.page-header
+    %h2= t('.title')
+  .page-body
+    = search_form_for @search, url: admin_users_path, html: { method: :get } do |f|
+      .row
+        .input-field.col.s3
+          = f.text_field :first_name_or_last_name_cont
+          = f.label :first_name_or_last_name_cont, t('.search.first_or_last_name_cont')
+        .input-field.col.s3
+          = f.text_field :email_cont
+          = f.label :email_cont, User.human_attribute_name(:email)
+        .input-field.col.s3
+          = f.select :roles_name_eq, Role.pluck(:name).map { |role| [role.titleize, role] }, include_blank: t('.search.roles_name_eq')
+        .input-field.col.s3
+          = f.button type: :submit, class: warning_button_class do
+            %i.material-icons search
+          &nbsp;
+          = link_to admin_users_path, class: "#{caution_button_class} tooltipped", 'data-tooltip' => t('clear_search') do
+            %i.material-icons clear
+    - if policy([:admin, User]).create?
+      .row
+        .col.s12
+          = link_to t('.new_user'), new_admin_user_path, class: success_button_class
+    - if @users.present?
+      .row
+        .col.s12
+          %table.users.responsive-table
+            %thead
+              %tr
+                %th.user-name= sort_link @search, :last_name_first_name, User.human_attribute_name(:full_name)
+                %th.user-email= sort_link @search, :email
+                %th.user-role= sort_link @search, :role
+                %th.user-created-at= sort_link @search, :created_at
+                %th.edit
+                %th.delete
+            %tbody
+              - @users.each do |user|
+                - present user do |user_presenter|
+                  %tr.user
+                    %td.user-name= link_to user_presenter.full_name, admin_user_path(user)
+                    %td.user-email
+                      = user_presenter.email
+                      = user_presenter.email_link
+                    %td.user-roles= user_presenter.roles
+                    %td.user-created-at= user_presenter.created_at
+                    %td.edit
+                      - if policy([:admin, user]).edit?
+                        = edit_icon_link edit_admin_user_path(user)
+                    %td.delete
+                      - if policy([:admin, user]).destroy?
+                        = delete_icon_link admin_user_path(user)
+      .row
+        .col.s12
+          = paginate @users
+    - else
+      %p.no-items= t('.no_users')

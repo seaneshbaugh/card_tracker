@@ -1,0 +1,17 @@
+en:
+  admin:
+    users:
+      index:
+        title: "Users"
+        search:
+          first_or_last_name_cont: "First or last name"
+          roles_name_eq: "Has Role"
+        new_user: "New User"
+        no_users: "No users found."
+      show:
+        title: "User: %{username}"
+        back_to_users: "Back to Users"
+      new:
+        title: "New User"
+      edit:
+        title: "Edit User"

@@ -1,0 +1,8 @@
+label[for="user_roles"] {
+    top: -40px;
+}
+
+label[for^='user_role_ids_'] {
+    display: block;
+    position: inherit;
+}

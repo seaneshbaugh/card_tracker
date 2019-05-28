@@ -1,0 +1,8 @@
+- content_for :page_title, t('.title')
+- content_for :body_class, 'admin-edit-user'
+.page-edit-user.admin-page.page
+  %header.page-header
+    - present @user do |user_presenter|
+      %h1= user_presenter.form_title
+  .page-body
+    = render 'form'

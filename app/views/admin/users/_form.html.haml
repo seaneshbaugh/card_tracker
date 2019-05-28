@@ -1,0 +1,45 @@
+- present @user do |user_presenter|
+  = form_for [:admin, @user], html: { autocomplete: 'off' } do |f|
+    .row
+      .input-field.col.s12
+        = f.text_field :username
+        = f.label :username
+    .row
+      .input-field.col.s12
+        = f.password_field :password
+        = f.label :password
+    .row
+      .input-field.col.s12
+        = f.password_field :password_confirmation
+        = f.label :password_confirmation
+    .row
+      .input-field.col.s12
+        = f.email_field :email
+        = f.label :email
+    .row
+      .input-field.col.s12
+        = f.label :roles
+        = f.collection_check_boxes(:role_ids, Role.all, :id, :name) do |c|
+          = c.label do
+            = c.check_box
+            %span= c.text.titleize
+    .row
+      .input-field.col.s12
+        = f.text_field :first_name
+        = f.label :first_name
+    .row
+      .input-field.col.s12
+        = f.text_field :last_name
+        = f.label :last_name
+    %p
+      = f.label :receive_newsletters do
+        = f.check_box :receive_newsletters
+        %span= CardList.human_attribute_name(:receive_newsletters)
+    %p
+      = f.label :receive_sign_up_alerts do
+        = f.check_box :receive_sign_up_alerts
+        %span= CardList.human_attribute_name(:receive_sign_up_alerts)
+    %p
+      = f.label :receive_contact_alerts do
+        = f.check_box :receive_contact_alerts
+        %span= CardList.human_attribute_name(:receive_contact_alerts)
