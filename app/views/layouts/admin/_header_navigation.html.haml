@@ -1,22 +1,22 @@
 .navbar.navbar-fixed
   %nav
     .nav-wrapper
-      = link_to t('layouts.admin.title'), root_path, class: 'brand-logo'
+      = link_to t('layouts.admin.title'), admin_root_path, class: 'brand-logo'
       %a.sidenav-trigger{ href: '#', 'data-target' => 'main-nav-sidebar' }
         %i.material-icons menu
       %ul.navbar-list.right
-        - if policy([:admin, CardBlock]).index?
-          %li.hide-on-med-and-down
-            = link_to t('activerecord.models.card_block').pluralize, admin_card_blocks_path
-        - if policy([:admin, CardSet]).index?
-          %li.hide-on-med-and-down
-            = link_to t('activerecord.models.card_set').pluralize, admin_card_sets_path
-        - if policy([:admin, Card]).index?
-          %li.hide-on-med-and-down
-            = link_to t('activerecord.models.card').pluralize, admin_cards_path
-        - if policy([:admin, CardBlockType]).index?
-          %li.hide-on-med-and-down
-            = link_to t('activerecord.models.card_block_type').pluralize, admin_card_block_types_path
+        -# - if policy([:admin, CardBlock]).index?
+        -#   %li.hide-on-med-and-down
+        -#     = link_to t('activerecord.models.card_block').pluralize, admin_card_blocks_path
+        -# - if policy([:admin, CardSet]).index?
+        -#   %li.hide-on-med-and-down
+        -#     = link_to t('activerecord.models.card_set').pluralize, admin_card_sets_path
+        -# - if policy([:admin, Card]).index?
+        -#   %li.hide-on-med-and-down
+        -#     = link_to t('activerecord.models.card').pluralize, admin_cards_path
+        -# - if policy([:admin, CardSetType]).index?
+        -#   %li.hide-on-med-and-down
+        -#     = link_to t('activerecord.models.card_block_type').pluralize, admin_card_block_types_path
         - if policy([:admin, User]).index?
           %li.hide-on-med-and-down
             = link_to t('activerecord.models.user').pluralize, admin_users_path
