@@ -57,6 +57,7 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.3)
     byebug (11.0.1)
+    classnames (1.0.0)
     codeclimate-engine-rb (0.4.1)
       virtus (~> 1.0)
     coercible (1.0.0)
@@ -328,6 +329,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (= 1.4.3)
   byebug (= 11.0.1)
+  classnames (= 1.0.0)
   devise (= 4.6.2)
   exception_notification (= 4.3.0)
   friendly_id (= 5.2.5)

@@ -9,6 +9,7 @@ gem 'pg', '1.1.4'
 gem 'rails', '5.2.3'
 
 gem 'bootsnap', '1.4.3', require: false
+gem 'classnames', '1.0.0'
 gem 'devise', '4.6.2'
 gem 'exception_notification', '4.3.0'
 gem 'friendly_id', '5.2.5'
