@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  include ClassNames
+
   def active_controller?(controller_name)
     'active' if params[:controller] == controller_name
   end
