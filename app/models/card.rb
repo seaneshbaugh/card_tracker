@@ -20,10 +20,13 @@ class Card < ApplicationRecord
   scope :display_order, -> { order('CAST("cards"."card_number" AS INTEGER) ASC') }
 
   validates :name, presence: true
+  validates :type_text, presence: true
+  validates :card_number, presence: true
+  validates :artist, presence: true
 
   Color.find_each do |color|
     define_method("#{color.name.downcase}?") do
-      colors.include(Color.find_by(color_code: color.color_code))
+      colors.include?(Color.find_by(color_code: color.color_code))
     end
   end
 

@@ -7,3 +7,11 @@ ice_age:
   keyrune_code: "ICE"
   release_date: "1995-06-01"
 
+mirage:
+  card_block: mirage
+  card_set_type: expansion
+  name: "Mirage"
+  code: "MIR"
+  slug: "mir"
+  keyrune_code: "MIR"
+  release_date: "1996-10-08"
