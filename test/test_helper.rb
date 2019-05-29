@@ -23,6 +23,8 @@ mean_time_reporter_options = {
 
 Minitest::Reporters.use! Minitest::Reporters::MeanTimeReporter.new(mean_time_reporter_options)
 
+Webpacker.compile
+
 module ActiveSupport
   self.test_order = :random
 
