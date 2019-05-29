@@ -1,3 +1,4 @@
 user1:
   username: "user1"
   email: "user1@test.com"
+  confirmed_at: "<%= Time.current %>"
