@@ -27,7 +27,7 @@ class AccountsController < ApplicationController
     end
   end
 
-  def confirm_destroy
+  def confirm_delete
     @account = current_user
   end
 
