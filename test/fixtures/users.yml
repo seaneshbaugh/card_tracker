@@ -2,3 +2,8 @@ user1:
   username: "user1"
   email: "user1@test.com"
   confirmed_at: "<%= Time.current %>"
+
+user2:
+  username: "user2"
+  email: "user2@test.com"
+  confirmed_at: "<%= Time.current %>"
