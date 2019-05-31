@@ -36,6 +36,8 @@ class CollectionsController < ApplicationController
     rescue StandardError => error
       # TODO: Figure out how to better handle errors here.
       render json: { message: t('.failure'), errors: [error.message] }, status: :unprocessable_entity
+
+      return
     end
 
     render json: { message: t('.success'), new_quantity: collection.quantity }, status: :ok
