@@ -1,0 +1,5 @@
+en:
+  card_lists:
+    reorder:
+      success: "Your lists have been reordered."
+      failure: "Failed to reorder your lists."

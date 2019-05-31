@@ -56,21 +56,30 @@ class CardListsController < ApplicationController
   def reorder
     respond_to do |format|
       format.json do
-        card_list_order = JSON.parse(params[:card_list_order])
+        card_lists_order = params.require(:card_lists_order).permit!
 
-        card_lists = CardList.where(id: card_list_order.map { |k, _| k }, user_id: current_user.id)
+        card_list_ids = []
+
+        card_lists_order.each do |id, _|
+          card_list_ids << id
+        end
+
+        card_lists = CardList.where(id: card_list_ids, user_id: current_user.id)
 
         begin
           CardList.transaction do
             card_lists.each do |card_list|
-              card_list.update!(order: card_list_order[card_list.id.to_s])
+              card_list.update!(order: card_lists_order[card_list.id.to_s])
             end
           end
-        rescue StandardError => e
-          render(json: { status: 405, status_message: 'Failed to reorder your lists.', errors: [e.message] }, status: :method_not_allowed) && (return)
+        rescue StandardError => error
+          # TODO: Figure out how to better handle errors here.
+          render json: { message: t('.failure'), errors: [error.message] }, status: :unprocessable_entity
+
+          return
         end
 
-        render json: { status: 200, status_message: 'Your lists have been reordered.' }, status: :ok
+        render json: { message: t('.success') }, status: :ok
       end
     end
   end

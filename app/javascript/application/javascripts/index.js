@@ -1,4 +1,5 @@
 import "./accounts";
+import "./lists";
 import "./collections";
 
 const completed = () => {
