@@ -37,7 +37,7 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
     end
 
     context 'with invalid parameters' do
-      it 'should update the current user and redirect to the edit account page' do
+      it 'should not update the current user and return a 422' do
         patch account_url, params: { account: { email: '' } }
 
         assert_response :unprocessable_entity

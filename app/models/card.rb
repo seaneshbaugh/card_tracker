@@ -17,7 +17,7 @@ class Card < ApplicationRecord
   has_many :card_lists, through: :collections, inverse_of: :cards
   has_many :users, through: :collections, inverse_of: :cards
 
-  scope :display_order, -> { order('CAST("cards"."card_number" AS INTEGER) ASC') }
+  scope :display_order, -> { order(Arel.sql('CAST("cards"."card_number" AS INTEGER) ASC')) }
 
   validates :name, presence: true
   validates :type_text, presence: true
