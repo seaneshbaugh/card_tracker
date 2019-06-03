@@ -26,6 +26,10 @@ class CardList < ApplicationRecord
 
   friendly_id :name, use: :scoped, scope: :user_id
 
+  def normalize_friendly_id(value)
+    CGI.unescapeHTML(Sanitize.clean(value.to_s.gsub(' & ', ' and '))).gsub(/'|"/, '').delete('&').squeeze(' ').gsub('_', '-').parameterize
+  end
+
   def should_generate_new_friendly_id?
     slug.blank? || name_changed?
   end

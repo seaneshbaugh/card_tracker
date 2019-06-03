@@ -61,4 +61,12 @@ class CardListTest < ActiveSupport::TestCase
       card_list_3.default.must_equal false
     end
   end
+
+  describe '#normalize_friendly_id' do
+    it 'normalizes the name for use as a slug' do
+      slug = card_list.normalize_friendly_id('  test- & -test--_%-SLUG!')
+
+      slug.must_equal 'test-and-test-slug'
+    end
+  end
 end
