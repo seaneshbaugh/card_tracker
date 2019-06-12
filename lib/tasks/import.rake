@@ -13,6 +13,15 @@ namespace :import do
     end
   end
 
+  desc 'Import card sets data and card data for all sets.'
+  task :all, %i[base_url] => %i[environment] do |_, args|
+    Importers::CardSetsImporter.new(args).import!
+
+    CardSet.order(:release_date).pluck(:code).each do |set_code|
+      Importers::CardsImporter.new(set_code.upcase).import!
+    end
+  end
+
   desc 'Clear the set data cache.'
   task clear_cache: :environment do
     FileUtils.rm_rf(Importers::Base.cache_directory_path)
