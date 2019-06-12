@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_22_210901) do
+ActiveRecord::Schema.define(version: 2019_06_12_184939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -217,6 +217,7 @@ ActiveRecord::Schema.define(version: 2019_05_22_210901) do
     t.datetime "updated_at", null: false
     t.string "original_card_text"
     t.string "original_type_text"
+    t.string "scryfall_id"
     t.index ["artist"], name: "index_cards_on_artist"
     t.index ["card_number"], name: "index_cards_on_card_number"
     t.index ["card_set_id"], name: "index_cards_on_card_set_id"
