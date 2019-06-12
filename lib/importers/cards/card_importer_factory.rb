@@ -15,6 +15,7 @@ module Importers
 end
 
 require_relative './normal_card_importer'
+require_relative './split_card_importer'
 require_relative './aftermath_card_importer'
 require_relative './augment_card_importer'
 require_relative './double_faced_token_card_importer'
@@ -25,7 +26,6 @@ require_relative './leveler_card_importer'
 require_relative './meld_card_importer'
 require_relative './planar_card_importer'
 require_relative './saga_card_importer'
-require_relative './split_card_importer'
 require_relative './token_card_importer'
 require_relative './transform_card_importer'
 require_relative './vanguard_card_importer'

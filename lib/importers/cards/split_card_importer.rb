@@ -40,10 +40,12 @@ module Importers
         }
       }.freeze
 
+      attr_reader :layout_code
       attr_reader :rarity_code
 
       def initialize(card_set, card_data)
         @card_set = card_set
+        @layout_code = 'SPLIT'
         @rarity_code = card_data['rarity'].first.upcase
         @attributes = attribute_mapper.map_attributes(card_data)
       end
@@ -76,7 +78,7 @@ module Importers
           name: this_card_part.side == 'a' ? "#{this_card_part.name} // ???" : "??? // #{this_card_part.name}",
           artist: this_card_part.side == 'a' ? "#{this_card_part.artist} // ???" : "??? // #{this_card_part.artist}",
           type_text: this_card_part.side == 'a' ? "#{this_card_part.type_text} // ???" : "??? // #{this_card_part.type_text}",
-          layout_Code: 'SPLIT',
+          layout_Code: layout_code,
           rarity_code: rarity_code
         }
       end
@@ -86,7 +88,7 @@ module Importers
           name: card_parts.map(&:name).join(' // '),
           artist: card_parts.map(&:artist).join(' // '),
           type_text: card_parts.map(&:type_text).join(' // '),
-          layout_code: 'SPLIT',
+          layout_code: layout_code,
           rarity_code: rarity_code
         }
       end
