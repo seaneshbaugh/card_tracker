@@ -27,6 +27,7 @@ module Importers
           name: :rarity_code,
           transformation: -> (rarity_code) { rarity_code.first.upcase }
         },
+        'scryfallId' => :scryfall_id,
         'subtypes' => {
           name: :card_sub_types,
           # TODO: Fix this! This will silently drop unknown subtypes.

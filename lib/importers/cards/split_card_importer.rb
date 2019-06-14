@@ -42,11 +42,15 @@ module Importers
 
       attr_reader :layout_code
       attr_reader :rarity_code
+      attr_reader :scryfall_id
 
       def initialize(card_set, card_data)
         @card_set = card_set
+        # TODO: Figure out a better way to handle attributes that belong to the
+        # card but not to the card parts.
         @layout_code = 'SPLIT'
         @rarity_code = card_data['rarity'].first.upcase
+        @scryfall_id = card_data['scryfallId']
         @attributes = attribute_mapper.map_attributes(card_data)
       end
 
