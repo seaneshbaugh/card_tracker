@@ -55,18 +55,18 @@ class Card < ApplicationRecord
   end
 
   def other_versions
-    self.class.includes(:card_set).where(name: name).where.not(id: id)
+    self.class.includes(:card_set).where(name: name).where.not(id: id).order('card_sets.release_date ASC')
   end
 
-  def <=>(other)
-    if card_set_id == other.card_set_id
-      card_number.to_i <=> other.card_number.to_i
-    elsif card_set.card_block.card_block_type_id != other.card_set.card_block.card_block.card_block_type_id
-      card_set.card_block.card_block_type_id <=> other.card_set.card_block.card_block.card_block_type_id
-    elsif card_set.card_block_id != other.card_set.card_block_id
-      card_set.card_block.card_sets.first.release_date <=> other.card_set.card_block.card_sets.first.release_date
-    else
-      card_set.release_date <=> other.card_set.release_date
-    end
-  end
+  # def <=>(other)
+  #   if card_set_id == other.card_set_id
+  #     card_number.to_i <=> other.card_number.to_i
+  #   elsif card_set.card_block.card_block_type_id != other.card_set.card_block.card_block.card_block_type_id
+  #     card_set.card_block.card_block_type_id <=> other.card_set.card_block.card_block.card_block_type_id
+  #   elsif card_set.card_block_id != other.card_set.card_block_id
+  #     card_set.card_block.card_sets.first.release_date <=> other.card_set.card_block.card_sets.first.release_date
+  #   else
+  #     card_set.release_date <=> other.card_set.release_date
+  #   end
+  # end
 end
