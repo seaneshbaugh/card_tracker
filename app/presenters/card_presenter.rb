@@ -117,8 +117,27 @@ class CardPresenter < BasePresenter
     end
   end
 
+  def gatherer_uri
+    "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=#{@card.multiverse_id}"
+  end
+
+  # TODO: Make default "No Image Available" image for when card has no Scryfall ID.
+  def image_uri(size = 'normal')
+    raise 'Invalid image size.' unless %w[small normal large png art_crop border_crop].include?(size)
+
+    return '' unless @card.scryfall_id
+
+    extension = size == 'png' ? 'png' : 'jpg'
+
+    "https://img.scryfall.com/cards/#{size}/front/#{@card.scryfall_id[0]}/#{@card.scryfall_id[1]}/#{@card.scryfall_id}.#{extension}"
+  end
+
   def partial_name
     @card.layout_code.underscore
+  end
+
+  def rarity
+    @card.rarity.name
   end
 
   private
