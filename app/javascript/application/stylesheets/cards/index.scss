@@ -4,3 +4,11 @@
         vertical-align: middle;
     }
 }
+
+.card {
+    .card-image {
+        img {
+            max-width: 100%;
+        }
+    }
+}

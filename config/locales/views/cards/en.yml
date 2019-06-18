@@ -6,6 +6,11 @@ en:
       title: "%{card_set_name} Cards"
       move: "Move to Another List"
       remove_all: "Remove All from List"
+    show:
+      page_title: "%{card_name} - %{card_set_name}"
+      other_versions: "Other Versions:"
+      show_on_gatherer: "Show on Gatherer"
+      attribute: "%{name}:"
     search:
       title: "Search Results"
       form:

@@ -1,26 +1,27 @@
-- content_for :page_title, "#{@card.name} - #{@card_set.name}"
+- content_for :page_title, t('cards.show.page_title', card_name: @card.name, card_set_name: @card_set.name)
 - content_for :body_class, 'card'
 .page-card.page
   - present @card_set do |card_set_presenter|
     - present @card do |card_presenter|
       %header.page-header
         %h1.card-name
-          = link_to card_set_presenter.symbol(rarity: card_presenter.rarity_code.downcase), set_cards_path(card_set_presenter.slug)
+          = link_to card_set_presenter.symbol(rarity: card_presenter.rarity.downcase), set_cards_path(card_set_presenter.slug)
           = card_presenter.name
       .page-body
-        .card{"data-card-id" => "#{@card.id}", :id => "card-#{card_presenter.multiverse_id}"}
+        .card{ 'data-card-id' => @card.id, id: "card-#{card_presenter.multiverse_id}" }
           .card-image-and-info.row
-            .card-image.hidden-xs.col-sm-3
-              %img{:src => "http://mtgimage.com/multiverseid/#{card_presenter.multiverse_id}.jpg", :style => "max-width: 100%;"}/
-            = render :partial => "cards/show/#{card_presenter.partial_name}", :locals => { :card_presenter => card_presenter }
-            .card-image.visible-xs.col-xs-12
-              %img{:src => "http://mtgimage.com/multiverseid/#{card_presenter.multiverse_id}.jpg", :style => "max-width: 100%;"}/
+            .card-image.col.s3.hide-on-small-only
+              = image_tag(card_presenter.image_uri)
+            = render partial: "cards/show/#{card_presenter.partial_name}", locals: { card_presenter: card_presenter }
+            .card-image.col.s12.hide-on-med-and-up
+              = image_tag(card_presenter.image_uri)
           .row
-            .card-attribute-label.col-xs-12.col-sm-2
-              Other Versions:
-            .card-attribute.other-versions.col-xs-12.col-sm-10
+            .card-attribute-label.col.s12.m2
+              = t('cards.show.other_versions')
+            .card-attribute.other-versions.col.s12.m10
               - card_presenter.other_versions.each do |other_version|
-                = link_to card_set_symbol(other_version.card_set, :rarity => other_version.rarity.downcase.to_sym, :size => 'small'), set_card_path(other_version.card_set.slug, other_version)
+                - present other_version.card_set do |other_version_card_set_presenter|
+                  = link_to other_version_card_set_presenter.symbol(rarity: other_version.rarity.name.downcase), set_card_path(other_version_card_set_presenter.slug, other_version)
           .row
-            .show-on-gatherer.col-xs-12
-              = link_to 'Show on Gatherer', "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=#{card_presenter.multiverse_id}", :target => '_blank'
+            .show-on-gatherer.col.s12
+              = link_to t('cards.show.show_on_gatherer'), card_presenter.gatherer_uri, target: '_blank'

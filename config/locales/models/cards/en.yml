@@ -11,7 +11,7 @@ en:
         mana_cost: "Mana Cost"
         converted_mana_cost: "Converted Mana Cost"
         colors: "Colors"
-        card_type: "Card Type"
+        type_text: "Card Type"
         card_supertypes: "Card Supertypes"
         card_types: "Card Types"
         card_subtypes: "Card Subtypes"
@@ -26,6 +26,7 @@ en:
         created_at: "Created At"
         updated_at: "Updated At"
         color: "Color"
+        power_toughness: "P/T"
     errors:
       models:
         card:
@@ -35,7 +36,7 @@ en:
             card_set_id: "Card Set"
             mana_cost: "Mana Cost"
             converted_mana_cost: "Converted Mana Cost"
-            card_type: "Card Type"
+            type_text: "Card Type"
             card_text: "Card Text"
             flavor_text: "Flavor Text"
             power: "Power"
