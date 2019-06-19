@@ -20,9 +20,7 @@ class CardListsController < ApplicationController
   end
 
   def create
-    @card_list = CardList.new(card_list_params)
-    @card_list.user_id = current_user.id
-    @card_list.order = current_user.card_lists.count + 1
+    @card_list = CardList.new(card_list_params.merge(user: current_user, order: current_user.card_lists.count + 1))
 
     if @card_list.save
       flash[:success] = t('.success')
@@ -97,7 +95,7 @@ class CardListsController < ApplicationController
   private
 
   def card_list_params
-    params.require(:card_list).permit(:name)
+    params.require(:card_list).permit(:name, :have, :default)
   end
 
   def find_card_list
