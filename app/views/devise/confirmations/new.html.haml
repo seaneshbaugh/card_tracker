@@ -6,9 +6,11 @@
   .page-body
     = form_for resource, as: resource_name, url: confirmation_path(resource_name) do |f|
       = render 'devise/shared/error_messages', resource: resource
-      .input-field
-        = f.email_field :email, autocomplete: 'email', autofocus: true, required: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
-        = f.label :email
-      .input-field
-        = f.submit t('.submit'), class: success_button_class
+      .row
+        .input-field.col.s12
+          = f.email_field :email, autocomplete: 'email', autofocus: true, required: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
+          = f.label :email
+      .row
+        .input-field.col.s12
+          = f.submit t('.submit'), class: success_button_class
     = render 'devise/shared/links'

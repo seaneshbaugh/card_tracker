@@ -5,17 +5,20 @@
     %h1= t('.title')
   .page-body
     = form_for resource, as: resource_name, url: session_path(resource_name) do |f|
-      .input-field
-        = f.text_field :username, autocomplete: 'username', autofocus: true, required: true
-        = f.label :username
-      .input-field
-        = f.password_field :password, autocomplete: 'current-password', required: true
-        = f.label :password
+      .row
+        .input-field.col.s12
+          = f.text_field :username, autocomplete: 'username', autofocus: true, required: true
+          = f.label :username
+      .row
+        .input-field.col.s12
+          = f.password_field :password, autocomplete: 'current-password', required: true
+          = f.label :password
       - if devise_mapping.rememberable?
         %p
           = f.label :remember_me do
             = f.check_box :remember_me
             %span= t('.remember_me')
-      .input-field
-        = f.submit t('.submit'), class: success_button_class
+      .row
+        .input-field.col.s12
+          = f.submit t('.submit'), class: success_button_class
     = render 'devise/shared/links'

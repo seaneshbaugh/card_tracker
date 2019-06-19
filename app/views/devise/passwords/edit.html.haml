@@ -6,14 +6,17 @@
     = form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :put } do |f|
       = render 'devise/shared/error_messages', resource: resource
       = f.hidden_field :reset_password_token
-      .input-field
-        = f.password_field :password, autocomplete: 'new-password', autofocus: true, required: true
-        = f.label :password
-      - if @minimum_password_length
-        %em= t('.minimum_password_length', minimum_password_length: @minimum_password_length)
-      .input-field
-        = f.password_field :password_confirmation, autocomplete: 'new-password', autofocus: true, required: true
-        = f.label :password_confirmation
-      .input-field
-        = f.submit t('.submit'), class: success_button_class
+      .row
+        .input-field.col.s12
+          = f.password_field :password, autocomplete: 'new-password', autofocus: true, required: true
+          = f.label :password
+          - if @minimum_password_length
+            %em= t('.minimum_password_length', minimum_password_length: @minimum_password_length)
+      .row
+        .input-field.col.s12
+          = f.password_field :password_confirmation, autocomplete: 'new-password', autofocus: true, required: true
+          = f.label :password_confirmation
+      .row
+        .input-field.col.s12
+          = f.submit t('.submit'), class: success_button_class
     = render 'devise/shared/links'
