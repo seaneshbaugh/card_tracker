@@ -26,3 +26,7 @@ en:
   eq: "="
   show_only: "Show Only..."
   send_email: "Send Email"
+  and: "and"
+  or: "or"
+  not: "not"
+  nor: "nor"

@@ -21,7 +21,10 @@
         = f.submit t('devise.sessions.new.submit'), class: success_button_class
   .col.s12.hide-on-med-and-up.center-align
     %span{ style: 'text-decoration: line-through;' } &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    %span &nbsp;or&nbsp;
+    %span
+      &nbsp;
+      = t('or')
+      &nbsp;
     %span{ style: 'text-decoration: line-through;' } &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   .col.s12.m6
     %h2.center-align= t('devise.registrations.new.title')
