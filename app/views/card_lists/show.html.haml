@@ -42,13 +42,13 @@
                             %i.material-icons settings
                           %ul.dropdown-content{ id: "collection-options-#{card_presenter.id}" }
                             %li
-                              %a.toggle-move-collection-modal{ href: '#' } Move to Another List
+                              %a.toggle-move-collection-modal{ href: '#' }= t('.move_list')
                             %li
-                              %a.remove-all-from-list{ href: '#' } Remove All from List
+                              %a.remove-all-from-list{ href: '#' }= t('.remove_from_list')
           = paginate @collections
         - elsif params[:q].present?
           .no-cards
-            No matching cards found in this list.
+            = t('.no_results')
         - else
           .no-cards
-            You don't seem to have any cards in this list. Why not browse through the Magic card #{link_to 'sets', list_sets_path(@card_list.slug)} and add some?
+            = t('.no_cards_html', list_sets_path: list_sets_path(@card_list.slug))

@@ -9,6 +9,10 @@ en:
       new_list: "New List"
     show:
       page_title: "Card List: %{card_list_name}"
+      move_list: "Move to Another List"
+      remove_from_list: "Remove All from List"
+      no_results: "No matching cards found in this list."
+      no_cards_html: "You don't seem to have any cards in this list. Why not browse through the Magic card <a href=\"%{list_sets_path}\">sets</a> and add some?"
     form:
       have_list: "Have List"
       want_list: "Want List"
