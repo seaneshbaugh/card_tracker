@@ -5,4 +5,4 @@
   %body{ 'style' => "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen;".html_safe }
     %p{ 'style' => 'font-size: 20px; line-height: 24px' }= t('.greeting')
     %p{ 'style' => 'font-size: 16px; line-height: 18px' }= t('.text')
-    %p{ 'style' => 'font-size: 16px; line-height: 18px' }= link_to t('.link_text'), confirmation_url(@resource, confirmation_token: @token)
+    %p{ 'style' => 'font-size: 16px; line-height: 18px' }= link_to(t('.link_text'), confirmation_url(@resource, confirmation_token: @token))
