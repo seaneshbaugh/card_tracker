@@ -1,8 +1,11 @@
-<%# Non-link tag that stands for skipped pages...
+-#
+  Link showing page number
   - available local variables
+    page:          a page object for "this" page
+    url:           url to this page
     current_page:  a page object for the currently displayed page
     num_pages:     total number of pages
     per_page:      number of items to fetch per page
     remote:        data-remote
--%>
-<span class="page gap"><%= raw(t 'views.pagination.truncate') %></span>
+%li{ class: "#{'active' if page.current?}" }
+  = link_to page, url, class: 'waves-effect', remote: remote
