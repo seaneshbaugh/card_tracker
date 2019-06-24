@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# TODO: Figure out a better way to handle this stuff. It works but it's slow and results in lots of N+1 queries.
 class CardSetStat
   extend Memoist
 
