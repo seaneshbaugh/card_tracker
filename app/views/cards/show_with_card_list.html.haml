@@ -1,0 +1,39 @@
+- content_for :page_title, t('cards.show.page_title', card_name: @card.name, card_set_name: @card_set.name)
+- content_for :body_class, 'card'
+.page-card.with-list.page
+  - present @card_set do |card_set_presenter|
+    - present @card do |card_presenter|
+      - present @collection, CollectionPresenter do |collection_presenter|
+        %header.page-header
+          %h1.card-name
+            = link_to card_set_presenter.symbol(rarity: card_presenter.rarity.downcase.to_sym), list_set_cards_path(@card_list.slug, card_set_presenter.slug)
+            = card_presenter.name
+        .page-body
+          .card{ 'data-card-id' => @card.id, 'data-card-list-id' => @card_list.id, 'data-quantity' => collection_presenter.quantity_as_integer, id: "card-#{card_presenter.multiverse_id}" }
+            .card-image-and-info.row
+              .card-image.col.s3.hide-on-small-only
+                = image_tag(card_presenter.image_uri)
+              = render partial: "cards/show/#{card_presenter.partial_name}", locals: { card_presenter: card_presenter }
+              .card-image.col.s12.hide-on-med-and-up
+                = image_tag(card_presenter.image_uri)
+            .row
+              .card-attribute-label.col.s12.m2
+                = t('cards.show.other_versions')
+              .card-attribute.other-versions.col.s12.m10
+                - card_presenter.other_versions.each do |other_version|
+                  - present other_version.card_set do |other_version_card_set_presenter|
+                    = link_to other_version_card_set_presenter.symbol(rarity: other_version.rarity.name.downcase), list_set_card_path(@card_list.slug, other_version_card_set_presenter.slug, other_version)
+            .row
+              .card-attribute-label.col.s12
+                %strong= t('cards.show.quantity')
+              .card-attribute.card-quantity.col.s10
+                = collection_presenter.quantity_as_string
+              .col.s1.center-align
+                %button.increment.btn.btn-small
+                  %i.material-icons expand_less
+              .col.s1.center-align
+                %button.decrement.btn.btn-small
+                  %i.material-icons expand_more
+            .row
+              .show-on-gatherer.col.s12
+                = link_to t('cards.show.show_on_gatherer'), card_presenter.gatherer_uri, target: '_blank'

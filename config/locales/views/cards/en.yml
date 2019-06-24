@@ -11,6 +11,7 @@ en:
       other_versions: "Other Versions:"
       show_on_gatherer: "Show on Gatherer"
       attribute: "%{name}:"
+      quantity: "Quantity:"
     search:
       title: "Search Results"
       form:

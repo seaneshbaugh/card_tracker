@@ -1,6 +1,6 @@
 - content_for :page_title, t('cards.show.page_title', card_name: @card.name, card_set_name: @card_set.name)
 - content_for :body_class, 'card'
-.page-card.page
+.page-card.without-list.page
   - present @card_set do |card_set_presenter|
     - present @card do |card_presenter|
       %header.page-header
