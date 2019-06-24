@@ -1,0 +1,48 @@
+- content_for :page_title, t('.page_title', card_set_name: @card_set.name)
+- content_for :body_class, 'card-set-stats'
+- present @card_set_stat do |card_set_stat_presenter|
+  .page-card-set-stats.page
+    %header.page-header
+      %h1
+        = card_set_stat_presenter.symbol
+        = card_set_stat_presenter.name
+        = t('.title')
+    .page-body
+      .page-body.col-xs-12
+        .overall-stats
+          %h2= t('.stats.overall')
+          .percent-collected.progress
+            .determinate{ style: "width: #{card_set_stat_presenter.percent_collected}%;" }
+          .total-cards.overall-all
+            = t('.stats.total', total: card_set_stat_presenter.total_cards)
+          .unique-cards.overall-all
+            = t('.stats.unique_cards_in_set', unique_cards: card_set_stat_presenter.unique_cards, cards_in_set: card_set_stat_presenter.cards_in_set)
+        .rarity-stats
+          %h2= t('.stats.by_rarity')
+          .uniqie-basic-cards.overall-stat
+            = t('.stats.basic', unique_cards: @card_set_stat.unique_basic_cards, cards_in_set: @card_set_stat.basic_cards_in_set)
+          .unique-common-cards.overall-stat
+            = t('.stats.common', unique_cards: @card_set_stat.unique_common_cards, cards_in_set: @card_set_stat.common_cards_in_set)
+          .unique-uncommon-cards.overall-stat
+            = t('.stats.uncommon', unique_cards: @card_set_stat.unique_uncommon_cards, cards_in_set: @card_set_stat.uncommon_cards_in_set)
+          .unique-rare-cards.overall-stat
+            = t('.stats.rare', unique_cards: @card_set_stat.unique_rare_cards, cards_in_set: @card_set_stat.rare_cards_in_set)
+          - unless @card_set_stat.mythic_cards_in_set.zero?
+            .unique-mythic-rare-cards.overall-stat
+              = t('stats.mythic', unique_cards: @card_set_stat.unique_mythic_cards, cards_in_set: @card_set_stat.mythic_cards_in_set)
+        .card-lists-stats
+          %h2= t('.stats.by_list')
+          - @card_lists.each do |card_list|
+            .card-list-stat
+              %h3= card_list.name
+              .unique-basic-cards.card-list-stat
+                = t('.stats.basic', unique_cards: @card_set_stat.unique_basic_cards_in_list(card_list), cards_in_set: @card_set_stat.basic_cards_in_set)
+              .unique-common-cards.card-list-stat
+                = t('.stats.common', unique_cards: @card_set_stat.unique_common_cards_in_list(card_list), cards_in_set: @card_set_stat.common_cards_in_set)
+              .unique-uncommon-cards.card-list-stat
+                = t('.stats.uncommon', unique_cards: @card_set_stat.unique_uncommon_cards_in_list(card_list), cards_in_set: @card_set_stat.uncommon_cards_in_set)
+              .unique-rare-cards.card-list-stat
+                = t('.stats.rare', unique_cards: @card_set_stat.unique_rare_cards_in_list(card_list), cards_in_set: @card_set_stat.rare_cards_in_set)
+              - unless @card_set_stat.mythic_cards_in_set.zero?
+                .unique-mythic-rare-cards.card-list-stat
+                  = t('.stats.mythic', unique_cards: @card_set_stat.unique_mythic_cards_in_list(card_list), cards_in_set: @card_set_stat.mythic_cards_in_set)

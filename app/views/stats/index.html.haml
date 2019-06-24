@@ -1,0 +1,24 @@
+- content_for :page_title, t('.title')
+- content_for :body_class, 'collection-stats'
+.page-collection-stats.page
+  %header.page-header
+    %h1= t('.title')
+  .page-body
+    .row
+      .total-cards-in-collections.stat.col.s12
+        = t('.stats.total', total: @total_cards_in_collections)
+    .row
+      .unique-cards-in-collections.stat.col.s12
+        = t('.stats.unique', unique: @unique_cards_in_collections)
+    .sets
+      - @card_set_stats.each do |card_set_stat|
+        - present card_set_stat do |card_set_stat_presenter|
+          .set{ id: "set-#{card_set_stat_presenter.card_set_slug}"}
+            = link_to card_set_stat_presenter.symbol(fixed_width: true), stat_path(card_set_stat_presenter.card_set_slug)
+            = link_to card_set_stat_presenter.name, stat_path(card_set_stat_presenter.card_set_slug)
+            %br
+            = t('.stats.total_cards_in_set', total: card_set_stat_presenter.total_cards)
+            %br
+            = t('.stats.unique_cards_in_set', unique_cards: card_set_stat_presenter.unique_cards, cards_in_set: card_set_stat_presenter.cards_in_set)
+            .percent-collected.progress
+              .determinate{ style: "width: #{card_set_stat_presenter.percent_collected}%" }

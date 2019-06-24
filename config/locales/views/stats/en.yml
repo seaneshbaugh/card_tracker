@@ -1,0 +1,23 @@
+en:
+  stats:
+    index:
+      title: "Collection Stats"
+      stats:
+        total: "You have a total of %{total} cards."
+        unique: "You have %{unique} unique cards."
+        total_cards_in_set: "%{total} total"
+        unique_cards_in_set: "%{unique_cards} / %{cards_in_set}"
+    show:
+      page_title: "Collection Stats - %{card_set_name}"
+      title: "Collection Stats"
+      stats:
+        overall: "Overall"
+        total: "%{total} total"
+        unique_cards_in_set: "%{unique_cards} / %{cards_in_set}"
+        by_rarity: "By Rarity"
+        by_list: "By List"
+        basic: "%{unique_cards} / %{cards_in_set} Basic"
+        common: "%{unique_cards} / %{cards_in_set} Common"
+        uncommon: "%{unique_cards} / %{cards_in_set} Uncommon"
+        rare: "%{unique_cards} / %{cards_in_set} Rare"
+        mythic: "%{unique_cards} / %{cards_in_set} Mythic Rare"
