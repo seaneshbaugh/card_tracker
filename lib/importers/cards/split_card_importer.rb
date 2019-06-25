@@ -83,7 +83,8 @@ module Importers
           artist: this_card_part.side == 'a' ? "#{this_card_part.artist} // ???" : "??? // #{this_card_part.artist}",
           type_text: this_card_part.side == 'a' ? "#{this_card_part.type_text} // ???" : "??? // #{this_card_part.type_text}",
           layout_Code: layout_code,
-          rarity_code: rarity_code
+          rarity_code: rarity_code,
+          scryfall_id: scryfall_id
         }
       end
 
@@ -93,7 +94,8 @@ module Importers
           artist: card_parts.map(&:artist).join(' // '),
           type_text: card_parts.map(&:type_text).join(' // '),
           layout_code: layout_code,
-          rarity_code: rarity_code
+          rarity_code: rarity_code,
+          scryfall_id: scryfall_id
         }
       end
 
