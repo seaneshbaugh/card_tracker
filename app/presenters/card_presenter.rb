@@ -129,7 +129,15 @@ class CardPresenter < BasePresenter
 
     extension = size == 'png' ? 'png' : 'jpg'
 
-    "https://img.scryfall.com/cards/#{size}/front/#{@card.scryfall_id[0]}/#{@card.scryfall_id[1]}/#{@card.scryfall_id}.#{extension}"
+    # See: https://scryfall.com/blog/deprecation-notice-old-price-fields-and-old-image-urls-207
+    # TODO: Consider storing the image URI in the database. I'm avoiding it for now since it would greatly
+    # increase the time it takes to import cards for a set because Scryfall doesn't return all the card
+    # data along with set data which would require an additional API call per card. Given that there are
+    # tens of thousands of cards that might be crossing a line.
+    # For now the format=image URI should work. The only downside is the 302 redirect.
+    # "https://img.scryfall.com/cards/#{size}/front/#{@card.scryfall_id[0]}/#{@card.scryfall_id[1]}/#{@card.scryfall_id}.#{extension}"
+    # "https://img.scryfall.com/cards/#{size}/en/#{@card.card_set.slug}/#{@card.card_number.gsub(/\D/, '')}.#{extension}"
+    "https://api.scryfall.com/cards/#{@card.card_set.slug}/#{@card.card_number.gsub(/\D/, '')}?format=image&version=#{size}"
   end
 
   def partial_name
