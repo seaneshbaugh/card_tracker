@@ -3,7 +3,7 @@
 module Importers
   module Cards
     class AftermathCardImporter < SplitCardImporter
-      def initialize
+      def initialize(card_set, card_data)
         super
 
         @layout_code = 'AFTERMATH'
