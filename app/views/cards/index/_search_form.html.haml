@@ -1,0 +1,14 @@
+= search_form_for @search, url: search_url, html: { method: :get } do |f|
+  .row
+    .input-field.col.s3
+      = f.text_field :name_cont, placeholder: Card.human_attribute_name(:name)
+    .input-field.col.s3
+      = f.text_field :type_text_cont, placeholder: Card.human_attribute_name(:type_text)
+    .input-field.col.s3
+      = f.text_field :card_text_cont, placeholder: Card.human_attribute_name(:card_text)
+    .input-field.col.s3
+      = f.button type: :submit, class: success_button_class do
+        %i.material-icons search
+      &nbsp;
+      = link_to clear_url, class: "#{caution_button_class} tooltipped", 'data-tooltip' => t('clear_search') do
+        %i.material-icons clear

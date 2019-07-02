@@ -7,20 +7,7 @@
         = card_set_presenter.symbol
         = card_set_presenter.name
     .page-body
-      = search_form_for @search, url: list_set_cards_path(@card_list.slug, @card_set.slug), html: { method: :get } do |f|
-        .row
-          .input-field.col.s3
-            = f.text_field :name_cont, placeholder: Card.human_attribute_name(:name)
-          .input-field.col.s3
-            = f.text_field :type_text_cont, placeholder: Card.human_attribute_name(:type_text)
-          .input-field.col.s3
-            = f.text_field :card_text_cont, placeholder: Card.human_attribute_name(:card_text)
-          .input-field.col.s3
-            = f.button type: :submit, class: success_button_class do
-              %i.material-icons search
-            &nbsp;
-            = link_to list_set_cards_path(@card_list.slug, @card_set.slug), class: "#{caution_button_class} tooltipped", 'data-tooltip' => t('clear_search') do
-              %i.material-icons clear
+      = render partial: 'cards/index/search_form', locals: { search_url: list_set_cards_path(@card_list.slug, @card_set.slug), clear_url: list_set_cards_path(@card_list.slug, @card_set.slug) }
       .set{ id: "set-#{@card_set.slug}" }
         .cards
           = render partial: 'card_with_collection', collection: @cards, as: :card, locals: { card_list: @card_list }

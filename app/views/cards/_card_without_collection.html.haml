@@ -1,0 +1,6 @@
+- present card do |card_presenter|
+  .card{ id: "card-#{card.id}", class: "row card #{card_presenter.color_class}", 'data-card-id' => card.id }
+    .card-name.col.s11
+      = link_to card_presenter.name, set_card_path(card.card_set.slug, card), class: 'tooltipped', 'data-tooltip' => card_tooltip_text(card)
+    .card-rarity.col.s1.right-align
+      = card_presenter.rarity_code

@@ -7,21 +7,7 @@
         = card_set_presenter.symbol
         = card_set_presenter.name
     .page-body
-      .set.row{ id: "set-#{@card_set.slug}"}
-        .well.col-xs-12
-          = search_form_for @search, url: set_cards_path(@card_set.slug), html: { method: :get } do |f|
-            .form-group
-              = f.text_field :name_cont, :class => 'form-control', placeholder: Card.human_attribute_name(:name)
-            .form-group
-              = f.text_field :card_text_cont, :class => 'form-control', :placeholder => t('activerecord.attributes.card.card_text')
-            .form-group
-              = f.button "<span class=\"glyphicon glyphicon-search\"></span> #{t('search')}".html_safe, :type => :submit, :class => 'btn btn-primary'
-              = link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, set_cards_path(@card_set.slug), :class => 'btn btn-default', :rel => 'tooltip', :title => t('clear_search')
-        .cards.col-xs-12
-          - @cards.each do |card|
-            - present card do |card_presenter|
-              %div{:class => "row card #{card_presenter.color_class}", "data-card-id" => "#{card.id}", :id => "card-#{card.id}"}
-                .card-name.col-xs-12.col-sm-7
-                  = link_to card_presenter.name, set_card_path(@card_set.slug, card), :rel => 'tooltip', :title => card_tooltip_text(card).gsub("\"", "'"), :data => { :html => 'true' }
-                .card-rarity.col-xs-1
-                  = card_presenter.rarity_code
+      = render partial: 'cards/index/search_form', locals: { search_url: set_cards_path(@card_set.slug), clear_url: set_cards_path(@card_set.slug) }
+      .set{ id: "set-#{@card_set.slug}" }
+        .cards
+          = render partial: 'card_without_collection', collection: @cards, as: :card
