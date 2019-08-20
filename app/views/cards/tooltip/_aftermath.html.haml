@@ -1,0 +1,21 @@
+- present card do |card_presenter|
+  .card-tooltip.split
+    .card-name
+      = card_presenter.name
+    - card.card_parts.each do |card_part|
+      - present card_part, CardPresenter do |card_part_presenter|
+        .card-part
+          .card-name
+            = card_part_presenter.name
+          .mana-cost
+            = card_part_presenter.mana_cost(size: 'small')
+          .card-type
+            = card_part.type_text
+          .card-text
+            = card_part_presenter.card_text(size: 'small')
+          .flavor-text
+            = card_part_presenter.flavor_text
+          .artist
+            = "#{t('cards.show.attribute', name: Card.human_attribute_name(:artist))} #{card_part_presenter.artist}"
+    .card-number
+      = card_presenter.card_number
