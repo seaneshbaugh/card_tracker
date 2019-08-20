@@ -40,6 +40,26 @@ Seed the database.
 
     $ docker-compose run web rails db:seed
 
+## Importing Card Data
+
+To import set data:
+
+    $ docker-compose rub web bundle exec rake import:sets
+
+To import card data for an individual set:
+
+    $ docker-compose run web bundle exec rake import:cards\[LEA\]
+
+To import card data for multiple sets:
+
+    $ docker-compose run web bundle exec rake import:cards\[LEA,LEB,INV\]
+
+Note: The backslashes are required if you're using Zsh. Bash does not require them.
+
+To import card data for all sets (this will also by necessity import all set data):
+
+    $ docker-compose run web bundle exec rake import:all
+
 ## Troubleshooting
 
 #### `Node Sass could not find a binding for your current environment: Linux 64-bit with Node.js 11.x`
