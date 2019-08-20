@@ -11,4 +11,14 @@
             max-width: 100%;
         }
     }
+
+    .flavor-text {
+        font-style: italic;
+    }
+}
+
+.card-tooltip {
+    .flavor-text {
+        font-style: italic;
+    }
 }
