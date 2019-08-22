@@ -32,6 +32,21 @@ class CollectionTest < ActiveSupport::TestCase
         collection.must validate_presence_of(:quantity)
       end
     end
+
+    describe 'card_is_addible?' do
+      it 'validates that the card is addible' do
+        card.layout_code = 'MELD'
+        card.card_number = '1b'
+
+        refute card.addible?
+
+        collection.validate
+
+        refute collection.valid?
+
+        collection.errors.full_messages.must_include 'Card is the result of a meld and cannot be directly added to your collection'
+      end
+    end
   end
 
   describe '#cards?' do

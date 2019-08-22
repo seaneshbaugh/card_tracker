@@ -15,6 +15,7 @@ class Collection < ApplicationRecord
   scope :quantity_greater_than_zero, -> { where(Collection.arel_table[:quantity].gt(0)) }
 
   validates :quantity, numericality: true, presence: true
+  validate :card_is_addible?
 
   after_initialize :set_default_attribute_values, if: :new_record?
 
@@ -29,6 +30,12 @@ class Collection < ApplicationRecord
   end
 
   private
+
+  def card_is_addible?
+    return if card.nil? || card.addible?
+
+    errors.add(:card, :cannot_be_added_to_collection)
+  end
 
   def set_default_attribute_values
     self.quantity ||= 0

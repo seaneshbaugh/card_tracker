@@ -8,16 +8,19 @@
       .card-quantity.col.s1
         = collection_presenter.quantity_as_string
       .col.s1.center-align
-        %button.increment.btn.btn-small
-          %i.material-icons expand_less
+        - if card_presenter.addible?
+          %button.increment.btn.btn-small
+            %i.material-icons expand_less
       .col.s1.center-align
-        %button.decrement.btn.btn-small
-          %i.material-icons expand_more
+        - if card_presenter.addible?
+          %button.decrement.btn.btn-small
+            %i.material-icons expand_more
       .col.s1.center-align
-        %a.dropdown-trigger.btn.btn-small{ href: '#', 'data-target' => "collection-options-#{card_presenter.id}" }
-          %i.material-icons settings
-        %ul.dropdown-content{ id: "collection-options-#{card_presenter.id}" }
-          %li
-            %a.move-collection-modal-trigger= t('cards.index_with_card_list.move')
-          %li
-            %a.remove-all-from-list{ href: '#' }= t('cards.index_with_card_list.remove_all')
+        - if card_presenter.addible?
+          %a.dropdown-trigger.btn.btn-small{ href: '#', 'data-target' => "collection-options-#{card_presenter.id}" }
+            %i.material-icons settings
+          %ul.dropdown-content{ id: "collection-options-#{card_presenter.id}" }
+            %li
+              %a.move-collection-modal-trigger= t('cards.index_with_card_list.move')
+            %li
+              %a.remove-all-from-list{ href: '#' }= t('cards.index_with_card_list.remove_all')

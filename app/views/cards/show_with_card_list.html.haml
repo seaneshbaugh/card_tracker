@@ -24,16 +24,20 @@
                   - present other_version.card_set do |other_version_card_set_presenter|
                     = link_to other_version_card_set_presenter.symbol(rarity: other_version.rarity.name.downcase), list_set_card_path(@card_list.slug, other_version_card_set_presenter.slug, other_version)
             .row
-              .card-attribute-label.col.s12
-                %strong= t('cards.show.quantity')
-              .card-attribute.card-quantity.col.s10
-                = collection_presenter.quantity_as_string
-              .col.s1.center-align
-                %button.increment.btn.btn-small
-                  %i.material-icons expand_less
-              .col.s1.center-align
-                %button.decrement.btn.btn-small
-                  %i.material-icons expand_more
+              - if card_presenter.addible?
+                .card-attribute-label.col.s12
+                  %strong= t('cards.show.quantity')
+                .card-attribute.card-quantity.col.s10
+                  = collection_presenter.quantity_as_string
+                .col.s1.center-align
+                  %button.increment.btn.btn-small
+                    %i.material-icons expand_less
+                .col.s1.center-align
+                  %button.decrement.btn.btn-small
+                    %i.material-icons expand_more
+              - else
+                .col.s12
+                  = t('cards.show.cannot_be_added_to_collection')
             .row
               .show-on-gatherer.col.s12
                 = link_to t('cards.show.show_on_gatherer'), card_presenter.gatherer_uri, target: '_blank'

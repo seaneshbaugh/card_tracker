@@ -17,7 +17,7 @@ class Card < ApplicationRecord
   has_many :card_lists, through: :collections, inverse_of: :cards
   has_many :users, through: :collections, inverse_of: :cards
 
-  scope :display_order, -> { order(Arel.sql('CAST("cards"."card_number" AS INTEGER) ASC')) }
+  scope :display_order, -> { order(Arel.sql('SUBSTRING("cards"."card_number", \'^[0-9]+\')::INTEGER, SUBSTRING("cards"."card_number", \'[^0-9]*$\')')) }
 
   validates :name, presence: true
   validates :type_text, presence: true
@@ -28,6 +28,10 @@ class Card < ApplicationRecord
     define_method("#{color.name.downcase}?") do
       colors.include?(Color.find_by(color_code: color.color_code))
     end
+  end
+
+  def addible?
+    !placeholder?
   end
 
   def colorless?
@@ -44,6 +48,10 @@ class Card < ApplicationRecord
 
   def land?
     card_types.find { |card_type| card_type.card_type_code == 'LAND' }.present?
+  end
+
+  def placeholder?
+    layout_code == 'MELD' && card_number.ends_with?('b')
   end
 
   def collection_for(user, card_list)

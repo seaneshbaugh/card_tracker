@@ -12,6 +12,7 @@ en:
       show_on_gatherer: "Show on Gatherer"
       attribute: "%{name}:"
       quantity: "Quantity:"
+      cannot_be_added_to_collection: "This card is the result of a meld and cannot be directly added to your collection."
     search:
       title: "Search Results"
       form:

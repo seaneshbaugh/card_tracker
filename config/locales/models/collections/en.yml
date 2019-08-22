@@ -14,9 +14,5 @@ en:
       models:
         collection:
           attributes:
-            card_id: "Card"
-            user_id: "User"
-            card_list_id: "Card List"
-            quantity: "Quantity"
-            created_at: "Created At"
-            updated_at: "Updated At"
+            card:
+              cannot_be_added_to_collection: "is the result of a meld and cannot be directly added to your collection"
