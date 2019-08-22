@@ -45,7 +45,9 @@ module Importers
           name: :card_types,
           # TODO: Fix this! This will silently drop unknown types.
           transformation: -> (card_type_names) { CardType.where(name: card_type_names) }
-        }
+        },
+        'hand' => :hand,
+        'life' => :life
       }.freeze
 
       attr_reader :card_set, :attributes

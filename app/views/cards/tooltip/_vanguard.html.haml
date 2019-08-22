@@ -1,0 +1,20 @@
+- present card do |card_presenter|
+  .card-tooltip.normal
+    .card-name
+      = card_presenter.name
+    .mana-cost
+      = card_presenter.mana_cost(size: 'small')
+    .card-type
+      = card_presenter.type_text
+    .card-text
+      = card_presenter.card_text(size: 'small')
+    .hand-size-modifier
+      = "#{t('cards.show.attribute', name: Card.human_attribute_name(:hand))} #{card_presenter.hand}"
+    .starting-life-modifier
+      = "#{t('cards.show.attribute', name: Card.human_attribute_name(:life))} #{card_presenter.life}"
+    .flavor-text
+      = card_presenter.flavor_text
+    .artist
+      = "#{t('cards.show.attribute', name: Card.human_attribute_name(:artist))} #{card_presenter.artist}"
+    .card-number
+      = card_presenter.card_number

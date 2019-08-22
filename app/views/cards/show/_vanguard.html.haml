@@ -1,0 +1,63 @@
+.col.s12.m9
+  .row
+    .card-attribute-label.col.s12.m2
+      = t('cards.show.attribute', name: Card.human_attribute_name(:mana_cost))
+    .card-attribute.mana-cost.col.s12.m10
+      = card_presenter.mana_cost(size: 'small')
+  .row
+    .card-attribute-label.col.s12.m2
+      = t('cards.show.attribute', name: Card.human_attribute_name(:converted_mana_cost))
+    .card-attribute.converted-mana-cost.col.s12.m10
+      = card_presenter.converted_mana_cost
+  .row
+    .card-attribute-label.col.s12.m2
+      = t('cards.show.attribute', name: Card.human_attribute_name(:colors))
+    .card-attribute.colors.col.s12.m10
+      = card_presenter.colors
+  .row
+    .card-attribute-label.col.s12.m2
+      = t('cards.show.attribute', name: Card.human_attribute_name(:type_text))
+    .card-attribute.card-type.col.s12.m10
+      = card_presenter.type_text
+  .row
+    .card-attribute-label.col.s12.m2
+      = t('cards.show.attribute', name: Card.human_attribute_name(:card_text))
+    .card-attribute.card-text.col.s12.m10
+      = card_presenter.card_text(size: 'small')
+  .row
+    .card-attribute-label.col.s12.m2
+      = t('cards.show.attribute', name: Card.human_attribute_name(:hand))
+    .card-attribute.card-text.col.s12.m10
+      = card_presenter.hand
+  .row
+    .card-attribute-label.col.s12.m2
+      = t('cards.show.attribute', name: Card.human_attribute_name(:life))
+    .card-attribute.card-text.col.s12.m10
+      = card_presenter.life
+  - if card_presenter.flavor_text.present?
+    .row
+      .card-attribute-label.col.s12.m2
+        = t('cards.show.attribute', name: Card.human_attribute_name(:flavor_text))
+      .card-attribute.flavor-text.col.s12.m10
+        = card_presenter.flavor_text
+  - if card_presenter.power.present? || card_presenter.toughness.present?
+    .row
+      .card-attribute-label.col.s12.m2
+        = t('cards.show.attribute', name: Card.human_attribute_name(:power_toughness))
+      .card-attribute.power-toughness.col.s12.m10
+        = card_presenter.power_toughness
+  .row
+    .card-attribute-label.col.s12.m2
+      = t('cards.show.attribute', name: Card.human_attribute_name(:rarity))
+    .card-attribute.rarity.col.s12.m10
+      = card_presenter.rarity
+  .row
+    .card-attribute-label.col.s12.m2
+      = t('cards.show.attribute', name: Card.human_attribute_name(:card_number))
+    .card-attribute.card-number.col.s12.m10
+      = card_presenter.card_number
+  .row
+    .card-attribute-label.col.s12.m2
+      = t('cards.show.attribute', name: Card.human_attribute_name(:artist))
+    .card-attribute.artist.col.s12.m10
+      = card_presenter.artist

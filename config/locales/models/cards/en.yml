@@ -27,23 +27,9 @@ en:
         updated_at: "Updated At"
         color: "Color"
         power_toughness: "P/T"
+        hand: "Starting and Max Hand Size"
+        life: "Starting Life"
     errors:
       models:
         card:
           attributes:
-            multiverse_id: "Multiverse"
-            name: "Name"
-            card_set_id: "Card Set"
-            mana_cost: "Mana Cost"
-            converted_mana_cost: "Converted Mana Cost"
-            type_text: "Card Type"
-            card_text: "Card Text"
-            flavor_text: "Flavor Text"
-            power: "Power"
-            toughness: "Toughness"
-            loyalty: "Loyalty"
-            rarity: "Rarity"
-            card_number: "Card Number"
-            artist: "Artist"
-            created_at: "Created At"
-            updated_at: "Updated At"
