@@ -137,7 +137,7 @@ class CardPresenter < BasePresenter
     # For now the format=image URI should work. The only downside is the 302 redirect.
     # "https://img.scryfall.com/cards/#{size}/front/#{@card.scryfall_id[0]}/#{@card.scryfall_id[1]}/#{@card.scryfall_id}.#{extension}"
     # "https://img.scryfall.com/cards/#{size}/en/#{@card.card_set.slug}/#{@card.card_number.gsub(/\D/, '')}.#{extension}"
-    "https://api.scryfall.com/cards/#{@card.card_set.slug}/#{@card.card_number.gsub(/\D/, '')}?format=image&version=#{size}"
+    "https://api.scryfall.com/cards/#{@card.card_set.slug}/#{@card.card_number}?format=image&version=#{size}"
   end
 
   def partial_name
