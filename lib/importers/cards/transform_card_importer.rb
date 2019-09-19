@@ -2,7 +2,7 @@
 
 module Importers
   module Cards
-    class TransformCardImporter < NormalCardImporter
+    class TransformCardImporter < SplitCardImporter
     end
   end
 end
