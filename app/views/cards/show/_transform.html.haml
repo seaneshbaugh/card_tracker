@@ -1,0 +1,63 @@
+.col.s12.m9
+  .row
+    .card-attribute-label.col.s12.m2
+      = t('cards.show.attribute', name: Card.human_attribute_name(:rarity))
+    .card-attribute.rarity.col.s12.m10
+      = card_presenter.rarity
+  - card_presenter.card_parts.each_slice(2) do |card_parts|
+    .row.card-parts
+      - card_parts.sort_by(&:card_number).each do |card_part|
+        - present card_part, CardPresenter do |card_part_presenter|
+          .card-part.col.s12.m6
+            .row
+              .card-attribute-label.col.s12.m2
+                = t('cards.show.attribute', name: Card.human_attribute_name(:name))
+              .card-attribute.name.col.s12.m10
+                = card_part_presenter.name
+            .row
+              .card-attribute-label.col.s12.m2
+                = t('cards.show.attribute', name: Card.human_attribute_name(:mana_cost))
+              .card-attribute.mana-cost.col.s12.m10
+                = card_part_presenter.mana_cost(size: 'small')
+            .row
+              .card-attribute-label.col.s12.m2
+                = t('cards.show.attribute', name: Card.human_attribute_name(:converted_mana_cost))
+              .card-attribute.converted-mana-cost.col.s12.m10
+                = card_part_presenter.converted_mana_cost
+            .row
+              .card-attribute-label.col.s12.m2
+                = t('cards.show.attribute', name: Card.human_attribute_name(:colors))
+              .card-attribute.colors.col.s12.m10
+                = card_part_presenter.colors
+            .row
+              .card-attribute-label.col.s12.m2
+                = t('cards.show.attribute', name: Card.human_attribute_name(:type_text))
+              .card-attribute.card-type.col.s12.m10
+                = card_part_presenter.type_text
+            .row
+              .card-attribute-label.col.s12.m2
+                = t('cards.show.attribute', name: Card.human_attribute_name(:card_text))
+              .card-attribute.card-text.col.s12.m10
+                = card_part_presenter.card_text(size: 'small')
+            - if card_part_presenter.flavor_text.present?
+              .row
+                .card-attribute-label.col.s12.m2
+                  = t('cards.show.attribute', name: Card.human_attribute_name(:flavor_text))
+                .card-attribute.flavor-text.col.s12.m10
+                  = card_part_presenter.flavor_text
+            - if card_part_presenter.power.present? || card_part_presenter.toughness.present?
+              .row
+                .card-attribute-label.col.s12.m2
+                  = t('cards.show.attribute', name: Card.human_attribute_name(:power_toughness))
+                .card-attribute.power-toughness.col.s12.m10
+                  = card_part_presenter.power_toughness
+            .row
+              .card-attribute-label.col.s12.m2
+                = t('cards.show.attribute', name: Card.human_attribute_name(:card_number))
+              .card-attribute.card-number.col.s12.m10
+                = card_part_presenter.card_number
+            .row
+              .card-attribute-label.col.s12.m2
+                = t('cards.show.attribute', name: Card.human_attribute_name(:artist))
+              .card-attribute.artist.col.s12.m10
+                = card_part_presenter.artist
