@@ -11,6 +11,6 @@
     .flavor-text
       = card_presenter.flavor_text
     .artist
-      Artist: #{card_presenter.artist}
+      = "#{t('cards.show.attribute', name: Card.human_attribute_name(:artist))} #{card_presenter.artist}"
     .card-number
       = card_presenter.card_number
