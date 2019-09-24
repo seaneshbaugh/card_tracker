@@ -64,7 +64,7 @@ To import card data for all sets (this will also by necessity import all set dat
 
 #### `Node Sass could not find a binding for your current environment: Linux 64-bit with Node.js 11.x`
 
-If you update `/package.json` and run `yarn install` on the host machine it will overwrite the contents of `/node_modules` and in the process will rebuild Node Sass for the host machine. If the host machine is not the same OS as the Docker container you will see this error. This can be fixed by running `docker-compose run -rm web yarn install --force` and then restarting the `web` container.
+If you update `/package.json` and run `yarn install` on the host machine it will overwrite the contents of `/node_modules` and in the process will rebuild Node Sass for the host machine. If the host machine is not the same OS as the Docker container you will see this error. This can be fixed by running `docker-compose run --rm web yarn install --force` and then restarting the `web` container.
 
 #### `no space left on device`
 
