@@ -2,8 +2,6 @@
 
 module Admin
   class CardBlockTypesController < AdminController
-    authorize_resource
-
     def index
       @search = CardBlockType.search(params[:q])
 

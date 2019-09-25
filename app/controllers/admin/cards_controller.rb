@@ -2,8 +2,6 @@
 
 module Admin
   class CardsController < AdminController
-    authorize_resource
-
     def index
       @search = Card.search(params[:q])
 
