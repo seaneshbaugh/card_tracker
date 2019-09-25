@@ -74,10 +74,10 @@ Rails.application.routes.draw do
   end
 
   authenticated do
-    root to: 'card_lists#index'
+    root to: 'card_lists#index', as: :authenticated_root
   end
 
-  root :to => 'pages#index'
+  root to: 'pages#index'
 
   get ':id' => 'pages#show', as: :page
 end
