@@ -12,7 +12,7 @@
 
 /* SITE */
   Created On: 2012/12/30
-  Last Updated: 2019/04/11
+  Last Updated: 2019/09/26
   Language: English
   Doctype: HTML5
   Lovingly Made In: Emacs
