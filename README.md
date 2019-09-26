@@ -4,11 +4,11 @@ A Magic: The Gathering inventory/collection tracker.
 
 ## Ruby Version
 
-2.6.2
+2.6.4
 
 ## Rails Version
 
-5.2.3
+6.0.0
 
 ## Dependencies
 
@@ -30,25 +30,25 @@ Start the Docker containers.
 
 Create the development and test databases.
 
-    $ docker-compose run web rails db:create
+    $ docker-compose run --rm web rails db:create
 
 Load the database schema.
 
-    $ docker-compose run web rails db:schema:load
+    $ docker-compose run --rm web rails db:schema:load
 
 Seed the database.
 
-    $ docker-compose run web rails db:seed
+    $ docker-compose run --rm web rails db:seed
 
 ## Importing Card Data
 
 To import set data:
 
-    $ docker-compose rub web bundle exec rake import:sets
+    $ docker-compose run --rm web bundle exec rake import:sets
 
 To import card data for an individual set:
 
-    $ docker-compose run web bundle exec rake import:cards\[LEA\]
+    $ docker-compose run --rm web bundle exec rake import:cards\[LEA\]
 
 To import card data for multiple sets:
 
@@ -58,7 +58,7 @@ Note: The backslashes are required if you're using Zsh. Bash does not require th
 
 To import card data for all sets (this will also by necessity import all set data):
 
-    $ docker-compose run web bundle exec rake import:all
+    $ docker-compose run --rm web bundle exec rake import:all
 
 ## Troubleshooting
 
