@@ -1,6 +1,6 @@
 en:
   devise:
-    sessions:
+    unlocks:
       new:
         title: "Unlock Your Account"
         submit: "Send Unlock Instructions"

@@ -7,9 +7,9 @@
     = form_for resource, as: resource_name, url: unlock_path(resource_name) do |f|
       .row
         .input-field.col.s12
-          = f.email_input :email, autocomplee: 'email', autofocus: true, required: true
+          = f.email_field :email, autocomplete: 'email', autofocus: true, required: true
           = f.label :email
       .row
         .input-field.col.s12
-          = f.button :submit, t('.submit'), class: success_button_class
+          = f.submit t('.submit'), class: success_button_class
     = render 'devise/shared/links'
