@@ -43,3 +43,7 @@
       = f.label :receive_contact_alerts do
         = f.check_box :receive_contact_alerts
         %span= CardList.human_attribute_name(:receive_contact_alerts)
+    .row
+      .input-field.col.s12
+        = f.submit t('submit'), class: success_button_class
+        = link_to t('cancel'), admin_users_path, class: warning_button_class

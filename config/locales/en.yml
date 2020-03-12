@@ -20,6 +20,7 @@ en:
   filter: "Filter"
   "yes": "Yes"
   "no": "No"
+  submit: "Submit"
   cancel: "Cancel"
   lteq: "<="
   gteq: ">="
