@@ -17,3 +17,13 @@
                 - gem[:dependencies].each do |dependency|
                   %li
                     = "#{dependency[:name]} (#{dependency[:requirement]})"
+    %section.nodejs-info
+      %h2= t('.section.nodejs_info.title')
+      %table
+        %tbody
+          %tr
+            %td.name= t('.section.nodejs_info.labels.nodejs_version')
+            %td.value= node_version
+          %tr
+            %td.name= t('.section.nodejs_info.labels.yarn_version')
+            %td.value= yarn_version

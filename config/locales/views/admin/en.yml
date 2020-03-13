@@ -8,3 +8,8 @@ en:
             title: "Rails Info"
           gems:
             title: "Gems"
+          nodejs_info:
+            title: "Node.js Info"
+            labels:
+              nodejs_version: "Node.js version"
+              yarn_version: "Yarn version"

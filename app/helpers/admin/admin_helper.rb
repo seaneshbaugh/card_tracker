@@ -49,5 +49,13 @@ module Admin
         }
       end
     end
+
+    def node_version
+      `nodejs -v`
+    end
+
+    def yarn_version
+      `yarn -v`
+    end
   end
 end
