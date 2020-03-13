@@ -4,11 +4,11 @@ A Magic: The Gathering inventory/collection tracker.
 
 ## Ruby Version
 
-2.6.4
+2.7.0
 
 ## Rails Version
 
-6.0.0
+6.0.2.1
 
 ## Dependencies
 
