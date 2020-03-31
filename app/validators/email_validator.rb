@@ -7,9 +7,37 @@ class EmailValidator < ActiveModel::EachValidator
     not_spam: true
   }.freeze
 
+  SPAM_TLDS = [
+    'buzz',
+    'fun',
+    'online',
+    'pl',
+    'pro',
+    'pw',
+    'ru',
+    'ua',
+    'site',
+    'space',
+    'website',
+    'xyz'
+  ]
+
   SPAM_DOMAINS = [
-    'mail.ru',
-    'yandex.com'
+    'dogbackpack.net',
+    'drugrehabfdd.org',
+    'enelopes.com',
+    'gmail.c...',
+    'me.com',
+    'novitynet.eu',
+    'oteoutdoor.com',
+    'partyreflections.com',
+    'primavera.org',
+    'sbcglobal.ne',
+    'thefmail.com',
+    'topomnireviews.com',
+    'yandex.by',
+    'yandex.com',
+    'yandex.kz'
   ]
 
   def initialize(options)
@@ -25,12 +53,20 @@ class EmailValidator < ActiveModel::EachValidator
 
     record.errors.add(attribute, options[:message] || :invalid) unless value =~ options[:regexp]
 
-    record.errors.add(attribute, options[:messsge] || :invalid) if options[:not_spam] && is_spam?(value)
+    record.errors.add(attribute, options[:messsge] || :invalid) if options[:not_spam] && spam?(value)
   end
 
   private
 
-  def is_spam?(value)
+  def spam?(value)
+    spam_tld?(value) || spam_domain?(value)
+  end
+
+  def spam_tld?(value)
+    SPAM_TLDS.any? { |spam_tld| value =~ /@.+\.#{spam_tld}\z/ }
+  end
+
+  def spam_domain?(value)
     SPAM_DOMAINS.any? { |spam_domain| value.ends_with?("@#{spam_domain}") }
   end
 end

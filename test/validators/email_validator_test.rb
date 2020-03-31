@@ -28,10 +28,20 @@ class EmailValidatorTest < ActiveSupport::TestCase
     assert dummy_object.errors[:email] == ['is invalid']
   end
 
-  test 'spam email address' do
+  test 'spam tld in email address' do
     dummy_object = DummyClass.new
 
     dummy_object.email = 'spam@mail.ru'
+
+    assert_not dummy_object.valid?
+
+    assert dummy_object.errors[:email] == ['is invalid']
+  end
+
+  test 'spam domain in email address' do
+    dummy_object = DummyClass.new
+
+    dummy_object.email = 'spam@me.com'
 
     assert_not dummy_object.valid?
 
