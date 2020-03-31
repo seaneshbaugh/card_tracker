@@ -6,6 +6,8 @@ class PagesController < ApplicationController
   end
 
   def show
+    @new_user = User.new if params[:id] == 'index'
+
     render params[:id]
   rescue ActionView::MissingTemplate
     raise ActionController::RoutingError, 'Not Found'
