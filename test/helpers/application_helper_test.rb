@@ -9,9 +9,9 @@ class ApplicationHelperTest < ActionView::TestCase
 
       user_presenter = present(user)
 
-      user_presenter.must_be_kind_of(UserPresenter)
+      _(user_presenter).must_be_kind_of(UserPresenter)
 
-      user_presenter.instance_variable_get(:@object).must_equal user
+      _(user_presenter.instance_variable_get(:@object)).must_equal(user)
     end
   end
 end

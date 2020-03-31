@@ -25,11 +25,11 @@ class AttributeMapperTest < ActiveSupport::TestCase
 
         mapped = attribute_mapper.map_attributes(values)
 
-        mapped.keys.must_equal %i[to1 to2 to3]
+        _(mapped.keys).must_equal(%i[to1 to2 to3])
 
-        mapped[:to1].must_equal '1'
-        mapped[:to2].must_equal '2'
-        mapped[:to3].must_equal '3'
+        _(mapped[:to1]).must_equal('1')
+        _(mapped[:to2]).must_equal('2')
+        _(mapped[:to3]).must_equal('3')
       end
     end
 
@@ -52,11 +52,11 @@ class AttributeMapperTest < ActiveSupport::TestCase
 
         mapped = attribute_mapper.map_attributes(values, true)
 
-        mapped.keys.must_equal %i[to1 to2 to3 from4]
+        _(mapped.keys).must_equal(%i[to1 to2 to3 from4])
 
-        mapped[:to1].must_equal '1'
-        mapped[:to2].must_equal '2'
-        mapped[:to3].must_equal '3'
+        _(mapped[:to1]).must_equal('1')
+        _(mapped[:to2]).must_equal('2')
+        _(mapped[:to3]).must_equal('3')
       end
     end
 
@@ -79,10 +79,10 @@ class AttributeMapperTest < ActiveSupport::TestCase
 
         mapped = attribute_mapper.map_attributes(values)
 
-        mapped.keys.must_equal %i[to1 to2]
+        _(mapped.keys).must_equal(%i[to1 to2])
 
-        mapped[:to1].must_equal '1'
-        mapped[:to2].must_equal '2222222222'
+        _(mapped[:to1]).must_equal('1')
+        _(mapped[:to2]).must_equal('2222222222')
       end
     end
   end

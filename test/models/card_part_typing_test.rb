@@ -7,11 +7,11 @@ class CardPartTypingTest < ActiveSupport::TestCase
 
   describe 'associations' do
     it 'belongs to card_part' do
-      card_part_typing.must belong_to(:card_part).inverse_of(:card_part_typings)
+      _(card_part_typing).must(belong_to(:card_part).inverse_of(:card_part_typings))
     end
 
     it 'belongs to card_type' do
-      card_part_typing.must belong_to(:card_type).with_foreign_key(:card_type_code).with_primary_key(:card_type_code).inverse_of(:card_part_typings)
+      _(card_part_typing).must(belong_to(:card_type).with_foreign_key(:card_type_code).with_primary_key(:card_type_code).inverse_of(:card_part_typings))
     end
   end
 end

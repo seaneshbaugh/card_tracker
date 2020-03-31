@@ -8,36 +8,36 @@ class CardListTest < ActiveSupport::TestCase
 
   describe 'associations' do
     it 'it belongs to user' do
-      card_list.must belong_to(:user).inverse_of(:card_lists)
+      _(card_list).must(belong_to(:user).inverse_of(:card_lists))
     end
 
     it 'has many collections' do
-      card_list.must have_many(:collections).dependent(:destroy).inverse_of(:card_list)
+      _(card_list).must(have_many(:collections).dependent(:destroy).inverse_of(:card_list))
     end
 
     it 'has many cards through collections' do
-      card_list.must have_many(:cards).through(:collections).inverse_of(:card_list)
+      _(card_list).must(have_many(:cards).through(:collections).inverse_of(:card_list))
     end
   end
 
   describe 'validations' do
     describe 'name' do
       it 'validates presence of name' do
-        card_list.must validate_presence_of(:name)
+        _(card_list).must(validate_presence_of(:name))
       end
 
       it 'validates uniqueness of name scopped to the user' do
-        card_list.must validate_uniqueness_of(:name).scoped_to(:user_id)
+        _(card_list).must(validate_uniqueness_of(:name).scoped_to(:user_id))
       end
     end
 
     describe 'order' do
       it 'validates numericality of order' do
-        card_list.must validate_numericality_of(:order).is_greater_than_or_equal_to(0).is_less_than_or_equal_to(2_147_483_647)
+        _(card_list).must(validate_numericality_of(:order).is_greater_than_or_equal_to(0).is_less_than_or_equal_to(2_147_483_647))
       end
 
       it 'validates presence of order' do
-        card_list.must validate_presence_of(:order)
+        _(card_list).must(validate_presence_of(:order))
       end
     end
   end
@@ -56,9 +56,9 @@ class CardListTest < ActiveSupport::TestCase
       card_list_2.reload
       card_list_3.reload
 
-      card_list_1.default.must_equal false
-      card_list_2.default.must_equal true
-      card_list_3.default.must_equal false
+      _(card_list_1.default).must_equal(false)
+      _(card_list_2.default).must_equal(true)
+      _(card_list_3.default).must_equal(false)
     end
   end
 
@@ -66,7 +66,7 @@ class CardListTest < ActiveSupport::TestCase
     it 'normalizes the name for use as a slug' do
       slug = card_list.normalize_friendly_id('  test- & -test--_%-SLUG!')
 
-      slug.must_equal 'test-and-test-slug'
+      _(slug).must_equal('test-and-test-slug')
     end
   end
 end

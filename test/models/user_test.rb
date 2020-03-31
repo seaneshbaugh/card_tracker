@@ -5,51 +5,51 @@ class UserTest < ActiveSupport::TestCase
 
   describe 'associations' do
     it 'has many cards_lists' do
-      user.must have_many(:card_lists).autosave(true).dependent(:destroy).inverse_of(:user)
+      _(user).must(have_many(:card_lists).autosave(true).dependent(:destroy).inverse_of(:user))
     end
 
     it 'has many collections' do
-      user.must have_many(:collections).dependent(:destroy).inverse_of(:user)
+      _(user).must(have_many(:collections).dependent(:destroy).inverse_of(:user))
     end
 
     it 'has many cards through collections' do
-      user.must have_many(:cards).through(:collections)
+      _(user).must(have_many(:cards).through(:collections))
     end
   end
 
   describe 'validations' do
     describe 'username' do
       it 'valdiates format of username' do
-        user.must allow_value('testtesttest').for(:username)
-        user.must allow_value('TeStTeSt').for(:username)
-        user.must allow_value('test12345').for(:username)
-        user.must allow_value('test_1').for(:username)
-        user.must allow_value('test__').for(:username)
-        user.wont allow_value('te').for(:username)
-        user.wont allow_value('test' * 10).for(:username)
-        user.wont allow_value('__test').for(:username)
-        user.wont allow_value('1__test').for(:username)
+        _(user).must(allow_value('testtesttest').for(:username))
+        _(user).must(allow_value('TeStTeSt').for(:username))
+        _(user).must(allow_value('test12345').for(:username))
+        _(user).must(allow_value('test_1').for(:username))
+        _(user).must(allow_value('test__').for(:username))
+        _(user).wont(allow_value('te').for(:username))
+        _(user).wont(allow_value('test' * 10).for(:username))
+        _(user).wont(allow_value('__test').for(:username))
+        _(user).wont(allow_value('1__test').for(:username))
       end
 
       it 'validates presence of username' do
-        user.must validate_presence_of(:username)
+        _(user).must(validate_presence_of(:username))
       end
 
       it 'validates uniqueness of username' do
-        user.must validate_uniqueness_of(:username)
+        _(user).must(validate_uniqueness_of(:username))
       end
     end
 
     describe 'email' do
       it 'validates that email is an email address' do
-        user.must allow_value('test@test.com').for(:email)
-        user.wont allow_value('test').for(:email)
-        user.wont allow_value('test@').for(:email)
-        user.wont allow_value('@test.com').for(:email)
+        _(user).must(allow_value('test@test.com').for(:email))
+        _(user).wont(allow_value('test').for(:email))
+        _(user).wont(allow_value('test@').for(:email))
+        _(user).wont(allow_value('@test.com').for(:email))
       end
 
       it 'validates presence of email' do
-        user.must validate_presence_of(:email)
+        _(user).must(validate_presence_of(:email))
       end
     end
   end
@@ -59,7 +59,7 @@ class UserTest < ActiveSupport::TestCase
       user.first_name = 'TEST'
       user.last_name = 'USER'
 
-      user.full_name.must_equal 'TEST USER'
+      _(user.full_name).must_equal('TEST USER')
     end
   end
 
@@ -73,7 +73,7 @@ class UserTest < ActiveSupport::TestCase
       user.card_lists << card_list_2
       user.card_lists << card_list_3
 
-      user.default_list.must_equal card_list_2
+      _(user.default_list).must_equal(card_list_2)
     end
   end
 end

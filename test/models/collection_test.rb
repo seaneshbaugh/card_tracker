@@ -10,26 +10,26 @@ class CollectionTest < ActiveSupport::TestCase
 
   describe 'associations' do
     it 'belongs to card' do
-      collection.must belong_to(:card)
+      _(collection).must(belong_to(:card))
     end
 
     it 'belongs to user' do
-      collection.must belong_to(:user)
+      _(collection).must(belong_to(:user))
     end
 
     it 'belongs to card_list' do
-      collection.must belong_to(:card_list)
+      _(collection).must(belong_to(:card_list))
     end
   end
 
   describe 'validations' do
     describe 'quantity' do
       it 'validates numericality of quantity' do
-        collection.must validate_numericality_of(:quantity)
+        _(collection).must(validate_numericality_of(:quantity))
       end
 
       it 'validates presence of quantity' do
-        collection.must validate_presence_of(:quantity)
+        _(collection).must(validate_presence_of(:quantity))
       end
     end
 
@@ -38,13 +38,13 @@ class CollectionTest < ActiveSupport::TestCase
         card.layout_code = 'MELD'
         card.card_number = '1b'
 
-        refute card.addible?
+        _(card.addible?).must_equal(false)
 
         collection.validate
 
-        refute collection.valid?
+        _(collection.valid?).must_equal(false)
 
-        collection.errors.full_messages.must_include 'Card is the result of a meld and cannot be directly added to your collection'
+        _(collection.errors.full_messages).must_include('Card is the result of a meld and cannot be directly added to your collection')
       end
     end
   end
@@ -54,7 +54,7 @@ class CollectionTest < ActiveSupport::TestCase
       it 'returns false' do
         collection.quantity = 0
 
-        collection.cards?.must_equal false
+        _(collection.cards?).must_equal(false)
       end
     end
 
@@ -62,7 +62,7 @@ class CollectionTest < ActiveSupport::TestCase
       it 'returns true' do
         collection.quantity = 4
 
-        collection.cards?.must_equal true
+        _(collection.cards?).must_equal(true)
       end
     end
   end

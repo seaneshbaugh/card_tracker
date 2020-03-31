@@ -8,11 +8,11 @@ class ContactTest < ActiveSupport::TestCase
   describe 'validations' do
     describe 'name' do
       it 'validates length of name' do
-        contact.must validate_length_of(:name).is_at_most(128)
+        _(contact).must(validate_length_of(:name).is_at_most(128))
       end
 
       it 'validates presence of name' do
-        contact.must validate_presence_of(:name)
+        _(contact).must(validate_presence_of(:name))
       end
     end
 
@@ -21,27 +21,27 @@ class ContactTest < ActiveSupport::TestCase
       # end
 
       it 'validates presence of email' do
-        contact.must validate_presence_of(:email)
+        _(contact).must(validate_presence_of(:email))
       end
     end
 
     describe 'subject' do
       it 'validates presence of subject' do
-        contact.must validate_presence_of(:subject)
+        _(contact).must(validate_presence_of(:subject))
       end
 
       it 'validates length of subject' do
-        contact.must validate_length_of(:subject).is_at_least(4).is_at_most(128)
+        _(contact).must(validate_length_of(:subject).is_at_least(4).is_at_most(128))
       end
     end
 
     describe 'body' do
       it 'validates presence of body' do
-        contact.must validate_presence_of(:body)
+        _(contact).must(validate_presence_of(:body))
       end
 
       it 'validates length of body' do
-        contact.must validate_length_of(:body).is_at_least(8).is_at_most(2048)
+        _(contact).must(validate_length_of(:body).is_at_least(8).is_at_most(2048))
       end
     end
   end
@@ -52,7 +52,7 @@ class ContactTest < ActiveSupport::TestCase
 
       contact.sanitize!
 
-      contact.name.must_equal 't e s t'
+      _(contact.name).must_equal('t e s t')
     end
 
     it 'downcases the contact\'s email' do
@@ -60,7 +60,7 @@ class ContactTest < ActiveSupport::TestCase
 
       contact.sanitize!
 
-      contact.email.must_equal 'test@test.com'
+      _(contact.email).must_equal('test@test.com')
     end
 
     it 'removes leading and trailing whitespace from the contact\'s email' do
@@ -68,7 +68,7 @@ class ContactTest < ActiveSupport::TestCase
 
       contact.sanitize!
 
-      contact.email.must_equal 'test@test.com'
+      _(contact.email).must_equal('test@test.com')
     end
 
     it 'removes HTML from the contact\'s subject' do
@@ -76,7 +76,7 @@ class ContactTest < ActiveSupport::TestCase
 
       contact.sanitize!
 
-      contact.subject.must_equal 'HelloWorld'
+      _(contact.subject).must_equal('HelloWorld')
     end
 
     it 'removes linefeeds, newlines, and tabs from the contact\'s subject' do
@@ -84,7 +84,7 @@ class ContactTest < ActiveSupport::TestCase
 
       contact.sanitize!
 
-      contact.subject.must_equal 'HelloWorld'
+      _(contact.subject).must_equal('HelloWorld')
     end
 
     it 'removes HTML from the contact\'s body' do
@@ -92,7 +92,7 @@ class ContactTest < ActiveSupport::TestCase
 
       contact.sanitize!
 
-      contact.body.must_equal 'HelloWorld'
+      _(contact.body).must_equal('HelloWorld')
     end
 
     it 'removes linefeeds, and tabs from the contact\'s body' do
@@ -100,7 +100,7 @@ class ContactTest < ActiveSupport::TestCase
 
       contact.sanitize!
 
-      contact.body.must_equal "Hello\nWorld"
+      _(contact.body).must_equal("Hello\nWorld")
     end
 
     it 'turns multiple newlines in the contact\'s body into a single newline' do
@@ -108,7 +108,7 @@ class ContactTest < ActiveSupport::TestCase
 
       contact.sanitize!
 
-      contact.body.must_equal "Hello\nWorld"
+      _(contact.body).must_equal("Hello\nWorld")
     end
   end
 end

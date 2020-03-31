@@ -25,7 +25,7 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
 
     context 'invalid pages' do
       it 'should return a 404' do
-        proc { get page_url(id: 'does-not-exist') }.must_raise(ActionController::RoutingError)
+        _(proc { get page_url(id: 'does-not-exist') }).must_raise(ActionController::RoutingError)
       end
     end
   end

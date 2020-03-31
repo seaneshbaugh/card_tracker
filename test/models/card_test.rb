@@ -7,84 +7,84 @@ class CardTest < ActiveSupport::TestCase
 
   describe 'associations' do
     it 'belongs to card_set' do
-      card.must belong_to(:card_set)
+      _(card).must(belong_to(:card_set))
     end
 
     it 'belongs to layout' do
-      card.must belong_to(:layout).with_foreign_key(:layout_code).inverse_of(:cards).with_primary_key(:layout_code)
+      _(card).must(belong_to(:layout).with_foreign_key(:layout_code).inverse_of(:cards).with_primary_key(:layout_code))
     end
 
     it 'belongs to rarity' do
-      card.must belong_to(:rarity).with_foreign_key(:rarity_code).inverse_of(:cards).with_primary_key(:rarity_code)
+      _(card).must(belong_to(:rarity).with_foreign_key(:rarity_code).inverse_of(:cards).with_primary_key(:rarity_code))
     end
 
     it 'has many card_colorings' do
-      card.must have_many(:card_colorings).dependent(:restrict_with_exception)
+      _(card).must(have_many(:card_colorings).dependent(:restrict_with_exception))
     end
 
     it 'has many card_super_typings' do
-      card.must have_many(:card_super_typings).dependent(:restrict_with_exception)
+      _(card).must(have_many(:card_super_typings).dependent(:restrict_with_exception))
     end
 
     it 'has many card_typings' do
-      card.must have_many(:card_typings).dependent(:restrict_with_exception)
+      _(card).must(have_many(:card_typings).dependent(:restrict_with_exception))
     end
 
     it 'has many card_sub_typings' do
-      card.must have_many(:card_sub_typings).dependent(:restrict_with_exception)
+      _(card).must(have_many(:card_sub_typings).dependent(:restrict_with_exception))
     end
 
     it 'has many card_partssub_typings' do
-      card.must have_many(:card_parts).dependent(:restrict_with_exception)
+      _(card).must(have_many(:card_parts).dependent(:restrict_with_exception))
     end
 
     it 'has many collections' do
-      card.must have_many(:collections).dependent(:restrict_with_exception)
+      _(card).must(have_many(:collections).dependent(:restrict_with_exception))
     end
 
     it 'has many colors through card_colorings' do
-      card.must have_many(:colors).through(:card_colorings).with_foreign_key(:color_code)
+      _(card).must(have_many(:colors).through(:card_colorings).with_foreign_key(:color_code))
     end
 
     it 'has many card_super_types through card_super_typings' do
-      card.must have_many(:card_super_types).through(:card_super_typings).with_foreign_key(:card_super_type_code)
+      _(card).must(have_many(:card_super_types).through(:card_super_typings).with_foreign_key(:card_super_type_code))
     end
 
     it 'has many card_types through card_typings' do
-      card.must have_many(:card_types).through(:card_typings).with_foreign_key(:card_type_code)
+      _(card).must(have_many(:card_types).through(:card_typings).with_foreign_key(:card_type_code))
     end
 
     it 'has many card_sub_types through card_sub_typings' do
-      card.must have_many(:card_sub_types).through(:card_sub_typings).with_foreign_key(:card_sub_type_code)
+      _(card).must(have_many(:card_sub_types).through(:card_sub_typings).with_foreign_key(:card_sub_type_code))
     end
 
     it 'has many users through collections' do
-      card.must have_many(:users).through(:collections)
+      _(card).must(have_many(:users).through(:collections))
     end
   end
 
   describe 'validations' do
     describe 'name' do
       it 'validates presence of name' do
-        card.must validate_presence_of(:name)
+        _(card).must(validate_presence_of(:name))
       end
     end
 
     describe 'type_text' do
       it 'validates presence of type_text' do
-        card.must validate_presence_of(:type_text)
+        _(card).must(validate_presence_of(:type_text))
       end
     end
 
     describe 'card_number' do
       it 'validates presence of card_number' do
-        card.must validate_presence_of(:card_number)
+        _(card).must(validate_presence_of(:card_number))
       end
     end
 
     describe 'artist' do
       it 'validates presence of artist' do
-        card.must validate_presence_of(:artist)
+        _(card).must(validate_presence_of(:artist))
       end
     end
   end
@@ -94,7 +94,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns false' do
         card.colors = Color.where(color_code: %w[U B R G])
 
-        card.white?.must_equal false
+        _(card.white?).must_equal(false)
       end
     end
 
@@ -102,7 +102,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns true' do
         card.colors = Color.where(color_code: %w[W U B R G])
 
-        card.white?.must_equal true
+        _(card.white?).must_equal(true)
       end
     end
   end
@@ -112,7 +112,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns false' do
         card.colors = Color.where(color_code: %w[W B R G])
 
-        card.blue?.must_equal false
+        _(card.blue?).must_equal(false)
       end
     end
 
@@ -120,7 +120,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns true' do
         card.colors = Color.where(color_code: %w[W U B R G])
 
-        card.blue?.must_equal true
+        _(card.blue?).must_equal(true)
       end
     end
   end
@@ -130,7 +130,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns false' do
         card.colors = Color.where(color_code: %w[W U R G])
 
-        card.black?.must_equal false
+        _(card.black?).must_equal(false)
       end
     end
 
@@ -138,7 +138,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns true' do
         card.colors = Color.where(color_code: %w[W U B R G])
 
-        card.black?.must_equal true
+        _(card.black?).must_equal(true)
       end
     end
   end
@@ -148,7 +148,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns false' do
         card.colors = Color.where(color_code: %w[W U B G])
 
-        card.red?.must_equal false
+        _(card.red?).must_equal(false)
       end
     end
 
@@ -156,7 +156,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns true' do
         card.colors = Color.where(color_code: %w[W U B R G])
 
-        card.red?.must_equal true
+        _(card.red?).must_equal(true)
       end
     end
   end
@@ -166,7 +166,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns false' do
         card.colors = Color.where(color_code: %w[W U B R])
 
-        card.green?.must_equal false
+        _(card.green?).must_equal(false)
       end
     end
 
@@ -174,7 +174,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns true' do
         card.colors = Color.where(color_code: %w[W U B R G])
 
-        card.green?.must_equal true
+        _(card.green?).must_equal(true)
       end
     end
   end
@@ -185,7 +185,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns true' do
         card.colors = []
 
-        card.colorless?.must_equal true
+        _(card.colorless?).must_equal(true)
       end
     end
 
@@ -193,7 +193,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns false' do
         card.colors = Color.where(color_code: 'B')
 
-        card.colorless?.must_equal false
+        _(card.colorless?).must_equal(false)
       end
     end
 
@@ -201,7 +201,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns false' do
         card.colors = Color.where(color_code: %w[W B U])
 
-        card.colorless?.must_equal false
+        _(card.colorless?).must_equal(false)
       end
     end
   end
@@ -211,7 +211,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns false' do
         card.colors = []
 
-        card.monocolored?.must_equal false
+        _(card.monocolored?).must_equal(false)
       end
     end
 
@@ -219,7 +219,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns true' do
         card.colors = Color.where(color_code: 'B')
 
-        card.monocolored?.must_equal true
+        _(card.monocolored?).must_equal(true)
       end
     end
 
@@ -227,7 +227,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns false' do
         card.colors = Color.where(color_code: %w[W B U])
 
-        card.monocolored?.must_equal false
+        _(card.monocolored?).must_equal(false)
       end
     end
   end
@@ -237,7 +237,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns true' do
         card.colors = []
 
-        card.multicolored?.must_equal false
+        _(card.multicolored?).must_equal(false)
       end
     end
 
@@ -245,7 +245,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns false' do
         card.colors = Color.where(color_code: 'B')
 
-        card.multicolored?.must_equal false
+        _(card.multicolored?).must_equal(false)
       end
     end
 
@@ -253,7 +253,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns true' do
         card.colors = Color.where(color_code: %w[W B U])
 
-        card.multicolored?.must_equal true
+        _(card.multicolored?).must_equal(true)
       end
     end
   end
@@ -263,7 +263,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns false' do
         card.card_types = CardType.where(card_type_code: 'CREATURE')
 
-        card.land?.must_equal false
+        _(card.land?).must_equal(false)
       end
     end
 
@@ -271,7 +271,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns true' do
         card.card_types = CardType.where(card_type_code: 'LAND')
 
-        card.land?.must_equal true
+        _(card.land?).must_equal(true)
       end
     end
   end
@@ -285,7 +285,7 @@ class CardTest < ActiveSupport::TestCase
       it 'returns the collection for user\'s card list' do
         collection
 
-        card.collection_for(user, card_list).must_equal collection
+        _(card.collection_for(user, card_list)).must_equal(collection)
       end
     end
 
@@ -293,9 +293,9 @@ class CardTest < ActiveSupport::TestCase
       it 'returns the collection for user\'s card list' do
         collection
 
-        card.collections.length.must_equal 1
+        _(card.collections.length).must_equal(1)
 
-        card.collection_for(user, card_list).must_equal collection
+        _(card.collection_for(user, card_list)).must_equal(collection)
       end
     end
   end
@@ -306,7 +306,7 @@ class CardTest < ActiveSupport::TestCase
     it 'returns other versions of the same card' do
       other_card
 
-      card.other_versions.must_equal [other_card]
+      _(card.other_versions).must_equal([other_card])
     end
   end
 end
