@@ -14,11 +14,6 @@ class Contact
   validates :subject, length: { minimum: 4, maximum: 128, allow_blank: true }, presence: true
   validates :body, length: { minimum: 8, maximum: 2048, allow_blank: true }, presence: true
 
-  # TODO: Remove this method when Rails 6 is released.
-  def as_json(options = nil)
-    super({ except: %w[errors validation_context] }.deep_merge(options || {}))
-  end
-
   def sanitize!
     @name = name.strip
 
