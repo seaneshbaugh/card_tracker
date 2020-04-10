@@ -28,22 +28,22 @@
     %span{ style: 'text-decoration: line-through;' } &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   .col.s12.m6
     %h2.center-align= t('devise.registrations.new.title')
-    = form_for @new_user, as: :user, url: registration_path(:user), html: { autocomplete: 'off', honeypot: true } do |f|
-      .input-field
-        = f.text_field :username, required: true
-        = f.label :username
-      .input-field
-        = f.email_field :email, required: true
-        = f.label :email
-      .input-field
-        = f.password_field :password, required: true
-        = f.label :password
-      .input-field
-        = f.password_field :password_confirmation, required: true
-        = f.label :password_confirmation
-      %p
-        = label_tag :accept_terms_of_service do
-          = check_box_tag :accept_terms_of_service, 'yes', false, class: 'accept-terms-of-service'
-          %span= t('devise.registrations.new.accept_terms_of_service_html')
-      .input-field
-        = f.submit t('devise.registrations.new.submit'), class: "#{success_button_class} requires-terms-of-service-acceptance", disabled: true
+    -# = form_for @new_user, as: :user, url: registration_path(:user), html: { autocomplete: 'off', honeypot: true } do |f|
+    -#   .input-field
+    -#     = f.text_field :username, required: true
+    -#     = f.label :username
+    -#   .input-field
+    -#     = f.email_field :email, required: true
+    -#     = f.label :email
+    -#   .input-field
+    -#     = f.password_field :password, required: true
+    -#     = f.label :password
+    -#   .input-field
+    -#     = f.password_field :password_confirmation, required: true
+    -#     = f.label :password_confirmation
+    -#   %p
+    -#     = label_tag :accept_terms_of_service do
+    -#       = check_box_tag :accept_terms_of_service, 'yes', false, class: 'accept-terms-of-service'
+    -#       %span= t('devise.registrations.new.accept_terms_of_service_html')
+    -#   .input-field
+    -#     = f.submit t('devise.registrations.new.submit'), class: "#{success_button_class} requires-terms-of-service-acceptance", disabled: true

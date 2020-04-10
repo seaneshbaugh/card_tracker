@@ -49,8 +49,8 @@
         - else
           %li.hide-on-med-and-down
             = link_to t('.navigation.sign_in'), new_user_session_path
-          %li.hide-on-med-and-down
-            = link_to t('.navigation.register'), new_user_registration_path
+          -# %li.hide-on-med-and-down
+          -#   = link_to t('.navigation.register'), new_user_registration_path
 %ul#main-nav-sidebar.sidenav.collapsible
   - if current_user
     %li
@@ -111,8 +111,8 @@
       = link_to new_user_session_path, class: 'grey-text text-darken-1' do
         %i.material-icons exit_to_app
         = t('.navigation.sign_in')
-    %li
-      = link_to t('.navigation.register'), new_user_registration_path, class: 'grey-text text-darken-1'
+    -# %li
+    -#   = link_to t('.navigation.register'), new_user_registration_path, class: 'grey-text text-darken-1'
   %li
     = link_to page_path('about'), class: 'grey-text text-darken-1' do
       %i.material-icons help_outline
