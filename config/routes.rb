@@ -13,16 +13,16 @@ Rails.application.routes.draw do
     get '/update-password' => 'devise/passwords#edit', as: :edit_user_password
     put '/update-password' => 'devise/passwords#update'
 
-    post '/register' => 'devise/registrations#create', as: :user_registration
-    get '/register' => 'devise/registrations#new', as: :new_user_registration
+    # post '/register' => 'devise/registrations#create', as: :user_registration
+    # get '/register' => 'devise/registrations#new', as: :new_user_registration
 
-    post '/confirm-registration' => 'devise/confirmations#create', as: :user_confirmation
-    get '/resend-confirmation' => 'devise/confirmations#new', as: :new_user_confirmation
-    get '/confirm-registration' => 'devise/confirmations#show'
+    # post '/confirm-registration' => 'devise/confirmations#create', as: :user_confirmation
+    # get '/resend-confirmation' => 'devise/confirmations#new', as: :new_user_confirmation
+    # get '/confirm-registration' => 'devise/confirmations#show'
 
-    post '/unlock-account' => 'devise/unlocks#create', as: :user_unlock
-    get '/resend-unlock' => 'devise/unlocks#new', as: :new_user_unlock
-    get '/unlock-account' => 'devise/unlocks#show'
+    # post '/unlock-account' => 'devise/unlocks#create', as: :user_unlock
+    # get '/resend-unlock' => 'devise/unlocks#new', as: :new_user_unlock
+    # get '/unlock-account' => 'devise/unlocks#show'
   end
 
   get '/contact' => 'contact#new', as: :contact
