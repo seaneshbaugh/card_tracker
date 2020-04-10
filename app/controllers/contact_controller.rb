@@ -6,17 +6,17 @@ class ContactController < ApplicationController
   end
 
   def create
-    @contact = Contact.new(contact_params).sanitize!
+    # @contact = Contact.new(contact_params).sanitize!
 
-    if @contact.valid?
-      ContactNotificationJob.perform_later(@contact)
+    # if @contact.valid?
+    #   ContactNotificationJob.perform_later(@contact)
 
-      render 'thanks'
-    else
-      flash.now[:error] = helpers.error_messages_for(@contact)
+    render 'thanks'
+    # else
+    #   flash.now[:error] = helpers.error_messages_for(@contact)
 
-      render 'new', status: :unprocessable_entity
-    end
+    #   render 'new', status: :unprocessable_entity
+    # end
   end
 
   private
