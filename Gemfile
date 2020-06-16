@@ -24,7 +24,7 @@ gem 'puma', '4.3.3'
 gem 'pundit', '2.1.0'
 gem 'ransack', '2.3.2'
 gem 'rolify', '5.2.0'
-gem 'sanitize', '5.1.0'
+gem 'sanitize', '5.2.1'
 gem 'seed-fu', '2.3.9'
 gem 'webpacker', '4.2.2'
 
