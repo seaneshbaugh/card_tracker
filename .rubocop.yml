@@ -1,73 +1,73 @@
 require: rubocop-performance
 
-AllCops:
-  Exclude:
-    - bin/bundle
-    - bin/rails
-    - bin/rake
-    - bin/setup
-    - bin/update
-    - bin/webpack
-    - bin/webpack-dev-server
-    - bin/yarn
-    - db/schema.rb
-    - node_modules/**/*
-  TargetRailsVersion: 5.2
+# AllCops:
+#   Exclude:
+#     - bin/bundle
+#     - bin/rails
+#     - bin/rake
+#     - bin/setup
+#     - bin/update
+#     - bin/webpack
+#     - bin/webpack-dev-server
+#     - bin/yarn
+#     - db/schema.rb
+#     - node_modules/**/*
+#   TargetRailsVersion: 5.2
 
-AbcSize:
-  Enabled: false
+# AbcSize:
+#   Enabled: false
 
-ClassLength:
-  Enabled: false
+# ClassLength:
+#   Enabled: false
 
-CyclomaticComplexity:
-  Enabled: false
+# CyclomaticComplexity:
+#   Enabled: false
 
-Documentation:
-  Enabled: false
+# Documentation:
+#   Enabled: false
 
-MethodLength:
-  Enabled: false
+# MethodLength:
+#   Enabled: false
 
-Metrics/BlockLength:
-  Exclude:
-    - config/environments/*
-    - config/routes.rb
-    - db/migrate/*
+# Metrics/BlockLength:
+#   Exclude:
+#     - config/environments/*
+#     - config/routes.rb
+#     - db/migrate/*
 
-Metrics/LineLength:
-  Enabled: false
+# Metrics/LineLength:
+#   Enabled: false
 
-NumericLiterals:
-  MinDigits: 6
+# NumericLiterals:
+#   MinDigits: 6
 
-PerceivedComplexity:
-  Enabled: true
+# PerceivedComplexity:
+#   Enabled: true
 
-Style/SymbolProc:
-  Exclude:
-    - config/initializers/rolify.rb
+# Style/SymbolProc:
+#   Exclude:
+#     - config/initializers/rolify.rb
 
-Rails:
-  Enabled: true
+# Rails:
+#   Enabled: true
 
-Rails/BulkChangeTable:
-  Exclude:
-    - db/migrate/20140329235639_add_additional_card_type_fields_to_cards.rb
-    - db/migrate/20190421040736_remove_card_type_fields_from_cards.rb
-    - db/migrate/20190503155207_remove_defaults_from_card_sets_columns.rb
-    - db/migrate/20190506031934_remove_defaults_and_null_constraints_from_cards.rb
-    - db/migrate/20190520160614_update_card_parts_columns.rb
+# Rails/BulkChangeTable:
+#   Exclude:
+#     - db/migrate/20140329235639_add_additional_card_type_fields_to_cards.rb
+#     - db/migrate/20190421040736_remove_card_type_fields_from_cards.rb
+#     - db/migrate/20190503155207_remove_defaults_from_card_sets_columns.rb
+#     - db/migrate/20190506031934_remove_defaults_and_null_constraints_from_cards.rb
+#     - db/migrate/20190520160614_update_card_parts_columns.rb
 
-Rails/CreateTableWithTimestamps:
-  Exclude:
-    - db/migrate/20190413234027_rolify_create_roles.rb
+# Rails/CreateTableWithTimestamps:
+#   Exclude:
+#     - db/migrate/20190413234027_rolify_create_roles.rb
 
-Rails/HasAndBelongsToMany:
-  Enabled: false
+# Rails/HasAndBelongsToMany:
+#   Enabled: false
 
-Rails/NotNullColumn:
-  Exclude:
-    - db/migrate/20190421214509_rename_card_block_type_to_card_set_type.rb
-    - db/migrate/20190501201847_recreate_card_set_types.rb
-    - db/migrate/20190506194005_add_keyrune_code_to_card_sets.rb
+# Rails/NotNullColumn:
+#   Exclude:
+#     - db/migrate/20190421214509_rename_card_block_type_to_card_set_type.rb
+#     - db/migrate/20190501201847_recreate_card_set_types.rb
+#     - db/migrate/20190506194005_add_keyrune_code_to_card_sets.rb
